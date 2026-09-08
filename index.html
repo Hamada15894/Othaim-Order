@@ -40,6 +40,14 @@ input,select{font-family:inherit;}
 
 /* ---------- layout shell ---------- */
 #app{height:100%;display:flex;flex-direction:column;max-width:640px;margin:0 auto;background:var(--bg);position:relative;overflow:hidden;}
+:root[data-viewport="phone"] #app{max-width:460px;}
+:root[data-viewport="wide"] #app{max-width:1040px;}
+.storelist{display:flex;flex-direction:column;gap:8px;}
+.histlist{display:flex;flex-direction:column;gap:8px;}
+/* roomier layout on the computer view: stores + order history flow into two columns */
+:root[data-viewport="wide"] .storelist{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-content:start;}
+:root[data-viewport="wide"] .histlist{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-content:start;}
+:root[data-viewport="wide"] .content{padding-left:22px;padding-right:22px;}
 .screen{display:flex;flex-direction:column;height:100%;min-height:0;overflow:hidden;}
 
 /* ---------- top bar ---------- */
@@ -330,8 +338,16 @@ html[data-lang="ar"] .switch input:checked ~ .thumb{transform:translateX(-18px);
 .buildok .okchanges .okchval{font-family:var(--font-mono);color:var(--ink-soft);white-space:nowrap;flex-shrink:0;}
 .buildok .okchanges .okchval b{color:var(--green);font-size:13px;}
 .orderlogitem{background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 12px;}
-.orderlogitem .top{display:flex;justify-content:space-between;font-size:13px;font-weight:700;}
-.orderlogitem .sub{font-size:11.5px;color:var(--muted);margin-top:2px;}
+.orderlogitem .top{display:flex;justify-content:space-between;font-size:13px;font-weight:700;gap:10px;}
+.orderlogitem .subrow{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:3px;}
+.orderlogitem .sub{font-size:11.5px;color:var(--muted);}
+.orderlogitem .delx{flex-shrink:0;width:26px;height:26px;border:1px solid var(--line);background:#fff;color:var(--muted);border-radius:7px;font-size:17px;line-height:1;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.orderlogitem .delx:active{background:rgba(226,0,10,.08);color:var(--danger);border-color:var(--danger);}
+.histhdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:2px;grid-column:1/-1;}
+.histhdr .histcount{font-size:12px;font-weight:700;color:var(--muted);}
+.histhdr .histclear{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--danger);background:rgba(226,0,10,.06);border:1px solid rgba(226,0,10,.25);border-radius:8px;padding:6px 11px;cursor:pointer;}
+.histhdr .histclear svg{width:15px;height:15px;}
+.histhdr .histclear:active{background:rgba(226,0,10,.13);}
 
 /* ---------- toast ---------- */
 #toastwrap{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:100;display:flex;flex-direction:column;gap:8px;width:calc(100% - 32px);max-width:400px;pointer-events:none;}
@@ -348,74 +364,73 @@ html[data-lang="ar"] .switch input:checked ~ .thumb{transform:translateX(-18px);
 
 /* ---------- print sheet (off-screen render source for PDF) ---------- */
 #printRoot{position:fixed;top:0;left:-99999px;width:0;height:0;overflow:visible;}
-.pdfpage{width:794px;min-height:1123px;background:#fff;padding:38px 40px 70px;font-family:'Cairo','Inter',sans-serif;color:#1A1D23;direction:rtl;position:relative;box-sizing:border-box;}
+.pdfpage{width:794px;min-height:1123px;background:#fff;padding:46px 48px 78px;font-family:'Cairo','Inter',sans-serif;color:#20242C;direction:rtl;position:relative;box-sizing:border-box;}
 .pdfpage.ltr{direction:ltr;}
 /* header */
-.pdf-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
-.pdf-head .logo img{height:58px;display:block;}
+.pdf-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;}
+.pdf-head .logo img{height:50px;display:block;}
 .pdf-head .doctitle{text-align:end;}
-.pdfpage.ltr .pdf-head .doctitle{text-align:end;}
-.pdf-head .doctitle .kicker{display:inline-block;background:#E2000A;color:#fff;font-size:10px;font-weight:800;letter-spacing:.5px;padding:3px 10px;border-radius:20px;}
-.pdf-head .doctitle h1{margin:6px 0 0;font-size:26px;font-weight:800;color:#15181D;line-height:1;}
-.pdf-head .doctitle .docsub{font-size:9.5px;color:#8A8F99;margin-top:5px;max-width:300px;margin-inline-start:auto;}
-.pdf-rule{height:3px;background:linear-gradient(90deg,#E2000A 0%,#E2000A 62%,#067F3E 62%,#067F3E 100%);border-radius:2px;margin-bottom:14px;}
+.pdf-head .doctitle .kicker{display:inline-block;border:1px solid #D7DBE2;color:#68707C;background:#F7F8FA;font-size:8.5px;font-weight:700;letter-spacing:1.2px;padding:4px 11px;border-radius:5px;text-transform:uppercase;}
+.pdf-head .doctitle h1{margin:11px 0 0;font-size:30px;font-weight:800;color:#13161B;line-height:.98;letter-spacing:-.4px;}
+.pdf-head .doctitle .h1ar{font-size:12.5px;font-weight:700;color:#9198A4;margin-top:5px;letter-spacing:.2px;}
+.pdf-head .doctitle .docsub{font-size:8.5px;color:#A6ACB8;margin-top:7px;max-width:290px;margin-inline-start:auto;line-height:1.55;}
+.pdf-rule{height:2.5px;background:#067F3E;border-radius:2px;margin-bottom:20px;}
 /* meta */
-.pdf-meta{display:flex;background:#F6F7F9;border:1px solid #EBEDF0;border-radius:10px;padding:0;margin-bottom:14px;overflow:hidden;}
-.pdf-meta .cell{flex:1;padding:11px 14px;border-inline-start:1px solid #EBEDF0;}
+.pdf-meta{display:flex;background:#fff;border:1px solid #E4E7ED;border-radius:9px;padding:0;margin-bottom:22px;overflow:hidden;}
+.pdf-meta .cell{flex:1;padding:12px 16px;border-inline-start:1px solid #EDEFF3;}
 .pdf-meta .cell:first-child{border-inline-start:none;}
-.pdf-meta .k{color:#8A8F99;font-weight:700;font-size:9.5px;}
-.pdfpage:not(.arlang) .pdf-meta .k{letter-spacing:.3px;text-transform:uppercase;}
-.pdf-head .doctitle .h1ar{font-size:14px;font-weight:800;color:#3A3F49;margin-top:2px;}
-.pdf-table td.name .ar{font-size:9.5px;color:#5A606B;font-weight:600;margin-top:1px;direction:rtl;}
-.pdf-table td.name .bd{font-size:8.5px;color:#9AA0AC;font-weight:600;margin-top:1px;}
-.pdf-meta .v{font-weight:800;margin-top:3px;font-size:13px;color:#15181D;}
-.pdf-meta .cell.store .v{color:#E2000A;}
+.pdf-meta .k{color:#9AA0AC;font-weight:700;font-size:8px;letter-spacing:.7px;}
+.pdfpage:not(.arlang) .pdf-meta .k{text-transform:uppercase;}
+.pdf-meta .v{font-weight:800;margin-top:6px;font-size:13px;color:#13161B;line-height:1.2;}
+.pdf-meta .cell.store .v{color:#067F3E;}
+.pdf-meta .cell.idcell .v{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;letter-spacing:-.2px;word-break:break-all;}
 /* table */
 .pdf-table{width:100%;border-collapse:collapse;font-size:11.5px;table-layout:auto;}
-.pdf-table thead th{background:#15181D;color:#fff;padding:9px 7px;font-size:10px;text-align:center;font-weight:700;white-space:nowrap;}
-.pdf-table thead th.name{text-align:start;}
-.pdf-table thead th.qtycol{background:#067F3E;}
-.pdf-table thead th.ohcol{background:#4A5160;}
-.pdf-table tbody td{padding:6px 7px;border-bottom:1px solid #EEF0F2;text-align:center;vertical-align:middle;}
+.pdf-table thead th{background:#13161B;color:#fff;padding:11px 9px;font-size:9px;text-align:end;font-weight:600;white-space:nowrap;letter-spacing:.4px;text-transform:uppercase;}
+.pdf-table thead th.name,.pdf-table thead th.idx{text-align:start;}
+.pdf-table thead th.codecol,.pdf-table thead th.packcol,.pdf-table thead th.ohcol,.pdf-table thead th.qtycol{text-align:center;}
+.pdf-table thead th.qtycol{background:#067F3E;color:#fff;}
+.pdf-table tbody td{padding:8px 9px;border-bottom:1px solid #EDEFF2;text-align:end;vertical-align:middle;color:#2C313A;}
 .pdf-table tbody tr:nth-child(even) td{background:#FAFBFC;}
-.pdf-table td.name{text-align:start;font-weight:700;color:#1A1D23;line-height:1.25;}
-.pdf-table td.name .bd{font-size:9px;color:#9AA0AC;font-weight:600;margin-top:1px;}
-.pdf-table td.num{font-family:'IBM Plex Mono',monospace;white-space:nowrap;}
-.pdf-table td.idx{color:#9AA0AC;font-family:'IBM Plex Mono',monospace;width:22px;}
+.pdf-table tbody tr:last-child td{border-bottom:1.5px solid #D6DAE1;}
+.pdf-table td.name{text-align:start;font-weight:700;color:#171A20;line-height:1.3;font-size:11px;padding-inline-end:14px;}
+.pdf-table td.name .ar{font-size:9.5px;color:#7C828E;font-weight:600;margin-top:2px;direction:rtl;}
+.pdf-table td.num{font-family:'IBM Plex Mono',monospace;white-space:nowrap;font-weight:600;color:#20242C;}
+.pdf-table td.idx{color:#B2B7C1;font-family:'IBM Plex Mono',monospace;width:24px;text-align:center;font-size:10px;font-weight:600;}
+.pdf-table td.packcol{font-family:'IBM Plex Mono',monospace;text-align:center;color:#5A616D;font-weight:600;}
 /* code column: Othaim code prominent, Zrep small underneath */
-.pdf-table td.codecol{background:#EDEFF2;border-inline:2px solid #15181D;padding:5px 8px;}
-.pdf-table tr:nth-child(even) td.codecol{background:#E6E9ED;}
-.pdf-table .oth{font-family:'IBM Plex Mono',monospace;font-weight:800;font-size:12.5px;letter-spacing:.6px;color:#15181D;}
-.pdf-table .zr{font-family:'IBM Plex Mono',monospace;font-size:8.5px;color:#8A8F99;margin-top:1px;}
-.pdf-table .zr b{color:#B4000A;font-weight:700;}
-/* on-hand columns */
-.pdf-table td.ohcol{background:#F4F1EA;color:#6B5836;font-family:'IBM Plex Mono',monospace;font-weight:700;}
-.pdf-table tr:nth-child(even) td.ohcol{background:#EFEBE1;}
-.pdf-table td.ohcol .cs{font-size:8.5px;color:#A8946E;}
-/* order columns: the point of the sheet, strong green */
-.pdf-table td.qtycol{background:#E4F2EA;color:#067F3E;font-family:'IBM Plex Mono',monospace;font-weight:800;font-size:12.5px;}
-.pdf-table tr:nth-child(even) td.qtycol{background:#DAEEE2;}
-.pdf-table td.qtycol.pcs{color:#3A8B5E;font-size:11px;}
-/* category band */
+.pdf-table td.codecol{background:#F4F6F8;border-inline:1px solid #E6E9EF;padding:6px 10px;text-align:center;}
+.pdf-table tr:nth-child(even) td.codecol{background:#EFF2F5;}
+.pdf-table .oth{font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:11.5px;letter-spacing:.4px;color:#13161B;}
+.pdf-table .zr{font-family:'IBM Plex Mono',monospace;font-size:8px;color:#9098A4;margin-top:2px;font-weight:600;letter-spacing:.2px;}
+.pdf-table .zr b{color:#8A909C;font-weight:700;}
+/* on-hand columns — calm cool neutral (replaces the muddy tan) */
+.pdf-table td.ohcol{background:#F1F4F8;color:#3D434E;font-family:'IBM Plex Mono',monospace;font-weight:600;text-align:center;}
+.pdf-table tr:nth-child(even) td.ohcol{background:#EBEFF4;}
+.pdf-table td.ohcol .cs{font-size:8.5px;color:#94A0B0;}
+/* order column — the single emphasised column (what the sheet is for) */
+.pdf-table td.qtycol{background:#EAF4EE;color:#056331;font-family:'IBM Plex Mono',monospace;font-weight:800;font-size:13px;text-align:center;border-inline:1px solid #D6E8DE;}
+.pdf-table tr:nth-child(even) td.qtycol{background:#E1F0E8;}
+/* category band — one consistent style, quiet neutral with a green edge + small colour chip */
 .pdf-table .catrow td{padding:0;border-bottom:none;}
-.pdf-table .catband{display:flex;align-items:center;gap:8px;padding:7px 10px;font-weight:800;font-size:11.5px;color:#15181D;margin-top:2px;}
-.pdf-table .catband .dot{width:11px;height:11px;border-radius:3px;}
-.pdf-table .catband .ct{margin-inline-start:auto;font-size:9.5px;color:#8A8F99;font-weight:700;font-family:'IBM Plex Mono',monospace;}
+.pdf-table .catband{display:flex;align-items:center;gap:9px;padding:9px 12px;font-weight:800;font-size:11px;color:#13161B;background:#F3F5F8;border-inline-start:3px solid #067F3E;margin-top:7px;letter-spacing:.2px;}
+.pdf-table .catband .dot{width:9px;height:9px;border-radius:2.5px;flex-shrink:0;}
+.pdf-table .catband .ct{margin-inline-start:auto;font-size:8.5px;color:#8A909C;font-weight:700;font-family:'IBM Plex Mono',monospace;letter-spacing:.4px;text-transform:uppercase;}
 .pdf-table.tight{font-size:10.5px;}
-.pdf-table.tight thead th{padding:8px 4px;font-size:9px;}
-.pdf-table.tight tbody td{padding:5px 4px;}
-.pdf-table.tight .oth{font-size:11px;}
+.pdf-table.tight thead th{padding:9px 5px;font-size:8.5px;}
+.pdf-table.tight tbody td{padding:6px 5px;}
+.pdf-table.tight .oth{font-size:10.5px;}
 /* totals + signatures */
-.pdf-after{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-top:18px;}
-.pdf-sign{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:24px;}
-.pdf-sign .box{border-top:1.5px solid #C5C9D0;padding-top:6px;font-size:11px;color:#5A606B;font-weight:700;}
-.pdf-totals{width:290px;flex-shrink:0;border:1.5px solid #15181D;border-radius:10px;overflow:hidden;}
-.pdf-totals .r{display:flex;justify-content:space-between;font-size:12px;padding:8px 15px;color:#3A3F49;border-bottom:1px solid #EEF0F2;font-weight:600;}
-.pdf-totals .r b{color:#15181D;font-family:'IBM Plex Mono',monospace;font-weight:800;}
-.pdf-totals .g{display:flex;justify-content:space-between;align-items:center;font-size:16px;font-weight:800;background:#15181D;color:#fff;border-bottom:none;padding:12px 15px;}
-.pdf-totals .g b{color:#fff;font-family:'IBM Plex Mono',monospace;}
-.pdf-totals .g .cur{font-size:11px;color:#9DC418;margin-inline-start:3px;}
-.pdf-foot{position:absolute;bottom:30px;left:40px;right:40px;font-size:9px;color:#9AA0AC;display:flex;justify-content:space-between;border-top:1px solid #EEF0F2;padding-top:8px;}
+.pdf-after{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-top:26px;}
+.pdf-sign{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:28px;padding-bottom:6px;}
+.pdf-sign .box{border-top:1.5px solid #C9CED6;padding-top:8px;font-size:10.5px;color:#6C7480;font-weight:700;}
+.pdf-totals{width:300px;flex-shrink:0;border:1px solid #E0E4EA;border-radius:10px;overflow:hidden;}
+.pdf-totals .r{display:flex;justify-content:space-between;font-size:11.5px;padding:10px 16px;color:#4A5058;border-bottom:1px solid #EDEFF2;font-weight:600;}
+.pdf-totals .r b{color:#13161B;font-family:'IBM Plex Mono',monospace;font-weight:700;}
+.pdf-totals .g{display:flex;justify-content:space-between;align-items:center;font-size:14px;font-weight:800;background:#13161B;color:#fff;border-bottom:none;padding:13px 16px;letter-spacing:.2px;}
+.pdf-totals .g b{color:#fff;font-family:'IBM Plex Mono',monospace;font-size:17px;font-weight:800;}
+.pdf-totals .g .cur{font-size:10px;color:#7FD69F;margin-inline-start:4px;font-weight:700;}
+.pdf-foot{position:absolute;bottom:34px;left:48px;right:48px;font-size:8.5px;color:#A6ACB8;display:flex;justify-content:space-between;border-top:1px solid #EDEFF2;padding-top:9px;font-weight:600;}
 </style>
 </head>
 <body>
@@ -532,6 +547,8 @@ const I18N = {
     fresh:"محدث", stale:"قديم", never:"—", min:"أدنى", max:"أقصى", lastSold:"آخر بيع",
     catNoLines:"لا توجد أصناف مطابقة", genericErr:"حدث خطأ، حاول مجددًا",
     changePin:"دخول كمدير", loginAsRep:"دخول كمندوب", myOrders:"طلبياتي السابقة", noMyOrders:"لا توجد طلبيات محفوظة على هذا الجهاز بعد",
+    refresh:"تحديث", viewToggle:"عرض موبايل / كمبيوتر",
+    clearHistory:"مسح السجل", confirmClearHist:"مسح كل الطلبيات المحفوظة على هذا الجهاز؟", ordersWord:"طلبية", delete:"حذف",
     fileNotRecognized:"لم يتم التعرف على تبويبات الملف — تأكد أنه يحتوي على نفس تبويبات الملف الأصلي"
   },
   en: {
@@ -596,6 +613,8 @@ const I18N = {
     fresh:"fresh", stale:"stale", never:"—", min:"Min", max:"Max", lastSold:"Last Sold",
     catNoLines:"No matching items", genericErr:"Something went wrong, please retry",
     changePin:"Manager login", loginAsRep:"Rep login", myOrders:"My Past Orders", noMyOrders:"No orders saved on this device yet",
+    refresh:"Refresh", viewToggle:"Mobile / computer view",
+    clearHistory:"Clear history", confirmClearHist:"Clear all saved orders on this device?", ordersWord:"orders", delete:"Delete",
     fileNotRecognized:"Could not recognize the file's sheets — make sure it matches the original file's structure"
   }
 };
@@ -663,10 +682,62 @@ const state = {
   prefShowPrice: (localStorage.getItem("oo_showPrice") ?? "1") === "1",
   prefShowOnHandCols: (localStorage.getItem("oo_showOnHandCols") ?? "1") === "1",
   viewMode: localStorage.getItem("oo_viewMode") || "order",   // "order" | "list"
+  viewport: localStorage.getItem("oo_viewport") || "",        // "" auto | "phone" | "wide"
   hidePrices: localStorage.getItem("oo_hidePrices") === "1",  // quick on-screen money blackout
   adminPin: null,
   lastPdf: null
 };
+
+// Display width: a phone-sized centered column, or a wider "computer" layout. Auto-picks by the
+// screen it opens on (so a rep's phone stays phone, the manager's computer gets the roomy view),
+// and the toggle in the top bar lets either device force the other.
+function currentViewport(){ return state.viewport || (window.innerWidth >= 900 ? "wide" : "phone"); }
+function applyViewport(){ document.documentElement.setAttribute("data-viewport", currentViewport()); }
+function setViewport(v){
+  state.viewport = v;
+  try{ localStorage.setItem("oo_viewport", v); }catch(e){}
+  applyViewport(); render();
+}
+
+// Keep the logged-in session on THIS device so a reload (the Refresh button, or just reopening the
+// app) lands the user back where they were instead of on the login screen. Cleared on logout.
+function saveSession(){
+  try{
+    if(state.user || state.adminPin){
+      localStorage.setItem("oo_session", JSON.stringify({
+        loginMode: state.loginMode, user: state.user, salesman: state.salesman,
+        adminPin: state.adminPin, screen: state.screen,
+        storeNo: state.selectedStore ? state.selectedStore.storeNo : null,
+        cart: state.cart || {}
+      }));
+    } else { localStorage.removeItem("oo_session"); }
+  }catch(e){}
+}
+function restoreSession(){
+  let s = null;
+  try{ s = JSON.parse(localStorage.getItem("oo_session")||"null"); }catch(e){}
+  if(!s) return false;
+  try{
+    if(s.user === "__preview__"){
+      state.user = "__preview__"; state.salesman = s.salesman || t("previewLabel");
+      state.stores = (OO.stores||[]).slice(); state.loginMode = "manager";
+      state.screen = ["stores","items","cart"].includes(s.screen) ? s.screen : "stores";
+    } else if(s.loginMode === "rep" && s.user){
+      const mine = (OO.stores||[]).filter(st => String(st.userNumber) === String(s.user));
+      if(mine.length === 0) return false;   // reassigned / removed → fall back to login
+      state.user = s.user; state.salesman = mine[0].salesman; state.stores = mine; state.loginMode = "rep";
+      state.screen = ["stores","items","cart"].includes(s.screen) ? s.screen : "stores";
+    } else if(s.loginMode === "manager" && s.adminPin && String(s.adminPin) === String(OO.meta.adminPin)){
+      state.adminPin = s.adminPin; state.loginMode = "manager"; state.screen = "admin";
+    } else { return false; }
+    if(state.screen === "items" || state.screen === "cart"){
+      const st = (state.stores||[]).find(x => String(x.storeNo) === String(s.storeNo));
+      if(st) state.selectedStore = st; else state.screen = "stores";
+    }
+    if(s.cart && typeof s.cart === "object") state.cart = s.cart;
+    return true;
+  }catch(e){ return false; }
+}
 
 /* ---------------- UTIL ---------------- */
 function $(sel, root){ return (root||document).querySelector(sel); }
@@ -736,7 +807,10 @@ function svgIcon(name){
     logout: '<path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
     lang: '<circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7" fill="none"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18" stroke="currentColor" stroke-width="1.5" fill="none"/>',
     share: '<circle cx="18" cy="5" r="2.4" stroke="currentColor" stroke-width="1.7" fill="none"/><circle cx="6" cy="12" r="2.4" stroke="currentColor" stroke-width="1.7" fill="none"/><circle cx="18" cy="19" r="2.4" stroke="currentColor" stroke-width="1.7" fill="none"/><path d="M8.1 10.7l7.8-4.4M8.1 13.3l7.8 4.4" stroke="currentColor" stroke-width="1.7"/>',
-    download: '<path d="M12 3v12M7 11l5 5 5-5M4 20h16" stroke="currentColor" stroke-width="1.9" fill="none" stroke-linecap="round" stroke-linejoin="round"/>'
+    download: '<path d="M12 3v12M7 11l5 5 5-5M4 20h16" stroke="currentColor" stroke-width="1.9" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
+    trash: '<path d="M4 7h16M9 7V4.5h6V7M6.5 7l.9 12.1a2 2 0 002 1.9h5.2a2 2 0 002-1.9L17.5 7M10 11v6M14 11v6" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
+    phone: '<rect x="7" y="2.5" width="10" height="19" rx="2.3" stroke="currentColor" stroke-width="1.8" fill="none"/><path d="M10.5 18.5h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>',
+    desktop: '<rect x="2.5" y="4" width="19" height="12.5" rx="1.8" stroke="currentColor" stroke-width="1.8" fill="none"/><path d="M9 20.5h6M12 16.5v4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/>'
   };
   const s = el("span"); s.innerHTML = `<svg viewBox="0 0 24 24">${icons[name]||""}</svg>`;
   return s.firstChild;
@@ -857,6 +931,7 @@ function render(){
   else if(state.screen === "items") app.appendChild(renderItems());
   else if(state.screen === "cart") app.appendChild(renderCart());
   else if(state.screen === "admin") app.appendChild(renderAdmin());
+  saveSession();
 }
 
 /* ---------------- LOGIN SCREEN ---------------- */
@@ -948,6 +1023,15 @@ function topbar(opts){
   lp.appendChild(el("button", {class: state.lang==="en"?"active":"", onclick:() => setLang("en")}, ["EN"]));
   bar.appendChild(lp);
 
+  // Refresh: reload the app so the newest data (a fresh GitHub deploy, or this device's last build) shows.
+  bar.appendChild(el("button", {class:"iconbtn", title:t("refresh"), "aria-label":t("refresh"), onclick:() => location.reload()}, [svgIcon("refresh")]));
+  // Mobile / computer view toggle — only worth showing on a wide screen (a phone is always "phone").
+  if(window.innerWidth >= 700){
+    const vp = currentViewport();
+    bar.appendChild(el("button", {class:"iconbtn", title:t("viewToggle"), "aria-label":t("viewToggle"),
+      onclick:() => setViewport(vp === "wide" ? "phone" : "wide")}, [ svgIcon(vp === "wide" ? "phone" : "desktop") ]));
+  }
+
   if(opts.cartCount !== undefined){
     const cb = el("button", {class:"iconbtn cartbtn", onclick:opts.onCart}, [svgIcon("cart")]);
     if(opts.cartCount > 0) cb.appendChild(el("span", {class:"cartbadge"}, [String(opts.cartCount)]));
@@ -961,6 +1045,7 @@ function topbar(opts){
 function doLogout(){
   state.user=null; state.salesman=null; state.stores=[]; state.selectedStore=null;
   state.cart={}; state.adminPin=null; state.screen="login"; state.loginMode="rep";
+  try{ localStorage.removeItem("oo_session"); }catch(e){}
   render();
 }
 
@@ -975,7 +1060,7 @@ function renderStores(){
   const searchWrap = el("div", {class:"searchbox"}, [svgIcon("search"), search]);
   content.appendChild(searchWrap);
 
-  const list = el("div", {style:"display:flex;flex-direction:column;gap:8px;"});
+  const list = el("div", {class:"storelist"});
   content.appendChild(list);
 
   function draw(){
@@ -1551,7 +1636,8 @@ async function generateThen(action){
   showLoading(true);
   try{
     const orderId = "OO-"+new Date().toISOString().replace(/[-:T.]/g,"").slice(0,14);
-    const dateStr = new Date().toLocaleString("en-GB");
+    const _now = new Date();
+    const dateStr = _now.toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"}) + " · " + _now.toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"});
     const {blob, filename} = await buildPdf({ store, lines, orderId, dateStr,
       showValues: state.prefShowValues, showTotal: state.prefShowTotal,
       showPrice: state.prefShowPrice, showOnHand: state.prefShowOnHandCols });
@@ -1731,11 +1817,12 @@ async function buildPdf({store, lines, orderId, dateStr, showValues, showTotal, 
         isLast: p===pages.length-1, totals
       });
       document.getElementById("printRoot").appendChild(pageEl);
-      const canvas = await html2canvas(pageEl, {scale:2, useCORS:true, backgroundColor:"#ffffff",
+      // scale 3 + lossless PNG → crisp text/lines at high resolution (no JPEG softening).
+      const canvas = await html2canvas(pageEl, {scale:3, useCORS:true, backgroundColor:"#ffffff",
         onclone: (doc) => { doc.documentElement.setAttribute("dir","ltr"); }});
-      const img = canvas.toDataURL("image/jpeg", 0.95);
+      const img = canvas.toDataURL("image/png");
       if(p>0) pdf.addPage();
-      pdf.addImage(img, "JPEG", 0, 0, 210, 297);
+      pdf.addImage(img, "PNG", 0, 0, 210, 297, undefined, "FAST");
       pageEl.remove();
     }
   } finally {
@@ -1759,7 +1846,7 @@ function buildPdfPageDom(o){
     const head = el("div", {class:"pdf-head"});
     head.appendChild(el("div", {class:"logo"}, [ el("img", {src:"data:image/png;base64,"+window.OTHAIM_LOGO_B64}) ]));
     const dt = el("div", {class:"doctitle"});
-    dt.appendChild(el("span", {class:"kicker"}, [ CONFIG.VENDOR_CODE + "  ·  MARS" ]));
+    dt.appendChild(el("span", {class:"kicker"}, [ "MARS  ·  " + CONFIG.VENDOR_CODE ]));
     dt.appendChild(el("h1",{},[ "Estimated Order" ]));
     dt.appendChild(el("div", {class:"docsub"}, [ E("poSub") ]));
     head.appendChild(dt);
@@ -1772,12 +1859,12 @@ function buildPdfPageDom(o){
     meta.appendChild(mk("storeNo", o.store.storeNo));
     meta.appendChild(mk("salesman", state.salesman||""));
     meta.appendChild(mk("date", o.dateStr));
-    meta.appendChild(mk("orderId", o.orderId));
+    meta.appendChild(mk("orderId", o.orderId, "idcell"));
     page.appendChild(meta);
   } else {
-    const mini = el("div", {style:"display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#8A8F99;border-bottom:2px solid #EEF0F2;padding-bottom:9px;margin-bottom:12px;font-weight:700;"});
-    mini.appendChild(el("div", {}, [ "Estimated Order — "+o.store.nameAr+"  ·  #"+o.store.storeNo ]));
-    mini.appendChild(el("div", {}, [ o.orderId ]));
+    const mini = el("div", {style:"display:flex;justify-content:space-between;align-items:center;font-size:10.5px;color:#8A909C;border-bottom:2px solid #067F3E;padding-bottom:10px;margin-bottom:14px;font-weight:700;letter-spacing:.2px;"});
+    mini.appendChild(el("div", {style:"color:#13161B;font-weight:800;"}, [ "Estimated Order — "+o.store.nameAr+"  ·  #"+o.store.storeNo ]));
+    mini.appendChild(el("div", {style:"font-family:'IBM Plex Mono',monospace;font-weight:600;"}, [ o.orderId ]));
     page.appendChild(mini);
   }
 
@@ -1796,11 +1883,11 @@ function buildPdfPageDom(o){
         c.appendChild(el("div",{class:"oth"},[codeStr(l.sku)]));
         if(l.sku.zrep) c.appendChild(el("div",{class:"zr"},[ el("b",{},["ZR "]), String(l.sku.zrep) ]));
         return c; } },
-    { head:"PC / Carton", cls:"num", get:(l) => fmtInt(l.sku.pcPerCs) }
+    { head:"PC / Carton", cls:"packcol", get:(l) => fmtInt(l.sku.pcPerCs) }
   ];
   if(o.showOnHand){
-    cols.push({ head:"On Hand (PC)", cls:"num ohcol", get:(l) => fmtInt(l.onHandPc||0) });
-    cols.push({ head:"On Hand (CTN)", cls:"num ohcol", get:(l) => { const cs = ohCartons(l.onHandPc||0, l.sku.pcPerCs); return cs ? cs.text : "—"; } });
+    cols.push({ head:"On Hand (PC)", cls:"ohcol", get:(l) => fmtInt(l.onHandPc||0) });
+    cols.push({ head:"On Hand (CTN)", cls:"ohcol", get:(l) => { const cs = ohCartons(l.onHandPc||0, l.sku.pcPerCs); return cs ? cs.text : "—"; } });
   }
   cols.push({ head:"Order (Cartons)", cls:"qtycol", get:(l) => fmtInt(l.cartons) });
   if(o.showPrice) cols.push({ head:"Carton Price", cls:"num", get:(l) => fmtMoney(l.sku.csPrice) });
@@ -1818,7 +1905,7 @@ function buildPdfPageDom(o){
     if(r.type === "cat"){
       const m = catMeta(r.cat);
       const tr = el("tr", {class:"catrow"});
-      const band = el("div", {class:"catband", style:"background:"+m.color+"14;border-inline-start:3px solid "+m.color}, [
+      const band = el("div", {class:"catband"}, [
         el("span", {class:"dot", style:"background:"+m.color}),
         el("span", {}, [m.en]),
         el("span", {class:"ct"}, [fmtInt(r.count)+" "+E("skuCount")])
@@ -2333,18 +2420,34 @@ async function doBuild(parsed, summaryEl){
   }finally{ showLoading(false); }
 }
 
+function saveHist(hist){ try{ localStorage.setItem("oo_order_history", JSON.stringify(hist)); }catch(e){} }
 function renderOrderHistory(){
-  const wrap = el("div", {style:"display:flex;flex-direction:column;gap:8px;"});
+  const wrap = el("div", {class:"histlist"});
   let hist = [];
   try{ hist = JSON.parse(localStorage.getItem("oo_order_history")||"[]"); }catch(e){}
   if(hist.length === 0){ wrap.appendChild(el("div",{class:"emptystate"},[t("noMyOrders")])); return wrap; }
-  hist.slice(0,20).forEach(o => {
+  // Header: count + one button to clear the whole saved history on this device.
+  const hdr = el("div", {class:"histhdr"});
+  hdr.appendChild(el("span", {class:"histcount"}, [ fmtInt(hist.length)+" "+t("ordersWord") ]));
+  hdr.appendChild(el("button", {class:"histclear", onclick:() => {
+    if(confirm(t("confirmClearHist"))){ localStorage.removeItem("oo_order_history"); render(); }
+  }}, [ svgIcon("trash"), el("span",{},[t("clearHistory")]) ]));
+  wrap.appendChild(hdr);
+  hist.slice(0,30).forEach(o => {
     const box = el("div", {class:"orderlogitem"});
     const top = el("div", {class:"top"});
     top.appendChild(el("span",{},[o.storeName+" · #"+o.storeNo]));
     top.appendChild(el("span",{},[fmtMoney(o.value)+" "+curr()]));
     box.appendChild(top);
-    box.appendChild(el("div",{class:"sub"},[ o.orderId+" · "+new Date(o.date).toLocaleString() ]));
+    const subrow = el("div", {class:"subrow"});
+    subrow.appendChild(el("div",{class:"sub"},[ o.orderId+" · "+new Date(o.date).toLocaleString() ]));
+    // Per-order delete.
+    subrow.appendChild(el("button", {class:"delx", title:t("delete"), "aria-label":t("delete"), onclick:() => {
+      let h2 = []; try{ h2 = JSON.parse(localStorage.getItem("oo_order_history")||"[]"); }catch(e){}
+      saveHist(h2.filter(x => x.orderId !== o.orderId));
+      render();
+    }}, ["×"]));
+    box.appendChild(subrow);
     wrap.appendChild(box);
   });
   return wrap;
@@ -2356,6 +2459,8 @@ let ORIGINAL_HTML = null;
   ORIGINAL_HTML = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
   OO = loadLiveData();   // newest of baked vs last build saved on this device
   reindexSkus();
+  applyViewport();
+  restoreSession();      // land back where we were (Refresh / reopen), not on the login screen
   render();
   if("serviceWorker" in navigator){
     window.addEventListener("load", () => {
