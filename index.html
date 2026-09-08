@@ -4,10 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <title>Othaim Order</title>
-<meta name="theme-color" content="#111318">
+<meta name="theme-color" content="#13161B">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Othaim Order">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" id="favicon" href="icon-192.png">
-<link rel="apple-touch-icon" id="appleIcon" href="icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="apple-touch-icon" id="appleIcon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
@@ -67,8 +72,16 @@ input,select{font-family:inherit;}
 .cartbadge{position:absolute;top:-5px;inset-inline-end:-5px;background:var(--red);color:#fff;font-size:10px;font-weight:800;min-width:16px;height:16px;border-radius:8px;display:flex;align-items:center;justify-content:center;padding:0 3px;}
 
 /* ---------- status strip ---------- */
-.statusstrip{display:flex;gap:0;background:#fff;border-bottom:1px solid var(--line);font-size:11px;color:var(--muted);}
-.statusstrip .cell{flex:1;padding:7px 12px;display:flex;flex-direction:column;gap:1px;border-inline-end:1px solid var(--line-soft);}
+.statusstrip{display:flex;gap:0;background:#fff;border-bottom:1px solid var(--line);font-size:11px;color:var(--muted);direction:ltr;}
+.statusstrip .cell{flex:1;padding:7px 12px;display:flex;flex-direction:column;gap:1px;border-inline-end:1px solid var(--line-soft);text-align:left;}
+.statusstrip .ts{direction:ltr;unicode-bidi:isolate;font-variant-numeric:tabular-nums;}
+.statusstrip .stamp{display:inline-flex;align-items:center;gap:4px;margin-top:4px;align-self:flex-start;
+  border:1px solid #E3E7EE;border-radius:8px;padding:3px 8px;background:#fff;
+  font-family:var(--font-mono);font-size:11px;font-weight:700;line-height:1.2;direction:ltr;
+  font-variant-numeric:tabular-nums;white-space:nowrap;}
+.statusstrip .stamp .sdate{color:#2563EB;}
+.statusstrip .stamp .sdash{color:#9AA0AC;}
+.statusstrip .stamp .stime{color:#F97316;}
 .statusstrip .cell b{color:var(--ink-soft);font-size:11.5px;font-weight:700;}
 .statusstrip .dot{width:6px;height:6px;border-radius:50%;display:inline-block;margin-inline-end:5px;}
 .dot-fresh{background:var(--green);} .dot-warn{background:var(--amber);} .dot-stale{background:var(--danger);}
@@ -110,11 +123,20 @@ label.field-label{font-size:12.5px;font-weight:700;color:var(--ink-soft);margin-
 .input-lg{font-size:22px;letter-spacing:2px;text-align:center;font-family:var(--font-mono);}
 
 /* ---------- login screen ---------- */
-.login-logo-wrap{display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:8px;}
-.login-logo-wrap img{width:96px;height:auto;}
+/* Full-height branded layout: hero at top, form centred, language + freshness pinned at the bottom. */
+.loginscreen{display:flex;flex-direction:column;height:100%;overflow-y:auto;-webkit-overflow-scrolling:touch;
+  background:linear-gradient(180deg,#E7F5EE 0%,#F3FAF6 24%,var(--bg) 58%);}
+.login-hero{flex-shrink:0;text-align:center;padding:calc(env(safe-area-inset-top,0px) + 42px) 24px 10px;}
+.login-hero .login-logo{display:inline-block;background:#fff;border-radius:24px;padding:16px 20px;box-shadow:0 12px 30px rgba(6,127,62,.16);}
+.login-hero .login-logo img{width:100px;height:auto;display:block;}
+.login-hero .login-title{font-size:27px;font-weight:800;color:var(--ink);margin-top:16px;letter-spacing:-.3px;}
+.login-hero .login-sub{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.5;}
+.login-body{flex:1 1 auto;min-height:0;display:flex;align-items:center;justify-content:center;padding:14px 20px;}
+.login-foot{flex-shrink:0;padding:6px 20px calc(env(safe-area-inset-bottom,0px) + 22px);}
 .login-title{font-size:21px;font-weight:800;color:var(--ink);}
 .login-sub{font-size:13px;color:var(--muted);text-align:center;line-height:1.6;}
-.login-card{width:100%;max-width:360px;}
+.login-card{width:100%;max-width:380px;box-shadow:0 12px 34px rgba(18,28,22,.10);border:1px solid var(--line);}
+.login-foot .langpick{margin-top:0;}
 .tabswitch{display:flex;background:var(--line-soft);border-radius:10px;padding:3px;margin-bottom:16px;}
 .tabswitch button{flex:1;border:none;background:transparent;padding:9px;border-radius:8px;font-weight:700;font-size:13px;color:var(--muted);cursor:pointer;}
 .tabswitch button.active{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12);}
@@ -330,6 +352,12 @@ html[data-lang="ar"] .switch input:checked ~ .thumb{transform:translateX(-18px);
 .buildok .oktimes{margin-top:10px;display:flex;flex-direction:column;gap:3px;font-size:12px;color:var(--ink-soft);font-family:var(--font-mono);}
 .buildok .oktimes b{color:var(--ink);}
 .buildok .oksteps{margin:12px 0 0;padding-inline-start:20px;font-size:12.5px;color:var(--ink-soft);line-height:1.7;}
+.buildok .okba{margin-top:12px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 13px;display:flex;flex-direction:column;gap:8px;}
+.buildok .okba-row{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:12.5px;}
+.buildok .okba-lbl{color:var(--muted);font-weight:700;}
+.buildok .okba-val{font-family:var(--font-mono);color:var(--muted);font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums;}
+.buildok .okba-val .okba-arrow{color:var(--faint,#B7BCC7);}
+.buildok .okba-val b{color:var(--green);font-size:14px;}
 .buildok .okchanges{margin-top:12px;background:#fff;border:1px solid var(--line,rgba(0,0,0,.1));border-radius:10px;padding:8px 10px;}
 .buildok .okchanges .okchttl{font-size:12.5px;font-weight:800;color:var(--green);margin-bottom:5px;}
 .buildok .okchanges .okchrow{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:12px;padding:3px 0;border-top:1px dashed rgba(0,0,0,.06);}
@@ -543,6 +571,9 @@ const I18N = {
     changesTitle:"✅ تأكيد التغيير (الموجود: قبل → بعد):",
     previewStores:"👁 معاينة المتاجر بالبيانات الجديدة الآن",
     previewLabel:"معاينة المدير",
+    updateDoneTitle:"✅ تم التحديث بنجاح", stockValueTotal:"إجمالي قيمة المخزون",
+    downloadForGithub:"تنزيل index.html لرفعه على GitHub", downloadStarted:"بدأ تنزيل الملف",
+    deployHint:"الأرقام اتحدّثت في التطبيق فورًا. لو عايز التحديث يوصل للمناديب، نزّل الملف وارفعه على GitHub (استبدال القديم).",
     save:"حفظ", noStores:"لا توجد متاجر مرتبطة بهذا المستخدم",
     fresh:"محدث", stale:"قديم", never:"—", min:"أدنى", max:"أقصى", lastSold:"آخر بيع",
     catNoLines:"لا توجد أصناف مطابقة", genericErr:"حدث خطأ، حاول مجددًا",
@@ -609,6 +640,9 @@ const I18N = {
     changesTitle:"✅ Update confirmed (On Hand: before → after):",
     previewStores:"👁 Preview stores with the new data now",
     previewLabel:"Manager preview",
+    updateDoneTitle:"✅ Updated successfully", stockValueTotal:"Total stock value",
+    downloadForGithub:"Download index.html for GitHub", downloadStarted:"Download started",
+    deployHint:"Numbers updated in the app instantly. To push the update to the reps, download the file and upload it to GitHub (replace the old one).",
     save:"Save", noStores:"No stores linked to this user",
     fresh:"fresh", stale:"stale", never:"—", min:"Min", max:"Max", lastSold:"Last Sold",
     catNoLines:"No matching items", genericErr:"Something went wrong, please retry",
@@ -936,19 +970,22 @@ function render(){
 
 /* ---------------- LOGIN SCREEN ---------------- */
 function renderLogin(){
-  const s = el("div", {class:"screen center-content"});
+  const s = el("div", {class:"screen loginscreen"});
+
+  // Brand hero — fills the top of the screen with the Othaim identity.
+  const hero = el("div", {class:"login-hero"});
+  hero.appendChild(el("div", {class:"login-logo"}, [ el("img", {src:"data:image/png;base64,"+window.OTHAIM_LOGO_B64, alt:"Othaim"}) ]));
+  hero.appendChild(el("div", {class:"login-title"}, [t("appName")]));
+  hero.appendChild(el("div", {class:"login-sub"}, [t("tagline")]));
+  s.appendChild(hero);
+
+  // Login form — centred in the growing middle.
+  const body = el("div", {class:"login-body"});
   const card = el("div", {class:"card card-pad login-card"});
 
-  card.appendChild(el("div", {class:"login-logo-wrap"}, [
-    el("img", {src:"data:image/png;base64,"+window.OTHAIM_LOGO_B64, alt:"Othaim"}),
-    el("div", {class:"login-title"}, [t("appName")]),
-    el("div", {class:"login-sub"}, [t("tagline")])
-  ]));
-
   const tabs = el("div", {class:"tabswitch"});
-  const repBtn = el("button", {class: state.loginMode==="rep" ? "active":"", onclick:() => { state.loginMode="rep"; render(); }}, [t("loginAsRep")]);
-  const mgrBtn = el("button", {class: state.loginMode==="manager" ? "active":"", onclick:() => { state.loginMode="manager"; render(); }}, [t("changePin")]);
-  tabs.appendChild(repBtn); tabs.appendChild(mgrBtn);
+  tabs.appendChild(el("button", {class: state.loginMode==="rep" ? "active":"", onclick:() => { state.loginMode="rep"; render(); }}, [t("loginAsRep")]));
+  tabs.appendChild(el("button", {class: state.loginMode==="manager" ? "active":"", onclick:() => { state.loginMode="manager"; render(); }}, [t("changePin")]));
   card.appendChild(tabs);
 
   const err = el("div", {class:"errmsg"});
@@ -976,19 +1013,37 @@ function renderLogin(){
   input.addEventListener("keydown", (ev) => { if(ev.key === "Enter") doLogin(); });
   card.appendChild(el("button", {class:"btn btn-primary btn-block", onclick:doLogin}, [t("login")]));
   card.appendChild(err);
+  body.appendChild(card);
+  s.appendChild(body);
 
+  // Footer — language + data freshness pinned near the bottom.
+  const foot = el("div", {class:"login-foot"});
   const lp = el("div", {class:"langpick"});
   lp.appendChild(el("button", {class: state.lang==="ar"?"active":"", onclick:() => setLang("ar")}, ["العربية"]));
   lp.appendChild(el("button", {class: state.lang==="en"?"active":"", onclick:() => setLang("en")}, ["English"]));
-  card.appendChild(lp);
-
-  card.appendChild(renderStatusStrip(true));
-  s.appendChild(card);
+  foot.appendChild(lp);
+  foot.appendChild(renderStatusStrip(true));
+  s.appendChild(foot);
   return s;
 }
 function setLang(l){ state.lang = l; localStorage.setItem("oo_lang", l); render(); }
 
 /* ---------------- STATUS STRIP (shared) ---------------- */
+// Pretty timestamp: "08-Sep-2026 - 8:19 AM" — date in blue, dash in grey, time in orange.
+// Parses the stored "YYYY-MM-DD HH:MM" wall-clock straight from the string (no timezone shift).
+const STAMP_MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+function fmtStamp(ts){
+  const m = String(ts||"").match(/(\d{4})-(\d{2})-(\d{2})[ T](\d{1,2}):(\d{2})/);
+  if(!m) return null;
+  let h = parseInt(m[4],10); const ap = h < 12 ? "AM" : "PM"; h = h % 12; if(h === 0) h = 12;
+  const datePart = m[3] + "-" + (STAMP_MON[parseInt(m[2],10)-1] || m[2]) + "-" + m[1];
+  const timePart = h + ":" + m[5] + " " + ap;
+  const pill = el("span", {class:"stamp", dir:"ltr"});
+  pill.appendChild(el("span", {class:"sdate"}, [datePart]));
+  pill.appendChild(el("span", {class:"sdash"}, ["-"]));
+  pill.appendChild(el("span", {class:"stime"}, [timePart]));
+  return pill;
+}
 function renderStatusStrip(compact){
   const wrap = el("div", {class:"statusstrip", style: compact ? "margin-top:16px;border-radius:10px;overflow:hidden;border:1px solid var(--line);" : ""});
   const mk = (labelKey, tsKey) => {
@@ -996,7 +1051,8 @@ function renderStatusStrip(compact){
     const fr = freshness(ts);
     const cell = el("div", {class:"cell"});
     cell.appendChild(el("b", {}, [ el("span",{class:"dot dot-"+fr}), t(labelKey) ]));
-    cell.appendChild(el("span", {}, [ ts || t("never") ]));
+    // Date/time always reads left-to-right (never bidi-reordered in the Arabic layout).
+    cell.appendChild(fmtStamp(ts) || el("span", {class:"ts", dir:"ltr"}, [ t("never") ]));
     return cell;
   };
   wrap.appendChild(mk("stockUpdated","lastUpdatedMarsStock"));
@@ -2002,69 +2058,7 @@ function renderAdmin(){
         if(!parsed || Object.keys(parsed).length === 0){
           toast(t("fileNotRecognized"), "error"); return;
         }
-        summary.style.display = "flex"; summary.innerHTML = "";
-        summary.appendChild(el("div", {class:"section-title"}, [t("selectSheets")]));
-        const order = ["stores","skus","onHand","marsStock"];
-        const labels = {stores:"Stores", skus:"SKUs", onHand:"OnHand", marsStock:"MarsStock"};
-        order.filter(k => parsed[k]).forEach(k => {
-          const row = el("div", {class:"chkrow"});
-          const line = el("label", {class:"chkline"});
-          const cb = el("input", {type:"checkbox"}); cb.checked = true; cb.dataset.key = k;
-          const count = k==="onHand"
-            ? Object.values(parsed.onHand).reduce((a,it)=>a+Object.keys(it).length,0)
-            : (Array.isArray(parsed[k]) ? parsed[k].length : Object.keys(parsed[k]).length);
-          line.appendChild(cb);
-          line.appendChild(el("span", {}, [labels[k]+" — "+fmtInt(count)+" "+t("rowsFound")]));
-          row.appendChild(line);
-          // On-hand diagnostics: does it actually match items and produce a value? (Catches
-          // the "all zeros" case BEFORE he uploads the rebuilt file to GitHub.)
-          if(k === "onHand"){
-            const skuSet = {}; (OO.skus||[]).forEach(s => skuSet[s.artecal] = s);
-            // AFTER (the uploaded file)
-            let matched=0, pieces=0, val=0;
-            Object.values(parsed.onHand).forEach(items => Object.entries(items).forEach(([art,rec]) => {
-              const q = Number(rec.onHand)||0; pieces += q;
-              const sk = skuSet[art]; if(sk){ matched++; val += q*(Number(sk.pcPrice)||0); }
-            }));
-            // BEFORE (what's in the app right now) + how many entries actually changed
-            let beforePieces=0, beforeVal=0, changed=0;
-            Object.entries(OO.onHand||{}).forEach(([st,items]) => Object.entries(items).forEach(([art,rec]) => {
-              const q = Number(rec.onHand)||0; beforePieces += q;
-              const sk = skuSet[art]; if(sk) beforeVal += q*(Number(sk.pcPrice)||0);
-              const nu = parsed.onHand[st] && parsed.onHand[st][art];
-              if(!nu || (Number(nu.onHand)||0) !== q) changed++;
-            }));
-            const ok = matched>0 && pieces>0;
-            const d = el("div", {class:"chkdiag"+(ok?"":" bad")});
-            d.appendChild(el("div", {}, [t("matchedItems")+": "+fmtInt(matched)+"  ·  "+t("onHandPieces")+": "+fmtInt(pieces)]));
-            if(!state.hidePrices){
-              // before → after value, with the delta, so the update is unmistakable
-              const delta = val - beforeVal;
-              const sign = delta>=0 ? "▲ +" : "▼ ";
-              d.appendChild(el("div", {class:"diffline"}, [
-                t("beforeLbl")+": "+fmtMoney(beforeVal)+"  →  "+t("afterLbl")+": ", el("b",{},[fmtMoney(val)+" "+curr()])
-              ]));
-              d.appendChild(el("div", {class:"diffdelta"+(delta>=0?" up":" down")}, [ t("changeLbl")+": "+sign+fmtMoney(Math.abs(delta))+" "+curr() ]));
-            }
-            d.appendChild(el("div", {class:"diffsub"}, [ t("changedEntries")+": "+fmtInt(changed) ]));
-            // When the upload matches current data EXACTLY, "+0.00 / 0 changed" looks like a
-            // failure — say plainly that the file is identical so it's never mistaken for a bug.
-            if(ok && changed === 0){
-              const nd = el("div", {class:"nodiff"});
-              nd.appendChild(el("div", {class:"ndttl"}, ["ℹ️ "+t("noDiffTitle")]));
-              nd.appendChild(el("div", {class:"ndmsg"}, [t("noDiffMsg")]));
-              d.appendChild(nd);
-            }
-            if(!ok){
-              d.appendChild(el("div", {class:"warn"}, [t("zeroWarn")]));
-              if(parsed._onHandCols) d.appendChild(el("div", {class:"cols"}, [t("colsDetected")+": "+Object.values(parsed._onHandCols).filter(Boolean).join(" · ")]));
-            }
-            row.appendChild(d);
-          }
-          summary.appendChild(row);
-        });
-        summary.appendChild(el("button", {class:"btn btn-green btn-block", style:"margin-top:10px;", onclick: () => doBuild(parsed, summary)}, [t("buildNewFile")]));
-        summary.appendChild(el("div", {class:"login-sub", style:"margin-top:6px;"}, [t("buildHint")]));
+        applyUpload(parsed, summary);   // apply the update immediately and show the result card
       }catch(e){
         console.error(e);
         toast(t("fileNotRecognized"), "error");
@@ -2288,136 +2282,102 @@ function parseWorkbook(wb){
   return out;
 }
 
-async function doBuild(parsed, summaryEl){
-  const checks = summaryEl.querySelectorAll("input[type=checkbox]");
-  const selected = Array.from(checks).filter(c => c.checked).map(c => c.dataset.key);
-  if(selected.length === 0) return;
-  showLoading(true);
+// Overall stock snapshot across ALL of the manager's stores (value + pieces).
+function overallTotals(data){
+  let value=0, pieces=0; const sk={}; (data.skus||[]).forEach(s=>sk[s.artecal]=s);
+  Object.values(data.onHand||{}).forEach(items=>{ for(const art in items){ const q=Number(items[art].onHand)||0; pieces+=q; const s=sk[art]; if(s) value+=q*(Number(s.pcPrice)||0); } });
+  return {value, pieces};
+}
+
+// Apply an uploaded workbook to the app IMMEDIATELY (no extra "build" click): merge the sheets it
+// contains, refresh every number live, persist on this device, and show a clear "done" card with
+// before -> after totals. Downloading index.html for GitHub is a separate button on that card.
+function applyUpload(parsed, summaryEl){
+  const now = new Date().toISOString().slice(0,16).replace("T"," ");
+  const before = overallTotals(OO);
+  const merged = JSON.parse(JSON.stringify(OO)); // clone current data
+  const present = ["stores","skus","onHand","marsStock"].filter(k => parsed[k]);
+  const applied = [], skipped = [];
+  // SAFETY NET: never let an empty/corrupted sheet wipe good data already in the app.
+  if(present.includes("stores")){ if(parsed.stores && parsed.stores.length){ merged.stores=parsed.stores; merged.meta.lastUpdatedStores=now; applied.push("Stores"); } else skipped.push("Stores"); }
+  if(present.includes("skus")){ if(parsed.skus && parsed.skus.length){ merged.skus=parsed.skus; merged.meta.lastUpdatedSKUs=now; applied.push("SKUs"); } else skipped.push("SKUs"); }
+  if(present.includes("onHand")){ if(parsed.onHand && Object.keys(parsed.onHand).length){ merged.onHand=parsed.onHand; merged.meta.lastUpdatedOnHand=now; applied.push("OnHand"); } else skipped.push("OnHand"); }
+  if(present.includes("marsStock") && parsed.marsStock && Object.keys(parsed.marsStock).length){
+    let ms=parsed.marsStock;
+    if(Object.values(ms)[0] && Object.values(ms)[0]._zrep){
+      const z2a={}; merged.skus.forEach(sk=>{ if(sk.zrep) z2a[String(sk.zrep)]=sk.artecal; });
+      const rem={}; Object.entries(ms).forEach(([z,v])=>{ const a=z2a[z]; if(a) rem[String(a)]={qty:v.qty,updated:v.updated}; }); ms=rem;
+    }
+    merged.marsStock=ms; merged.meta.lastUpdatedMarsStock=now; applied.push("MarsStock");
+  } else if(present.includes("marsStock")) skipped.push("MarsStock");
+
+  if(applied.length === 0){ toast(t("buildAllEmpty"), "error"); return; }
+
+  // Collect concrete on-hand changes (store . item . before -> after) + count, before swapping in.
+  const changeSamples=[]; let changed=0;
+  if(parsed.onHand){
+    const skById={}; (merged.skus||[]).forEach(s=>skById[s.artecal]=s);
+    const stById={}; (merged.stores||[]).forEach(s=>stById[String(leadCode(s.storeNo))]=s);
+    for(const st of Object.keys(parsed.onHand)){
+      const oldItems=(OO.onHand&&OO.onHand[st])||{};
+      for(const art of Object.keys(parsed.onHand[st])){
+        const nv=Number(parsed.onHand[st][art].onHand)||0, ov=Number((oldItems[art]||{}).onHand)||0;
+        if(nv!==ov){ changed++;
+          if(changeSamples.length<6){ const sk=skById[art], store=stById[String(st)];
+            changeSamples.push({store:st, item:(sk?(sk.nameEn||sk.nameAr):art), before:ov, after:nv}); } }
+      }
+    }
+  }
+
+  merged.stores = merged.stores.filter(st => st.userNumber);
+  merged.meta.builtAt = now;              // this upload is now the newest data version
+  OO = merged; reindexSkus();             // refresh every number live (clears the value cache)
+  const after = overallTotals(OO);
+
+  // Persist on THIS device so a reload/reopen keeps the new numbers (never reverts to baked).
+  try{ localStorage.setItem(LS_DATA_KEY, encodeEmbeddedData(OO)); localStorage.setItem(LS_DATA_BUILT, now); }catch(e){}
+  if(skipped.length) toast(t("buildKept")+": "+skipped.join(", "), "warn");
+
+  // ---- result card ----
+  summaryEl.style.display="flex"; summaryEl.innerHTML="";
+  const box = el("div", {class:"buildok"});
+  box.appendChild(el("div", {class:"okttl"}, [t("updateDoneTitle")]));
+  const noChange = (changed === 0);
+  const ba = el("div", {class:"okba"});
+  const baRow = (lbl, beforeTxt, afterTxt) => el("div",{class:"okba-row"},[
+    el("span",{class:"okba-lbl"},[lbl]),
+    el("span",{class:"okba-val", dir:"ltr"},[ beforeTxt, el("span",{class:"okba-arrow"},[" → "]), el("b",{},[afterTxt]) ])
+  ]);
+  if(!state.hidePrices) ba.appendChild(baRow(t("stockValueTotal"), fmtMoney(before.value), fmtMoney(after.value)+" "+curr()));
+  ba.appendChild(baRow(t("onHandPieces"), fmtInt(before.pieces), fmtInt(after.pieces)));
+  ba.appendChild(el("div",{class:"okba-row"},[ el("span",{class:"okba-lbl"},[t("changedEntries")]), el("span",{class:"okba-val"},[el("b",{},[fmtInt(changed)])]) ]));
+  box.appendChild(ba);
+  if(noChange){ const nd=el("div",{class:"nodiff"}); nd.appendChild(el("div",{class:"ndttl"},["ℹ️ "+t("noDiffTitle")])); nd.appendChild(el("div",{class:"ndmsg"},[t("noDiffMsg")])); box.appendChild(nd); }
+  if(changeSamples.length){
+    const ch=el("div",{class:"okchanges"}); ch.appendChild(el("div",{class:"okchttl"},[t("changesTitle")]));
+    changeSamples.forEach(c=>ch.appendChild(el("div",{class:"okchrow"},[ el("span",{class:"okchname"},[c.item+"  ·  #"+c.store]), el("span",{class:"okchval", dir:"ltr"},[fmtInt(c.before)+" → ", el("b",{},[fmtInt(c.after)])]) ])));
+    box.appendChild(ch);
+  }
+  box.appendChild(el("button",{class:"btn btn-primary btn-block",style:"margin-top:12px;",onclick:()=>{ state.user="__preview__"; state.salesman=t("previewLabel"); state.stores=(OO.stores||[]).slice(); state.screen="stores"; state.category="all"; state.query=""; render(); }},[t("previewStores")]));
+  box.appendChild(el("button",{class:"btn btn-green btn-block",style:"margin-top:8px;",onclick:()=>downloadIndexHtml()},[svgIcon("download"), " "+t("downloadForGithub")]));
+  box.appendChild(el("div",{class:"login-sub",style:"margin-top:8px;line-height:1.7;"},[t("deployHint")]));
+  box.appendChild(el("button",{class:"btn btn-outline btn-block",style:"margin-top:8px;",onclick:()=>{ summaryEl.style.display="none"; summaryEl.innerHTML=""; }},[t("buildAgain")]));
+  summaryEl.appendChild(box);
+  toast(t("updateDoneTitle"), "success");
+}
+
+// Build and download the updated index.html (the file the manager re-uploads to GitHub for reps).
+function downloadIndexHtml(){
   try{
-    const now = new Date().toISOString().slice(0,16).replace("T"," ");
-    const merged = JSON.parse(JSON.stringify(OO)); // deep clone current data
-
-    // SAFETY NET: only replace a section when the upload actually produced data for it. A file
-    // whose Stores/SKUs sheet came out empty (corrupted export, wrong sheet) must NEVER wipe the
-    // good data already in the app — otherwise reps could suddenly find no stores to log into.
-    const skipped = [];
-    if(selected.includes("stores")){ if(parsed.stores && parsed.stores.length){ merged.stores = parsed.stores; merged.meta.lastUpdatedStores = now; } else skipped.push("Stores"); }
-    if(selected.includes("skus")){ if(parsed.skus && parsed.skus.length){ merged.skus = parsed.skus; merged.meta.lastUpdatedSKUs = now; } else skipped.push("SKUs"); }
-    if(selected.includes("onHand")){ if(parsed.onHand && Object.keys(parsed.onHand).length){ merged.onHand = parsed.onHand; merged.meta.lastUpdatedOnHand = now; } else skipped.push("OnHand"); }
-    if(selected.includes("marsStock") && parsed.marsStock && Object.keys(parsed.marsStock).length){
-      // Mars Stock from the raw export is keyed by ZREP — remap to ArtecalNo via current SKUs
-      let ms = parsed.marsStock;
-      if(parsed._marsStockByZrep_unused){ /* no-op, placeholder */ }
-      if(Object.values(ms)[0] && Object.values(ms)[0]._zrep){
-        const zrepToArt = {};
-        merged.skus.forEach(sk => { if(sk.zrep) zrepToArt[String(sk.zrep)] = sk.artecal; });
-        const remapped = {};
-        Object.entries(ms).forEach(([zrep, v]) => {
-          const art = zrepToArt[zrep];
-          if(art) remapped[String(art)] = {qty:v.qty, updated:v.updated};
-        });
-        ms = remapped;
-      }
-      merged.marsStock = ms;
-      merged.meta.lastUpdatedMarsStock = now;
-    } else if(selected.includes("marsStock")){ skipped.push("MarsStock"); }
-
-    // If any selected section produced no data, tell the manager it was kept as-is (not wiped),
-    // and abort entirely if EVERYTHING was empty (so a bad file never overwrites a good app).
-    if(skipped.length === selected.length){
-      showLoading(false);
-      toast(t("buildAllEmpty"), "error");
-      return;
-    }
-    if(skipped.length){ toast(t("buildKept")+": "+skipped.join(", "), "warn"); }
-
-    // Capture a few CONCRETE on-hand changes (store · item · before → after) BEFORE swapping the
-    // data in, so the success card can prove the update landed with real numbers he recognizes.
-    const changeSamples = [];
-    if(selected.includes("onHand") && parsed.onHand && Object.keys(parsed.onHand).length){
-      const skById = {}; (merged.skus||[]).forEach(s => skById[s.artecal] = s);
-      const stById = {}; (merged.stores||[]).forEach(s => stById[String(leadCode(s.storeNo))] = s);
-      outer:
-      for(const st of Object.keys(parsed.onHand)){
-        const oldItems = (OO.onHand && OO.onHand[st]) || {};
-        for(const art of Object.keys(parsed.onHand[st])){
-          const nv = Number(parsed.onHand[st][art].onHand)||0;
-          const ov = Number((oldItems[art]||{}).onHand)||0;
-          if(nv !== ov){
-            const sk = skById[art]; const store = stById[String(st)];
-            changeSamples.push({
-              store: st, storeName: store ? store.nameAr : ("#"+st),
-              item: sk ? (sk.nameEn || sk.nameAr) : art, code: sk ? sk.artecalCode : art,
-              before: ov, after: nv
-            });
-            if(changeSamples.length >= 6) break outer;
-          }
-        }
-      }
-    }
-
-    // filter OnHand/Stores consistency: keep only stores that still have a userNumber
-    merged.stores = merged.stores.filter(st => st.userNumber);
-    merged.meta.builtAt = now;   // this build is now the newest data version
-
-    OO = merged; // reflect immediately in this session too, as visible confirmation
-    reindexSkus();
-
-    const newBlob64 = encodeEmbeddedData(OO);
-    // Persist on THIS device so a reload/reopen keeps showing the update (never reverts to baked).
-    try{ localStorage.setItem(LS_DATA_KEY, newBlob64); localStorage.setItem(LS_DATA_BUILT, now); }catch(e){}
-    const newHtml = ORIGINAL_HTML.replace(
-      /(<script id="oo-data"[^>]*>)[\s\S]*?(<\/script>)/,
-      "$1" + newBlob64 + "$2"
-    );
+    const blob64 = encodeEmbeddedData(OO);
+    const newHtml = ORIGINAL_HTML.replace(/(<script id="oo-data"[^>]*>)[\s\S]*?(<\/script>)/, "$1"+blob64+"$2");
     const blob = new Blob([newHtml], {type:"text/html"});
     const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url; a.download = "index.html";
+    const a = document.createElement("a"); a.href=url; a.download="index.html";
     document.body.appendChild(a); a.click(); a.remove();
-    setTimeout(() => URL.revokeObjectURL(url), 30000);
-
-    // Clear success card (replaces the tiny toast) — he said the old flow never showed
-    // whether the update actually worked or what to do next.
-    showLoading(false);
-    summaryEl.innerHTML = "";
-    const box = el("div", {class:"buildok"});
-    box.appendChild(el("div", {class:"okttl"}, [t("buildSuccessTitle")]));
-    box.appendChild(el("div", {class:"okmsg"}, [t("buildSuccessMsg")]));
-    const times = el("div", {class:"oktimes"});
-    [["OnHand","lastUpdatedOnHand"],["MarsStock","lastUpdatedMarsStock"],["SKUs","lastUpdatedSKUs"],["Stores","lastUpdatedStores"]]
-      .filter(([lbl,key]) => selected.includes({lastUpdatedOnHand:"onHand",lastUpdatedMarsStock:"marsStock",lastUpdatedSKUs:"skus",lastUpdatedStores:"stores"}[key]))
-      .forEach(([lbl,key]) => times.appendChild(el("div", {}, [ el("b",{},[lbl]), " · "+OO.meta[key] ])));
-    box.appendChild(times);
-    // Concrete proof the update landed: real before→after numbers he recognizes.
-    if(changeSamples.length){
-      const ch = el("div", {class:"okchanges"});
-      ch.appendChild(el("div", {class:"okchttl"}, [t("changesTitle")]));
-      changeSamples.forEach(c => {
-        ch.appendChild(el("div", {class:"okchrow"}, [
-          el("span", {class:"okchname"}, [c.item + "  ·  #" + c.store]),
-          el("span", {class:"okchval"}, [ fmtInt(c.before) + " → ", el("b", {}, [fmtInt(c.after)]) ])
-        ]));
-      });
-      box.appendChild(ch);
-    }
-    // One tap to SEE the updated stores live — confirmation that never depends on redeploying first.
-    box.appendChild(el("button", {class:"btn btn-primary btn-block", style:"margin-top:10px;", onclick:() => {
-      state.user = "__preview__"; state.salesman = t("previewLabel"); state.stores = (OO.stores||[]).slice();
-      state.screen = "stores"; state.category = "all"; state.query = ""; render();
-    }}, [t("previewStores")]));
-    const steps = el("ol", {class:"oksteps"});
-    [t("step1"), t("step2"), t("step3")].forEach(s => steps.appendChild(el("li", {}, [s])));
-    box.appendChild(steps);
-    box.appendChild(el("button", {class:"btn btn-outline btn-block", style:"margin-top:8px;", onclick:() => { summaryEl.style.display="none"; summaryEl.innerHTML=""; }}, [t("buildAgain")]));
-    summaryEl.appendChild(box);
-    toast(t("buildDone"), "success");
-    // NOTE: do not call render() here — it would rebuild the admin screen and wipe this
-    // success card. OO is already updated live; the card shows the new timestamps.
-  }catch(e){
-    console.error(e);
-    toast(t("genericErr"), "error");
-  }finally{ showLoading(false); }
+    setTimeout(()=>URL.revokeObjectURL(url), 30000);
+    toast(t("downloadStarted"), "success");
+  }catch(e){ console.error(e); toast(t("genericErr"), "error"); }
 }
 
 function saveHist(hist){ try{ localStorage.setItem("oo_order_history", JSON.stringify(hist)); }catch(e){} }
