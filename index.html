@@ -78,13 +78,15 @@ input,select{font-family:inherit;}
 .statusstrip{display:flex;gap:0;background:#fff;border-bottom:1px solid var(--line);font-size:11px;color:var(--muted);direction:ltr;}
 .statusstrip .cell{flex:1;padding:7px 12px;display:flex;flex-direction:column;gap:1px;border-inline-end:1px solid var(--line-soft);text-align:left;}
 .statusstrip .ts{direction:ltr;unicode-bidi:isolate;font-variant-numeric:tabular-nums;}
-.statusstrip .stamp{display:inline-flex;align-items:center;gap:4px;margin-top:4px;align-self:flex-start;
+/* Reusable date/time pill (status strip + admin data-status cards): blue date · orange time. */
+.stamp{display:inline-flex;align-items:center;gap:4px;align-self:flex-start;
   border:1px solid #E3E7EE;border-radius:8px;padding:3px 8px;background:#fff;
   font-family:var(--font-mono);font-size:11px;font-weight:700;line-height:1.2;direction:ltr;
   font-variant-numeric:tabular-nums;white-space:nowrap;}
-.statusstrip .stamp .sdate{color:#2563EB;}
-.statusstrip .stamp .sdash{color:#9AA0AC;}
-.statusstrip .stamp .stime{color:#F97316;}
+.statusstrip .stamp{margin-top:4px;}
+.stamp .sdate{color:#2563EB;}
+.stamp .sdash{color:#9AA0AC;}
+.stamp .stime{color:#F97316;}
 .statusstrip .cell b{color:var(--ink-soft);font-size:11.5px;font-weight:700;}
 .statusstrip .dot{width:6px;height:6px;border-radius:50%;display:inline-block;margin-inline-end:5px;}
 .dot-fresh{background:var(--green);} .dot-warn{background:var(--amber);} .dot-stale{background:var(--danger);}
@@ -327,7 +329,7 @@ html[data-lang="ar"] .switch input:checked ~ .thumb{transform:translateX(-18px);
 .adminstat{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .adminstat .box{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px;}
 .adminstat .box .lbl{font-size:11px;color:var(--muted);font-weight:700;}
-.adminstat .box .when{font-size:13px;font-weight:800;margin-top:3px;}
+.adminstat .box .when{margin-top:8px;display:flex;align-items:center;gap:6px;}
 .uploadzone{border:2px dashed var(--line);border-radius:var(--radius);padding:26px 16px;text-align:center;color:var(--muted);cursor:pointer;background:#fff;}
 .uploadzone.drag{border-color:var(--red);background:#FFF3F2;}
 .progresswrap{background:var(--line-soft);border-radius:8px;height:8px;overflow:hidden;}
@@ -368,6 +370,94 @@ html[data-lang="ar"] .switch input:checked ~ .thumb{transform:translateX(-18px);
 .buildok .okchanges .okchname{color:var(--ink-soft);font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .buildok .okchanges .okchval{font-family:var(--font-mono);color:var(--ink-soft);white-space:nowrap;flex-shrink:0;}
 .buildok .okchanges .okchval b{color:var(--green);font-size:13px;}
+/* Manager success card: brand-new items Othaim added */
+.buildok .newitems{margin-top:12px;background:#F5F8FF;border:1px solid #CADBFF;border-radius:10px;padding:12px 13px;}
+.buildok .newitems .ni-head{display:flex;align-items:center;gap:8px;}
+.buildok .newitems .ni-title{font-size:13px;font-weight:800;color:#2563EB;}
+.buildok .newitems .ni-count{font-size:11.5px;font-weight:800;color:#fff;background:#2563EB;border-radius:999px;padding:1px 9px;min-width:22px;text-align:center;}
+.buildok .newitems .ni-note{font-size:12px;color:var(--ink-soft);line-height:1.6;margin:7px 0 9px;}
+.buildok .newitems .ni-list{display:flex;flex-direction:column;gap:2px;max-height:260px;overflow:auto;}
+.buildok .newitems .ni-item{display:flex;align-items:center;gap:10px;font-size:12.5px;padding:4px 0;border-top:1px dashed rgba(37,99,235,.12);}
+.buildok .newitems .ni-item:first-of-type{border-top:none;}
+.buildok .newitems .ni-code{font-family:var(--font-mono);font-size:11px;color:#2563EB;background:#fff;border:1px solid #CADBFF;border-radius:5px;padding:1px 6px;flex-shrink:0;min-width:54px;text-align:center;}
+.buildok .newitems .ni-name{color:var(--ink-soft);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+/* Store page: what's new / changed for THIS store (rep & manager preview) */
+.whatsnew{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;border-inline-start:3px solid #2563EB;}
+.whatsnew .wn-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;cursor:pointer;}
+.whatsnew .wn-head-l{display:flex;flex-direction:column;gap:6px;min-width:0;}
+.whatsnew .wn-title{font-size:13.5px;font-weight:800;color:var(--ink);}
+.whatsnew .wn-badges{display:flex;flex-wrap:wrap;gap:6px;}
+.whatsnew .wn-b{font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;white-space:nowrap;}
+.whatsnew .wn-b.added{background:rgba(6,127,62,.1);color:var(--green);}
+.whatsnew .wn-b.missing{background:rgba(180,116,10,.12);color:var(--amber);}
+.whatsnew .wn-b.removed{background:rgba(192,40,31,.1);color:var(--danger);}
+.whatsnew .wn-chev{color:var(--muted);font-size:13px;flex-shrink:0;}
+.whatsnew .wn-body{display:none;padding:0 14px 12px;flex-direction:column;gap:2px;}
+.whatsnew.open .wn-body{display:flex;}
+.whatsnew .wn-sec{font-size:11.5px;font-weight:800;margin:10px 0 4px;padding-bottom:3px;border-bottom:1px solid var(--line-soft);}
+.whatsnew .wn-sec.added{color:var(--green);} .whatsnew .wn-sec.missing{color:var(--amber);} .whatsnew .wn-sec.removed{color:var(--danger);}
+.whatsnew .wn-item{display:flex;align-items:center;gap:10px;font-size:12.5px;padding:4px 0;border-top:1px dashed rgba(0,0,0,.05);}
+.whatsnew .wn-item:first-of-type{border-top:none;}
+.whatsnew .wn-code{font-family:var(--font-mono);font-size:11px;color:var(--muted);background:var(--line-soft);border-radius:5px;padding:1px 6px;flex-shrink:0;min-width:54px;text-align:center;}
+.whatsnew .wn-name{color:var(--ink-soft);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+/* Opportunity / gap filter (item screen) */
+.gapbar{display:flex;flex-direction:column;gap:8px;}
+.gaptoggle{display:flex;align-items:center;gap:8px;width:100%;border:1.5px solid var(--line);background:#fff;border-radius:11px;padding:10px 12px;cursor:pointer;font-family:inherit;}
+.gaptoggle .gt-ic{font-size:15px;line-height:1;}
+.gaptoggle .gt-l{font-weight:800;font-size:13.5px;color:var(--ink);flex:1;text-align:start;}
+.gaptoggle .gt-n{font-family:var(--font-mono);font-size:12px;font-weight:800;color:var(--muted);background:var(--line-soft);border-radius:999px;padding:2px 9px;min-width:24px;text-align:center;}
+.gaptoggle.on{border-color:#2563EB;background:#F5F8FF;}
+.gaptoggle.on .gt-l{color:#2563EB;}
+.gaptoggle.on .gt-n{color:#fff;background:#2563EB;}
+.gapthresh{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.gapthresh .gt-cap{font-size:12px;color:var(--muted);font-weight:600;}
+.gapthresh .gt-opt{min-width:34px;height:30px;border:1.5px solid var(--line);background:#fff;border-radius:8px;font-weight:800;font-size:13px;color:var(--ink-soft);cursor:pointer;font-family:var(--font-mono);}
+.gapthresh .gt-opt.on{border-color:#2563EB;background:#2563EB;color:#fff;}
+.gap-hint{font-size:11.5px;color:var(--muted);line-height:1.5;}
+/* Manager region search */
+.regionsearch{display:flex;flex-direction:column;gap:10px;}
+.rs-thr{margin-top:-2px;}
+.rs-results{display:flex;flex-direction:column;gap:4px;}
+.rs-hit{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:9px;padding:8px 10px;cursor:pointer;}
+.rs-hit:active{background:var(--line-soft);}
+.rs-hit-code{font-family:var(--font-mono);font-size:11px;color:var(--muted);background:var(--line-soft);border-radius:5px;padding:1px 6px;flex-shrink:0;min-width:54px;text-align:center;}
+.rs-hit-name{flex:1;font-size:12.5px;color:var(--ink-soft);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.rs-hit-add{font-size:16px;font-weight:800;color:#2563EB;flex-shrink:0;}
+.rs-none{font-size:12px;color:var(--muted);padding:6px 2px;}
+.rs-chips{display:flex;flex-wrap:wrap;gap:6px;}
+.rs-chip{display:inline-flex;align-items:center;gap:6px;background:#2563EB;color:#fff;border-radius:999px;padding:4px 6px 4px 11px;font-size:12px;font-weight:700;max-width:100%;}
+.rs-chip-t{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:200px;}
+.rs-x{width:18px;height:18px;border:none;background:rgba(255,255,255,.25);color:#fff;border-radius:50%;font-size:11px;line-height:1;cursor:pointer;flex-shrink:0;}
+.rs-out{display:flex;flex-direction:column;gap:12px;}
+.rs-empty{font-size:12.5px;color:var(--muted);line-height:1.6;padding:6px 2px;}
+.rs-card{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+.rs-h{display:flex;align-items:center;gap:10px;padding:12px 13px 0;}
+.rs-h-name{flex:1;font-size:14px;font-weight:800;color:var(--ink);}
+.rs-h-code{font-family:var(--font-mono);font-size:11px;color:var(--muted);background:var(--line-soft);border-radius:5px;padding:1px 7px;flex-shrink:0;}
+.rs-sum{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:11px 13px;}
+.rs-pill{display:flex;flex-direction:column;gap:2px;border:1px solid var(--line);border-radius:9px;padding:7px 10px;}
+.rs-pl{font-size:10.5px;color:var(--muted);font-weight:700;}
+.rs-pv{font-size:16px;font-weight:800;font-family:var(--font-mono);}
+.rs-pill.blue .rs-pv{color:#2563EB;} .rs-pill.green .rs-pv{color:var(--green);} .rs-pill.amber .rs-pv{color:var(--amber);} .rs-pill.ink .rs-pv{color:var(--ink);}
+.rs-reps{display:flex;flex-direction:column;border-top:1px solid var(--line-soft);}
+.rs-rep{border-bottom:1px solid var(--line-soft);}
+.rs-rep:last-child{border-bottom:none;}
+.rs-rep-h{display:flex;align-items:center;gap:8px;padding:10px 13px;cursor:pointer;}
+.rs-rep-l{flex:1;display:flex;flex-direction:column;gap:5px;min-width:0;}
+.rs-rep-name{font-size:12.5px;font-weight:700;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.rs-rep-b{display:flex;flex-wrap:wrap;gap:5px;}
+.rs-b{font-size:10.5px;font-weight:700;padding:1px 7px;border-radius:999px;font-family:var(--font-mono);}
+.rs-b.total{background:var(--line-soft);color:var(--ink-soft);}
+.rs-b.carry{background:rgba(6,127,62,.1);color:var(--green);}
+.rs-b.gap{background:rgba(180,116,10,.12);color:var(--amber);}
+.rs-chev{color:var(--muted);font-size:12px;flex-shrink:0;}
+.rs-rep-body{display:none;flex-direction:column;padding:0 13px 8px;}
+.rs-rep.open .rs-rep-body{display:flex;}
+.rs-store{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:12px;padding:5px 0;border-top:1px dashed rgba(0,0,0,.05);}
+.rs-store-name{color:var(--ink-soft);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.rs-store-oh{font-family:var(--font-mono);font-weight:700;color:var(--ink);flex-shrink:0;}
+.rs-store.gap .rs-store-name{color:var(--amber);font-weight:600;}
+.rs-store.gap .rs-store-oh{color:var(--amber);}
 .orderlogitem{background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 12px;}
 .orderlogitem .top{display:flex;justify-content:space-between;font-size:13px;font-weight:700;gap:10px;}
 .orderlogitem .subrow{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:3px;}
@@ -545,7 +635,7 @@ const I18N = {
     onHandCtnLbl:"الموجود بالكرتون",
     suggested:"المقترح", applyAll:"تطبيق كل المقترح", clearAll:"مسح الكل",
     noNeed:"لا يحتاج طلب", suggestHint:"مقترح حسب حد الرف",
-    marsLimited:"محدود بمخزون مارس", marsNone:"غير متوفر في مارس",
+    marsLimited:"محدود بمخزون مارس", marsNone:"غير متوفر في مارس", marsPartial:"مخزون مارس أقل من كرتون",
     viewOrder:"شاشة الطلب", viewList:"قائمة مجمّعة",
     stockValue:"قيمة المخزون", storeStockTitle:"إجمالي مخزون المتجر (Onhand)", skuCount:"صنف", byCategory:"تفصيل بالفئة",
     hidePrices:"إخفاء الأسعار", afterOrder:"بعد الطلب", shelfMax:"حد الرف",
@@ -572,6 +662,15 @@ const I18N = {
     buildAllEmpty:"الملف لا يحتوي على بيانات صالحة للتحديث — لم يتغيّر أي شيء. تأكد أنك رفعت الملف الصحيح.",
     buildKept:"تم الإبقاء على البيانات الحالية كما هي للأقسام (الملف لم يحتوِ عليها)",
     changesTitle:"✅ تأكيد التغيير (الموجود: قبل → بعد):",
+    newItemsTitle:"🆕 أصناف جديدة أضافها العثيم", newItemsNote:"الأصناف دي ظهرت في الموجود لأول مرة (ماكنتش في آخر تحديث). كل مندوب هيشوف في صفحة متجره الأصناف اللي لسه ما اتوردتش لمتجره:",
+    whatsNewTitle:"أصناف جديدة وتغييرات في الموجود",
+    wnAdded:"بدأ توريده", wnMissing:"لم يُورَّد بعد", wnRemoved:"اختفى",
+    wnAddedTitle:"أصناف بدأت تتورّد لهذا المتجر", wnMissingTitle:"أصناف جديدة لم تُورَّد لهذا المتجر بعد", wnRemovedTitle:"أصناف اختفت من هذا المتجر",
+    gapFilter:"فرص البيع", gapThreshLabel:"يعتبر ناقص إذا الموجود ≤", gapHint:"أصناف مارس عندها رصيد والمتجر ناقصها أو قربت تخلص — روح بيعها فيه.",
+    noGaps:"مفيش فرص بيع عند هذا الحد — المتجر مغطّى من أصناف مارس.",
+    regionSearchTitle:"🔎 بحث المنطقة", regionSearchPlaceholder:"ابحث عن صنف بالاسم أو الكود لعرضه عبر المنطقة...",
+    regionEmptyHint:"ابحث واختر صنف (أو أكتر) عشان تشوف توفّره في كل المنطقة، وتفصيله لكل مندوب ومتجر.",
+    regionTotal:"إجمالي المنطقة", carryingStores:"متاجر بها الصنف", gapStores:"متاجر ناقصة",
     previewStores:"👁 معاينة المتاجر بالبيانات الجديدة الآن",
     previewLabel:"معاينة المدير",
     updateDoneTitle:"✅ تم التحديث بنجاح", stockValueTotal:"إجمالي قيمة المخزون",
@@ -624,7 +723,7 @@ const I18N = {
     onHandCtnLbl:"On Hand (CTN)",
     suggested:"Suggested", applyAll:"Apply all suggested", clearAll:"Clear all",
     noNeed:"No order needed", suggestHint:"Suggested from shelf max",
-    marsLimited:"Capped by Mars stock", marsNone:"Not in Mars stock",
+    marsLimited:"Capped by Mars stock", marsNone:"Not in Mars stock", marsPartial:"Mars stock below 1 carton",
     viewOrder:"Order view", viewList:"Grouped list",
     stockValue:"Stock value", storeStockTitle:"Total store stock (On Hand)", skuCount:"SKUs", byCategory:"By category",
     hidePrices:"Hide prices", afterOrder:"After order", shelfMax:"Shelf max",
@@ -651,6 +750,15 @@ const I18N = {
     buildAllEmpty:"The file has no valid data to update — nothing was changed. Make sure you uploaded the correct file.",
     buildKept:"Kept current data unchanged for (file had none)",
     changesTitle:"✅ Update confirmed (On Hand: before → after):",
+    newItemsTitle:"🆕 New items added by Othaim", newItemsNote:"These items appeared in On Hand for the first time (not in the last update). On each store page, the rep will see which of these items have not yet been supplied to that store:",
+    whatsNewTitle:"New items & On Hand changes",
+    wnAdded:"now supplied", wnMissing:"not yet supplied", wnRemoved:"gone",
+    wnAddedTitle:"Items now being supplied to this store", wnMissingTitle:"New items not yet supplied to this store", wnRemovedTitle:"Items that disappeared from this store",
+    gapFilter:"Opportunities", gapThreshLabel:"Low if On Hand ≤", gapHint:"Items Mars has in stock but this store is out of or low on — go sell them in.",
+    noGaps:"No opportunities at this threshold — the store is covered on Mars items.",
+    regionSearchTitle:"🔎 Region search", regionSearchPlaceholder:"Search an item by name or code across the region...",
+    regionEmptyHint:"Search and pick one or more items to see region-wide availability, broken down per rep and store.",
+    regionTotal:"Region total", carryingStores:"Stores carrying", gapStores:"Gap stores",
     previewStores:"👁 Preview stores with the new data now",
     previewLabel:"Manager preview",
     updateDoneTitle:"✅ Updated successfully", stockValueTotal:"Total stock value",
@@ -796,10 +904,16 @@ const state = {
   selectedStore: null,
   category: "all", query: "",
   cart: {},
-  prefShowValues: (localStorage.getItem("oo_showValues") ?? "1") === "1",
-  prefShowTotal: (localStorage.getItem("oo_showTotal") ?? "1") === "1",
-  prefShowPrice: (localStorage.getItem("oo_showPrice") ?? "1") === "1",
-  prefShowOnHandCols: (localStorage.getItem("oo_showOnHandCols") ?? "1") === "1",
+  // Opportunity / gap filter: show only items Mars has stock of but the store is out of (or nearly).
+  gapOnly: false,
+  gapThreshold: (function(){ const v = parseInt(localStorage.getItem("oo_gapThreshold"),10); return isNaN(v) ? 1 : v; })(),
+  // File options — fixed defaults every time: show On Hand only. Price / item values / grand total
+  // start OFF and are turned on only when the rep needs them for one PDF; they reset to this default
+  // (not remembered), so the sheet always goes back to the standard shape.
+  prefShowValues: false,
+  prefShowTotal: false,
+  prefShowPrice: false,
+  prefShowOnHandCols: true,
   viewMode: localStorage.getItem("oo_viewMode") || "order",   // "order" | "list"
   viewport: localStorage.getItem("oo_viewport") || "",        // "" auto | "phone" | "wide"
   hidePrices: localStorage.getItem("oo_hidePrices") === "1",  // quick on-screen money blackout
@@ -984,7 +1098,8 @@ function suggestFor(sku, oh){
     if(marsQ <= 0){ if(cartons > 0){ cartons = 0; capReason = "nomars"; } }
     else if(cartons*per > marsQ){
       const c = Math.max(0, Math.floor(marsQ/per));
-      if(c < cartons){ cartons = c; capReason = c > 0 ? "mars" : "nomars"; }
+      // marsQ>0 here: if it can't even cover one carton, that's "less than a carton", NOT "none".
+      if(c < cartons){ cartons = c; capReason = c > 0 ? "mars" : "marspartial"; }
     }
   }
   return { cartons, base: base.cartons, reason: base.reason, capReason, onHand, min, max };
@@ -1036,6 +1151,28 @@ function categoryStock(storeNo, category){
   const st = storeStock(storeNo);
   if(category === "all" || !category) return { value: st.value, pieces: st.pieces, skus: st.skuCount };
   return st.byCat[category] || { value:0, pieces:0, skus:0 };
+}
+// Opportunity test: Mars HAS stock of this SKU, but the store is out of it (or nearly — On Hand at
+// or below the chosen threshold; a missing item counts as 0). These are the "go sell it in" items.
+function isGapItem(sku, ohRec, threshold){
+  const marsQ = OO.marsStock[sku.artecal] ? Number(OO.marsStock[sku.artecal].qty)||0 : 0;
+  if(marsQ <= 0) return false;
+  const ohQty = ohRec ? Number(ohRec.onHand)||0 : 0;
+  return ohQty <= (Number(threshold)||0);
+}
+// What changed for ONE store in the last update: items newly supplied to it (added), items that
+// disappeared (removed), and brand-new items Othaim added elsewhere that this store did NOT get
+// (missing / not supplied here). Returns null if there's no recorded update diff yet.
+function storeItemDiff(storeNo){
+  const d = OO.meta && OO.meta.lastDiff;
+  if(!d) return null;
+  const k1 = String(storeNo), k2 = String(leadCode(storeNo));
+  const bs = (d.byStore && (d.byStore[k1] || d.byStore[k2])) || {};
+  const added = (bs.added || []).slice();
+  const removed = (bs.removed || []).slice();
+  const oh = OO.onHand[k1] || OO.onHand[k2] || {};
+  const missing = (d.newSkus || []).filter(a => !(String(a) in oh) && !oh[a]);
+  return { at: d.at, added, removed, missing };
 }
 
 /* ---------------- ROUTER / RENDER ---------------- */
@@ -1117,6 +1254,13 @@ function setLang(l){ state.lang = l; localStorage.setItem("oo_lang", l); render(
 // Pretty timestamp: "08-Sep-2026 - 8:19 AM" — date in blue, dash in grey, time in orange.
 // Parses the stored "YYYY-MM-DD HH:MM" wall-clock straight from the string (no timezone shift).
 const STAMP_MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+// Current wall-clock in the DEVICE's local time (Saudi time for the team), "YYYY-MM-DD HH:MM".
+// Used for update timestamps so the shown time matches when the manager actually updated
+// (the old toISOString() stored UTC, which read 3 hours behind Saudi time).
+function nowStamp(){
+  const d = new Date(), p = n => String(n).padStart(2,"0");
+  return d.getFullYear()+"-"+p(d.getMonth()+1)+"-"+p(d.getDate())+" "+p(d.getHours())+":"+p(d.getMinutes());
+}
 function fmtStamp(ts){
   const m = String(ts||"").match(/(\d{4})-(\d{2})-(\d{2})[ T](\d{1,2}):(\d{2})/);
   if(!m) return null;
@@ -1331,13 +1475,51 @@ function renderStockSummary(store, onCategoryPick){
   return box;
 }
 
+// "What's new" for a store since the last update: items newly supplied here, brand-new items that
+// this store did NOT get (missing / not supplied), and items that disappeared. Collapsible card.
+function renderStoreWhatsNew(store){
+  const d = storeItemDiff(store.storeNo);
+  if(!d) return null;
+  const { added, missing, removed } = d;
+  if(!added.length && !missing.length && !removed.length) return null;
+  const nameOfArt = a => { const sk=state.skusByArt[a]; return sk ? (cleanName(sk.nameEn)||arName(sk.nameAr)||("#"+a)) : ("#"+a); };
+  const codeOfArt = a => { const sk=state.skusByArt[a]; return sk ? sk.artecalCode : String(a); };
+  const card = el("div", {class:"whatsnew"});
+  const head = el("div", {class:"wn-head"});
+  const left = el("div", {class:"wn-head-l"});
+  left.appendChild(el("div", {class:"wn-title"}, ["🆕 "+t("whatsNewTitle")]));
+  const badges = el("div", {class:"wn-badges"});
+  if(added.length) badges.appendChild(el("span",{class:"wn-b added"},["＋"+fmtInt(added.length)+" "+t("wnAdded")]));
+  if(missing.length) badges.appendChild(el("span",{class:"wn-b missing"},[fmtInt(missing.length)+" "+t("wnMissing")]));
+  if(removed.length) badges.appendChild(el("span",{class:"wn-b removed"},["−"+fmtInt(removed.length)+" "+t("wnRemoved")]));
+  left.appendChild(badges);
+  head.appendChild(left);
+  head.appendChild(el("span",{class:"wn-chev"},["▾"]));
+  card.appendChild(head);
+  const body = el("div", {class:"wn-body"});
+  const section = (titleKey, arts, cls) => {
+    if(!arts.length) return;
+    body.appendChild(el("div",{class:"wn-sec "+cls},[t(titleKey)+" ("+fmtInt(arts.length)+")"]));
+    arts.slice(0,60).forEach(a => body.appendChild(el("div",{class:"wn-item"},[
+      el("span",{class:"wn-code"},[codeOfArt(a)]), el("span",{class:"wn-name"},[nameOfArt(a)])
+    ])));
+    if(arts.length>60) body.appendChild(el("div",{class:"login-sub",style:"padding:4px 2px;"},["+"+fmtInt(arts.length-60)]));
+  };
+  section("wnMissingTitle", missing, "missing");
+  section("wnAddedTitle", added, "added");
+  section("wnRemovedTitle", removed, "removed");
+  card.appendChild(body);
+  head.onclick = () => { card.classList.toggle("open"); head.querySelector(".wn-chev").textContent = card.classList.contains("open") ? "▴" : "▾"; };
+  return card;
+}
+
 function renderItems(){
   const store = state.selectedStore;
   const s = el("div", {class:"screen"});
   s.appendChild(topbar({
     title: store.nameAr, subtitle: t("storeNo")+" "+store.storeNo,
     onBack: () => { state.screen="stores"; render(); },
-    cartCount: cartLineCount(), onCart: () => { state.screen="cart"; render(); }
+    cartCount: cartLineCount(), onCart: () => { goToCart(); }
   }));
   const content = el("div", {class:"content", style:"gap:10px;"});
   const onHand = OO.onHand[String(store.storeNo)] || {};
@@ -1345,14 +1527,46 @@ function renderItems(){
   const hero = renderStockSummary(store, (cat) => { state.category = cat; drawChips(); drawList(); });
   content.appendChild(hero);
 
+  const wn = renderStoreWhatsNew(store);
+  if(wn) content.appendChild(wn);
+
   const search = el("input", {class:"input", placeholder:t("searchItems"), value: state.query});
   content.appendChild(el("div", {class:"searchbox"}, [svgIcon("search"), search]));
+
+  // Opportunity / gap filter: show only items Mars has, that this store is out of (or nearly).
+  const gapBar = el("div", {class:"gapbar"});
+  content.appendChild(gapBar);
+  function storeGapCount(){ let n=0; OO.skus.forEach(sk=>{ if(isGapItem(sk, onHand[sk.artecal], state.gapThreshold)) n++; }); return n; }
+  function drawGapBar(){
+    gapBar.innerHTML = "";
+    const count = storeGapCount();
+    const btn = el("button", {class:"gaptoggle"+(state.gapOnly?" on":""), onclick:()=>{ state.gapOnly=!state.gapOnly; drawGapBar(); drawList(); }}, [
+      el("span",{class:"gt-ic"},["🎯"]), el("span",{class:"gt-l"},[t("gapFilter")]), el("span",{class:"gt-n"},[fmtInt(count)])
+    ]);
+    gapBar.appendChild(btn);
+    if(state.gapOnly){
+      const ctrl = el("div", {class:"gapthresh"});
+      ctrl.appendChild(el("span",{class:"gt-cap"},[t("gapThreshLabel")]));
+      [0,1,2,3].forEach(n=>ctrl.appendChild(el("button",{class:"gt-opt"+(state.gapThreshold===n?" on":""),
+        onclick:()=>{ state.gapThreshold=n; try{localStorage.setItem("oo_gapThreshold",String(n));}catch(e){} drawGapBar(); drawList(); }},[String(n)])));
+      gapBar.appendChild(ctrl);
+      gapBar.appendChild(el("div",{class:"gap-hint"},[t("gapHint")]));
+    }
+  }
 
   const chips = el("div", {class:"chiprow"});
   content.appendChild(chips);
 
   const vs = el("div", {class:"viewswitch"});
-  const setView = (mode) => { state.viewMode = mode; localStorage.setItem("oo_viewMode", mode); render(); };
+  // Switch order/list WITHOUT a full re-render (only the list needs to change) — keeps it snappy.
+  const setView = (mode) => {
+    state.viewMode = mode; localStorage.setItem("oo_viewMode", mode);
+    const btns = vs.querySelectorAll("button");
+    if(btns[0]) btns[0].classList.toggle("active", mode==="order");
+    if(btns[1]) btns[1].classList.toggle("active", mode==="list");
+    list.style.gap = (mode==="list"?"6px":"10px");
+    drawList();
+  };
   vs.appendChild(el("button", {class: state.viewMode==="order"?"active":"", onclick:() => setView("order")}, [t("viewOrder")]));
   vs.appendChild(el("button", {class: state.viewMode==="list"?"active":"", onclick:() => setView("list")}, [t("viewList")]));
   content.appendChild(vs);
@@ -1361,18 +1575,18 @@ function renderItems(){
   bulk.appendChild(el("button", {class:"btn btn-outline", onclick:() => applyAllSuggested()}, [t("applyAll")]));
   bulk.appendChild(el("button", {class:"btn btn-outline", onclick:() => {
     if(cartLineCount() === 0) return;
-    if(confirm(t("clearAll")+"?")){ state.cart = {}; render(); }
+    if(confirm(t("clearAll")+"?")){ state.cart = {}; drawList(); updateFloatbar(); }
   }}, [t("clearAll")]));
   content.appendChild(bulk);
 
   const list = el("div", {style:"display:flex;flex-direction:column;gap:"+(state.viewMode==="list"?"6px":"10px")+";margin-top:2px;"});
   content.appendChild(list);
 
-  // Fills in the suggested quantity for everything currently visible (respects the
-  // category chip and the search box), so a category can be ordered in one pass.
+  // Fills in the suggested quantity for everything currently visible (respects the category chip,
+  // the search box, and the opportunity filter), so a category can be ordered in one pass.
   function applyAllSuggested(){
     const q = search.value.trim();
-    const visible = OO.skus.filter(sk => (state.category==="all" || sk.category===state.category) && matches(sk, q));
+    const visible = OO.skus.filter(sk => (state.category==="all" || sk.category===state.category) && passesGap(sk) && matches(sk, q));
     let n = 0, cartons = 0;
     visible.forEach(sk => {
       const sug = suggestFor(sk, onHand[sk.artecal]);
@@ -1380,7 +1594,7 @@ function renderItems(){
     });
     if(n === 0){ toast(t("noNeed")); return; }
     toast(fmtInt(n)+" "+t("skuCount")+"  ·  "+fmtInt(cartons)+" "+t("cartons"), "success");
-    render();
+    drawList(); updateFloatbar();
   }
 
   function categoriesPresent(){
@@ -1411,17 +1625,28 @@ function renderItems(){
     return String(sku.artecal).includes(q) || codeStr(sku).includes(q) || String(sku.zrep).includes(q) ||
       (sku.nameAr||"").toLowerCase().includes(q) || (sku.nameEn||"").toLowerCase().includes(q);
   }
+  function passesGap(sk){ return !state.gapOnly || isGapItem(sk, onHand[sk.artecal], state.gapThreshold); }
 
+  let drawToken = 0;   // cancels a half-finished chunked draw when a newer draw starts
   function drawList(){
+    const myToken = ++drawToken;
     list.innerHTML = "";
     const q = search.value.trim();
-    const filtered = OO.skus.filter(sk => (state.category==="all" || sk.category===state.category) && matches(sk, q));
-    if(filtered.length === 0){ list.appendChild(el("div",{class:"emptystate"},[t("catNoLines")])); return; }
-    if(state.viewMode === "list") drawGrouped(filtered);
-    else {
-      filtered.sort((a,b) => nameOf(a).localeCompare(nameOf(b)));
-      filtered.forEach((sku,i) => list.appendChild(renderItemCard(sku, onHand[sku.artecal], i+1)));
-    }
+    const filtered = OO.skus.filter(sk => (state.category==="all" || sk.category===state.category) && passesGap(sk) && matches(sk, q));
+    if(filtered.length === 0){ list.appendChild(el("div",{class:"emptystate"},[t(state.gapOnly ? "noGaps" : "catNoLines")])); return; }
+    if(state.viewMode === "list"){ drawGrouped(filtered); return; }
+    filtered.sort((a,b) => nameOf(a).localeCompare(nameOf(b)));
+    // Paint the first cards right away, then stream the rest across animation frames so opening a
+    // store / switching a category feels instant instead of freezing on ~300 cards at once.
+    const CHUNK = 26; let i = 0;
+    (function step(){
+      if(myToken !== drawToken) return;   // a newer draw replaced this one — stop
+      const frag = document.createDocumentFragment();
+      const end = Math.min(i + CHUNK, filtered.length);
+      for(; i < end; i++) frag.appendChild(renderItemCard(filtered[i], onHand[filtered[i].artecal], i+1));
+      list.appendChild(frag);
+      if(i < filtered.length) (window.requestAnimationFrame || window.setTimeout)(step);
+    })();
   }
 
   // Grouped list: one category block after another, and inside each block the items
@@ -1551,7 +1776,7 @@ function renderItems(){
         t("suggested"), el("b",{},[String(sug.cartons)]) ]));
     } else {
       order.appendChild(el("span", {class:"sugchip none"}, [
-        sug.capReason==="nomars" ? t("marsNone") : (ohQty<=0 ? t("outOfStock") : t("noNeed")) ]));
+        sug.capReason==="nomars" ? t("marsNone") : sug.capReason==="marspartial" ? t("marsPartial") : (ohQty<=0 ? t("outOfStock") : t("noNeed")) ]));
     }
     const step = el("div", {class:"step"});
     const minus = el("button", {}, ["–"]);
@@ -1605,7 +1830,7 @@ function renderItems(){
       el("div", {class:"fcount"}, [String(count)+" "+t("items")]),
       el("div", {class:"fsum"}, [ t("totalCartons")+": ", el("b",{},[fmtInt(totals.cartons)]) ].concat(
         state.hidePrices ? [] : ["   ", el("b",{},[fmtMoney(totals.value)+" "+curr()])])),
-      el("button", {class:"btn btn-primary", onclick: () => { state.screen="cart"; render(); }}, [t("reviewOrder")])
+      el("button", {class:"btn btn-primary", onclick: () => { goToCart(); }}, [t("reviewOrder")])
     ]);
     s.appendChild(floatbar);
     const badge = $(".cartbadge", s);
@@ -1620,13 +1845,24 @@ function renderItems(){
     clearTimeout(searchTimer);
     searchTimer = setTimeout(drawList, 120);
   });
-  drawChips(); drawList();
+  drawGapBar(); drawChips(); drawList();
   s.appendChild(content);
   updateFloatbar();
   return s;
 }
 
 /* ---------------- CART / REVIEW SCREEN ---------------- */
+// Enter the review screen with the file options at their FIXED default (On Hand on; price,
+// item values and grand total off). Resetting happens only on entry — toggling inside the
+// screen re-renders via render() (not this), so a rep's one-off choice sticks until they leave.
+function goToCart(){
+  state.prefShowOnHandCols = true;
+  state.prefShowPrice = false;
+  state.prefShowValues = false;
+  state.prefShowTotal = false;
+  state.screen = "cart";
+  render();
+}
 function renderCart(){
   const store = state.selectedStore;
   const s = el("div", {class:"screen"});
@@ -1703,10 +1939,10 @@ function renderCart(){
     return row;
   }
   togglesCard.appendChild(el("div", {class:"section-title", style:"margin:0 0 4px;"}, [t("docOptions")]));
-  togglesCard.appendChild(toggleRow("showOnHandCols", () => state.prefShowOnHandCols, v => { state.prefShowOnHandCols=v; localStorage.setItem("oo_showOnHandCols", v?"1":"0"); }));
-  togglesCard.appendChild(toggleRow("showPrice", () => state.prefShowPrice, v => { state.prefShowPrice=v; localStorage.setItem("oo_showPrice", v?"1":"0"); }));
-  togglesCard.appendChild(toggleRow("showValues", () => state.prefShowValues, v => { state.prefShowValues=v; localStorage.setItem("oo_showValues", v?"1":"0"); render(); }));
-  togglesCard.appendChild(toggleRow("showTotal", () => state.prefShowTotal, v => { state.prefShowTotal=v; localStorage.setItem("oo_showTotal", v?"1":"0"); render(); }));
+  togglesCard.appendChild(toggleRow("showOnHandCols", () => state.prefShowOnHandCols, v => { state.prefShowOnHandCols=v; }));
+  togglesCard.appendChild(toggleRow("showPrice", () => state.prefShowPrice, v => { state.prefShowPrice=v; }));
+  togglesCard.appendChild(toggleRow("showValues", () => state.prefShowValues, v => { state.prefShowValues=v; render(); }));
+  togglesCard.appendChild(toggleRow("showTotal", () => state.prefShowTotal, v => { state.prefShowTotal=v; render(); }));
   content.appendChild(togglesCard);
 
   if(state.prefShowTotal){
@@ -2112,6 +2348,122 @@ function renderFirebaseCard(){
   return card;
 }
 
+/* ================= MANAGER REGION SEARCH ================= */
+// Pick one or more items and see, for each, the region total + Mars stock and a per-rep breakdown
+// (each rep expandable to his own stores), with the stores that are out/low (sell-in gaps) flagged.
+function renderRegionSearch(){
+  const wrap = el("div", {class:"regionsearch"});
+  const sel = [];  // selected artecals for this admin session
+
+  // Group the region's stores by rep once.
+  const repsMap = {};
+  (OO.stores||[]).forEach(s => { const u=String(s.userNumber||"—"); (repsMap[u] = repsMap[u] || {user:u, name:s.salesman||("#"+u), stores:[]}).stores.push(s); });
+  const repList = Object.values(repsMap);
+
+  // Availability of one item across the whole region + per rep + per store.
+  function itemStats(a){
+    const mars = OO.marsStock[a] ? Number(OO.marsStock[a].qty)||0 : 0;
+    let total=0, carrying=0, gaps=0, storeCount=0;
+    const byRep = repList.map(r => {
+      let rt=0, rc=0, rg=0; const stores=[];
+      r.stores.forEach(s => {
+        const rec = (OO.onHand[String(s.storeNo)] || {})[a];
+        const q = rec ? Number(rec.onHand)||0 : 0;
+        const gap = mars>0 && q <= state.gapThreshold;
+        stores.push({no:s.storeNo, name:s.nameAr, oh:q, gap});
+        rt+=q; if(q>0)rc++; if(gap)rg++;
+        storeCount++; total+=q; if(q>0)carrying++; if(gap)gaps++;
+      });
+      return {user:r.user, name:r.name, count:r.stores.length, total:rt, carrying:rc, gaps:rg, stores};
+    });
+    return {mars, total, carrying, gaps, storeCount, byRep};
+  }
+  const pill = (lbl, val, tone) => el("div", {class:"rs-pill "+tone}, [ el("span",{class:"rs-pl"},[lbl]), el("span",{class:"rs-pv"},[val]) ]);
+
+  const inp = el("input", {class:"input", placeholder:t("regionSearchPlaceholder")});
+  wrap.appendChild(el("div", {class:"searchbox"}, [svgIcon("search"), inp]));
+  // Shared opportunity threshold (same one the reps use): tune what counts as a gap here too.
+  const thr = el("div", {class:"gapthresh rs-thr"});
+  function drawThr(){ thr.innerHTML=""; thr.appendChild(el("span",{class:"gt-cap"},[t("gapThreshLabel")]));
+    [0,1,2,3].forEach(n=>thr.appendChild(el("button",{class:"gt-opt"+(state.gapThreshold===n?" on":""),
+      onclick:()=>{ state.gapThreshold=n; try{localStorage.setItem("oo_gapThreshold",String(n));}catch(e){} drawThr(); drawOut(); }},[String(n)]))); }
+  wrap.appendChild(thr);
+  const results = el("div", {class:"rs-results"}); wrap.appendChild(results);
+  const chips = el("div", {class:"rs-chips"}); wrap.appendChild(chips);
+  const out = el("div", {class:"rs-out"}); wrap.appendChild(out);
+
+  function drawResults(){
+    results.innerHTML = "";
+    const q = inp.value.trim().toLowerCase();
+    if(!q) return;
+    const hits = OO.skus.filter(sk => !sel.includes(sk.artecal) && (
+      String(sk.artecal).includes(q) || codeStr(sk).includes(q) || String(sk.zrep).includes(q) ||
+      (sk.nameAr||"").toLowerCase().includes(q) || (sk.nameEn||"").toLowerCase().includes(q))).slice(0,12);
+    if(!hits.length){ results.appendChild(el("div",{class:"rs-none"},[t("catNoLines")])); return; }
+    hits.forEach(sk => results.appendChild(el("div", {class:"rs-hit", onclick:()=>{ sel.push(sk.artecal); inp.value=""; drawResults(); drawChips(); drawOut(); }}, [
+      el("span",{class:"rs-hit-code"},[codeStr(sk)]),
+      el("span",{class:"rs-hit-name"},[cleanName(sk.nameEn)||arName(sk.nameAr)||("#"+sk.artecal)]),
+      el("span",{class:"rs-hit-add"},["＋"])
+    ])));
+  }
+  function drawChips(){
+    chips.innerHTML = "";
+    sel.forEach(a => { const sk=state.skusByArt[a];
+      chips.appendChild(el("span", {class:"rs-chip"}, [
+        el("span",{class:"rs-chip-t"},[sk?(cleanName(sk.nameEn)||arName(sk.nameAr)):("#"+a)]),
+        el("button",{class:"rs-x", onclick:()=>{ const i=sel.indexOf(a); if(i>=0) sel.splice(i,1); drawChips(); drawOut(); }},["✕"])
+      ]));
+    });
+  }
+  function drawOut(){
+    out.innerHTML = "";
+    if(!sel.length){ out.appendChild(el("div", {class:"rs-empty"}, [t("regionEmptyHint")])); return; }
+    sel.forEach(a => {
+      const sk = state.skusByArt[a]; const st = itemStats(a);
+      const card = el("div", {class:"rs-card"});
+      const h = el("div", {class:"rs-h"});
+      h.appendChild(el("div", {class:"rs-h-name"}, [sk?(cleanName(sk.nameEn)||arName(sk.nameAr)):("#"+a)]));
+      h.appendChild(el("span", {class:"rs-h-code"}, [sk?codeStr(sk):String(a)]));
+      card.appendChild(h);
+      const sum = el("div", {class:"rs-sum"});
+      sum.appendChild(pill(t("regionTotal"), fmtInt(st.total), "blue"));
+      sum.appendChild(pill(t("marsStock"), fmtInt(st.mars), "green"));
+      sum.appendChild(pill(t("carryingStores"), fmtInt(st.carrying)+"/"+fmtInt(st.storeCount), "ink"));
+      sum.appendChild(pill(t("gapStores"), fmtInt(st.gaps), "amber"));
+      card.appendChild(sum);
+      const reps = el("div", {class:"rs-reps"});
+      st.byRep.slice().sort((x,y)=> y.gaps-x.gaps || y.total-x.total).forEach(r => {
+        const row = el("div", {class:"rs-rep"});
+        const head = el("div", {class:"rs-rep-h", onclick:()=>{ row.classList.toggle("open"); head.querySelector(".rs-chev").textContent = row.classList.contains("open")?"▴":"▾"; }});
+        const nm = el("div", {class:"rs-rep-l"});
+        nm.appendChild(el("span",{class:"rs-rep-name"},[r.name]));
+        const b = el("div", {class:"rs-rep-b"});
+        b.appendChild(el("span",{class:"rs-b total"},[t("onHand")+" "+fmtInt(r.total)]));
+        b.appendChild(el("span",{class:"rs-b carry"},[fmtInt(r.carrying)+"/"+fmtInt(r.count)]));
+        if(r.gaps) b.appendChild(el("span",{class:"rs-b gap"},["🎯 "+fmtInt(r.gaps)]));
+        nm.appendChild(b);
+        head.appendChild(nm);
+        head.appendChild(el("span",{class:"rs-chev"},["▾"]));
+        row.appendChild(head);
+        const body = el("div", {class:"rs-rep-body"});
+        r.stores.slice().sort((x,y)=> (x.gap===y.gap ? x.oh-y.oh : (x.gap?-1:1))).forEach(s => {
+          body.appendChild(el("div", {class:"rs-store"+(s.gap?" gap":"")}, [
+            el("span",{class:"rs-store-name"},[s.name]),
+            el("span",{class:"rs-store-oh"},[fmtInt(s.oh)])
+          ]));
+        });
+        row.appendChild(body);
+        reps.appendChild(row);
+      });
+      card.appendChild(reps);
+      out.appendChild(card);
+    });
+  }
+  inp.addEventListener("input", ()=>{ clearTimeout(inp._t); inp._t=setTimeout(drawResults, 120); });
+  drawThr(); drawOut();
+  return wrap;
+}
+
 /* ================= ADMIN / DATA-BUILDER SCREEN ================= */
 function renderAdmin(){
   const s = el("div", {class:"screen"});
@@ -2124,10 +2476,17 @@ function renderAdmin(){
     const ts = OO.meta[key];
     const box = el("div", {class:"box"});
     box.appendChild(el("div", {class:"lbl"}, [label]));
-    box.appendChild(el("div", {class:"when"}, [ el("span",{class:"dot dot-"+freshness(ts)}), ts||t("never") ]));
+    const when = el("div", {class:"when"}, [ el("span",{class:"dot dot-"+freshness(ts)}) ]);
+    when.appendChild(fmtStamp(ts) || document.createTextNode(t("never")));
+    box.appendChild(when);
     grid.appendChild(box);
   });
   content.appendChild(grid);
+
+  // Region search — look up one or more items and see availability across the whole region,
+  // broken down per rep (and per store), with the sell-in gaps highlighted.
+  content.appendChild(el("div", {class:"section-title", style:"margin-top:6px;"}, [t("regionSearchTitle")]));
+  content.appendChild(renderRegionSearch());
 
   // Stock-valuation export — every store's on-hand valued per item, with category/brand
   // roll-ups and a full detail sheet, as one Excel workbook.
@@ -2400,23 +2759,43 @@ function overallTotals(data){
 // Apply an uploaded workbook to the app IMMEDIATELY (no extra "build" click): merge the sheets it
 // contains, refresh every number live, persist on this device, and show a clear "done" card with
 // before -> after totals. Downloading index.html for GitHub is a separate button on that card.
+// Stable, order-independent fingerprint of one data section — used to detect whether a section
+// ACTUALLY changed on upload, so a section's time/date only moves when its own data really changed
+// (upload a file where only On Hand changed → only the On Hand timestamp updates).
+function sectionSig(kind, data){
+  if(!data) return "";
+  if(kind==="stores") return (data||[]).map(s=>[leadCode(s.storeNo),s.userNumber,s.nameAr,s.salesman,s.nameEn].join("|")).sort().join("¶");
+  if(kind==="skus")   return (data||[]).map(s=>[s.artecal,s.pcPrice,s.csPrice,s.pcPerCs,s.category,s.brand,s.nameEn,s.nameAr,s.zrep].join("|")).sort().join("¶");
+  if(kind==="onHand"){
+    const parts=[];
+    Object.keys(data).sort().forEach(st=>{ const it=data[st]||{};
+      parts.push(st+":"+Object.keys(it).sort().map(a=>a+"="+(Number(it[a].onHand)||0)+","+(Number(it[a].min)||0)+","+(Number(it[a].max)||0)).join(";")); });
+    return parts.join("¶");
+  }
+  if(kind==="marsStock") return Object.keys(data).sort().map(a=>a+"="+(Number(data[a].qty)||0)).join(";");
+  return "";
+}
 function applyUpload(parsed, summaryEl){
-  const now = new Date().toISOString().slice(0,16).replace("T"," ");
+  const now = nowStamp();   // local Saudi time, not UTC
   const before = overallTotals(OO);
   const merged = JSON.parse(JSON.stringify(OO)); // clone current data
   const present = ["stores","skus","onHand","marsStock"].filter(k => parsed[k]);
-  const applied = [], skipped = [];
+  const applied = [], skipped = [], changedSections = [];
+  // Bump a section's timestamp ONLY if its data differs from what's already loaded.
+  const stamp = (kind, oldData, newData, metaKey) => {
+    if(sectionSig(kind, oldData) !== sectionSig(kind, newData)){ merged.meta[metaKey] = now; changedSections.push(kind); }
+  };
   // SAFETY NET: never let an empty/corrupted sheet wipe good data already in the app.
-  if(present.includes("stores")){ if(parsed.stores && parsed.stores.length){ merged.stores=parsed.stores; merged.meta.lastUpdatedStores=now; applied.push("Stores"); } else skipped.push("Stores"); }
-  if(present.includes("skus")){ if(parsed.skus && parsed.skus.length){ merged.skus=parsed.skus; merged.meta.lastUpdatedSKUs=now; applied.push("SKUs"); } else skipped.push("SKUs"); }
-  if(present.includes("onHand")){ if(parsed.onHand && Object.keys(parsed.onHand).length){ merged.onHand=parsed.onHand; merged.meta.lastUpdatedOnHand=now; applied.push("OnHand"); } else skipped.push("OnHand"); }
+  if(present.includes("stores")){ if(parsed.stores && parsed.stores.length){ stamp("stores", OO.stores, parsed.stores.filter(st=>st.userNumber), "lastUpdatedStores"); merged.stores=parsed.stores; applied.push("Stores"); } else skipped.push("Stores"); }
+  if(present.includes("skus")){ if(parsed.skus && parsed.skus.length){ stamp("skus", OO.skus, parsed.skus, "lastUpdatedSKUs"); merged.skus=parsed.skus; applied.push("SKUs"); } else skipped.push("SKUs"); }
+  if(present.includes("onHand")){ if(parsed.onHand && Object.keys(parsed.onHand).length){ stamp("onHand", OO.onHand, parsed.onHand, "lastUpdatedOnHand"); merged.onHand=parsed.onHand; applied.push("OnHand"); } else skipped.push("OnHand"); }
   if(present.includes("marsStock") && parsed.marsStock && Object.keys(parsed.marsStock).length){
     let ms=parsed.marsStock;
     if(Object.values(ms)[0] && Object.values(ms)[0]._zrep){
       const z2a={}; merged.skus.forEach(sk=>{ if(sk.zrep) z2a[String(sk.zrep)]=sk.artecal; });
       const rem={}; Object.entries(ms).forEach(([z,v])=>{ const a=z2a[z]; if(a) rem[String(a)]={qty:v.qty,updated:v.updated}; }); ms=rem;
     }
-    merged.marsStock=ms; merged.meta.lastUpdatedMarsStock=now; applied.push("MarsStock");
+    stamp("marsStock", OO.marsStock, ms, "lastUpdatedMarsStock"); merged.marsStock=ms; applied.push("MarsStock");
   } else if(present.includes("marsStock")) skipped.push("MarsStock");
 
   if(applied.length === 0){ toast(t("buildAllEmpty"), "error"); return; }
@@ -2435,6 +2814,22 @@ function applyUpload(parsed, summaryEl){
             changeSamples.push({store:st, item:(sk?(sk.nameEn||sk.nameAr):art), before:ov, after:nv}); } }
       }
     }
+  }
+
+  // ---- NEW / REMOVED items diff (per store + brand-new SKUs) — powers the "what's new" report ----
+  if(parsed.onHand && Object.keys(parsed.onHand).length){
+    const oldByStore = {}, newByStore = {}, oldGlobal = new Set(), newGlobal = new Set();
+    Object.entries(OO.onHand||{}).forEach(([st,items])=>{ const s=new Set(Object.keys(items||{})); oldByStore[st]=s; s.forEach(a=>oldGlobal.add(a)); });
+    Object.entries(parsed.onHand).forEach(([st,items])=>{ const s=new Set(Object.keys(items||{})); newByStore[st]=s; s.forEach(a=>newGlobal.add(a)); });
+    const newSkus=[]; newGlobal.forEach(a=>{ if(!oldGlobal.has(a)) newSkus.push(a); });
+    const byStore={};
+    new Set([...Object.keys(oldByStore),...Object.keys(newByStore)]).forEach(st=>{
+      const o=oldByStore[st]||new Set(), n=newByStore[st]||new Set(), added=[], removed=[];
+      n.forEach(a=>{ if(!o.has(a)) added.push(a); });
+      o.forEach(a=>{ if(!n.has(a)) removed.push(a); });
+      if(added.length||removed.length) byStore[st]={added,removed};
+    });
+    merged.meta.lastDiff = { at: now, newSkus, byStore };
   }
 
   merged.stores = merged.stores.filter(st => st.userNumber);
@@ -2465,6 +2860,26 @@ function applyUpload(parsed, summaryEl){
     const ch=el("div",{class:"okchanges"}); ch.appendChild(el("div",{class:"okchttl"},[t("changesTitle")]));
     changeSamples.forEach(c=>ch.appendChild(el("div",{class:"okchrow"},[ el("span",{class:"okchname"},[c.item+"  ·  #"+c.store]), el("span",{class:"okchval", dir:"ltr"},[fmtInt(c.before)+" → ", el("b",{},[fmtInt(c.after)])]) ])));
     box.appendChild(ch);
+  }
+  // NEW ITEMS Othaim added (brand-new SKUs in On Hand vs last update) — professional summary for the manager.
+  const newSkus = (OO.meta && OO.meta.lastDiff && OO.meta.lastDiff.newSkus) || [];
+  if(newSkus.length){
+    const ni = el("div",{class:"newitems"});
+    const h = el("div",{class:"ni-head"});
+    h.appendChild(el("div",{class:"ni-title"},[t("newItemsTitle")]));
+    h.appendChild(el("span",{class:"ni-count"},[fmtInt(newSkus.length)]));
+    ni.appendChild(h);
+    ni.appendChild(el("div",{class:"ni-note"},[t("newItemsNote")]));
+    const list = el("div",{class:"ni-list"});
+    newSkus.slice(0,80).forEach(a=>{ const sk=state.skusByArt[a];
+      list.appendChild(el("div",{class:"ni-item"},[
+        el("span",{class:"ni-code"},[sk?sk.artecalCode:String(a)]),
+        el("span",{class:"ni-name"},[sk?(cleanName(sk.nameEn)||arName(sk.nameAr)||("#"+a)):("#"+a)])
+      ]));
+    });
+    if(newSkus.length>80) list.appendChild(el("div",{class:"login-sub",style:"padding:6px 2px;"},["+"+fmtInt(newSkus.length-80)]));
+    ni.appendChild(list);
+    box.appendChild(ni);
   }
   // PRIMARY: publish live to every rep via Firebase (no GitHub, no password — auto anonymous sign-in).
   const pubNote = el("div",{class:"login-sub",style:"margin-top:6px;line-height:1.7;"});
