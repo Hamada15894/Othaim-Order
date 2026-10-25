@@ -552,6 +552,137 @@ html[data-lang="ar"] .switch input:checked ~ .thumb{transform:translateX(-18px);
 .pdf-totals .g b{color:#fff;font-family:'IBM Plex Mono',monospace;font-size:17px;font-weight:800;}
 .pdf-totals .g .cur{font-size:10px;color:#7FD69F;margin-inline-start:4px;font-weight:700;}
 .pdf-foot{position:absolute;bottom:34px;left:48px;right:48px;font-size:8.5px;color:#A6ACB8;display:flex;justify-content:space-between;border-top:1px solid #EDEFF2;padding-top:9px;font-weight:600;}
+
+/* =====================================================================
+   v-Next polish — single login, inactive items, refined palette
+   ===================================================================== */
+:root{
+  --bg:#F1F4F2; --line:#E2E6E4; --line-soft:#EDF1EF;
+  --slate:#4B5563; --slate-soft:#EEF0F3;
+  --grad-brand:linear-gradient(90deg,#067F3E 0%,#9DC418 55%,#E2000A 100%);
+  --shadow:0 1px 2px rgba(16,24,20,.05),0 8px 24px -12px rgba(16,24,20,.18);
+}
+
+/* ---- top bar: deep ink with the Othaim tri-colour rule ---- */
+.topbar{position:relative;background:linear-gradient(120deg,#0D1216 0%,#17202A 100%);padding-bottom:12px;}
+.topbar::after{content:"";position:absolute;inset-inline:0;bottom:0;height:3px;background:var(--grad-brand);}
+.topbar .brandmark img{border-radius:7px;padding:3px;box-shadow:0 0 0 1px rgba(255,255,255,.18);}
+
+/* ---- section titles get a small brand tick ---- */
+.section-title{display:flex;align-items:center;gap:8px;color:var(--ink-soft);}
+.section-title::before{content:"";width:4px;height:14px;border-radius:3px;background:linear-gradient(180deg,#067F3E,#9DC418);flex-shrink:0;}
+
+/* ---- store cards: green number tile ---- */
+.storecard .num{background:linear-gradient(145deg,#067F3E,#0A5C30);box-shadow:inset 0 -2px 0 rgba(0,0,0,.15);}
+.storecard:hover{border-color:#9FCDB3;background:#FAFDFB;}
+
+/* ---- login: one door ---- */
+.loginscreen{background:
+  radial-gradient(900px 420px at 110% -10%, rgba(157,196,24,.22), transparent 60%),
+  radial-gradient(700px 380px at -20% 110%, rgba(226,0,10,.10), transparent 60%),
+  radial-gradient(600px 300px at 50% 0%, rgba(6,127,62,.14), transparent 70%),
+  #F3F6F4;}
+.loginscreen::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.45;
+  background-image:radial-gradient(rgba(6,127,62,.16) 1px, transparent 1.2px);background-size:22px 22px;
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,transparent 55%);mask-image:linear-gradient(180deg,#000 0%,transparent 55%);}
+.login-hero,.login-body,.login-foot{position:relative;}
+.login-hero .login-logo{border-radius:26px;box-shadow:0 18px 40px -12px rgba(6,127,62,.35),0 0 0 6px rgba(255,255,255,.7);}
+.login-hero .login-title{background:linear-gradient(90deg,#0B3D22,#067F3E);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.login-card{border:none;border-radius:22px;padding:24px 20px 18px;background:rgba(255,255,255,.92);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  box-shadow:0 1px 0 rgba(255,255,255,.8) inset,0 24px 50px -20px rgba(10,40,24,.35),0 0 0 1px rgba(6,127,62,.08);position:relative;overflow:hidden;}
+.login-card::before{content:"";position:absolute;inset-inline:0;top:0;height:4px;background:var(--grad-brand);}
+.lg-lock{width:52px;height:52px;border-radius:16px;margin:2px auto 12px;display:flex;align-items:center;justify-content:center;color:#fff;
+  background:linear-gradient(145deg,#0A8F47,#067F3E 55%,#0A5C30);box-shadow:0 10px 22px -8px rgba(6,127,62,.6);}
+.lg-lock svg{width:26px;height:26px;}
+.lg-title{text-align:center;font-size:19px;font-weight:800;color:var(--ink);}
+.lg-sub{text-align:center;font-size:12.5px;color:var(--muted);line-height:1.65;margin:6px 4px 18px;}
+.lg-field{position:relative;}
+.lg-pin{height:58px;border-radius:14px;border:1.8px solid #DDE3E0;background:#FBFCFB;letter-spacing:8px;font-size:24px;padding-inline:52px;transition:border-color .15s, box-shadow .15s;}
+.lg-pin:focus{border-color:#067F3E;box-shadow:0 0 0 4px rgba(6,127,62,.12);background:#fff;}
+.lg-pin::placeholder{color:#C3CAC6;letter-spacing:8px;}
+.lg-eye{position:absolute;top:50%;inset-inline-end:8px;transform:translateY(-50%);width:40px;height:40px;border:none;background:transparent;color:#9AA3A0;border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.lg-eye svg{width:20px;height:20px;}
+.lg-eye.on{color:#067F3E;background:rgba(6,127,62,.08);}
+.lg-go{height:52px;border-radius:14px;font-size:15.5px;background:linear-gradient(135deg,#E2000A,#B4000A);box-shadow:0 12px 24px -12px rgba(226,0,10,.7);}
+.lg-go:hover{background:linear-gradient(135deg,#C8000A,#9E0009);}
+html[dir="rtl"] .lg-go svg{transform:scaleX(-1);}
+.login-card .errmsg{margin-top:10px;}
+@keyframes lgShake{10%,90%{transform:translateX(-1px)}20%,80%{transform:translateX(3px)}30%,50%,70%{transform:translateX(-6px)}40%,60%{transform:translateX(6px)}}
+.login-card.shake{animation:lgShake .45s both;}
+
+/* ---- Active / Inactive switch on the items screen ---- */
+.actseg{display:flex;flex-direction:column;gap:6px;}
+.as-seg{display:flex;gap:4px;padding:4px;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);}
+.as-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;border:none;background:transparent;border-radius:10px;padding:10px 8px;
+  font-weight:800;font-size:13px;color:var(--muted);cursor:pointer;transition:background .18s,color .18s,box-shadow .18s;font-family:inherit;}
+.as-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+.as-on .as-dot{background:#14A35A;box-shadow:0 0 0 3px rgba(20,163,90,.18);}
+.as-off .as-dot{background:transparent;width:10px;height:10px;border-radius:2px;
+  background-image:linear-gradient(90deg,#64748B 0 35%,transparent 35% 65%,#64748B 65% 100%);}
+.as-n{font-family:var(--font-mono);font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:20px;background:var(--line-soft);color:var(--ink-soft);}
+.as-btn.as-on.sel{background:linear-gradient(135deg,#0A8F47,#067F3E);color:#fff;box-shadow:0 8px 18px -10px rgba(6,127,62,.8);}
+.as-btn.as-on.sel .as-dot{background:#C8F27A;box-shadow:0 0 0 3px rgba(200,242,122,.25);}
+.as-btn.as-off.sel{color:#fff;box-shadow:0 8px 18px -10px rgba(51,65,85,.8);
+  background:repeating-linear-gradient(135deg,#475569 0 10px,#3F4B5C 10px 20px);}
+.as-btn.as-off.sel .as-dot{background-image:linear-gradient(90deg,#fff 0 35%,transparent 35% 65%,#fff 65% 100%);}
+.as-btn.sel .as-n{background:rgba(255,255,255,.2);color:#fff;}
+.as-hint{font-size:11.5px;font-weight:600;color:#0B5E33;background:#ECF7F0;border:1px solid #CFE9D9;border-radius:10px;padding:7px 10px;line-height:1.55;}
+.as-hint.off{color:#334155;background:#F1F3F6;border-color:#DDE2E9;}
+
+/* ---- inactive item cards / rows ---- */
+.itemcard.inactive,.listrow.inactive{border-inline-start-color:#94A3B8;border-inline-start-style:dashed;
+  background:repeating-linear-gradient(135deg,#FFFFFF 0 14px,#F6F7F9 14px 28px);}
+.itemcard.inactive .name,.listrow.inactive .ln{color:#475569;}
+.itemcard.inactive .ic-grid,.itemcard.inactive .ic-order{opacity:.62;filter:grayscale(.55);}
+.itemcard.inactive .seq{background:#64748B;}
+.inact-ctl{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.listrow .inact-ctl{margin-top:5px;}
+.inact-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;color:#334155;background:#E7EAEF;border:1px solid #D5DAE1;border-radius:20px;padding:3px 10px;}
+.inact-badge::before{content:"";width:8px;height:9px;background-image:linear-gradient(90deg,#475569 0 35%,transparent 35% 65%,#475569 65% 100%);}
+.inact-tg{display:inline-flex;align-items:center;gap:6px;border-radius:20px;padding:6px 13px;font-size:12px;font-weight:800;cursor:pointer;font-family:inherit;transition:transform .08s,background .15s,color .15s,border-color .15s;}
+.inact-tg:active{transform:scale(.96);}
+.inact-tg.to-off{background:#fff;color:#475569;border:1.5px solid #CBD2DB;}
+.inact-tg.to-off::before{content:"";width:8px;height:10px;background-image:linear-gradient(90deg,currentColor 0 35%,transparent 35% 65%,currentColor 65% 100%);}
+.inact-tg.to-off:hover{border-color:#475569;color:#1F2937;}
+.inact-tg.to-on{background:linear-gradient(135deg,#0A8F47,#067F3E);color:#fff;border:1.5px solid transparent;box-shadow:0 6px 14px -8px rgba(6,127,62,.8);}
+.inact-tg.to-on::before{content:"";width:0;height:0;border-style:solid;border-width:5px 0 5px 8px;border-color:transparent transparent transparent currentColor;}
+.itemcard.leaving,.listrow.leaving,.ia-row.leaving{transition:opacity .22s,transform .22s;opacity:0;transform:translateX(18px) scale(.98);}
+html[dir="rtl"] .itemcard.leaving,html[dir="rtl"] .listrow.leaving,html[dir="rtl"] .ia-row.leaving{transform:translateX(-18px) scale(.98);}
+
+/* ---- manager: inactive items card ---- */
+.inact-admin{overflow:hidden;padding:0;}
+.ia-head{display:flex;align-items:center;gap:14px;padding:16px;color:#fff;
+  background:repeating-linear-gradient(135deg,#334155 0 14px,#2C3949 14px 28px);position:relative;}
+.ia-head::after{content:"";position:absolute;inset-inline:0;bottom:0;height:3px;background:var(--grad-brand);}
+.ia-ic{width:46px;height:46px;border-radius:14px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ia-bars{width:16px;height:20px;background-image:linear-gradient(90deg,#fff 0 35%,transparent 35% 65%,#fff 65% 100%);border-radius:2px;}
+.ia-ht{min-width:0;}
+.ia-big{font-size:15px;font-weight:700;}
+.ia-big b{font-size:24px;font-weight:800;font-family:var(--font-mono);margin-inline-end:2px;}
+.ia-meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:11.5px;color:#CBD5E1;margin-top:4px;}
+.ia-meta .stamp{background:rgba(255,255,255,.95);border-color:transparent;}
+.ia-body{padding:14px;display:flex;flex-direction:column;gap:10px;}
+.ia-hint{font-size:12px;color:var(--muted);line-height:1.65;}
+.ia-list{display:flex;flex-direction:column;gap:6px;max-height:420px;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:2px;}
+.ia-cat{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:800;color:var(--ink-soft);padding:8px 4px 2px;}
+.ia-cn{font-family:var(--font-mono);font-size:10.5px;color:var(--muted);background:var(--line-soft);border-radius:10px;padding:1px 7px;}
+.ia-sw{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.ia-row{display:flex;align-items:center;gap:10px;padding:9px 10px;border:1px solid var(--line);border-radius:11px;background:#fff;}
+.ia-row.off{background:repeating-linear-gradient(135deg,#FFFFFF 0 12px,#F6F7F9 12px 24px);border-style:dashed;border-color:#CBD2DB;}
+.ia-code{font-family:var(--font-mono);font-size:11.5px;font-weight:800;color:#1E3A8A;background:#EEF2FF;border-radius:6px;padding:3px 7px;flex-shrink:0;letter-spacing:.4px;}
+.ia-nm{flex:1;min-width:0;}
+.ia-en{font-size:12.5px;font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.ia-ar{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px;}
+html[dir="ltr"] .ia-ar{text-align:left;}
+html[dir="rtl"] .ia-en[dir="ltr"]{text-align:right;}
+.ia-empty{text-align:center;color:var(--muted);font-size:13px;padding:18px 6px;}
+.ia-bulk{border:1px dashed #CBD2DB;border-radius:12px;padding:10px 12px;background:#FAFBFC;}
+.ia-bulk summary{cursor:pointer;font-weight:800;font-size:13px;color:var(--ink-soft);}
+.ia-ta{margin-top:10px;font-family:var(--font-mono);font-size:13px;resize:vertical;min-height:72px;}
+.ia-res{font-size:12px;font-weight:700;margin-top:8px;min-height:14px;}
+.ia-res.ok{color:#067F3E;} .ia-res.warn{color:var(--amber);}
+
 </style>
 </head>
 <body>
@@ -674,6 +805,25 @@ const I18N = {
     regionTotal:"إجمالي المنطقة", carryingStores:"متاجر بها الصنف", gapStores:"متاجر ناقصة",
     previewStores:"👁 معاينة المتاجر بالبيانات الجديدة الآن",
     previewLabel:"معاينة المدير",
+    activeItems:"الأصناف النشطة", inactiveItems:"غير النشطة", inactBadge:"غير نشط",
+    activate:"تفعيل", deactivate:"إيقاف",
+    inactTitle:"الأصناف غير النشطة",
+    inactHint:"الأصناف الموقوفة تختفي من قائمة المناديب وتظهر فقط في تبويب «غير النشطة». أي تغيير هنا يصل لكل المناديب مباشرة.",
+    inactSearchPh:"ابحث في كل الأصناف بالاسم أو الكود لإيقافه أو تفعيله…",
+    inactNone:"لا توجد أصناف غير نشطة", inactCount:"صنف غير نشط", inactOf:"من",
+    inactBulkTitle:"إيقاف عدة أصناف دفعة واحدة", inactBulkPh:"الصق أكواد العثيم هنا (كل كود في سطر أو بينها مسافة)",
+    inactBulkBtn:"إيقاف هذه الأصناف", inactBulkDone:"تم إيقاف", inactBulkNone:"لم يتم العثور على أكواد جديدة",
+    inactNotFound:"كود غير موجود",
+    inactSynced:"تم الحفظ ووصل للمناديب", inactSyncErr:"تم الحفظ على هذا الجهاز فقط — تعذّر الإرسال للمناديب",
+    inactLocalOnly:"تم الحفظ على هذا الجهاز — النشر المباشر غير متاح الآن",
+    inactViewRep:"أصناف موقوفة حاليًا. لا تُطلب إلا بعد أن يفعّلها المدير.",
+    inactViewMgr:"اضغط «تفعيل» على أي صنف رجع للعمل ليعود للأصناف النشطة.",
+    inactActiveMgr:"وضع المدير: زر «إيقاف» على كل صنف ينقله لغير النشطة.",
+    inactLast:"آخر تعديل", inactStatusActive:"نشط", inactStatusOff:"موقوف",
+    previewItems:"فتح المتاجر والتفعيل من بطاقات الأصناف", backToAdmin:"لوحة المدير",
+    loginTitle:"تسجيل الدخول", loginSub:"أدخل رقمك السري. المندوب يدخل برقمه، والمدير برمز الإدارة.",
+    loginLabel:"الرقم السري", badLogin:"الرقم السري غير صحيح", welcome:"أهلًا", showPass:"إظهار",
+    roleRep:"صفحة المندوب", roleMgr:"لوحة المدير",
     updateDoneTitle:"✅ تم التحديث بنجاح", stockValueTotal:"إجمالي قيمة المخزون",
     downloadForGithub:"تنزيل index.html لرفعه على GitHub", downloadStarted:"بدأ تنزيل الملف",
     deployHint:"الأرقام اتحدّثت في التطبيق فورًا. لو عايز التحديث يوصل للمناديب، نزّل الملف وارفعه على GitHub (استبدال القديم).",
@@ -763,6 +913,25 @@ const I18N = {
     regionTotal:"Region total", carryingStores:"Stores carrying", gapStores:"Gap stores",
     previewStores:"👁 Preview stores with the new data now",
     previewLabel:"Manager preview",
+    activeItems:"Active items", inactiveItems:"Inactive", inactBadge:"Inactive",
+    activate:"Activate", deactivate:"Deactivate",
+    inactTitle:"Inactive items",
+    inactHint:"Inactive items are hidden from the reps' list and only show under the “Inactive” tab. Any change here reaches every rep instantly.",
+    inactSearchPh:"Search all items by name or code to deactivate or activate…",
+    inactNone:"No inactive items", inactCount:"inactive items", inactOf:"of",
+    inactBulkTitle:"Deactivate several items at once", inactBulkPh:"Paste Othaim codes here (one per line or space-separated)",
+    inactBulkBtn:"Deactivate these items", inactBulkDone:"Deactivated", inactBulkNone:"No new codes found",
+    inactNotFound:"Unknown code",
+    inactSynced:"Saved and sent to the reps", inactSyncErr:"Saved on this device only — could not reach the reps",
+    inactLocalOnly:"Saved on this device — live publishing unavailable right now",
+    inactViewRep:"These items are currently inactive. Don't order them until the manager re-activates them.",
+    inactViewMgr:"Tap “Activate” on any item that is selling again to move it back to active.",
+    inactActiveMgr:"Manager mode: “Deactivate” on any card moves it to inactive.",
+    inactLast:"Last change", inactStatusActive:"Active", inactStatusOff:"Inactive",
+    previewItems:"Open stores and activate from item cards", backToAdmin:"Manager panel",
+    loginTitle:"Sign in", loginSub:"Enter your PIN. Reps use their own number, the manager uses the admin code.",
+    loginLabel:"PIN", badLogin:"Incorrect PIN", welcome:"Welcome", showPass:"Show",
+    roleRep:"Rep page", roleMgr:"Manager panel",
     updateDoneTitle:"✅ Updated successfully", stockValueTotal:"Total stock value",
     downloadForGithub:"Download index.html for GitHub", downloadStarted:"Download started",
     deployHint:"Numbers updated in the app instantly. To push the update to the reps, download the file and upload it to GitHub (replace the old one).",
@@ -834,6 +1003,68 @@ function encodeEmbeddedData(obj){
 
 let OO = null; // the live embedded dataset for this session
 
+/* ================= INACTIVE ITEMS =================
+   A manager-curated list of Othaim items that are no longer active. They are kept out of the
+   reps' normal list (and out of suggestions / gap counts) and shown on their own tab. The list
+   travels three ways so it never gets lost: baked into the data (meta.inactive), saved on the
+   device, and live on Firebase at oo_data/inactive. The newest version (by its "at" time) wins. */
+const INACTIVE_SEED = { at:"2026-10-25T10:00:00.000Z", codes:["6350", "72581", "6512", "11451", "49938", "11518", "11519", "5114", "15521", "13928", "14334", "14336", "4503", "14201", "281", "10831", "36694", "1943", "16312", "20953", "13819", "1016", "8470", "1237", "1471", "14500", "14499", "17229", "15522", "13084", "10833", "15754", "15755", "3371", "16758", "2730", "10832", "1180", "13820", "20765", "16759", "8372", "8373", "10835", "9614", "9613", "15641", "15640", "12453", "12452", "55388", "1058", "15818", "10830"] };
+const LS_INACTIVE = "oo_inactive";
+let INACT = { at:"", codes:new Set() };
+function inactNorm(o){
+  if(!o || !Array.isArray(o.codes)) return null;
+  const codes = new Set();
+  o.codes.forEach(c => { const n = parseInt(c,10); if(!isNaN(n)) codes.add(String(n)); });
+  return { at:String(o.at||""), codes };
+}
+function inactPayload(){ return { at: INACT.at, codes: Array.from(INACT.codes).sort((a,b)=>a-b) }; }
+function saveInactiveLocal(){ try{ localStorage.setItem(LS_INACTIVE, JSON.stringify(inactPayload())); }catch(e){} }
+// Take a list only if it is newer than what we already hold. Returns true when it changed.
+function adoptInactive(o, persist){
+  const n = inactNorm(o);
+  if(!n) return false;
+  if(INACT.at && n.at <= INACT.at) return false;
+  INACT = n;
+  if(OO && OO.meta) OO.meta.inactive = inactPayload();
+  if(persist) saveInactiveLocal();
+  return true;
+}
+function loadInactive(){
+  adoptInactive(INACTIVE_SEED);
+  adoptInactive(OO && OO.meta && OO.meta.inactive);
+  try{ adoptInactive(JSON.parse(localStorage.getItem(LS_INACTIVE)||"null")); }catch(e){}
+  if(OO && OO.meta) OO.meta.inactive = inactPayload();
+}
+function isInactive(sku){ return !!sku && INACT.codes.has(String(sku.artecal)); }
+function inactiveCount(){ let n=0; (OO.skus||[]).forEach(s => { if(isInactive(s)) n++; }); return n; }
+function isManager(){ return !!state.adminPin && OO && String(state.adminPin) === String(OO.meta.adminPin); }
+// Manager only: turn items off (off=true) or back on. Saves locally and pushes live to every rep.
+function setInactive(arts, off){
+  if(!isManager()) return 0;
+  let n = 0;
+  arts.forEach(a => { a = String(a);
+    if(off){ if(!INACT.codes.has(a)){ INACT.codes.add(a); n++; } }
+    else if(INACT.codes.delete(a)) n++;
+  });
+  if(!n) return 0;
+  INACT.at = new Date().toISOString();
+  OO.meta.inactive = inactPayload();
+  saveInactiveLocal();
+  pushInactive();
+  return n;
+}
+let _inactPushT = null;
+function pushInactive(){
+  clearTimeout(_inactPushT);
+  // A short debounce: several quick taps go out as one write.
+  _inactPushT = setTimeout(() => {
+    if(!fbReady || !fbDb){ toast(t("inactLocalOnly"), "warn"); return; }
+    fbDb.ref(FB_DATA_PATH + "/inactive").set(inactPayload())
+      .then(() => toast(t("inactSynced"), "success"))
+      .catch(e => { console.warn("inactive push failed:", e && e.message); toast(t("inactSyncErr"), "error"); });
+  }, 450);
+}
+
 /* ================= FIREBASE (LIVE DATA SYNC) =================
    The manager publishes the day's data to Firebase once; every rep's app reads it live —
    no GitHub re-deploy for daily updates. Everything here is defensive: if Firebase fails to
@@ -869,13 +1100,15 @@ function syncFromFirebase(){
   try{
     fbDb.ref(FB_DATA_PATH).on("value", (snap) => {
       const val = snap.val();
+      // The inactive list lives beside the data and can change on its own (no data rebuild).
+      if(val && val.inactive && adoptInactive(val.inactive, true)) liveRerender();
       if(!val || !val.blob || !val.builtAt) return;
       const localBuilt = (OO && OO.meta && OO.meta.builtAt) || "";
       if(String(val.builtAt) <= String(localBuilt)) return;   // not newer → ignore
       try{
         const data = decodeBlob(val.blob);
         if(!(data && Array.isArray(data.skus) && data.skus.length && data.stores && data.stores.length)) return;
-        OO = data; reindexSkus();
+        OO = data; adoptInactive(OO.meta && OO.meta.inactive, true); OO.meta.inactive = inactPayload(); reindexSkus();
         try{ localStorage.setItem(LS_DATA_KEY, val.blob); localStorage.setItem(LS_DATA_BUILT, val.builtAt); }catch(e){}
         // Don't yank the screen out from under a rep who is mid-order; refresh other screens live.
         liveRerender();
@@ -902,8 +1135,9 @@ function liveRerender(){
 async function publishToFirebase(){
   if(!fbReady || !fbDb){ toast(t("fbUnavailable"), "error"); return false; }
   try{
+    OO.meta.inactive = inactPayload();
     const blob64 = encodeEmbeddedData(OO);
-    await fbDb.ref(FB_DATA_PATH).set({ blob: blob64, builtAt: OO.meta.builtAt || new Date().toISOString(), by: "manager" });
+    await fbDb.ref(FB_DATA_PATH).set({ blob: blob64, builtAt: OO.meta.builtAt || new Date().toISOString(), by: "manager", inactive: inactPayload() });
     toast(t("fbPublished"), "success");
     return true;
   }catch(e){ console.warn("Firebase publish failed:", e && e.message); toast(t("fbPublishErr"), "error"); return false; }
@@ -933,6 +1167,7 @@ const state = {
   viewport: localStorage.getItem("oo_viewport") || "",        // "" auto | "phone" | "wide"
   hidePrices: localStorage.getItem("oo_hidePrices") === "1",  // quick on-screen money blackout
   adminPin: null,
+  showInactive: false,   // items screen: false = active items, true = the inactive list
   lastPdf: null
 };
 
@@ -968,6 +1203,7 @@ function restoreSession(){
   try{
     if(s.user === "__preview__"){
       state.user = "__preview__"; state.salesman = s.salesman || t("previewLabel");
+      if(s.adminPin && String(s.adminPin) === String(OO.meta.adminPin)) state.adminPin = s.adminPin;
       state.stores = (OO.stores||[]).slice(); state.loginMode = "manager";
       state.screen = ["stores","items","cart"].includes(s.screen) ? s.screen : "stores";
     } else if(s.loginMode === "rep" && s.user){
@@ -1046,6 +1282,9 @@ function toast(msg, kind){
 }
 function showLoading(v){ $("#loadingOverlay").classList.toggle("hidden", !v); }
 function svgIcon(name){
+  if(name === "lock") return _svgRaw('<rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V7.5a4 4 0 0 1 8 0V11"/><circle cx="12" cy="16" r="1.3"/>');
+  if(name === "eye") return _svgRaw('<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>');
+  if(name === "arrow") return _svgRaw('<path d="M5 12h14M13 6l6 6-6 6"/>');
   const icons = {
     back: '<path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
     cart: '<circle cx="9" cy="20" r="1.4" fill="currentColor"/><circle cx="17" cy="20" r="1.4" fill="currentColor"/><path d="M2.5 3h2l2 12.2a2 2 0 002 1.8h8.6a2 2 0 002-1.7L21 8H6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
@@ -1072,6 +1311,11 @@ function reindexSkus(){
   for(const k in _stockCache) delete _stockCache[k];
 }
 
+function _svgRaw(inner){
+  const s = el("span");
+  s.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+inner+'</svg>';
+  return s.firstChild;
+}
 /* ---------------- STOCK / SUGGESTION HELPERS ---------------- */
 // On-hand expressed in cartons: the decimal figure the rep is used to seeing
 // ("603 pieces = 4.2 cartons") plus the exact full-cartons + loose-pieces split.
@@ -1216,39 +1460,48 @@ function renderLogin(){
   hero.appendChild(el("div", {class:"login-sub"}, [t("tagline")]));
   s.appendChild(hero);
 
-  // Login form — centred in the growing middle.
+  // One door for everyone: the PIN decides who you are. The admin code opens the manager panel,
+  // a rep's own number opens that rep's stores. No separate tabs to choose from.
   const body = el("div", {class:"login-body"});
   const card = el("div", {class:"card card-pad login-card"});
-
-  const tabs = el("div", {class:"tabswitch"});
-  tabs.appendChild(el("button", {class: state.loginMode==="rep" ? "active":"", onclick:() => { state.loginMode="rep"; render(); }}, [t("loginAsRep")]));
-  tabs.appendChild(el("button", {class: state.loginMode==="manager" ? "active":"", onclick:() => { state.loginMode="manager"; render(); }}, [t("changePin")]));
-  card.appendChild(tabs);
+  card.appendChild(el("div", {class:"lg-lock"}, [svgIcon("lock")]));
+  card.appendChild(el("div", {class:"lg-title"}, [t("loginTitle")]));
+  card.appendChild(el("div", {class:"lg-sub"}, [t("loginSub")]));
 
   const err = el("div", {class:"errmsg"});
-  const input = el("input", {class:"input input-lg", type:"tel", inputmode:"numeric",
-    placeholder: state.loginMode==="rep" ? "•••••" : "••••"});
-  card.appendChild(el("label",{class:"field-label"}, [state.loginMode==="rep" ? t("userNumber") : t("pin")]));
-  card.appendChild(input);
-  card.appendChild(el("div",{style:"height:12px"}));
+  const input = el("input", {class:"input input-lg lg-pin", type:"password", inputmode:"numeric", autocomplete:"current-password",
+    placeholder:"••••", "aria-label":t("loginLabel")});
+  const eye = el("button", {class:"lg-eye", type:"button", "aria-label":t("showPass"), onclick:() => {
+    input.type = input.type === "password" ? "text" : "password";
+    eye.classList.toggle("on", input.type === "text"); input.focus();
+  }}, [svgIcon("eye")]);
+  card.appendChild(el("label",{class:"field-label"}, [t("loginLabel")]));
+  card.appendChild(el("div", {class:"lg-field"}, [input, eye]));
+  card.appendChild(el("div",{style:"height:14px"}));
 
   const doLogin = () => {
     const val = input.value.trim();
-    if(!val){ err.textContent = t("enterUser"); return; }
+    if(!val){ err.textContent = t("enterUser"); input.focus(); return; }
     err.textContent = "";
-    if(state.loginMode === "rep"){
+    if(val === String(OO.meta.adminPin)){
+      state.adminPin = val; state.loginMode = "manager"; state.user = null; state.screen = "admin";
+      toast(t("welcome")+" · "+t("roleMgr"), "success");
+    } else {
       const mine = OO.stores.filter(st => String(st.userNumber) === val);
-      if(mine.length === 0){ err.textContent = t("userNotFound"); return; }
+      if(mine.length === 0){
+        err.textContent = t("badLogin");
+        card.classList.remove("shake"); void card.offsetWidth; card.classList.add("shake");
+        input.select(); return;
+      }
+      state.adminPin = null; state.loginMode = "rep";
       state.user = val; state.salesman = mine[0].salesman; state.stores = mine;
       state.screen = "stores";
-    } else {
-      if(val !== String(OO.meta.adminPin)){ err.textContent = t("badPin"); return; }
-      state.adminPin = val; state.screen = "admin";
+      toast(t("welcome")+" "+String(mine[0].salesman||"").split(/\s+/)[0], "success");
     }
     render();
   };
   input.addEventListener("keydown", (ev) => { if(ev.key === "Enter") doLogin(); });
-  card.appendChild(el("button", {class:"btn btn-primary btn-block", onclick:doLogin}, [t("login")]));
+  card.appendChild(el("button", {class:"btn btn-primary btn-block lg-go", onclick:doLogin}, [t("login"), svgIcon("arrow")]));
   card.appendChild(err);
   body.appendChild(card);
   s.appendChild(body);
@@ -1348,7 +1601,7 @@ function topbar(opts){
 }
 function doLogout(){
   state.user=null; state.salesman=null; state.stores=[]; state.selectedStore=null;
-  state.cart={}; state.adminPin=null; state.screen="login"; state.loginMode="rep";
+  state.cart={}; state.adminPin=null; state.screen="login"; state.loginMode="rep"; state.showInactive=false; state.gapOnly=false;
   try{ localStorage.removeItem("oo_session"); }catch(e){}
   render();
 }
@@ -1356,7 +1609,8 @@ function doLogout(){
 /* ---------------- STORES SCREEN ---------------- */
 function renderStores(){
   const s = el("div", {class:"screen"});
-  s.appendChild(topbar({title: state.salesman || t("myStores"), subtitle: t("myStores"), onLogout: doLogout}));
+  s.appendChild(topbar({title: state.salesman || t("myStores"), subtitle: t("myStores"), onLogout: doLogout,
+    onBack: (state.user === "__preview__" && isManager()) ? (() => { state.user=null; state.salesman=null; state.stores=[]; state.selectedStore=null; state.cart={}; state.screen="admin"; render(); }) : null}));
   const content = el("div", {class:"content"});
   content.appendChild(renderStatusStrip(false));
 
@@ -1403,7 +1657,7 @@ function selectStore(store){
     if(!confirm(t("confirmSwitch"))) return;
   }
   state.cart = {};
-  state.selectedStore = store; state.category = "all"; state.query = "";
+  state.selectedStore = store; state.category = "all"; state.query = ""; state.showInactive = false;
   state.screen = "items"; render();
 }
 
@@ -1552,12 +1806,51 @@ function renderItems(){
   const search = el("input", {class:"input", placeholder:t("searchItems"), value: state.query});
   content.appendChild(el("div", {class:"searchbox"}, [svgIcon("search"), search]));
 
+  // Active / Inactive switch — keeps stopped items out of the way, one tap to look at them.
+  const actBar = el("div", {class:"actseg"});
+  content.appendChild(actBar);
+  function drawActBar(){
+    actBar.innerHTML = "";
+    const nOff = inactiveCount(), nOn = OO.skus.length - nOff;
+    const pick = (v) => {
+      if(state.showInactive === v) return;
+      state.showInactive = v; state.category = "all";
+      drawActBar(); drawGapBar(); drawChips(); drawList();
+    };
+    const seg = el("div", {class:"as-seg"});
+    seg.appendChild(el("button", {class:"as-btn as-on"+(!state.showInactive?" sel":""), onclick:() => pick(false)}, [
+      el("span",{class:"as-dot"}), el("span",{class:"as-l"},[t("activeItems")]), el("span",{class:"as-n"},[fmtInt(nOn)]) ]));
+    seg.appendChild(el("button", {class:"as-btn as-off"+(state.showInactive?" sel":""), onclick:() => pick(true)}, [
+      el("span",{class:"as-dot"}), el("span",{class:"as-l"},[t("inactiveItems")]), el("span",{class:"as-n"},[fmtInt(nOff)]) ]));
+    actBar.appendChild(seg);
+    const hint = state.showInactive ? t(isManager() ? "inactViewMgr" : "inactViewRep") : (isManager() ? t("inactActiveMgr") : "");
+    if(hint) actBar.appendChild(el("div", {class:"as-hint"+(state.showInactive?" off":"")}, [hint]));
+  }
+  function passesActive(sk){ return state.showInactive ? isInactive(sk) : !isInactive(sk); }
+  // Badge + (manager only) one-tap switch on an item card / row.
+  function inactCtl(sku, host){
+    const off = isInactive(sku);
+    if(!off && !isManager()) return null;
+    const box = el("div", {class:"inact-ctl"});
+    box.appendChild(off ? el("span",{class:"inact-badge"},[t("inactBadge")]) : el("span"));
+    if(isManager()){
+      box.appendChild(el("button", {class:"inact-tg "+(off?"to-on":"to-off"), onclick:(ev) => {
+        ev.stopPropagation();
+        if(!setInactive([sku.artecal], !off)) return;
+        host.classList.add("leaving");
+        setTimeout(() => { host.remove(); drawActBar(); drawChips(); }, 240);
+      }}, [ off ? t("activate") : t("deactivate") ]));
+    }
+    return box;
+  }
+
   // Opportunity / gap filter: show only items Mars has, that this store is out of (or nearly).
   const gapBar = el("div", {class:"gapbar"});
   content.appendChild(gapBar);
-  function storeGapCount(){ let n=0; OO.skus.forEach(sk=>{ if(isGapItem(sk, onHand[sk.artecal], state.gapThreshold)) n++; }); return n; }
+  function storeGapCount(){ let n=0; OO.skus.forEach(sk=>{ if(!isInactive(sk) && isGapItem(sk, onHand[sk.artecal], state.gapThreshold)) n++; }); return n; }
   function drawGapBar(){
     gapBar.innerHTML = "";
+    if(state.showInactive) return;   // the opportunity filter is for the active list only
     const count = storeGapCount();
     const btn = el("button", {class:"gaptoggle"+(state.gapOnly?" on":""), onclick:()=>{ state.gapOnly=!state.gapOnly; drawGapBar(); drawList(); }}, [
       el("span",{class:"gt-ic"},["🎯"]), el("span",{class:"gt-l"},[t("gapFilter")]), el("span",{class:"gt-n"},[fmtInt(count)])
@@ -1604,8 +1897,9 @@ function renderItems(){
   // Fills in the suggested quantity for everything currently visible (respects the category chip,
   // the search box, and the opportunity filter), so a category can be ordered in one pass.
   function applyAllSuggested(){
+    if(state.showInactive){ toast(t("inactViewRep"), "warn"); return; }
     const q = search.value.trim();
-    const visible = OO.skus.filter(sk => (state.category==="all" || sk.category===state.category) && passesGap(sk) && matches(sk, q));
+    const visible = OO.skus.filter(sk => passesActive(sk) && (state.category==="all" || sk.category===state.category) && passesGap(sk) && matches(sk, q));
     let n = 0, cartons = 0;
     visible.forEach(sk => {
       const sug = suggestFor(sk, onHand[sk.artecal]);
@@ -1618,7 +1912,7 @@ function renderItems(){
 
   function categoriesPresent(){
     const set = {};
-    OO.skus.forEach(sk => set[sk.category] = (set[sk.category]||0)+1);
+    OO.skus.forEach(sk => { if(passesActive(sk)) set[sk.category] = (set[sk.category]||0)+1; });
     return set;
   }
   function drawChips(){
@@ -1644,15 +1938,15 @@ function renderItems(){
     return String(sku.artecal).includes(q) || codeStr(sku).includes(q) || String(sku.zrep).includes(q) ||
       (sku.nameAr||"").toLowerCase().includes(q) || (sku.nameEn||"").toLowerCase().includes(q);
   }
-  function passesGap(sk){ return !state.gapOnly || isGapItem(sk, onHand[sk.artecal], state.gapThreshold); }
+  function passesGap(sk){ return state.showInactive || !state.gapOnly || isGapItem(sk, onHand[sk.artecal], state.gapThreshold); }
 
   let drawToken = 0;   // cancels a half-finished chunked draw when a newer draw starts
   function drawList(){
     const myToken = ++drawToken;
     list.innerHTML = "";
     const q = search.value.trim();
-    const filtered = OO.skus.filter(sk => (state.category==="all" || sk.category===state.category) && passesGap(sk) && matches(sk, q));
-    if(filtered.length === 0){ list.appendChild(el("div",{class:"emptystate"},[t(state.gapOnly ? "noGaps" : "catNoLines")])); return; }
+    const filtered = OO.skus.filter(sk => passesActive(sk) && (state.category==="all" || sk.category===state.category) && passesGap(sk) && matches(sk, q));
+    if(filtered.length === 0){ list.appendChild(el("div",{class:"emptystate"},[t(state.showInactive ? "inactNone" : (state.gapOnly ? "noGaps" : "catNoLines"))])); return; }
     if(state.viewMode === "list"){ drawGrouped(filtered); return; }
     filtered.sort((a,b) => nameOf(a).localeCompare(nameOf(b)));
     // Paint the first cards right away, then stream the rest across animation frames so opening a
@@ -1699,9 +1993,9 @@ function renderItems(){
     const ohQty = oh ? Number(oh.onHand)||0 : 0;
     const per = Number(sku.pcPerCs)||0;
     const cs = ohCartons(ohQty, per);
-    const sug = suggestFor(sku, oh);
+    const sug = isInactive(sku) ? { cartons:0, base:0, reason:"inactive", capReason:null, onHand:0, min:0, max:0 } : suggestFor(sku, oh);
 
-    const row = el("div", {class:"listrow"+(ctn>0?" has-order":"")+(ohQty<=0?" oos":"")});
+    const row = el("div", {class:"listrow"+(ctn>0?" has-order":"")+(ohQty<=0?" oos":"")+(isInactive(sku)?" inactive":"")});
     if(seq) row.appendChild(el("div", {class:"lseq"}, [String(seq)]));
     const li = el("div", {class:"li"});
     const np = nameParts(sku);
@@ -1722,6 +2016,7 @@ function renderItems(){
       meta.appendChild(el("span", {}, [el("b",{},[fmtMoney(ohQty*(Number(sku.pcPrice)||0))]), " "+curr()]));
     }
     li.appendChild(meta);
+    const ictl = inactCtl(sku, row); if(ictl) li.appendChild(ictl);
     row.appendChild(li);
 
     const step = el("div", {class:"ministep"});
@@ -1757,10 +2052,10 @@ function renderItems(){
     const marsQ = OO.marsStock[sku.artecal] ? Number(OO.marsStock[sku.artecal].qty)||0 : 0;
     const pcPerCs = Number(sku.pcPerCs)||0;
     const cs = ohCartons(ohQty, pcPerCs);
-    const sug = suggestFor(sku, oh);
+    const sug = isInactive(sku) ? { cartons:0, base:0, reason:"inactive", capReason:null, onHand:0, min:0, max:0 } : suggestFor(sku, oh);
     const np = nameParts(sku);
 
-    const card = el("div", {class:"itemcard"+(ctn>0?" has-order":"")+(ohQty<=0?" oos":""), style:"--cat:"+m.color});
+    const card = el("div", {class:"itemcard"+(ctn>0?" has-order":"")+(ohQty<=0?" oos":"")+(isInactive(sku)?" inactive":""), style:"--cat:"+m.color});
 
     // head: seq number, name (+arabic), code chip; category = left accent color
     const head = el("div", {class:"ic-head"});
@@ -1771,6 +2066,7 @@ function renderItems(){
     head.appendChild(titles);
     head.appendChild(el("span", {class:"code"}, [codeStr(sku)]));
     card.appendChild(head);
+    const ictl = inactCtl(sku, card); if(ictl) card.appendChild(ictl);
 
     // clear 4-cell grid: On Hand (pcs) · In Cartons · Pack · Mars
     const grid = el("div", {class:"ic-grid"});
@@ -1864,7 +2160,7 @@ function renderItems(){
     clearTimeout(searchTimer);
     searchTimer = setTimeout(drawList, 120);
   });
-  drawGapBar(); drawChips(); drawList();
+  drawActBar(); drawGapBar(); drawChips(); drawList();
   s.appendChild(content);
   updateFloatbar();
   return s;
@@ -2483,6 +2779,102 @@ function renderRegionSearch(){
   return wrap;
 }
 
+/* ================= MANAGER: INACTIVE ITEMS ================= */
+function enterManagerPreview(){
+  state.user="__preview__"; state.salesman=t("previewLabel"); state.stores=(OO.stores||[]).slice();
+  state.screen="stores"; state.category="all"; state.query=""; render();
+}
+function fmtIsoStamp(iso){ const d = new Date(iso); return isNaN(d) ? null : fmtStamp(nowStampOf(d)); }
+function renderInactiveAdmin(){
+  const card = el("div", {class:"card inact-admin"});
+  const head = el("div", {class:"ia-head"});
+  const big = el("div", {class:"ia-big"});
+  const meta = el("div", {class:"ia-meta"});
+  head.appendChild(el("div", {class:"ia-ic"}, [el("span",{class:"ia-bars"})]));
+  head.appendChild(el("div", {class:"ia-ht"}, [big, meta]));
+  card.appendChild(head);
+  const body = el("div", {class:"ia-body"});
+  body.appendChild(el("div", {class:"ia-hint"}, [t("inactHint")]));
+  const inp = el("input", {class:"input", placeholder:t("inactSearchPh")});
+  body.appendChild(el("div", {class:"searchbox"}, [svgIcon("search"), inp]));
+  const list = el("div", {class:"ia-list"});
+  body.appendChild(list);
+
+  // Bulk: paste a column of Othaim codes (e.g. from the store's inactive report) to stop them all.
+  const bulk = el("details", {class:"ia-bulk"});
+  bulk.appendChild(el("summary", {}, [t("inactBulkTitle")]));
+  const ta = el("textarea", {class:"input ia-ta", rows:"3", placeholder:t("inactBulkPh")});
+  const res = el("div", {class:"ia-res"});
+  bulk.appendChild(ta);
+  bulk.appendChild(el("button", {class:"btn btn-dark btn-block", style:"margin-top:8px;", onclick:() => {
+    const byCode = {};
+    OO.skus.forEach(s => { byCode[String(parseInt(codeStr(s),10))] = s; byCode[String(s.artecal)] = s; });
+    const arts = [], unknown = [];
+    (ta.value.match(/\d{3,}/g) || []).forEach(tk => {
+      const s = byCode[String(parseInt(tk,10))];
+      if(s){ if(!isInactive(s) && !arts.includes(s.artecal)) arts.push(s.artecal); }
+      else if(!unknown.includes(tk)) unknown.push(tk);
+    });
+    const n = arts.length ? setInactive(arts, true) : 0;
+    res.textContent = (n ? (t("inactBulkDone")+" "+fmtInt(n)) : t("inactBulkNone"))
+      + (unknown.length ? ("  ·  "+t("inactNotFound")+": "+unknown.slice(0,8).join(", ")+(unknown.length>8?"…":"")) : "");
+    res.className = "ia-res " + (n ? "ok" : "warn");
+    if(n){ ta.value = ""; draw(); }
+  }}, [t("inactBulkBtn")]));
+  bulk.appendChild(res);
+  body.appendChild(bulk);
+  body.appendChild(el("button", {class:"btn btn-outline btn-block", onclick: enterManagerPreview}, [svgIcon("chev"), " "+t("previewItems")]));
+  card.appendChild(body);
+
+  function row(sk){
+    const off = isInactive(sk), m = catMeta(sk.category);
+    const en = cleanName(sk.nameEn), ar = arName(sk.nameAr);
+    const r = el("div", {class:"ia-row"+(off?" off":"")});
+    r.appendChild(el("span", {class:"ia-sw", style:"background:"+m.color}));
+    r.appendChild(el("span", {class:"ia-code"}, [codeStr(sk)]));
+    r.appendChild(el("div", {class:"ia-nm"}, [ el("div",{class:"ia-en", dir: en ? "ltr" : "rtl"},[en || ar]), (en && ar) ? el("div",{class:"ia-ar", dir:"rtl"},[ar]) : null ]));
+    r.appendChild(el("button", {class:"inact-tg "+(off?"to-on":"to-off"), onclick:() => {
+      if(!setInactive([sk.artecal], !off)) return;
+      r.classList.add("leaving"); setTimeout(draw, 220);
+    }}, [ off ? t("activate") : t("deactivate") ]));
+    return r;
+  }
+  function draw(){
+    const n = inactiveCount();
+    big.innerHTML = "";
+    big.appendChild(el("b", {}, [fmtInt(n)]));
+    big.appendChild(document.createTextNode(" "+t("inactCount")));
+    meta.innerHTML = "";
+    meta.appendChild(el("span", {}, [t("inactOf")+" "+fmtInt(OO.skus.length)+"  ·  "+t("inactLast")]));
+    const st = INACT.at ? fmtIsoStamp(INACT.at) : null;
+    if(st) meta.appendChild(st);
+    list.innerHTML = "";
+    const q = inp.value.trim().toLowerCase();
+    let items;
+    if(q){
+      items = OO.skus.filter(sk => String(sk.artecal).includes(q) || codeStr(sk).includes(q) || String(sk.zrep).includes(q) ||
+        (sk.nameAr||"").toLowerCase().includes(q) || (sk.nameEn||"").toLowerCase().includes(q)).slice(0,40);
+      items.sort((a,b) => (isInactive(b)?1:0) - (isInactive(a)?1:0));
+    } else {
+      items = OO.skus.filter(isInactive).sort((a,b) => String(a.category).localeCompare(String(b.category)) || nameOf(a).localeCompare(nameOf(b)));
+    }
+    if(!items.length){ list.appendChild(el("div", {class:"ia-empty"}, [q ? t("catNoLines") : t("inactNone")])); return; }
+    let lastCat = null;
+    items.forEach(sk => {
+      if(!q && sk.category !== lastCat){
+        lastCat = sk.category; const m = catMeta(sk.category);
+        const cnt = items.filter(x => x.category === sk.category).length;
+        list.appendChild(el("div", {class:"ia-cat"}, [ el("span",{class:"ia-sw", style:"background:"+m.color}), el("span",{},[catLabel(sk.category)]), el("span",{class:"ia-cn"},[String(cnt)]) ]));
+      }
+      list.appendChild(row(sk));
+    });
+  }
+  inp.addEventListener("input", () => { clearTimeout(inp._t); inp._t = setTimeout(draw, 120); });
+  draw();
+  card._draw = draw;
+  return card;
+}
+
 /* ================= ADMIN / DATA-BUILDER SCREEN ================= */
 function renderAdmin(){
   const s = el("div", {class:"screen"});
@@ -2506,6 +2898,10 @@ function renderAdmin(){
   // broken down per rep (and per store), with the sell-in gaps highlighted.
   content.appendChild(el("div", {class:"section-title", style:"margin-top:6px;"}, [t("regionSearchTitle")]));
   content.appendChild(renderRegionSearch());
+
+  // Inactive items — the manager's list of stopped items (live to every rep).
+  content.appendChild(el("div", {class:"section-title", style:"margin-top:6px;"}, [t("inactTitle")]));
+  content.appendChild(renderInactiveAdmin());
 
   // Stock-valuation export — every store's on-hand valued per item, with category/brand
   // roll-ups and a full detail sheet, as one Excel workbook.
@@ -2994,6 +3390,7 @@ function applyUpload(parsed, summaryEl){
 // Build and download the updated index.html (the file the manager re-uploads to GitHub for reps).
 function downloadIndexHtml(){
   try{
+    OO.meta.inactive = inactPayload();
     const blob64 = encodeEmbeddedData(OO);
     const newHtml = ORIGINAL_HTML.replace(/(<script id="oo-data"[^>]*>)[\s\S]*?(<\/script>)/, "$1"+blob64+"$2");
     const blob = new Blob([newHtml], {type:"text/html"});
@@ -3043,6 +3440,7 @@ let ORIGINAL_HTML = null;
 (function boot(){
   ORIGINAL_HTML = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
   OO = loadLiveData();   // newest of baked vs last build saved on this device
+  loadInactive();
   reindexSkus();
   applyViewport();
   restoreSession();      // land back where we were (Refresh / reopen), not on the login screen
