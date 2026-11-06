@@ -553,6 +553,25 @@ html[data-lang="ar"] .switch input:checked ~ .thumb{transform:translateX(-18px);
 .pdf-totals .g .cur{font-size:10px;color:#7FD69F;margin-inline-start:4px;font-weight:700;}
 .pdf-foot{position:absolute;bottom:34px;left:48px;right:48px;font-size:8.5px;color:#A6ACB8;display:flex;justify-content:space-between;border-top:1px solid #EDEFF2;padding-top:9px;font-weight:600;}
 
+/* ---- PDF v2: Code + Order read as one linked pair ---- */
+.pdf-table thead th.codecol{background:#2A3140;border-inline-start:3px solid #067F3E;}
+.pdf-table thead th.qtycol{background:#067F3E;color:#fff;border-bottom:3px solid #9DC418;}
+.pdf-table thead th.packcol{border-inline-start:1px solid #2C323C;}
+.pdf-table td.codecol{background:#F3F5F8;border-inline-start:3px solid #067F3E;border-inline-end:none;}
+.pdf-table tr:nth-child(even) td.codecol{background:#EDF0F4;}
+.pdf-table .oth{font-size:12.5px;letter-spacing:.6px;}
+.pdf-table td.qtycol{background:#EAF5EE;padding:5px 8px;border-inline-start:none;border-inline-end:2px solid #B9DCC6;}
+.pdf-table tr:nth-child(even) td.qtycol{background:#E0F0E6;}
+.pdf-table .qbox{display:inline-block;min-width:62px;padding:5px 10px;border-radius:7px;background:#fff;border:1.5px solid #067F3E;text-align:center;line-height:1;white-space:nowrap;}
+.pdf-table .qbox b{font-family:'IBM Plex Mono',monospace;font-weight:800;font-size:15px;color:#056331;line-height:1;}
+.pdf-table .qbox .u{font-size:7.5px;font-weight:800;color:#5E9C77;letter-spacing:.6px;}
+.pdf-table.tight .qbox{min-width:52px;padding:4px 7px;}
+.pdf-table.tight .qbox b{font-size:13.5px;}
+.pdf-table td.packcol{border-inline-start:1px solid #EDEFF2;}
+.pdf-table .zr,.pdf-table .oth{white-space:nowrap;}
+.pdf-table td.codecol,.pdf-table td.qtycol{white-space:nowrap;}
+.pdf-table.tight td.num{padding-inline-start:10px;}
+
 /* =====================================================================
    v-Next polish — single login, inactive items, refined palette
    ===================================================================== */
@@ -2575,13 +2594,21 @@ function buildPdfPageDom(o){
         c.appendChild(el("div",{class:"oth"},[codeStr(l.sku)]));
         if(l.sku.zrep) c.appendChild(el("div",{class:"zr"},[ el("b",{},["ZR "]), String(l.sku.zrep) ]));
         return c; } },
+    // Order sits right beside the code: the store operator reads the code and keys the
+    // quantity next to it in one glance, without tracking across the on-hand columns.
+    { head:"Order (CTN)", cls:"qtycol", get:(l) => {
+        // Plain inline-block + text (no flex): html2canvas drops text inside inline-flex boxes.
+        const c = el("span", {class:"qbox"});
+        c.appendChild(el("b", {}, [fmtInt(l.cartons)]));
+        c.appendChild(document.createTextNode(" "));
+        c.appendChild(el("span", {class:"u"}, ["CTN"]));
+        return c; } },
     { head:"PC / Carton", cls:"packcol", get:(l) => fmtInt(l.sku.pcPerCs) }
   ];
   if(o.showOnHand){
     cols.push({ head:"On Hand (PC)", cls:"ohcol", get:(l) => fmtInt(l.onHandPc||0) });
     cols.push({ head:"On Hand (CTN)", cls:"ohcol", get:(l) => { const cs = ohCartons(l.onHandPc||0, l.sku.pcPerCs); return cs ? cs.text : "—"; } });
   }
-  cols.push({ head:"Order (Cartons)", cls:"qtycol", get:(l) => fmtInt(l.cartons) });
   if(o.showPrice) cols.push({ head:"Carton Price", cls:"num", get:(l) => fmtMoney(l.sku.csPrice) });
   if(o.showValues) cols.push({ head:"Value", cls:"num", get:(l) => fmtMoney(l.value) });
 
