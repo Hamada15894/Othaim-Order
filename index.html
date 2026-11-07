@@ -553,6 +553,21 @@ html[data-lang="ar"] .switch input:checked ~ .thumb{transform:translateX(-18px);
 .pdf-totals .g .cur{font-size:10px;color:#7FD69F;margin-inline-start:4px;font-weight:700;}
 .pdf-foot{position:absolute;bottom:34px;left:48px;right:48px;font-size:8.5px;color:#A6ACB8;display:flex;justify-content:space-between;border-top:1px solid #EDEFF2;padding-top:9px;font-weight:600;}
 
+
+/* ---- OUTER items: amber unit so it can't be keyed in as cartons ---- */
+.outer-tag{display:inline-flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:800;letter-spacing:.8px;color:#fff;background:linear-gradient(135deg,#F08C00,#D9480F);border-radius:7px;padding:5px 9px;box-shadow:0 4px 10px -6px rgba(217,72,15,.8);white-space:nowrap;font-family:'IBM Plex Mono',monospace;}
+.outer-tag.sm{font-size:9px;padding:2px 7px;margin-top:3px;border-radius:5px;}
+.itemcard.is-outer .step,.listrow.is-outer .ministep input,.cartline.is-outer .cartstep input{border-color:#F08C00 !important;}
+.itemcard.is-outer .step input,.listrow.is-outer .ministep input,.cartline.is-outer .cartstep input{color:#C2410C;background:#FFF7ED;border-color:#F08C00;}
+.cartline.is-outer{border-inline-start:3px solid #F08C00;}
+.cartstep .lbl.outer-tag{color:#fff;}
+.pdf-table .qbox.outer{border-color:#E8590C;background:#FFF4E6;}
+.pdf-table .qbox.outer b{color:#C2410C;}
+.pdf-table .qbox.outer .u{color:#E8590C;}
+.pdf-table tr.outer-row td.qtycol{background:#FFE8CC;}
+.pdf-table tr.outer-row td.codecol{border-inline-start-color:#E8590C;}
+.pdf-totals .r.outer{background:#FFF4E6;color:#C2410C;}
+.pdf-totals .r.outer b{color:#C2410C;}
 /* ---- PDF v2: Code + Order read as one linked pair ---- */
 .pdf-table thead th.codecol{background:#2A3140;border-inline-start:3px solid #067F3E;}
 .pdf-table thead th.qtycol{background:#067F3E;color:#fff;border-bottom:3px solid #9DC418;}
@@ -823,7 +838,7 @@ const I18N = {
     regionEmptyHint:"ابحث واختر صنف (أو أكتر) عشان تشوف توفّره في كل المنطقة، وتفصيله لكل مندوب ومتجر.",
     regionTotal:"إجمالي المنطقة", carryingStores:"متاجر بها الصنف", gapStores:"متاجر ناقصة",
     previewStores:"👁 معاينة المتاجر بالبيانات الجديدة الآن",
-    previewLabel:"معاينة المدير",
+    previewLabel:"معاينة المدير", outerTag:"OUTER", outerHint:"يُطلب بالأوتر", totalOuters:"إجمالي الأوتر",
     activeItems:"الأصناف النشطة", inactiveItems:"غير النشطة", inactBadge:"غير نشط",
     activate:"تفعيل", deactivate:"إيقاف",
     inactTitle:"الأصناف غير النشطة",
@@ -931,7 +946,7 @@ const I18N = {
     regionEmptyHint:"Search and pick one or more items to see region-wide availability, broken down per rep and store.",
     regionTotal:"Region total", carryingStores:"Stores carrying", gapStores:"Gap stores",
     previewStores:"👁 Preview stores with the new data now",
-    previewLabel:"Manager preview",
+    previewLabel:"Manager preview", outerTag:"OUTER", outerHint:"Ordered by outer", totalOuters:"Total Outers",
     activeItems:"Active items", inactiveItems:"Inactive", inactBadge:"Inactive",
     activate:"Activate", deactivate:"Deactivate",
     inactTitle:"Inactive items",
@@ -1021,6 +1036,11 @@ function encodeEmbeddedData(obj){
 }
 
 let OO = null; // the live embedded dataset for this session
+
+/* Items that Othaim keys in OUTERS, not cartons. The quantity entered is the same number —
+   this only changes the unit label (and its colour) so whoever keys the order in notices. */
+const OUTER_ARTS = new Set(["12498", "9611", "8817", "5310", "15645", "15644", "16709", "16009", "3212", "8374", "3211", "3616", "14821", "3617", "3404", "3403", "1977", "14343", "8609", "8608", "49939"]);
+function isOuter(sku){ return !!sku && OUTER_ARTS.has(String(sku.artecal)); }
 
 /* ================= INACTIVE ITEMS =================
    A manager-curated list of Othaim items that are no longer active. They are kept out of the
@@ -2014,7 +2034,7 @@ function renderItems(){
     const cs = ohCartons(ohQty, per);
     const sug = isInactive(sku) ? { cartons:0, base:0, reason:"inactive", capReason:null, onHand:0, min:0, max:0 } : suggestFor(sku, oh);
 
-    const row = el("div", {class:"listrow"+(ctn>0?" has-order":"")+(ohQty<=0?" oos":"")+(isInactive(sku)?" inactive":"")});
+    const row = el("div", {class:"listrow"+(isOuter(sku)?" is-outer":"")+(ctn>0?" has-order":"")+(ohQty<=0?" oos":"")+(isInactive(sku)?" inactive":"")});
     if(seq) row.appendChild(el("div", {class:"lseq"}, [String(seq)]));
     const li = el("div", {class:"li"});
     const np = nameParts(sku);
@@ -2046,6 +2066,7 @@ function renderItems(){
     const plus = el("button", {}, ["+"]);
     inner.appendChild(minus); inner.appendChild(input); inner.appendChild(plus);
     wrap.appendChild(inner);
+    if(isOuter(sku)) wrap.appendChild(el("span", {class:"outer-tag sm", title:t("outerHint")}, [t("outerTag")]));
     const sugBtn = el("button", {class:"sug"}, [sug.cartons > 0 ? (t("suggested")+" "+sug.cartons) : ""]);
     if(sug.cartons > 0){ sugBtn.onclick = () => setQty(sug.cartons); wrap.appendChild(sugBtn); }
     step.appendChild(wrap);
@@ -2074,7 +2095,7 @@ function renderItems(){
     const sug = isInactive(sku) ? { cartons:0, base:0, reason:"inactive", capReason:null, onHand:0, min:0, max:0 } : suggestFor(sku, oh);
     const np = nameParts(sku);
 
-    const card = el("div", {class:"itemcard"+(ctn>0?" has-order":"")+(ohQty<=0?" oos":"")+(isInactive(sku)?" inactive":""), style:"--cat:"+m.color});
+    const card = el("div", {class:"itemcard"+(isOuter(sku)?" is-outer":"")+(ctn>0?" has-order":"")+(ohQty<=0?" oos":"")+(isInactive(sku)?" inactive":""), style:"--cat:"+m.color});
 
     // head: seq number, name (+arabic), code chip; category = left accent color
     const head = el("div", {class:"ic-head"});
@@ -2118,6 +2139,7 @@ function renderItems(){
     const plus = el("button", {}, ["+"]);
     step.appendChild(minus); step.appendChild(input); step.appendChild(plus);
     order.appendChild(step);
+    if(isOuter(sku)) order.appendChild(el("span", {class:"outer-tag", title:t("outerHint")}, [t("outerTag")]));
     const ov = el("div", {class:"ov"});
     order.appendChild(ov);
     card.appendChild(order);
@@ -2132,7 +2154,7 @@ function renderItems(){
       } else if(c>0){
         ov.appendChild(el("b",{},[fmtMoney(c*(Number(sku.csPrice)||0))+" "+curr()]));
       } else {
-        ov.appendChild(document.createTextNode(fmtMoney(sku.csPrice)+" "+curr()+" / "+t("cartons")));
+        ov.appendChild(document.createTextNode(fmtMoney(sku.csPrice)+" "+curr()+(isOuter(sku)?"":" / "+t("cartons"))));
       }
       // Guard rail: only surface a line when the quantity actually overshoots — no noise otherwise.
       const w = c>0 ? qtyWarning(sku, oh, c) : null;
@@ -2216,7 +2238,7 @@ function renderCart(){
   const listWrap = el("div", {style:"display:flex;flex-direction:column;gap:6px;"});
   lines.forEach(([art, ctn], idx) => {
     const sku = state.skusByArt[art]; if(!sku) return;
-    const line = el("div", {class:"cartline"});
+    const line = el("div", {class:"cartline"+(isOuter(sku)?" is-outer":"")});
     const np = nameParts(sku);
 
     // top row: seq + name (+ arabic) + code, and remove
@@ -2230,7 +2252,7 @@ function renderCart(){
 
     // bottom row: editable carton quantity + live value
     const step = el("div", {class:"cartstep"});
-    step.appendChild(el("span", {class:"lbl"}, [t("cartons")]));
+    step.appendChild(isOuter(sku) ? el("span", {class:"lbl outer-tag", title:t("outerHint")}, [t("outerTag")]) : el("span", {class:"lbl"}, [t("cartons")]));
     const minus = el("button", {}, ["–"]);
     const input = el("input", {type:"tel", inputmode:"numeric", value:String(ctn)});
     const plus = el("button", {}, ["+"]);
@@ -2241,7 +2263,7 @@ function renderCart(){
       cv.innerHTML = "";
       if(!state.hidePrices){
         cv.appendChild(el("b", {}, [fmtMoney(c*(Number(sku.csPrice)||0))+" "+curr()]));
-        cv.appendChild(el("span", {class:"u"}, [fmtMoney(sku.csPrice)+" / "+t("cartons")]));
+        cv.appendChild(el("span", {class:"u"}, [fmtMoney(sku.csPrice)+" / "+(isOuter(sku)?t("outerTag"):t("cartons"))]));
       }
       cv.appendChild(el("span", {class:"u"}, [fmtInt(c*sku.pcPerCs)+" "+t("pieces")]));
     }
@@ -2510,7 +2532,7 @@ async function buildPdf({store, lines, orderId, dateStr, showValues, showTotal, 
   }
   if(pages.length === 0) pages.push([]);
 
-  const totals = lines.reduce((a,l) => ({cartons:a.cartons+l.cartons, pieces:a.pieces+l.pieces, value:a.value+l.value}), {cartons:0,pieces:0,value:0});
+  const totals = lines.reduce((a,l) => { const o = isOuter(l.sku); return {cartons:a.cartons+(o?0:l.cartons), outers:a.outers+(o?l.cartons:0), pieces:a.pieces+l.pieces, value:a.value+l.value}; }, {cartons:0,outers:0,pieces:0,value:0});
   const isAr = state.lang === "ar";
 
   // html2canvas reads the LAYOUT direction from the live document root at capture time
@@ -2596,12 +2618,13 @@ function buildPdfPageDom(o){
         return c; } },
     // Order sits right beside the code: the store operator reads the code and keys the
     // quantity next to it in one glance, without tracking across the on-hand columns.
-    { head:"Order (CTN)", cls:"qtycol", get:(l) => {
+    { head: o.rows.some(r => r.type!=="cat" && isOuter(r.l.sku)) ? "Order (CTN / OUTER)" : "Order (CTN)", cls:"qtycol", get:(l) => {
         // Plain inline-block + text (no flex): html2canvas drops text inside inline-flex boxes.
-        const c = el("span", {class:"qbox"});
+        const out = isOuter(l.sku);
+        const c = el("span", {class:"qbox"+(out?" outer":"")});
         c.appendChild(el("b", {}, [fmtInt(l.cartons)]));
         c.appendChild(document.createTextNode(" "));
-        c.appendChild(el("span", {class:"u"}, ["CTN"]));
+        c.appendChild(el("span", {class:"u"}, [out ? "OUTER" : "CTN"]));
         return c; } },
     { head:"PC / Carton", cls:"packcol", get:(l) => fmtInt(l.sku.pcPerCs) }
   ];
@@ -2634,7 +2657,7 @@ function buildPdfPageDom(o){
     } else {
       n++;
       const l = r.l;
-      const tr = el("tr");
+      const tr = el("tr", {class: isOuter(l.sku) ? "outer-row" : ""});
       cols.forEach(c => { const td = el("td", {class:c.cls}); const v = c.get(l, n); td.appendChild(typeof v === "string" ? document.createTextNode(v) : v); tr.appendChild(td); });
       tbody.appendChild(tr);
     }
@@ -2651,6 +2674,7 @@ function buildPdfPageDom(o){
     if(o.showTotal){
       const tb = el("div", {class:"pdf-totals"});
       tb.appendChild(el("div", {class:"r"}, [E("totalCartons"), el("b",{},[fmtInt(o.totals.cartons)])]));
+      if(o.totals.outers) tb.appendChild(el("div", {class:"r outer"}, [E("totalOuters"), el("b",{},[fmtInt(o.totals.outers)])]));
       tb.appendChild(el("div", {class:"r"}, [E("totalPieces"), el("b",{},[fmtInt(o.totals.pieces)])]));
       if(o.showValues){
         const g = el("div", {class:"g"});
