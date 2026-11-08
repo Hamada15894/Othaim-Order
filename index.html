@@ -554,6 +554,25 @@ html[data-lang="ar"] .switch input:checked ~ .thumb{transform:translateX(-18px);
 .pdf-foot{position:absolute;bottom:34px;left:48px;right:48px;font-size:8.5px;color:#A6ACB8;display:flex;justify-content:space-between;border-top:1px solid #EDEFF2;padding-top:9px;font-weight:600;}
 
 
+
+/* ---- Old Othaim code — indigo, labelled, never confused with the new code ---- */
+.itemcard .codes{display:flex;flex-direction:column;align-items:flex-end;gap:3px;flex-shrink:0;}
+html[dir="rtl"] .itemcard .codes{align-items:flex-start;}
+.oldcode{display:inline-flex;align-items:center;gap:4px;font-family:var(--font-mono);font-size:10px;font-weight:800;color:#3730A3;background:#EEF0FF;border:1px solid #D5D9FB;border-radius:5px;padding:2px 6px 2px 3px;letter-spacing:.3px;white-space:nowrap;}
+.oldcode i{font-style:normal;font-family:var(--font-ar,inherit);font-size:8.5px;font-weight:800;color:#fff;background:#4F46E5;border-radius:3px;padding:1px 5px;letter-spacing:0;line-height:1.4;}
+html[lang="en"] .oldcode i,html[data-lang="en"] .oldcode i{font-family:var(--font-mono);font-size:7.5px;letter-spacing:.4px;}
+.oldcode.sm{font-size:9.5px;padding:1px 5px 1px 2px;}
+.rowmeta b.oldcode{font-weight:800;}
+.ccodes{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px;align-items:center;}
+.ccodes .code{font-family:var(--font-mono);font-size:10px;font-weight:800;color:#4A5160;background:var(--bg);border-radius:5px;padding:2px 6px;letter-spacing:.3px;}
+/* PDF */
+.pdf-table td.codecol{text-align:left;padding-inline-start:10px;}
+.pdf-table .ctag{display:inline-block;width:24px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:6.5px;font-weight:800;letter-spacing:.4px;border-radius:3px;padding:2px 0;margin-inline-end:6px;vertical-align:2px;}
+.pdf-table .ctag-new{background:#13161B;color:#fff;}
+.pdf-table .ctag-old{background:#4F46E5;color:#fff;}
+.pdf-table .old{font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:10.5px;color:#3730A3;margin-top:3px;white-space:nowrap;letter-spacing:.4px;}
+.pdf-table.tight .old{font-size:9.5px;}
+.pdf-table .zr{padding-inline-start:30px;}
 /* ---- OUTER items: amber unit so it can't be keyed in as cartons ---- */
 .outer-tag{display:inline-flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:800;letter-spacing:.8px;color:#fff;background:linear-gradient(135deg,#F08C00,#D9480F);border-radius:7px;padding:5px 9px;box-shadow:0 4px 10px -6px rgba(217,72,15,.8);white-space:nowrap;font-family:'IBM Plex Mono',monospace;}
 .outer-tag.sm{font-size:9px;padding:2px 7px;margin-top:3px;border-radius:5px;}
@@ -838,7 +857,7 @@ const I18N = {
     regionEmptyHint:"ابحث واختر صنف (أو أكتر) عشان تشوف توفّره في كل المنطقة، وتفصيله لكل مندوب ومتجر.",
     regionTotal:"إجمالي المنطقة", carryingStores:"متاجر بها الصنف", gapStores:"متاجر ناقصة",
     previewStores:"👁 معاينة المتاجر بالبيانات الجديدة الآن",
-    previewLabel:"معاينة المدير", outerTag:"OUTER", outerHint:"يُطلب بالأوتر", totalOuters:"إجمالي الأوتر",
+    previewLabel:"معاينة المدير", oldTag:"قديم", oldCodeT:"رقم الصنف في نظام العثيم القديم", outerTag:"OUTER", outerHint:"يُطلب بالأوتر", totalOuters:"إجمالي الأوتر",
     activeItems:"الأصناف النشطة", inactiveItems:"غير النشطة", inactBadge:"غير نشط",
     activate:"تفعيل", deactivate:"إيقاف",
     inactTitle:"الأصناف غير النشطة",
@@ -946,7 +965,7 @@ const I18N = {
     regionEmptyHint:"Search and pick one or more items to see region-wide availability, broken down per rep and store.",
     regionTotal:"Region total", carryingStores:"Stores carrying", gapStores:"Gap stores",
     previewStores:"👁 Preview stores with the new data now",
-    previewLabel:"Manager preview", outerTag:"OUTER", outerHint:"Ordered by outer", totalOuters:"Total Outers",
+    previewLabel:"Manager preview", oldTag:"OLD", oldCodeT:"Item number in Othaim\u2019s old system", outerTag:"OUTER", outerHint:"Ordered by outer", totalOuters:"Total Outers",
     activeItems:"Active items", inactiveItems:"Inactive", inactBadge:"Inactive",
     activate:"Activate", deactivate:"Deactivate",
     inactTitle:"Inactive items",
@@ -1292,6 +1311,11 @@ function cleanName(s){
 // Arabic name prepared for display/printing: normalized + digit-spaced.
 function arName(s){ return spaceArDigits(cleanName(s)); }
 function codeStr(sku){ return sku.artecalCode || String(sku.artecal).padStart(6,"0"); }
+/* Othaim's OLD-system item number for the unit we order in (carton or outer), from the
+   "كود الكرتون والاوتر" sheet. A rebuilt dataset that carries the sheet wins (sku.oldCode);
+   otherwise this baked copy keeps every item covered. */
+const OLD_CODES = {"49977":"1669770","1977":"531630","3616":"898171","5853":"1286330","3211":"801691","4293":"1079230","10283":"1480360","1677":"425470","5856":"1286360","16042":"1584220","5854":"1286340","1942":"526500","11588":"1513540","7774":"1402340","49983":"1670530","839":"122180","8609":"1434570","16930":"1593400","54030":"1689080","1376":"289170","54036":"1689090","3212":"801701","52522":"1678830","12456":"1530780","49984":"1670540","16709":"1591121","3403":"841330","6881":"1351740","13083":"1543430","5310":"1231231","49986":"1670561","5855":"1286350","20663":"1633800","14821":"1571290","49985":"1670551","52520":"1678840","4680":"1166000","36842":"1644450","12498":"1532020","16009":"1583871","50608":"1661880","14335":"1564530","1389":"292701","14985":"1573070","5857":"1286370","14986":"1573080","49936":"1660280","2418":"629711","5851":"1286280","1777":"484940","4165":"989630","16710":"1591131","11484":"1511440","1778":"484950","1315":"254360","5600":"1263920","17082":"1594960","14343":"1564640","3404":"841340","49935":"1660270","51399":"1673190","1120":"202840","9611":"1462250","49978":"1669780","17227":"1596480","21521":"989642","9361":"1456120","49939":"1660411","1650":"413910","13710":"1555310","478":"61110","37558":"1652340","11590":"1513570","8817":"1441791","20952":"1636800","2008":"543990","13706":"1555270","20033":"1626340","6358":"1316620","1644":"410210","16008":"1583861","16006":"1583841","36693":"1642830","1944":"526560","605":"81380","1104":"191950","1056":"163880","4587":"1154770","3617":"898201","8374":"1426570","15644":"1580050","16583":"1589850","8608":"1434560","15645":"1580060","11589":"1513560","49988":"1670581","1237":"145250","17294":"1597180","52518":"1678850","7204":"1377200","1505":"344551","407":"52760","1102":"189990","4893":"1190010","16007":"1583851","21107":"1638420","19557":"1621400","840":"122200","6005":"1296770","49987":"1670571","5562":"1259620","8419":"1428000","13708":"1555290","52528":"1678820","338":"39660","15754":"1669780","281":"1678830","37809":"1654870","5576":"1260500","37559":"1652350","1016":"1732030","13927":"1558770","49940":"1660421","13707":"1555280","20032":"1626330","1387":"292330","13926":"1558760","54029":"1689070","16043":"1584230","11453":"1543430","54020":"1689130","37266":"1649280","14807":"1571120","52527":"1678810","13084":"1543440","9612":"1462260","1595":"377630","37808":"1654860","37807":"1654850","37477":"1651510","36927":"1645330","54027":"1689050","5575":"1260480","5573":"1260370","6006":"1296800","17228":"1596490","37476":"1651500","37106":"1647580","73777":"1732040","6354":"1316360","52508":"1678030","6353":"1316340","37105":"1647570","54028":"1689060","10216":"1478751","15643":"1580040","52506":"1678020","11451":"1510550","73773":"1732020","71733":"1724801","73069":"1729350","1180":"220961","15642":"1580030","2730":"1591610","73774":"1732030","17081":"1594950","19556":"1544890","37629":"1653050","14198":"1562720","72007":"1724991","21108":"1638430","14984":"1478751","7993":"1413320","72009":"1725011","50606":"1661860","9613":"1462270","36974":"1645830","884":"132240","37104":"1647560","51589":"1675190","63803":"1709140","37806":"1654840","72581":"1726701","36473":"1506610","73042":"1729160","8373":"1426560","50605":"1661850","72008":"1725001","14334":"1564510","63804":"1709150","63808":"1709170","14199":"1562730","49989":"1670590","63813":"1709190","51670":"1676100","5821":"1283080","14200":"1562740","20031":"1544910","50607":"1661870","63806":"1709160","13709":"1555300","37475":"1651490","5820":"1283070","16880":"1592880","16877":"1592850","8418":"1427990","6721":"1341270","11452":"1510550","16879":"1592870","13148":"1544910","51588":"1675180","4475":"1126005","73772":"1732010","16878":"1592860","14220":"1563020","19658":"1622470","11592":"1513590","17229":"1596500","16758":"1591610","19659":"1622480","73102":"1729670","15577":"1579380","4477":"1126020","8372":"1426550","12454":"1530740","6722":"1341280","19657":"1622460","15640":"1580011","9614":"1462280","1059":"165290","15579":"1579400","13819":"1557200","6723":"1341290","14228":"1563130","12546":"1532820","15641":"1580021","4503":"1596480","12453":"1530731","6352":"1316330","73111":"1729690","4476":"1126010","63832":"1709210","14230":"1563150","11485":"1286360","73109":"1729680","6720":"1341260","4474":"1125990","1471":"1532820","37471":"1651455","15578":"1579390","12452":"1530721","15755":"1669780","975":"145250","1060":"165300","6512":"1327040","12455":"1530750","36843":"1644460","14231":"1563160","10832":"1495940","6626":"1335425","5114":"1689130","36694":"1642840","15242":"1575770","14233":"1563180","14232":"1563170","871":"131180","37474":"1651480","14229":"1563140","37472":"1651460","64852":"1714620","13930":"1558840","17293":"1597180","13929":"1558830","8470":"1732030","37473":"1651470","13820":"1557200","15818":"1581850","20765":"1634840","37537":"1652115","11591":"1513590","15241":"1575760","13928":"1558780","1058":"165270","15522":"1578790","15521":"1578780","6350":"1316190","11517":"1512000","49938":"1660400","58402":"163705","10833":"1495950","10831":"1642840","14336":"1594960","13146":"1544890","55524":"1651490","10835":"1495990","17080":"1732040","36420":"1283120","14500":"1566750","16581":"1589830","13147":"1544900","20953":"1636815","16759":"1591620","14499":"1566740","16582":"1589840","14201":"1562750","3371":"837950","1943":"1636800","15240":"1575750","10830":"1626340","11519":"1594960","15819":"1581860","11518":"1562750","58231":"1303730","51965":"1260450","16312":"1587070","5858":"289170"};
+function oldCodeOf(sku){ return !sku ? "" : String(sku.oldCode || OLD_CODES[String(sku.artecal)] || ""); }
 function nameOf(sku){
   const ar = arName(sku.nameAr), en = cleanName(sku.nameEn);
   const fallback = "#"+sku.artecal;
@@ -1974,7 +1998,7 @@ function renderItems(){
   function matches(sku, q){
     if(!q) return true;
     q = q.toLowerCase();
-    return String(sku.artecal).includes(q) || codeStr(sku).includes(q) || String(sku.zrep).includes(q) ||
+    return String(sku.artecal).includes(q) || codeStr(sku).includes(q) || String(sku.zrep).includes(q) || oldCodeOf(sku).includes(q) ||
       (sku.nameAr||"").toLowerCase().includes(q) || (sku.nameEn||"").toLowerCase().includes(q);
   }
   function passesGap(sk){ return state.showInactive || !state.gapOnly || isGapItem(sk, onHand[sk.artecal], state.gapThreshold); }
@@ -2044,6 +2068,7 @@ function renderItems(){
     // code · on hand · on hand in cartons · stock value.
     const meta = el("div", {class:"rowmeta"+(ohQty<=0?" oos":"")});
     meta.appendChild(el("b", {class:"code"}, [codeStr(sku)]));
+    if(oldCodeOf(sku)) meta.appendChild(el("b", {class:"oldcode sm"}, [el("i",{},[t("oldTag")]), oldCodeOf(sku)]));
     meta.appendChild(el("span", {class:"sep"}, ["·"]));
     meta.appendChild(el("span", {}, [t("onHand")+" ", el("b",{},[fmtInt(ohQty)])]));
     if(cs){
@@ -2104,7 +2129,10 @@ function renderItems(){
     titles.appendChild(el("div", {class:"name"}, [np.primary]));
     if(np.secondary) titles.appendChild(el("div", {class:"nameAr", dir:"rtl"}, [np.secondary]));
     head.appendChild(titles);
-    head.appendChild(el("span", {class:"code"}, [codeStr(sku)]));
+    const codes = el("div", {class:"codes"});
+    codes.appendChild(el("span", {class:"code"}, [codeStr(sku)]));
+    if(oldCodeOf(sku)) codes.appendChild(el("span", {class:"oldcode", title:t("oldCodeT")}, [el("i",{},[t("oldTag")]), oldCodeOf(sku)]));
+    head.appendChild(codes);
     card.appendChild(head);
     const ictl = inactCtl(sku, card); if(ictl) card.appendChild(ictl);
 
@@ -2245,8 +2273,10 @@ function renderCart(){
     const ci = el("div", {class:"ci"});
     const nmLine = el("div", {class:"cn"}, [ el("span",{class:"cseq"},[String(idx+1)]), np.primary ]);
     ci.appendChild(nmLine);
-    if(np.secondary) ci.appendChild(el("div", {class:"cnAr", dir:"rtl"}, [np.secondary + "  ·  " + codeStr(sku)]));
-    else ci.appendChild(el("div", {class:"cnAr"}, [codeStr(sku)]));
+    if(np.secondary) ci.appendChild(el("div", {class:"cnAr", dir:"rtl"}, [np.secondary]));
+    const cc = el("div", {class:"ccodes"}, [ el("span",{class:"code"},[codeStr(sku)]) ]);
+    if(oldCodeOf(sku)) cc.appendChild(el("span", {class:"oldcode sm"}, [el("i",{},[t("oldTag")]), oldCodeOf(sku)]));
+    ci.appendChild(cc);
     const rm = el("button", {class:"rm", onclick: () => { delete state.cart[art]; render(); }}, ["×"]);
     line.appendChild(el("div", {class:"top"}, [ci, rm]));
 
@@ -2417,7 +2447,7 @@ function exportStockWorkbook(){
     const stores = OO.stores.slice().sort((a,b) => String(a.region||"").localeCompare(String(b.region||"")) || a.storeNo-b.storeNo);
 
     // ---- Detail (every store × in-stock SKU) ----
-    const detail = [["Store #","Store","Othaim Code","Zrep","Name (EN)","Name (AR)","Category","Brand","PC/Carton","On Hand (PC)","On Hand (CTN)","PC Price","Value (SAR)"]];
+    const detail = [["Store #","Store","Othaim Code","Old Othaim Code","Zrep","Name (EN)","Name (AR)","Category","Brand","PC/Carton","On Hand (PC)","On Hand (CTN)","PC Price","Value (SAR)"]];
     const brandAgg = {};    // brand -> {pieces, value, skus}
     const catTotals = {};   // category -> value (grand, all stores)
     const storeRows = [];   // per-store summary
@@ -2435,7 +2465,7 @@ function exportStockWorkbook(){
         const cat = sku.category || "Uncategorized";
         const cs = ohCartons(q, sku.pcPerCs);
         detail.push([ st.storeNo, st.nameAr,
-          codeStr(sku), sku.zrep||"", cleanName(sku.nameEn), arName(sku.nameAr), cat, sku.brand||"",
+          codeStr(sku), oldCodeOf(sku), sku.zrep||"", cleanName(sku.nameEn), arName(sku.nameAr), cat, sku.brand||"",
           Number(sku.pcPerCs)||0, q, cs?round2(cs.exact):0, round2(price), round2(val) ]);
         sValue += val; sPieces += q; sSkus++;
         perCat[cat] = (perCat[cat]||0) + val;
@@ -2611,9 +2641,13 @@ function buildPdfPageDom(o){
         const c = el("div"); c.appendChild(document.createTextNode(primary));
         if(en && ar) c.appendChild(el("div",{class:"ar", dir:"rtl"},[ar]));
         return c; } },
-    { head:"Code", cls:"codecol", get:(l) => {
+    { head:"Othaim Code", cls:"codecol", get:(l) => {
+        // Three codes, three looks — so nobody keys the wrong one:
+        // NEW (Dynamics) = the big black number · OLD system = indigo tag · Mars ZREP = small grey.
         const c = el("div");
-        c.appendChild(el("div",{class:"oth"},[codeStr(l.sku)]));
+        c.appendChild(el("div",{class:"oth"},[ el("span",{class:"ctag ctag-new"},["NEW"]), codeStr(l.sku) ]));
+        const old = oldCodeOf(l.sku);
+        if(old) c.appendChild(el("div",{class:"old"},[ el("span",{class:"ctag ctag-old"},["OLD"]), old ]));
         if(l.sku.zrep) c.appendChild(el("div",{class:"zr"},[ el("b",{},["ZR "]), String(l.sku.zrep) ]));
         return c; } },
     // Order sits right beside the code: the store operator reads the code and keys the
@@ -2763,7 +2797,7 @@ function renderRegionSearch(){
     const q = inp.value.trim().toLowerCase();
     if(!q) return;
     const hits = OO.skus.filter(sk => !sel.includes(sk.artecal) && (
-      String(sk.artecal).includes(q) || codeStr(sk).includes(q) || String(sk.zrep).includes(q) ||
+      String(sk.artecal).includes(q) || codeStr(sk).includes(q) || String(sk.zrep).includes(q) || oldCodeOf(sk).includes(q) ||
       (sk.nameAr||"").toLowerCase().includes(q) || (sk.nameEn||"").toLowerCase().includes(q))).slice(0,12);
     if(!hits.length){ results.appendChild(el("div",{class:"rs-none"},[t("catNoLines")])); return; }
     hits.forEach(sk => results.appendChild(el("div", {class:"rs-hit", onclick:()=>{ sel.push(sk.artecal); inp.value=""; drawResults(); drawChips(); drawOut(); }}, [
@@ -2903,7 +2937,7 @@ function renderInactiveAdmin(){
     const q = inp.value.trim().toLowerCase();
     let items;
     if(q){
-      items = OO.skus.filter(sk => String(sk.artecal).includes(q) || codeStr(sk).includes(q) || String(sk.zrep).includes(q) ||
+      items = OO.skus.filter(sk => String(sk.artecal).includes(q) || codeStr(sk).includes(q) || String(sk.zrep).includes(q) || oldCodeOf(sk).includes(q) ||
         (sk.nameAr||"").toLowerCase().includes(q) || (sk.nameEn||"").toLowerCase().includes(q)).slice(0,40);
       items.sort((a,b) => (isInactive(b)?1:0) - (isInactive(a)?1:0));
     } else {
@@ -3150,6 +3184,24 @@ function parseWorkbook(wb){
           pcPerCs, pcPrice, csPrice
         };
       }).filter(x => x.artecal);
+    }
+  }
+
+  // ---- Old Othaim codes (sheet "كود الكرتون والاوتر") ----
+  {
+    const nm = (wb.SheetNames||[]).find(n => /كود.*(الكرتون|الاوتر)|old.*code/i.test(n));
+    const aoa = nm ? sheetAoA(wb, nm) : null;
+    if(aoa && aoa.length > 1 && out.skus){
+      const H = aoa[0].map(x => String(x||"").replace(/\s+/g," ").trim());
+      const ci = colIdx(H, [/with\s*number/i, /^item/i, /صنف/]);
+      const oi = colIdx(H, [/sku/i, /كود الكرتون|الاوتر/]);
+      const map = {};
+      if(ci >= 0 && oi >= 0) for(let r=1; r<aoa.length; r++){
+        const a = leadCode(aoa[r][ci]); const v = String(aoa[r][oi]||"").trim().replace(/\.0+$/,"");
+        if(a !== null && /^\d+$/.test(v)) map[a] = v;
+      }
+      out.skus.forEach(s => { if(map[s.artecal]) s.oldCode = map[s.artecal]; });
+      out._oldCodes = Object.keys(map).length;
     }
   }
 
