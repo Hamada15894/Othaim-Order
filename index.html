@@ -610,6 +610,28 @@ html[lang="en"] .itemcard .codes .cp i{font-size:8px;min-width:46px;}
 .cp-mars i{background:#DFE5F3 !important;color:#3A5288 !important;}
 .cp-mars b{background:transparent !important;color:#2D4373 !important;}
 .cp-x{color:#B5BCC4;}
+
+/* ---- Full detail labels (wrap instead of overflowing on small phones) ---- */
+.itemcard .ic-order{flex-wrap:nowrap;}
+.itemcard .ic-order .sugchip{flex-shrink:1 !important;min-width:0;white-space:normal !important;line-height:1.25;text-align:center;}
+.itemcard .ic-order .sugchip.none{display:block;flex:0 1 auto;padding:5px 8px;}
+@media (max-width:380px){ .itemcard.is-outer .ic-order .sugchip.none{font-size:9.5px;padding:4px 5px;} .itemcard.is-outer .ic-order{gap:4px;} .itemcard.is-outer .step input{width:36px;} .itemcard.is-outer .step button{width:26px;} }
+.itemcard .ic-order .sugchip.marspart{color:#8A5A00;background:#FFF7E6;border-color:#F3DFB4;}
+.itemcard .ic-order .ov{flex:0 0 auto;margin-inline-start:auto;line-height:1.2;white-space:nowrap;}
+.itemcard .ic-order .ov .ov-p,.itemcard .ic-order .ov .ov-u{display:block;white-space:nowrap;}
+.itemcard .ic-order .ov .ov-u{font-size:.85em;opacity:.8;}
+
+/* ---- Cart: stock strip per line ---- */
+.cartline .cl-grid{display:grid;grid-template-columns:repeat(4,1fr);background:var(--bg);border:1px solid var(--line-soft);border-radius:8px;overflow:hidden;}
+.cartline .cl-c{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:5px 2px;border-inline-start:1px solid var(--line);text-align:center;min-width:0;}
+.cartline .cl-c:first-child{border-inline-start:none;}
+.cartline .cl-c .k{font-size:9.5px;color:var(--muted);font-weight:700;line-height:1.1;white-space:nowrap;}
+.cartline .cl-c .v{font-family:var(--font-mono);font-size:14px;font-weight:800;color:var(--ink);line-height:1.1;margin-top:2px;white-space:nowrap;}
+.cartline .cl-c .v small{font-size:9px;color:var(--muted);font-weight:700;font-family:inherit;}
+.cartline .cl-c.oh{background:#EFF6FF;} .cartline .cl-c.oh .v{color:#0B5FA5;}
+.cartline .cl-c.oh.low{background:#FEF2F2;} .cartline .cl-c.oh.low .v{color:var(--danger);}
+.cartline .cl-c.mars{background:rgba(180,116,10,.08);} .cartline .cl-c.mars .v{color:#7A4E06;}
+.cartline .cl-c.mars.low .v{color:var(--danger);}
 /* ---- Clearer numbers ---- */
 body{font-variant-numeric:tabular-nums;}
 .itemcard .ic-grid .cell{padding:8px 3px 7px;}
@@ -1857,9 +1879,16 @@ function categoryStock(storeNo, category){
 }
 // Opportunity test: Mars HAS stock of this SKU, but the store is out of it (or nearly — On Hand at
 // or below the chosen threshold; a missing item counts as 0). These are the "go sell it in" items.
-function isGapItem(sku, ohRec, threshold){
+// Mars must have at least ONE full orderable unit (a carton, or an outer for OUTER items) —
+// a few loose pieces in Mars can't be ordered, so they are not an opportunity.
+function marsCanSupply(sku){
   const marsQ = OO.marsStock[sku.artecal] ? Number(OO.marsStock[sku.artecal].qty)||0 : 0;
   if(marsQ <= 0) return false;
+  const per = unitPcs(sku);
+  return per > 0 ? marsQ >= per : true;
+}
+function isGapItem(sku, ohRec, threshold){
+  if(!marsCanSupply(sku)) return false;
   const ohQty = ohRec ? Number(ohRec.onHand)||0 : 0;
   return ohQty <= (Number(threshold)||0);
 }
@@ -2595,11 +2624,11 @@ function renderItems(){
     const order = el("div", {class:"ic-order"});
     if(sug.cartons > 0){
       order.appendChild(el("span", {class:"sugchip info"+(sug.reason==="oos"?" oos":""), title:t("suggested")}, [
-        t("sugShort"), el("b",{},[String(sug.cartons)]) ]));
+        t("suggested"), el("b",{},[String(sug.cartons)]) ]));
     } else {
-      // short label; the full reason shows on long-press / hover
+      // full reason; the full reason shows on long-press / hover
       const why = sug.capReason==="nomars" ? t("marsNone") : sug.capReason==="marspartial" ? t("marsPartial") : (ohQty<=0 ? t("outOfStock") : t("noNeed"));
-      order.appendChild(el("span", {class:"sugchip none"+(sug.capReason==="nomars"?" nomars":""), title: why}, [ sug.capReason==="nomars" ? t("noMarsShort") : t("noSugShort") ]));
+      order.appendChild(el("span", {class:"sugchip none"+(sug.capReason==="nomars"?" nomars":"")+(sug.capReason==="marspartial"?" marspart":""), title: why}, [ why ]));
     }
     const step = el("div", {class:"step"});
     const minus = el("button", {}, ["–"]);
@@ -2622,7 +2651,8 @@ function renderItems(){
       } else if(c>0){
         ov.appendChild(el("b",{},[fmtMoney(c*unitPrice(sku))+" "+curr()]));
       } else {
-        ov.appendChild(document.createTextNode(fmtMoney(unitPrice(sku))+" "+curr()));
+        ov.appendChild(el("span",{class:"ov-p"},[fmtMoney(unitPrice(sku))+" "+curr()]));
+        ov.appendChild(el("span",{class:"ov-u"},["/ "+(isOuter(sku)?t("outerTag"):t("cartons"))]));
       }
       // Guard rail: only surface a line when the quantity actually overshoots — no noise otherwise.
       const w = c>0 ? qtyWarning(sku, oh, c) : null;
@@ -2705,6 +2735,7 @@ function renderCart(){
   let repaintTotals = () => {};   // wired up after the totals box is built
 
   const listWrap = el("div", {style:"display:flex;flex-direction:column;gap:6px;"});
+  const storeOH = (store && OO.onHand[String(store.storeNo)]) || {};
   lines.forEach(([art, ctn], idx) => {
     const sku = state.skusByArt[art]; if(!sku) return;
     const line = el("div", {class:"cartline"+(isOuter(sku)?" is-outer":"")});
@@ -2719,6 +2750,24 @@ function renderCart(){
     ci.appendChild(cc);
     const rm = el("button", {class:"rm", onclick: () => { delete state.cart[art]; render(); }}, ["×"]);
     line.appendChild(el("div", {class:"top"}, [ci, rm]));
+
+    // stock strip: store On Hand (pieces + cartons) · pack size · Mars stock — so the order can be
+    // checked against the shelf and Mars without going back to the item list
+    {
+      const ohRec = storeOH[art];
+      const ohQ = ohRec ? Number(ohRec.onHand)||0 : 0;
+      const per = Number(sku.pcPerCs)||0;
+      const cs = ohCartons(ohQ, per);
+      const marsQ = OO.marsStock[art] ? Number(OO.marsStock[art].qty)||0 : 0;
+      const g = el("div", {class:"cl-grid"});
+      const cell = (cls, k, v, sub) => el("div", {class:"cl-c"+(cls?" "+cls:"")}, [
+        el("span",{class:"k"},[k]), el("span",{class:"v"},[v, sub ? el("small",{},[" "+sub]) : ""]) ]);
+      g.appendChild(cell("oh"+(ohQ<=0?" low":""), t("gridOnHand"), fmtInt(ohQ), t("pieces")));
+      g.appendChild(cell("", t("inCtn"), cs ? cs.text : "—", state.lang==="ar"?"ك":"ctn"));
+      g.appendChild(cell("", t("packShort"), fmtInt(per)));
+      g.appendChild(cell("mars"+(marsCanSupply(sku)?"":" low"), t("marsShort"), fmtInt(marsQ)));
+      line.appendChild(g);
+    }
 
     // bottom row: editable carton quantity + live value
     const step = el("div", {class:"cartstep"});
@@ -3262,13 +3311,14 @@ function renderRegionSearch(){
   // Availability of one item across the whole region + per rep + per store.
   function itemStats(a){
     const mars = OO.marsStock[a] ? Number(OO.marsStock[a].qty)||0 : 0;
+    const canSup = state.skusByArt && state.skusByArt[a] ? marsCanSupply(state.skusByArt[a]) : mars>0;
     let total=0, carrying=0, gaps=0, storeCount=0;
     const byRep = repList.map(r => {
       let rt=0, rc=0, rg=0; const stores=[];
       r.stores.forEach(s => {
         const rec = (OO.onHand[String(s.storeNo)] || {})[a];
         const q = rec ? Number(rec.onHand)||0 : 0;
-        const gap = mars>0 && q <= state.gapThreshold;
+        const gap = canSup && q <= state.gapThreshold;
         stores.push({no:s.storeNo, name:s.nameAr, oh:q, gap});
         rt+=q; if(q>0)rc++; if(gap)rg++;
         storeCount++; total+=q; if(q>0)carrying++; if(gap)gaps++;
