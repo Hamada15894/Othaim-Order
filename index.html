@@ -15,7 +15,7 @@
 <link rel="apple-touch-icon" id="appleIcon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -34,7 +34,7 @@
   --bg:#F4F5F7; --paper:#FFFFFF; --amber:#B4740A; --danger:#C0281F;
   --radius:12px; --radius-sm:8px;
   --shadow:0 1px 2px rgba(20,22,28,.05),0 6px 20px -8px rgba(20,22,28,.12);
-  --font-ar:'Cairo',system-ui,sans-serif; --font-en:'Inter',system-ui,sans-serif; --font-mono:'IBM Plex Mono',monospace;
+  --font-ar:'Cairo',system-ui,sans-serif; --font-en:'Inter',system-ui,sans-serif; --font-mono:'Inter',system-ui,sans-serif;
 }
 *{box-sizing:border-box;}
 html,body{margin:0;padding:0;height:100%;background:var(--bg);color:var(--ink);overflow:hidden;overscroll-behavior:none;}
@@ -94,7 +94,7 @@ input,select{font-family:inherit;}
 .statusstrip .refresh svg{width:15px;height:15px;}
 
 /* ---------- generic content padding ---------- */
-.content{flex:1;min-height:0;padding:14px;display:flex;flex-direction:column;gap:12px;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;}
+.content{flex:1;min-height:0;padding:14px;display:flex;flex-direction:column;gap:12px;overflow-y:auto;overflow-x:hidden;overflow-anchor:none;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;}
 /* In the scrolling flex column, children keep their natural height (a child with its
    own overflow:hidden would otherwise be squeezed to 0 — that collapsed the stock hero). */
 .content > *{flex-shrink:0;}
@@ -556,9 +556,82 @@ html[data-lang="ar"] .switch input:checked ~ .thumb{transform:translateX(-18px);
 
 
 
+
+
+/* ---- Othaim code ⇄ Mars ZREP pair ---- */
+.cpair{display:inline-flex;align-items:center;gap:5px;flex-wrap:wrap;}
+.cp b{direction:ltr;unicode-bidi:isolate;}
+.cpair.stack{flex-direction:column;align-items:stretch;gap:4px;}
+.cp{display:inline-flex;align-items:stretch;border-radius:7px;overflow:hidden;border:1px solid;line-height:1;white-space:nowrap;}
+.cp i{font-style:normal;font-family:var(--font-ar);font-size:9.5px;font-weight:800;display:flex;align-items:center;padding:0 6px;color:#fff;letter-spacing:0;}
+html[lang="en"] .cp i{font-family:var(--font-en);font-size:8.5px;letter-spacing:.5px;}
+.cp b{font-family:var(--font-en);font-variant-numeric:tabular-nums;font-size:13px;font-weight:800;letter-spacing:.6px;padding:4px 7px;background:#fff;}
+.cp-oth{border-color:#067F3E;} .cp-oth i{background:#067F3E;} .cp-oth b{color:#0B3D22;}
+.cp-mars{border-color:#1E3A8A;} .cp-mars i{background:#1E3A8A;} .cp-mars b{color:#1E3A8A;}
+.cp-x{font-size:13px;font-weight:800;color:#9AA3A0;}
+.cpair.stack .cp{justify-content:space-between;}
+.cpair.stack .cp i{min-width:40px;justify-content:center;}
+.cpair.stack .cp b{flex:1;text-align:center;font-size:13.5px;}
+.rowmeta .cp b{font-size:12px;padding:3px 6px;}
+.rowmeta .cp i{font-size:9px;padding:0 5px;}
+.cpair.wide{display:flex;width:100%;flex-wrap:nowrap;gap:6px;}
+.cpair.wide .cp{flex:1;}
+.cpair.wide .cp b{flex:1;text-align:center;font-size:14.5px;padding:6px 6px;}
+.cpair.wide .cp i{padding:0 8px;font-size:10px;}
+.ic-codes{margin:2px 0 0;display:flex;}
+.ic-codes .cpair.wide{flex:1;}
+.lcodes{margin-top:5px;}
+.lcodes .cpair.stack{align-items:flex-start;}
+.lcodes .cpair.stack .cp{min-width:150px;}
+.lcodes .cp b{font-size:12.5px;padding:3px 7px;}
+.lcodes .cp i{font-size:9px;padding:0 6px;}
+.rowmeta.oos .cp b,.lcodes .cp-oth b{color:#0B3D22;}
+.lcodes .cp-mars b{color:#1E3A8A;}
+/* ---- Clearer numbers ---- */
+body{font-variant-numeric:tabular-nums;}
+.itemcard .ic-grid .cell{padding:8px 3px 7px;}
+.itemcard .ic-grid .cell .k{font-size:10.5px;}
+.itemcard .ic-grid .cell .v{font-size:17px;font-weight:800;letter-spacing:-.2px;margin-top:4px;}
+.itemcard .ic-grid .cell .v small{font-size:10px;}
+.itemcard .code{font-size:11.5px;font-weight:700;letter-spacing:.6px;color:#2B3240;padding:3px 7px;}
+.itemcard .ov{white-space:normal;line-height:1.3;}
+.itemcard .ov b{font-size:14px;}
+.itemcard .step input,.listrow .ministep input,.cartstep input{font-size:18px;font-weight:800;letter-spacing:-.2px;}
+.rowmeta{font-size:11.5px;}
+.rowmeta b{font-weight:800;color:var(--ink);}
+.rowmeta b.code{font-size:11.5px;letter-spacing:.5px;}
+.ccodes .code{font-size:11.5px;letter-spacing:.5px;}
+.seq,.lseq{font-variant-numeric:tabular-nums;}
+
+/* ---- Code system choice (file options) ---- */
+.codeseg{padding:4px 0 12px;border-bottom:1px solid var(--line-soft);margin-bottom:4px;}
+.cs-l{font-size:13.5px;font-weight:700;color:var(--ink);margin-bottom:8px;}
+.cs-box{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:4px;background:var(--bg);border:1px solid var(--line);border-radius:12px;}
+.cs-b{display:flex;flex-direction:column;align-items:center;gap:2px;border:none;background:transparent;border-radius:9px;padding:9px 6px;cursor:pointer;font-family:inherit;color:var(--muted);}
+.cs-b b{font-size:13.5px;font-weight:800;}
+.cs-b span{font-size:11px;font-weight:600;letter-spacing:.3px;}
+.cs-b.sel{background:#13161B;color:#fff;box-shadow:0 6px 14px -8px rgba(19,22,27,.7);}
+.cs-b.cs-old.sel{background:#4338CA;box-shadow:0 6px 14px -8px rgba(67,56,202,.7);}
+.cs-b.sel span{color:rgba(255,255,255,.75);}
+/* ---- Saved orders ---- */
+.savedorders{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:0 14px;}
+.savedorders summary{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 0;cursor:pointer;font-weight:800;font-size:14px;color:var(--ink);list-style:none;}
+.savedorders summary::-webkit-details-marker{display:none;}
+.savedorders summary b{font-size:12px;background:#067F3E;color:#fff;border-radius:20px;padding:2px 10px;}
+.savedorders[open] summary{border-bottom:1px solid var(--line-soft);margin-bottom:10px;}
+.savedorders .histlist{padding-bottom:12px;}
+.histnote{font-size:11.5px;color:var(--muted);line-height:1.6;margin-bottom:8px;}
+.orderlogitem .oh-v{font-size:12px;color:var(--muted);font-weight:700;}
+.histacts{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px;}
+.ha{display:inline-flex;align-items:center;justify-content:center;gap:4px;border-radius:9px;padding:8px 6px;font-size:12px;font-weight:800;cursor:pointer;font-family:inherit;border:1.5px solid;}
+.ha svg{width:14px;height:14px;}
+.ha-new{background:#fff;color:#13161B;border-color:#13161B;}
+.ha-old{background:#fff;color:#4338CA;border-color:#4338CA;}
 /* ---- Smart search ---- */
-.sr-sticky{position:sticky;top:-14px;z-index:6;margin-top:-14px;padding-top:14px;padding-bottom:2px;display:flex;flex-direction:column;gap:7px;}
-.sr-sticky::before{content:"";position:absolute;top:0;bottom:-6px;inset-inline:-24px;background:var(--bg);z-index:-1;box-shadow:0 8px 12px -10px rgba(16,24,20,.18);}
+.sr-sticky{display:flex;flex-direction:column;gap:7px;}
+/* suggestion is a hint, not a button */
+.sugchip.info,.sug.info{cursor:default;pointer-events:none;}
+
 .sr-box .sr-input{height:50px;font-size:16px;border-radius:14px;border:1.6px solid #D5DBD8;background:#fff;padding-inline-end:46px;box-shadow:0 1px 2px rgba(16,24,20,.04);transition:border-color .15s,box-shadow .15s;}
 .sr-box .sr-input:focus{border-color:#067F3E;box-shadow:0 0 0 4px rgba(6,127,62,.12);outline:none;}
 .sr-box .sr-input::placeholder{font-size:13px;color:#98A19D;}
@@ -607,7 +680,8 @@ html[lang="en"] .oldcode i,html[data-lang="en"] .oldcode i{font-family:var(--fon
 .pdf-table .ctag-old{background:#4F46E5;color:#fff;}
 .pdf-table .old{font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:10.5px;color:#3730A3;margin-top:3px;white-space:nowrap;letter-spacing:.4px;}
 .pdf-table.tight .old{font-size:9.5px;}
-.pdf-table .zr{padding-inline-start:30px;}
+.pdf-table .zr{padding-inline-start:0;}
+.pdf-table .ctag.nb{margin-inline-start:6px;margin-inline-end:0;}
 /* ---- OUTER items: amber unit so it can't be keyed in as cartons ---- */
 .outer-tag{display:inline-flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:800;letter-spacing:.8px;color:#fff;background:linear-gradient(135deg,#F08C00,#D9480F);border-radius:7px;padding:5px 9px;box-shadow:0 4px 10px -6px rgba(217,72,15,.8);white-space:nowrap;font-family:'IBM Plex Mono',monospace;}
 .outer-tag.sm{font-size:9px;padding:2px 7px;margin-top:3px;border-radius:5px;}
@@ -892,7 +966,10 @@ const I18N = {
     regionEmptyHint:"ابحث واختر صنف (أو أكتر) عشان تشوف توفّره في كل المنطقة، وتفصيله لكل مندوب ومتجر.",
     regionTotal:"إجمالي المنطقة", carryingStores:"متاجر بها الصنف", gapStores:"متاجر ناقصة",
     previewStores:"👁 معاينة المتاجر بالبيانات الجديدة الآن",
-    previewLabel:"معاينة المدير",
+    previewLabel:"معاينة المدير", cpOth:"العثيم", cpMars:"مارس",
+    codeInFile:"كود العثيم في الملف", codeNew:"الكود الجديد", codeOld:"الكود القديم", codeEg:"مثال",
+    savedOrders:"الطلبات المحفوظة (آخر 30 يوم)", histNote:"كل طلب محفوظ 30 يومًا ويُحذف تلقائيًا بعدها. تقدر تنزّل ملفه بالكود الجديد أو القديم.",
+    histLeft:"يُحذف بعد {n} يوم", pdfNew:"PDF · الكود الجديد", pdfOld:"PDF · الكود القديم",
     srPh:"ابحث: اسم عربي أو إنجليزي، كود، أو حجم (مثال: مارس 150)", srClear:"مسح البحث", srResults:"نتيجة", srResult1:"نتيجة واحدة",
     srFuzzy:"لا يوجد تطابق تام — هذه أقرب النتائج", srNone:"لا توجد نتائج لـ",
     srTip:"جرّب جزءًا من الاسم (سنيك)، أو الكود الجديد أو القديم (605 أو 81380)، أو الحجم (150 أو 150ج).",
@@ -1004,7 +1081,10 @@ const I18N = {
     regionEmptyHint:"Search and pick one or more items to see region-wide availability, broken down per rep and store.",
     regionTotal:"Region total", carryingStores:"Stores carrying", gapStores:"Gap stores",
     previewStores:"👁 Preview stores with the new data now",
-    previewLabel:"Manager preview",
+    previewLabel:"Manager preview", cpOth:"OTHAIM", cpMars:"MARS",
+    codeInFile:"Othaim code in the file", codeNew:"New code", codeOld:"Old code", codeEg:"e.g.",
+    savedOrders:"Saved orders (last 30 days)", histNote:"Each order is kept for 30 days, then deleted automatically. Download its file with the new or the old code.",
+    histLeft:"deleted in {n} days", pdfNew:"PDF · New code", pdfOld:"PDF · Old code",
     srPh:"Search: Arabic or English name, code, or size (e.g. mars 150)", srClear:"Clear search", srResults:"results", srResult1:"1 result",
     srFuzzy:"No exact match — closest results", srNone:"No results for",
     srTip:"Try part of the name (snick), the new or old code (605 or 81380), or a size (150 or 150g).",
@@ -1268,6 +1348,7 @@ const state = {
   viewport: localStorage.getItem("oo_viewport") || "",        // "" auto | "phone" | "wide"
   hidePrices: localStorage.getItem("oo_hidePrices") === "1",  // quick on-screen money blackout
   adminPin: null,
+  codeMode: (() => { try{ return localStorage.getItem("oo_codemode") === "old" ? "old" : "new"; }catch(e){ return "new"; } })(),
   showInactive: false,   // items screen: false = active items, true = the inactive list
   lastPdf: null
 };
@@ -1319,7 +1400,12 @@ function restoreSession(){
       const st = (state.stores||[]).find(x => String(x.storeNo) === String(s.storeNo));
       if(st) state.selectedStore = st; else state.screen = "stores";
     }
-    if(s.cart && typeof s.cart === "object") state.cart = s.cart;
+    // One-time clean-up for this version: carts saved by older versions may hold quantities that
+    // were auto-filled from the suggestion, so they are dropped once. After that the open order is
+    // restored normally (only what the rep typed).
+    let cartOk = true;
+    try{ cartOk = localStorage.getItem("oo_cart_v2") === "1"; localStorage.setItem("oo_cart_v2", "1"); }catch(e){}
+    if(cartOk && s.cart && typeof s.cart === "object") state.cart = s.cart;
     return true;
   }catch(e){ return false; }
 }
@@ -1358,6 +1444,17 @@ function codeStr(sku){ return sku.artecalCode || String(sku.artecal).padStart(6,
    "كود الكرتون والاوتر" sheet. A rebuilt dataset that carries the sheet wins (sku.oldCode);
    otherwise this baked copy keeps every item covered. */
 const OLD_CODES = {"49977":"1669770","1977":"531630","3616":"898171","5853":"1286330","3211":"801691","4293":"1079230","10283":"1480360","1677":"425470","5856":"1286360","16042":"1584220","5854":"1286340","1942":"526500","11588":"1513540","7774":"1402340","49983":"1670530","839":"122180","8609":"1434570","16930":"1593400","54030":"1689080","1376":"289170","54036":"1689090","3212":"801701","52522":"1678830","12456":"1530780","49984":"1670540","16709":"1591121","3403":"841330","6881":"1351740","13083":"1543430","5310":"1231231","49986":"1670561","5855":"1286350","20663":"1633800","14821":"1571290","49985":"1670551","52520":"1678840","4680":"1166000","36842":"1644450","12498":"1532020","16009":"1583871","50608":"1661880","14335":"1564530","1389":"292701","14985":"1573070","5857":"1286370","14986":"1573080","49936":"1660280","2418":"629711","5851":"1286280","1777":"484940","4165":"989630","16710":"1591131","11484":"1511440","1778":"484950","1315":"254360","5600":"1263920","17082":"1594960","14343":"1564640","3404":"841340","49935":"1660270","51399":"1673190","1120":"202840","9611":"1462250","49978":"1669780","17227":"1596480","21521":"989642","9361":"1456120","49939":"1660411","1650":"413910","13710":"1555310","478":"61110","37558":"1652340","11590":"1513570","8817":"1441791","20952":"1636800","2008":"543990","13706":"1555270","20033":"1626340","6358":"1316620","1644":"410210","16008":"1583861","16006":"1583841","36693":"1642830","1944":"526560","605":"81380","1104":"191950","1056":"163880","4587":"1154770","3617":"898201","8374":"1426570","15644":"1580050","16583":"1589850","8608":"1434560","15645":"1580060","11589":"1513560","49988":"1670581","1237":"145250","17294":"1597180","52518":"1678850","7204":"1377200","1505":"344551","407":"52760","1102":"189990","4893":"1190010","16007":"1583851","21107":"1638420","19557":"1621400","840":"122200","6005":"1296770","49987":"1670571","5562":"1259620","8419":"1428000","13708":"1555290","52528":"1678820","338":"39660","15754":"1669780","281":"1678830","37809":"1654870","5576":"1260500","37559":"1652350","1016":"1732030","13927":"1558770","49940":"1660421","13707":"1555280","20032":"1626330","1387":"292330","13926":"1558760","54029":"1689070","16043":"1584230","11453":"1543430","54020":"1689130","37266":"1649280","14807":"1571120","52527":"1678810","13084":"1543440","9612":"1462260","1595":"377630","37808":"1654860","37807":"1654850","37477":"1651510","36927":"1645330","54027":"1689050","5575":"1260480","5573":"1260370","6006":"1296800","17228":"1596490","37476":"1651500","37106":"1647580","73777":"1732040","6354":"1316360","52508":"1678030","6353":"1316340","37105":"1647570","54028":"1689060","10216":"1478751","15643":"1580040","52506":"1678020","11451":"1510550","73773":"1732020","71733":"1724801","73069":"1729350","1180":"220961","15642":"1580030","2730":"1591610","73774":"1732030","17081":"1594950","19556":"1544890","37629":"1653050","14198":"1562720","72007":"1724991","21108":"1638430","14984":"1478751","7993":"1413320","72009":"1725011","50606":"1661860","9613":"1462270","36974":"1645830","884":"132240","37104":"1647560","51589":"1675190","63803":"1709140","37806":"1654840","72581":"1726701","36473":"1506610","73042":"1729160","8373":"1426560","50605":"1661850","72008":"1725001","14334":"1564510","63804":"1709150","63808":"1709170","14199":"1562730","49989":"1670590","63813":"1709190","51670":"1676100","5821":"1283080","14200":"1562740","20031":"1544910","50607":"1661870","63806":"1709160","13709":"1555300","37475":"1651490","5820":"1283070","16880":"1592880","16877":"1592850","8418":"1427990","6721":"1341270","11452":"1510550","16879":"1592870","13148":"1544910","51588":"1675180","4475":"1126005","73772":"1732010","16878":"1592860","14220":"1563020","19658":"1622470","11592":"1513590","17229":"1596500","16758":"1591610","19659":"1622480","73102":"1729670","15577":"1579380","4477":"1126020","8372":"1426550","12454":"1530740","6722":"1341280","19657":"1622460","15640":"1580011","9614":"1462280","1059":"165290","15579":"1579400","13819":"1557200","6723":"1341290","14228":"1563130","12546":"1532820","15641":"1580021","4503":"1596480","12453":"1530731","6352":"1316330","73111":"1729690","4476":"1126010","63832":"1709210","14230":"1563150","11485":"1286360","73109":"1729680","6720":"1341260","4474":"1125990","1471":"1532820","37471":"1651455","15578":"1579390","12452":"1530721","15755":"1669780","975":"145250","1060":"165300","6512":"1327040","12455":"1530750","36843":"1644460","14231":"1563160","10832":"1495940","6626":"1335425","5114":"1689130","36694":"1642840","15242":"1575770","14233":"1563180","14232":"1563170","871":"131180","37474":"1651480","14229":"1563140","37472":"1651460","64852":"1714620","13930":"1558840","17293":"1597180","13929":"1558830","8470":"1732030","37473":"1651470","13820":"1557200","15818":"1581850","20765":"1634840","37537":"1652115","11591":"1513590","15241":"1575760","13928":"1558780","1058":"165270","15522":"1578790","15521":"1578780","6350":"1316190","11517":"1512000","49938":"1660400","58402":"163705","10833":"1495950","10831":"1642840","14336":"1594960","13146":"1544890","55524":"1651490","10835":"1495990","17080":"1732040","36420":"1283120","14500":"1566750","16581":"1589830","13147":"1544900","20953":"1636815","16759":"1591620","14499":"1566740","16582":"1589840","14201":"1562750","3371":"837950","1943":"1636800","15240":"1575750","10830":"1626340","11519":"1594960","15819":"1581860","11518":"1562750","58231":"1303730","51965":"1260450","16312":"1587070","5858":"289170"};
+/* Othaim item code ⇄ Mars ZREP, shown as one labelled pair so it's obvious which Mars code
+   each Othaim code stands for. "stack" = two rows (item card), otherwise one line. */
+function codePair(sku, mode){
+  const box = el("span", {class:"cpair"+(mode === "stack" ? " stack" : "")});
+  box.appendChild(el("span", {class:"cp cp-oth"}, [ el("i",{},[t("cpOth")]), el("b",{class:"cpv"},[codeStr(sku)]) ]));
+  if(sku.zrep){
+    if(mode !== "stack") box.appendChild(el("span", {class:"cp-x"}, ["⇄"]));
+    box.appendChild(el("span", {class:"cp cp-mars"}, [ el("i",{},[t("cpMars")]), el("b",{class:"cpv"},[String(sku.zrep)]) ]));
+  }
+  return box;
+}
 function oldCodeOf(sku){ return !sku ? "" : String(sku.oldCode || OLD_CODES[String(sku.artecal)] || ""); }
 function nameOf(sku){
   const ar = arName(sku.nameAr), en = cleanName(sku.nameEn);
@@ -1596,7 +1693,7 @@ function srHighlight(root, p){
   if(!root || !p || p.empty) return;
   const needles = p.hl.filter(w => w.length >= 2 || /^\d$/.test(w)).sort((a,b) => b.length - a.length);
   if(!needles.length) return;
-  root.querySelectorAll(".name,.nameAr,.ln,.lnAr,.code,.oldcode,.cnAr,.ia-en,.ia-ar,.ia-code").forEach(node => {
+  root.querySelectorAll(".name,.nameAr,.ln,.lnAr,.code,.cpv,.oldcode,.cnAr,.ia-en,.ia-ar,.ia-code").forEach(node => {
     const walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT);
     const texts = []; let n; while((n = walker.nextNode())) if(n.parentNode.nodeName !== "I" && n.parentNode.nodeName !== "MARK") texts.push(n);
     texts.forEach(tn => {
@@ -1929,6 +2026,14 @@ function renderStores(){
   content.appendChild(searchWrap);
 
   const list = el("div", {class:"storelist"});
+  // Saved orders (last 30 days) — rebuild any order's file with the new or the old code.
+  const nSaved = purgeOldOrders().filter(o => o.lines && (!state.user || state.user === "__preview__" || !o.salesman || o.salesman === state.salesman)).length;
+  if(nSaved){
+    const det = el("details", {class:"savedorders"});
+    det.appendChild(el("summary", {}, [ el("span",{},[t("savedOrders")]), el("b",{},[String(nSaved)]) ]));
+    det.appendChild(renderOrderHistory());
+    content.appendChild(det);
+  }
   content.appendChild(list);
 
   function draw(){
@@ -2202,7 +2307,6 @@ function renderItems(){
   content.appendChild(vs);
 
   const bulk = el("div", {class:"bulkrow"});
-  bulk.appendChild(el("button", {class:"btn btn-outline", onclick:() => applyAllSuggested()}, [t("applyAll")]));
   bulk.appendChild(el("button", {class:"btn btn-outline", onclick:() => {
     if(cartLineCount() === 0) return;
     if(confirm(t("clearAll")+"?")){ state.cart = {}; drawList(); updateFloatbar(); }
@@ -2257,7 +2361,10 @@ function renderItems(){
   let drawToken = 0;   // cancels a half-finished chunked draw when a newer draw starts
   function drawList(){
     const myToken = ++drawToken;
+    // keep the old height until the new results are in, so the page doesn't jump while typing
+    list.style.minHeight = list.offsetHeight + "px";
     list.innerHTML = "";
+    requestAnimationFrame(() => requestAnimationFrame(() => { if(myToken === drawToken) list.style.minHeight = ""; }));
     const P = srParse(search.value), fz = srFz(P);
     const hits = []; let otherCat = 0, otherAct = 0;
     OO.skus.forEach(sk => {
@@ -2365,10 +2472,8 @@ function renderItems(){
     if(np.secondary) li.appendChild(el("div", {class:"lnAr", dir:"rtl"}, [np.secondary]));
     // One dense metrics line per row, reading like the sheet the rep already uses:
     // code · on hand · on hand in cartons · stock value.
+    li.appendChild(el("div", {class:"lcodes"}, [codePair(sku, "stack")]));
     const meta = el("div", {class:"rowmeta"+(ohQty<=0?" oos":"")});
-    meta.appendChild(el("b", {class:"code"}, [codeStr(sku)]));
-    if(oldCodeOf(sku)) meta.appendChild(el("b", {class:"oldcode sm"}, [el("i",{},[t("oldTag")]), oldCodeOf(sku)]));
-    meta.appendChild(el("span", {class:"sep"}, ["·"]));
     meta.appendChild(el("span", {}, [t("onHand")+" ", el("b",{},[fmtInt(ohQty)])]));
     if(cs){
       meta.appendChild(el("span", {class:"sep"}, ["·"]));
@@ -2391,8 +2496,7 @@ function renderItems(){
     inner.appendChild(minus); inner.appendChild(input); inner.appendChild(plus);
     wrap.appendChild(inner);
     if(isOuter(sku)) wrap.appendChild(el("span", {class:"outer-tag sm", title:t("outerHint")}, [t("outerTag")]));
-    const sugBtn = el("button", {class:"sug"}, [sug.cartons > 0 ? (t("suggested")+" "+sug.cartons) : ""]);
-    if(sug.cartons > 0){ sugBtn.onclick = () => setQty(sug.cartons); wrap.appendChild(sugBtn); }
+    if(sug.cartons > 0) wrap.appendChild(el("span", {class:"sug info"}, [t("suggested")+" "+sug.cartons]));
     step.appendChild(wrap);
     row.appendChild(step);
 
@@ -2428,11 +2532,9 @@ function renderItems(){
     titles.appendChild(el("div", {class:"name"}, [np.primary]));
     if(np.secondary) titles.appendChild(el("div", {class:"nameAr", dir:"rtl"}, [np.secondary]));
     head.appendChild(titles);
-    const codes = el("div", {class:"codes"});
-    codes.appendChild(el("span", {class:"code"}, [codeStr(sku)]));
-    if(oldCodeOf(sku)) codes.appendChild(el("span", {class:"oldcode", title:t("oldCodeT")}, [el("i",{},[t("oldTag")]), oldCodeOf(sku)]));
-    head.appendChild(codes);
     card.appendChild(head);
+    // Othaim code ⇄ Mars ZREP on its own full-width row, right under the name
+    card.appendChild(el("div", {class:"ic-codes"}, [codePair(sku, "wide")]));
     const ictl = inactCtl(sku, card); if(ictl) card.appendChild(ictl);
 
     // clear 4-cell grid: On Hand (pcs) · In Cartons · Pack · Mars
@@ -2451,10 +2553,11 @@ function renderItems(){
     grid.appendChild(cell("mars", t("marsShort"), fmtInt(marsQ)));
     card.appendChild(grid);
 
-    // order row: suggested chip (tap to fill) + stepper + live value
+    // order row: suggested quantity (information only — the field stays empty until the rep
+    // types a number or uses + / −) + stepper + live value
     const order = el("div", {class:"ic-order"});
     if(sug.cartons > 0){
-      order.appendChild(el("button", {class:"sugchip"+(sug.reason==="oos"?" oos":""), onclick:() => setQty(sug.cartons)}, [
+      order.appendChild(el("span", {class:"sugchip info"+(sug.reason==="oos"?" oos":"")}, [
         t("suggested"), el("b",{},[String(sug.cartons)]) ]));
     } else {
       order.appendChild(el("span", {class:"sugchip none"}, [
@@ -2574,8 +2677,7 @@ function renderCart(){
     const nmLine = el("div", {class:"cn"}, [ el("span",{class:"cseq"},[String(idx+1)]), np.primary ]);
     ci.appendChild(nmLine);
     if(np.secondary) ci.appendChild(el("div", {class:"cnAr", dir:"rtl"}, [np.secondary]));
-    const cc = el("div", {class:"ccodes"}, [ el("span",{class:"code"},[codeStr(sku)]) ]);
-    if(oldCodeOf(sku)) cc.appendChild(el("span", {class:"oldcode sm"}, [el("i",{},[t("oldTag")]), oldCodeOf(sku)]));
+    const cc = el("div", {class:"ccodes"}, [ codePair(sku) ]);
     ci.appendChild(cc);
     const rm = el("button", {class:"rm", onclick: () => { delete state.cart[art]; render(); }}, ["×"]);
     line.appendChild(el("div", {class:"top"}, [ci, rm]));
@@ -2625,6 +2727,22 @@ function renderCart(){
     return row;
   }
   togglesCard.appendChild(el("div", {class:"section-title", style:"margin:0 0 4px;"}, [t("docOptions")]));
+  {
+    const seg = el("div", {class:"codeseg"});
+    const draw = () => {
+      seg.innerHTML = "";
+      seg.appendChild(el("div", {class:"cs-l"}, [t("codeInFile")]));
+      const box = el("div", {class:"cs-box"});
+      [["new","codeNew","000605"],["old","codeOld","81380"]].forEach(([v,k,ex]) => {
+        box.appendChild(el("button", {class:"cs-b cs-"+v+(state.codeMode===v?" sel":""), type:"button", onclick:() => {
+          state.codeMode = v; try{ localStorage.setItem("oo_codemode", v); }catch(e){} draw(); }}, [
+          el("b",{},[t(k)]), el("span",{},[t("codeEg")+" "+ex]) ]));
+      });
+      seg.appendChild(box);
+    };
+    draw();
+    togglesCard.appendChild(seg);
+  }
   togglesCard.appendChild(toggleRow("showOnHandCols", () => state.prefShowOnHandCols, v => { state.prefShowOnHandCols=v; }));
   togglesCard.appendChild(toggleRow("showPrice", () => state.prefShowPrice, v => { state.prefShowPrice=v; }));
   togglesCard.appendChild(toggleRow("showValues", () => state.prefShowValues, v => { state.prefShowValues=v; render(); }));
@@ -2663,16 +2781,56 @@ function renderCart(){
   return s;
 }
 
-function saveOrderToHistory(store, orderId, totals, lines){
+/* Saved orders: every created file is kept on this device for 30 days as a snapshot of the
+   order (items, codes, quantities, on-hand, prices and the file options), so BOTH versions —
+   new code and old code — can be rebuilt at any time. Older entries are removed automatically. */
+const HIST_KEY = "oo_order_history", HIST_DAYS = 30;
+function loadHist(){ try{ return JSON.parse(localStorage.getItem(HIST_KEY) || "[]") || []; }catch(e){ return []; } }
+function purgeOldOrders(){
+  const cut = Date.now() - HIST_DAYS*864e5;
+  const hist = loadHist(), keep = hist.filter(o => new Date(o.date).getTime() >= cut);
+  if(keep.length !== hist.length) saveHist(keep);
+  return keep;
+}
+function skuSnap(s){
+  return { artecal:s.artecal, artecalCode:codeStr(s), oldCode:oldCodeOf(s), zrep:s.zrep, nameEn:s.nameEn, nameAr:s.nameAr,
+           category:s.category, brand:s.brand, pcPerCs:s.pcPerCs, csPrice:s.csPrice };
+}
+function saveOrderToHistory(store, orderId, totals, lines, opts){
+  const entry = {
+    orderId, storeNo: store.storeNo, storeName: store.nameAr, date: new Date().toISOString(),
+    cartons: totals.cartons, pieces: totals.pieces, value: totals.value, lineCount: lines.length,
+    salesman: state.salesman || "", opts: opts || {},
+    lines: lines.map(l => ({ sku: skuSnap(l.sku), cartons: l.cartons, pieces: l.pieces, value: l.value, onHandPc: l.onHandPc }))
+  };
+  let hist = [entry].concat(purgeOldOrders().filter(o => o.orderId !== orderId)).slice(0, 200);
+  // if the device storage is full, drop the oldest saved orders until it fits
+  while(hist.length){
+    try{ localStorage.setItem(HIST_KEY, JSON.stringify(hist)); return; }
+    catch(e){ if(hist.length === 1) return; hist = hist.slice(0, Math.max(1, Math.floor(hist.length*0.8))); }
+  }
+}
+// Rebuild a saved order's file in either code system, then share or download it.
+async function rebuildSavedPdf(o, codeMode){
+  if(!o || !o.lines || !o.lines.length) return;
+  showLoading(true);
   try{
-    const hist = JSON.parse(localStorage.getItem("oo_order_history") || "[]");
-    hist.unshift({
-      orderId, storeNo: store.storeNo, storeName: store.nameAr, date: new Date().toISOString(),
-      cartons: totals.cartons, pieces: totals.pieces, value: totals.value,
-      lineCount: lines.length
-    });
-    localStorage.setItem("oo_order_history", JSON.stringify(hist.slice(0, 200)));
-  }catch(e){ /* storage full — non-fatal */ }
+    const store = { storeNo:o.storeNo, nameAr:o.storeName };
+    const lines = o.lines.map(l => Object.assign({}, l)).sort((a,b) =>
+      (a.sku.category||"").localeCompare(b.sku.category||"") || nameOf(a.sku).localeCompare(nameOf(b.sku)));
+    const op = o.opts || {};
+    const {blob, filename} = await buildPdf({ store, lines, orderId:o.orderId, codeMode, salesman:o.salesman,
+      dateStr: op.dateStr || new Date(o.date).toLocaleString("en-GB"),
+      showValues:!!op.showValues, showTotal:!!op.showTotal, showPrice:!!op.showPrice, showOnHand: op.showOnHand !== false });
+    if(canShareFiles()){
+      showLoading(false);
+      try{ await navigator.share({ files:[new File([blob], filename, {type:"application/pdf"})], title:t("poTitle"), text:t("poTitle")+" — "+o.storeName+" #"+o.storeNo }); return; }
+      catch(e){ if(e && e.name === "AbortError") return; }
+      showLoading(true);
+    }
+    downloadBlob(blob, filename);
+  }catch(e){ console.error(e); toast(t("genericErr"), "error"); }
+  finally{ showLoading(false); }
 }
 
 /* ---------------- PDF GENERATION ---------------- */
@@ -2701,11 +2859,12 @@ async function generateThen(action){
     const orderId = "OO-"+new Date().toISOString().replace(/[-:T.]/g,"").slice(0,14);
     const _now = new Date();
     const dateStr = _now.toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"}) + " · " + _now.toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"});
-    const {blob, filename} = await buildPdf({ store, lines, orderId, dateStr,
-      showValues: state.prefShowValues, showTotal: state.prefShowTotal,
-      showPrice: state.prefShowPrice, showOnHand: state.prefShowOnHandCols });
+    const opts = { showValues: state.prefShowValues, showTotal: state.prefShowTotal,
+      showPrice: state.prefShowPrice, showOnHand: state.prefShowOnHandCols };
+    const {blob, filename} = await buildPdf(Object.assign({ store, lines, orderId, dateStr, codeMode: state.codeMode }, opts));
     state.lastPdf = {blob, filename};
-    saveOrderToHistory(store, orderId, cartTotals(), lines);
+    // both versions (new & old code) stay rebuildable from "Saved orders" for 30 days
+    saveOrderToHistory(store, orderId, cartTotals(), lines, Object.assign({ dateStr }, opts));
 
     if(action === "share" && canShareFiles()){
       const file = new File([blob], filename, {type:"application/pdf"});
@@ -2840,7 +2999,7 @@ function groupByCategory(lines){
   return map;
 }
 
-async function buildPdf({store, lines, orderId, dateStr, showValues, showTotal, showPrice, showOnHand}){
+async function buildPdf({store, lines, orderId, dateStr, showValues, showTotal, showPrice, showOnHand, codeMode, salesman}){
   const { jsPDF } = window.jspdf;
   const pdf = new jsPDF({ unit:"mm", format:"a4" });
   const grouped = groupByCategory(lines);
@@ -2875,7 +3034,7 @@ async function buildPdf({store, lines, orderId, dateStr, showValues, showTotal, 
   try{
     for(let p=0; p<pages.length; p++){
       const pageEl = buildPdfPageDom({
-        store, orderId, dateStr, showValues, showTotal, showPrice, showOnHand, isAr,
+        store, orderId, dateStr, showValues, showTotal, showPrice, showOnHand, isAr, codeMode, salesman,
         rows: pages[p], pageNum: p+1, totalPages: pages.length, isFirst: p===0,
         isLast: p===pages.length-1, totals
       });
@@ -2891,7 +3050,7 @@ async function buildPdf({store, lines, orderId, dateStr, showValues, showTotal, 
   } finally {
     if(prevDir) rootEl.setAttribute("dir", prevDir); else rootEl.removeAttribute("dir");
   }
-  const filename = "Othaim-"+store.storeNo+"-"+orderId+".pdf";
+  const filename = "Othaim-"+store.storeNo+"-"+orderId+(codeMode === "old" ? "-OLD" : "")+".pdf";
   const blob = pdf.output("blob");
   return {blob, filename};
 }
@@ -2920,7 +3079,7 @@ function buildPdfPageDom(o){
     const mk = (k,v,cls) => { const c = el("div",{class:"cell"+(cls?" "+cls:"")}); c.appendChild(el("div",{class:"k"},[E(k)])); c.appendChild(el("div",{class:"v"},[String(v)])); return c; };
     meta.appendChild(mk("store", o.store.nameAr, "store"));
     meta.appendChild(mk("storeNo", o.store.storeNo));
-    meta.appendChild(mk("salesman", state.salesman||""));
+    meta.appendChild(mk("salesman", o.salesman || state.salesman || ""));
     meta.appendChild(mk("date", o.dateStr));
     meta.appendChild(mk("orderId", o.orderId, "idcell"));
     page.appendChild(meta);
@@ -2941,13 +3100,14 @@ function buildPdfPageDom(o){
         const c = el("div"); c.appendChild(document.createTextNode(primary));
         if(en && ar) c.appendChild(el("div",{class:"ar", dir:"rtl"},[ar]));
         return c; } },
-    { head:"Othaim Code", cls:"codecol", get:(l) => {
-        // Three codes, three looks — so nobody keys the wrong one:
-        // NEW (Dynamics) = the big black number · OLD system = indigo tag · Mars ZREP = small grey.
+    { head: o.codeMode === "old" ? "Othaim Code · Old" : "Othaim Code", cls:"codecol", get:(l) => {
+        // One Othaim code per file — the NEW (Dynamics) code, or the OLD-system code when the
+        // rep picked it. If an item has no old code, the new one is printed and tagged NEW.
         const c = el("div");
-        c.appendChild(el("div",{class:"oth"},[ el("span",{class:"ctag ctag-new"},["NEW"]), codeStr(l.sku) ]));
         const old = oldCodeOf(l.sku);
-        if(old) c.appendChild(el("div",{class:"old"},[ el("span",{class:"ctag ctag-old"},["OLD"]), old ]));
+        if(o.codeMode === "old" && old) c.appendChild(el("div",{class:"oth"},[ old ]));
+        else if(o.codeMode === "old") c.appendChild(el("div",{class:"oth"},[ codeStr(l.sku), el("span",{class:"ctag ctag-new nb"},["NEW"]) ]));
+        else c.appendChild(el("div",{class:"oth"},[ codeStr(l.sku) ]));
         if(l.sku.zrep) c.appendChild(el("div",{class:"zr"},[ el("b",{},["ZR "]), String(l.sku.zrep) ]));
         return c; } },
     // Order sits right beside the code: the store operator reads the code and keys the
@@ -3808,8 +3968,9 @@ function downloadIndexHtml(){
 function saveHist(hist){ try{ localStorage.setItem("oo_order_history", JSON.stringify(hist)); }catch(e){} }
 function renderOrderHistory(){
   const wrap = el("div", {class:"histlist"});
-  let hist = [];
-  try{ hist = JSON.parse(localStorage.getItem("oo_order_history")||"[]"); }catch(e){}
+  let hist = purgeOldOrders();
+  // a rep sees only their own orders; the manager sees everything saved on this device
+  if(state.user && state.user !== "__preview__") hist = hist.filter(o => !o.salesman || o.salesman === state.salesman);
   if(hist.length === 0){ wrap.appendChild(el("div",{class:"emptystate"},[t("noMyOrders")])); return wrap; }
   // Header: count + one button to clear the whole saved history on this device.
   const hdr = el("div", {class:"histhdr"});
@@ -3818,14 +3979,17 @@ function renderOrderHistory(){
     if(confirm(t("confirmClearHist"))){ localStorage.removeItem("oo_order_history"); render(); }
   }}, [ svgIcon("trash"), el("span",{},[t("clearHistory")]) ]));
   wrap.appendChild(hdr);
-  hist.slice(0,30).forEach(o => {
+  wrap.appendChild(el("div", {class:"histnote"}, [t("histNote")]));
+  hist.slice(0,60).forEach(o => {
     const box = el("div", {class:"orderlogitem"});
     const top = el("div", {class:"top"});
     top.appendChild(el("span",{},[o.storeName+" · #"+o.storeNo]));
-    top.appendChild(el("span",{},[fmtMoney(o.value)+" "+curr()]));
+    top.appendChild(el("span",{class:"oh-v"},[ fmtInt(o.lineCount||0)+" "+t("skuCount") + (state.hidePrices ? "" : "  ·  "+fmtMoney(o.value)+" "+curr()) ]));
     box.appendChild(top);
     const subrow = el("div", {class:"subrow"});
-    subrow.appendChild(el("div",{class:"sub"},[ o.orderId+" · "+new Date(o.date).toLocaleString() ]));
+    const d = new Date(o.date), left = Math.max(0, HIST_DAYS - Math.floor((Date.now() - d.getTime())/864e5));
+    subrow.appendChild(el("div",{class:"sub"},[ (o.salesman ? o.salesman+" · " : "") + d.toLocaleDateString("en-GB",{day:"2-digit",month:"short"})+" "+d.toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"})
+      + "  ·  " + t("histLeft").replace("{n}", left) ]));
     // Per-order delete.
     subrow.appendChild(el("button", {class:"delx", title:t("delete"), "aria-label":t("delete"), onclick:() => {
       let h2 = []; try{ h2 = JSON.parse(localStorage.getItem("oo_order_history")||"[]"); }catch(e){}
@@ -3833,6 +3997,12 @@ function renderOrderHistory(){
       render();
     }}, ["×"]));
     box.appendChild(subrow);
+    if(o.lines && o.lines.length){
+      const acts = el("div", {class:"histacts"});
+      acts.appendChild(el("button", {class:"ha ha-new", type:"button", onclick:() => rebuildSavedPdf(o, "new")}, [svgIcon("download"), " "+t("pdfNew")]));
+      acts.appendChild(el("button", {class:"ha ha-old", type:"button", onclick:() => rebuildSavedPdf(o, "old")}, [svgIcon("download"), " "+t("pdfOld")]));
+      box.appendChild(acts);
+    }
     wrap.appendChild(box);
   });
   return wrap;
@@ -3844,6 +4014,7 @@ let ORIGINAL_HTML = null;
   ORIGINAL_HTML = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
   OO = loadLiveData();   // newest of baked vs last build saved on this device
   loadInactive();
+  purgeOldOrders();      // saved order files older than 30 days are removed automatically
   reindexSkus();
   applyViewport();
   restoreSession();      // land back where we were (Refresh / reopen), not on the login screen
