@@ -587,6 +587,29 @@ html[lang="en"] .cp i{font-family:var(--font-en);font-size:8.5px;letter-spacing:
 .lcodes .cp i{font-size:9px;padding:0 6px;}
 .rowmeta.oos .cp b,.lcodes .cp-oth b{color:#0B3D22;}
 .lcodes .cp-mars b{color:#1E3A8A;}
+
+/* ---- Card corner codes: Othaim (new) over Mars ZREP, small labelled chips ---- */
+.itemcard .codes{flex-shrink:0;display:flex;}
+.itemcard .codes .cpair.stack{gap:4px;align-items:stretch;}
+.itemcard .codes .cp{border-radius:6px;}
+.itemcard .codes .cp i{min-width:38px;justify-content:center;font-size:9px;padding:0 5px;}
+html[lang="en"] .itemcard .codes .cp i{font-size:8px;min-width:46px;}
+.itemcard .codes .cp b{font-size:12.5px;padding:3px 7px;letter-spacing:.5px;}
+.itemcard .ov{white-space:nowrap;}
+.itemcard .ic-order .outer-tag{padding:5px 6px;font-size:9.5px;letter-spacing:.4px;border-radius:6px;}
+.itemcard .ic-order .sugchip{flex-shrink:0;}
+.itemcard .ic-order .sugchip.nomars{color:#B91C1C;background:#FEF2F2;border-color:#FAD2D2;}
+@media (max-width:370px){ .itemcard .step input{width:40px;} .itemcard .step button{width:28px;} .itemcard .ic-order{gap:5px;} }
+
+/* ---- Softer code colours (easier on the eye) ---- */
+.cp{border-color:transparent !important;}
+.cp-oth{background:#EEF6F1;box-shadow:inset 0 0 0 1px #D3E7DA;}
+.cp-oth i{background:#DCEFE3 !important;color:#2E6B48 !important;}
+.cp-oth b{background:transparent !important;color:#24533A !important;}
+.cp-mars{background:#EFF2F9;box-shadow:inset 0 0 0 1px #D8DFEE;}
+.cp-mars i{background:#DFE5F3 !important;color:#3A5288 !important;}
+.cp-mars b{background:transparent !important;color:#2D4373 !important;}
+.cp-x{color:#B5BCC4;}
 /* ---- Clearer numbers ---- */
 body{font-variant-numeric:tabular-nums;}
 .itemcard .ic-grid .cell{padding:8px 3px 7px;}
@@ -966,7 +989,7 @@ const I18N = {
     regionEmptyHint:"ابحث واختر صنف (أو أكتر) عشان تشوف توفّره في كل المنطقة، وتفصيله لكل مندوب ومتجر.",
     regionTotal:"إجمالي المنطقة", carryingStores:"متاجر بها الصنف", gapStores:"متاجر ناقصة",
     previewStores:"👁 معاينة المتاجر بالبيانات الجديدة الآن",
-    previewLabel:"معاينة المدير", cpOth:"العثيم", cpMars:"مارس",
+    previewLabel:"معاينة المدير", sugShort:"المقترح", noSugShort:"لا مقترح", noMarsShort:"مارس: لا يوجد", cpOth:"العثيم", cpMars:"مارس",
     codeInFile:"كود العثيم في الملف", codeNew:"الكود الجديد", codeOld:"الكود القديم", codeEg:"مثال",
     savedOrders:"الطلبات المحفوظة (آخر 30 يوم)", histNote:"كل طلب محفوظ 30 يومًا ويُحذف تلقائيًا بعدها. تقدر تنزّل ملفه بالكود الجديد أو القديم.",
     histLeft:"يُحذف بعد {n} يوم", pdfNew:"PDF · الكود الجديد", pdfOld:"PDF · الكود القديم",
@@ -1081,7 +1104,7 @@ const I18N = {
     regionEmptyHint:"Search and pick one or more items to see region-wide availability, broken down per rep and store.",
     regionTotal:"Region total", carryingStores:"Stores carrying", gapStores:"Gap stores",
     previewStores:"👁 Preview stores with the new data now",
-    previewLabel:"Manager preview", cpOth:"OTHAIM", cpMars:"MARS",
+    previewLabel:"Manager preview", sugShort:"Sugg.", noSugShort:"No sugg.", noMarsShort:"Mars: none", cpOth:"OTHAIM", cpMars:"MARS",
     codeInFile:"Othaim code in the file", codeNew:"New code", codeOld:"Old code", codeEg:"e.g.",
     savedOrders:"Saved orders (last 30 days)", histNote:"Each order is kept for 30 days, then deleted automatically. Download its file with the new or the old code.",
     histLeft:"deleted in {n} days", pdfNew:"PDF · New code", pdfOld:"PDF · Old code",
@@ -1183,6 +1206,20 @@ let OO = null; // the live embedded dataset for this session
    this only changes the unit label (and its colour) so whoever keys the order in notices. */
 const OUTER_ARTS = new Set(["12498", "9611", "8817", "5310", "15645", "15644", "16709", "16009", "3212", "8374", "3211", "3616", "14821", "3617", "3404", "3403", "1977", "14343", "8609", "8608", "49939", "16710", "16008", "16007", "16006", "4680", "49985", "49987", "49986", "49988", "49940", "10216", "14984", "72009", "71733", "72008", "72007", "49936", "49935"]);
 function isOuter(sku){ return !!sku && OUTER_ARTS.has(String(sku.artecal)); }
+/* Outer size in pieces for OUTER items (from the "كود الكرتون والاوتر" sheet, e.g. piece×0006).
+   An OUTER line is priced and counted per outer: price = piece price × outer size. */
+const OUTER_PACK = {"12498": 36, "9611": 14, "8817": 14, "5310": 14, "15645": 14, "15644": 14, "16709": 16, "16009": 16, "3212": 30, "8374": 6, "3211": 30, "3616": 30, "14821": 16, "3617": 6, "3404": 6, "3403": 6, "1977": 30, "14343": 16, "8609": 30, "8608": 6, "49939": 16, "16710": 6, "16008": 6, "16007": 6, "16006": 6, "4680": 6, "49985": 30, "49987": 6, "49986": 30, "49988": 6, "49940": 6, "10216": 6, "14984": 6, "72009": 12, "71733": 12, "72008": 12, "72007": 12, "49936": 288, "49935": 288};
+function outerPackOf(sku){ return !sku ? 0 : (Number(sku.outerPack || OUTER_PACK[String(sku.artecal)]) || 0); }
+// pieces in ONE ordered unit (a carton, or an outer for OUTER items)
+function unitPcs(sku){
+  if(isOuter(sku)){ const n = outerPackOf(sku); if(n > 0) return n; }
+  return Number(sku.pcPerCs) || 0;
+}
+// price of ONE ordered unit (carton price, or piece price × outer size for OUTER items)
+function unitPrice(sku){
+  if(isOuter(sku)){ const n = outerPackOf(sku), pc = Number(sku.pcPrice) || 0; if(n > 0 && pc > 0) return Math.round(pc * n * 100) / 100; }
+  return Number(sku.csPrice) || 0;
+}
 
 /* ================= INACTIVE ITEMS =================
    A manager-curated list of Othaim items that are no longer active. They are kept out of the
@@ -1738,7 +1775,7 @@ function ohCartons(onHandPc, pcPerCs){
 // when on-hand has fallen to (or below) the min, refill up to the max — rounded to
 // whole cartons, because that is the only way stock actually moves.
 function suggestFor(sku, oh){
-  const per = Number(sku.pcPerCs)||0;
+  const per = unitPcs(sku);   // the ordered unit: carton, or outer
   const onHand = oh ? Number(oh.onHand)||0 : 0;
   const min = oh ? Number(oh.min)||0 : 0;
   const max = oh ? Number(oh.max)||0 : 0;
@@ -1775,7 +1812,7 @@ function suggestFor(sku, oh){
 // max, or more pieces than the Mars warehouse can actually supply.
 function qtyWarning(sku, oh, cartons){
   if(!cartons) return null;
-  const per = Number(sku.pcPerCs)||0;
+  const per = unitPcs(sku);
   const pieces = cartons * per;
   const marsQ = OO.marsStock[sku.artecal] ? Number(OO.marsStock[sku.artecal].qty)||0 : 0;
   if(marsQ > 0 && pieces > marsQ) return { key:"warnAboveMars", level:"warn" };
@@ -2082,7 +2119,7 @@ function cartTotals(){
   let cartons=0, pieces=0, value=0;
   Object.entries(state.cart).forEach(([art, ctn]) => {
     const sku = state.skusByArt[art]; if(!sku) return;
-    cartons += ctn; pieces += ctn*(Number(sku.pcPerCs)||0); value += ctn*(Number(sku.csPrice)||0);
+    cartons += ctn; pieces += ctn*unitPcs(sku); value += ctn*unitPrice(sku);
   });
   return {cartons, pieces, value};
 }
@@ -2532,9 +2569,9 @@ function renderItems(){
     titles.appendChild(el("div", {class:"name"}, [np.primary]));
     if(np.secondary) titles.appendChild(el("div", {class:"nameAr", dir:"rtl"}, [np.secondary]));
     head.appendChild(titles);
+    // corner: new Othaim code on top, the matching Mars ZREP under it
+    head.appendChild(el("div", {class:"codes"}, [codePair(sku, "stack")]));
     card.appendChild(head);
-    // Othaim code ⇄ Mars ZREP on its own full-width row, right under the name
-    card.appendChild(el("div", {class:"ic-codes"}, [codePair(sku, "wide")]));
     const ictl = inactCtl(sku, card); if(ictl) card.appendChild(ictl);
 
     // clear 4-cell grid: On Hand (pcs) · In Cartons · Pack · Mars
@@ -2557,11 +2594,12 @@ function renderItems(){
     // types a number or uses + / −) + stepper + live value
     const order = el("div", {class:"ic-order"});
     if(sug.cartons > 0){
-      order.appendChild(el("span", {class:"sugchip info"+(sug.reason==="oos"?" oos":"")}, [
-        t("suggested"), el("b",{},[String(sug.cartons)]) ]));
+      order.appendChild(el("span", {class:"sugchip info"+(sug.reason==="oos"?" oos":""), title:t("suggested")}, [
+        t("sugShort"), el("b",{},[String(sug.cartons)]) ]));
     } else {
-      order.appendChild(el("span", {class:"sugchip none"}, [
-        sug.capReason==="nomars" ? t("marsNone") : sug.capReason==="marspartial" ? t("marsPartial") : (ohQty<=0 ? t("outOfStock") : t("noNeed")) ]));
+      // short label; the full reason shows on long-press / hover
+      const why = sug.capReason==="nomars" ? t("marsNone") : sug.capReason==="marspartial" ? t("marsPartial") : (ohQty<=0 ? t("outOfStock") : t("noNeed"));
+      order.appendChild(el("span", {class:"sugchip none"+(sug.capReason==="nomars"?" nomars":""), title: why}, [ sug.capReason==="nomars" ? t("noMarsShort") : t("noSugShort") ]));
     }
     const step = el("div", {class:"step"});
     const minus = el("button", {}, ["–"]);
@@ -2580,11 +2618,11 @@ function renderItems(){
       const c = Number(input.value)||0;
       ov.innerHTML = "";
       if(state.hidePrices){
-        if(c>0) ov.appendChild(el("b",{},[fmtInt(c*pcPerCs)+" "+t("pieces")]));
+        if(c>0) ov.appendChild(el("b",{},[fmtInt(c*unitPcs(sku))+" "+t("pieces")]));
       } else if(c>0){
-        ov.appendChild(el("b",{},[fmtMoney(c*(Number(sku.csPrice)||0))+" "+curr()]));
+        ov.appendChild(el("b",{},[fmtMoney(c*unitPrice(sku))+" "+curr()]));
       } else {
-        ov.appendChild(document.createTextNode(fmtMoney(sku.csPrice)+" "+curr()+(isOuter(sku)?"":" / "+t("cartons"))));
+        ov.appendChild(document.createTextNode(fmtMoney(unitPrice(sku))+" "+curr()));
       }
       // Guard rail: only surface a line when the quantity actually overshoots — no noise otherwise.
       const w = c>0 ? qtyWarning(sku, oh, c) : null;
@@ -2694,10 +2732,10 @@ function renderCart(){
       const c = Number(state.cart[art])||0;
       cv.innerHTML = "";
       if(!state.hidePrices){
-        cv.appendChild(el("b", {}, [fmtMoney(c*(Number(sku.csPrice)||0))+" "+curr()]));
-        cv.appendChild(el("span", {class:"u"}, [fmtMoney(sku.csPrice)+" / "+(isOuter(sku)?t("outerTag"):t("cartons"))]));
+        cv.appendChild(el("b", {}, [fmtMoney(c*unitPrice(sku))+" "+curr()]));
+        cv.appendChild(el("span", {class:"u"}, [fmtMoney(unitPrice(sku))+" / "+(isOuter(sku)?t("outerTag"):t("cartons"))]));
       }
-      cv.appendChild(el("span", {class:"u"}, [fmtInt(c*sku.pcPerCs)+" "+t("pieces")]));
+      cv.appendChild(el("span", {class:"u"}, [fmtInt(c*unitPcs(sku))+" "+t("pieces")]));
     }
     function setQty(v){
       v = Math.max(0, Math.floor(Number(v)||0));
@@ -2794,7 +2832,7 @@ function purgeOldOrders(){
 }
 function skuSnap(s){
   return { artecal:s.artecal, artecalCode:codeStr(s), oldCode:oldCodeOf(s), zrep:s.zrep, nameEn:s.nameEn, nameAr:s.nameAr,
-           category:s.category, brand:s.brand, pcPerCs:s.pcPerCs, csPrice:s.csPrice };
+           category:s.category, brand:s.brand, pcPerCs:s.pcPerCs, csPrice:s.csPrice, pcPrice:s.pcPrice, outerPack:outerPackOf(s) };
 }
 function saveOrderToHistory(store, orderId, totals, lines, opts){
   const entry = {
@@ -2849,7 +2887,7 @@ async function generateThen(action){
     const sku = state.skusByArt[art];
     const oh = onHandMap[art];
     return { sku, oh, onHandPc: oh ? Number(oh.onHand)||0 : 0,
-             cartons: ctn, pieces: ctn*sku.pcPerCs, value: ctn*sku.csPrice };
+             cartons: ctn, pieces: ctn*unitPcs(sku), value: ctn*unitPrice(sku) };
   }).filter(l => l.sku);
   if(lines.length === 0) return;
   lines.sort((a,b) => (a.sku.category||"").localeCompare(b.sku.category||"") || nameOf(a.sku).localeCompare(nameOf(b.sku)));
@@ -3126,7 +3164,8 @@ function buildPdfPageDom(o){
     cols.push({ head:"On Hand (PC)", cls:"ohcol", get:(l) => fmtInt(l.onHandPc||0) });
     cols.push({ head:"On Hand (CTN)", cls:"ohcol", get:(l) => { const cs = ohCartons(l.onHandPc||0, l.sku.pcPerCs); return cs ? cs.text : "—"; } });
   }
-  if(o.showPrice) cols.push({ head:"Carton Price", cls:"num", get:(l) => fmtMoney(l.sku.csPrice) });
+  const hasOuter = o.rows.some(r => r.type !== "cat" && isOuter(r.l.sku));
+  if(o.showPrice) cols.push({ head: hasOuter ? "Price (CTN / OUTER)" : "Carton Price", cls:"num", get:(l) => fmtMoney(unitPrice(l.sku)) });
   if(o.showValues) cols.push({ head:"Value", cls:"num", get:(l) => fmtMoney(l.value) });
 
   const table = el("table", {class:"pdf-table"+(cols.length >= 8 ? " tight" : "")});
@@ -3660,7 +3699,12 @@ function parseWorkbook(wb){
         const a = leadCode(aoa[r][ci]); const v = String(aoa[r][oi]||"").trim().replace(/\.0+$/,"");
         if(a !== null && /^\d+$/.test(v)) map[a] = v;
       }
-      out.skus.forEach(s => { if(map[s.artecal]) s.oldCode = map[s.artecal]; });
+      const packMap = {};
+      if(ci >= 0) for(let r=1; r<aoa.length; r++){
+        const a = leadCode(aoa[r][ci]); if(a === null) continue;
+        for(const v of aoa[r]){ const m = String(v||"").match(/[×x]\s*0*(\d+)/i); if(m && /piece|قطع|pc/i.test(String(v))){ packMap[a] = Number(m[1]); break; } }
+      }
+      out.skus.forEach(s => { if(map[s.artecal]) s.oldCode = map[s.artecal]; if(packMap[s.artecal]) s.outerPack = packMap[s.artecal]; });
       out._oldCodes = Object.keys(map).length;
     }
   }
