@@ -555,6 +555,41 @@ html[data-lang="ar"] .switch input:checked ~ .thumb{transform:translateX(-18px);
 
 
 
+
+/* ---- Smart search ---- */
+.sr-sticky{position:sticky;top:-14px;z-index:6;margin-top:-14px;padding-top:14px;padding-bottom:2px;display:flex;flex-direction:column;gap:7px;}
+.sr-sticky::before{content:"";position:absolute;top:0;bottom:-6px;inset-inline:-24px;background:var(--bg);z-index:-1;box-shadow:0 8px 12px -10px rgba(16,24,20,.18);}
+.sr-box .sr-input{height:50px;font-size:16px;border-radius:14px;border:1.6px solid #D5DBD8;background:#fff;padding-inline-end:46px;box-shadow:0 1px 2px rgba(16,24,20,.04);transition:border-color .15s,box-shadow .15s;}
+.sr-box .sr-input:focus{border-color:#067F3E;box-shadow:0 0 0 4px rgba(6,127,62,.12);outline:none;}
+.sr-box .sr-input::placeholder{font-size:13px;color:#98A19D;}
+.sr-box .sr-input::-webkit-search-cancel-button{display:none;-webkit-appearance:none;}
+.sr-box svg{width:18px;height:18px;color:#067F3E;}
+.sr-clear{position:absolute;top:50%;inset-inline-end:9px;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;border:none;background:#EEF1EF;color:#4B5563;font-size:20px;line-height:1;cursor:pointer;display:none;align-items:center;justify-content:center;font-family:inherit;}
+.sr-clear.on{display:flex;}
+.sr-clear:active{background:#DDE3E0;}
+.sr-sum{display:none;flex-direction:column;gap:6px;}
+.sr-sum.on{display:flex;}
+.sr-line{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.sr-count{font-size:12px;font-weight:800;color:#fff;background:#067F3E;border-radius:20px;padding:4px 11px;}
+.sr-count.zero{background:#9AA3A0;}
+.sr-fz{font-size:11.5px;font-weight:700;color:#9A3412;background:#FFF4E6;border:1px solid #FBD5B0;border-radius:20px;padding:3px 10px;}
+.sr-pills{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-bottom:1px;}
+.sr-pills::-webkit-scrollbar{display:none;}
+.sr-pill{flex-shrink:0;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:#fff;border-radius:20px;padding:3px 9px;font-size:11.5px;font-weight:700;color:var(--ink-soft);cursor:pointer;font-family:inherit;}
+.sr-pill .sw{width:8px;height:8px;border-radius:50%;}
+.sr-pill b{font-family:var(--font-mono);font-size:11px;background:var(--line-soft);border-radius:10px;padding:1px 7px;color:var(--ink);}
+.sr-more{border:none;background:#EEF4FF;color:#1E40AF;border-radius:20px;padding:4px 10px;font-size:11.5px;font-weight:700;cursor:pointer;font-family:inherit;}
+.sr-more.off{background:#F1F3F6;color:#334155;}
+.sr-more b{text-decoration:underline;text-underline-offset:3px;}
+mark.hl{background:#FFE58A;color:inherit;border-radius:3px;padding:0 1px;box-shadow:0 0 0 1px rgba(234,179,8,.35);}
+.oldcode mark.hl,.code mark.hl{background:#FFD84D;}
+.chip .chip-n{font-family:var(--font-mono);font-size:10.5px;font-weight:800;background:rgba(0,0,0,.08);border-radius:10px;padding:1px 6px;margin-inline-start:2px;}
+.chip.active .chip-n{background:rgba(255,255,255,.25);}
+.sr-empty{display:flex;flex-direction:column;align-items:center;gap:8px;padding:28px 18px;line-height:1.7;}
+.sr-empty b{font-size:14.5px;color:var(--ink);}
+.sr-empty div:last-child{font-size:12.5px;color:var(--muted);max-width:320px;}
+.sr-ei{width:46px;height:46px;border-radius:50%;background:#EEF4F0;display:flex;align-items:center;justify-content:center;color:#067F3E;}
+.sr-ei svg{width:22px;height:22px;}
 /* ---- Old Othaim code — indigo, labelled, never confused with the new code ---- */
 .itemcard .codes{display:flex;flex-direction:column;align-items:flex-end;gap:3px;flex-shrink:0;}
 html[dir="rtl"] .itemcard .codes{align-items:flex-start;}
@@ -857,7 +892,11 @@ const I18N = {
     regionEmptyHint:"ابحث واختر صنف (أو أكتر) عشان تشوف توفّره في كل المنطقة، وتفصيله لكل مندوب ومتجر.",
     regionTotal:"إجمالي المنطقة", carryingStores:"متاجر بها الصنف", gapStores:"متاجر ناقصة",
     previewStores:"👁 معاينة المتاجر بالبيانات الجديدة الآن",
-    previewLabel:"معاينة المدير", oldTag:"قديم", oldCodeT:"رقم الصنف في نظام العثيم القديم", outerTag:"OUTER", outerHint:"يُطلب بالأوتر", totalOuters:"إجمالي الأوتر",
+    previewLabel:"معاينة المدير",
+    srPh:"ابحث: اسم عربي أو إنجليزي، كود، أو حجم (مثال: مارس 150)", srClear:"مسح البحث", srResults:"نتيجة", srResult1:"نتيجة واحدة",
+    srFuzzy:"لا يوجد تطابق تام — هذه أقرب النتائج", srNone:"لا توجد نتائج لـ",
+    srTip:"جرّب جزءًا من الاسم (سنيك)، أو الكود الجديد أو القديم (605 أو 81380)، أو الحجم (150 أو 150ج).",
+    srOtherCat:"نتائج في فئات أخرى", srShowAll:"عرض الكل", srInInactive:"في الأصناف غير النشطة", srInActive:"في الأصناف النشطة", srShow:"عرض", oldTag:"قديم", oldCodeT:"رقم الصنف في نظام العثيم القديم", outerTag:"OUTER", outerHint:"يُطلب بالأوتر", totalOuters:"إجمالي الأوتر",
     activeItems:"الأصناف النشطة", inactiveItems:"غير النشطة", inactBadge:"غير نشط",
     activate:"تفعيل", deactivate:"إيقاف",
     inactTitle:"الأصناف غير النشطة",
@@ -965,7 +1004,11 @@ const I18N = {
     regionEmptyHint:"Search and pick one or more items to see region-wide availability, broken down per rep and store.",
     regionTotal:"Region total", carryingStores:"Stores carrying", gapStores:"Gap stores",
     previewStores:"👁 Preview stores with the new data now",
-    previewLabel:"Manager preview", oldTag:"OLD", oldCodeT:"Item number in Othaim\u2019s old system", outerTag:"OUTER", outerHint:"Ordered by outer", totalOuters:"Total Outers",
+    previewLabel:"Manager preview",
+    srPh:"Search: Arabic or English name, code, or size (e.g. mars 150)", srClear:"Clear search", srResults:"results", srResult1:"1 result",
+    srFuzzy:"No exact match — closest results", srNone:"No results for",
+    srTip:"Try part of the name (snick), the new or old code (605 or 81380), or a size (150 or 150g).",
+    srOtherCat:"More in other categories", srShowAll:"Show all", srInInactive:"in inactive items", srInActive:"in active items", srShow:"Show", oldTag:"OLD", oldCodeT:"Item number in Othaim\u2019s old system", outerTag:"OUTER", outerHint:"Ordered by outer", totalOuters:"Total Outers",
     activeItems:"Active items", inactiveItems:"Inactive", inactBadge:"Inactive",
     activate:"Activate", deactivate:"Deactivate",
     inactTitle:"Inactive items",
@@ -1379,6 +1422,210 @@ function _svgRaw(inner){
   s.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+inner+'</svg>';
   return s.firstChild;
 }
+/* ================= SMART ITEM SEARCH =================
+   One forgiving search for the reps: Arabic or English, any part of a word, any order, the new
+   / old / ZREP code, or a size ("150", "150g", "150ج", "١٥٠ جم"). Typos and the data's own
+   spelling variants (سنكرز/سنيكرز, شوكولاته/شوكولاتة, SKT = Skittles) are tolerated. */
+const SR_UNITS = { g:"g", gm:"g", gr:"g", grm:"g", gram:"g", grams:"g", "ج":"g", "جم":"g", "جرام":"g", "غ":"g", "غم":"g", "غرام":"g",
+  kg:"kg", "كجم":"kg", "كغ":"kg", "كيلو":"kg", "ك":"kg", ml:"ml", "مل":"ml", "ملي":"ml", l:"l", "لتر":"l" };
+// Brand words in both languages + the abbreviations used in the English item names.
+const SR_BRAND = {
+  "galaxy":"جالكسي جلكسي glxy", "whiskas":"ويسكاس whi", "extra":"اكسترا ext ريجليز wrigleys", "snickers":"سنيكرز سنكرز snk",
+  "skittles":"سكيتلز سكتيلز skt", "twix":"تويكس", "m&ms":"mms ام اند امز امندامز", "bounty":"باونتي bnt", "sheba":"شيبا",
+  "mars":"مارس", "kind":"كايند بي كايند bekind", "jewels":"جواهر جولز", "airwaves":"ايرويفز اير ويفز", "starburst":"ستاربرست ستاربورست stb",
+  "maltesers":"مالتيزرز مالتيزر", "kitekat":"كيت كات كيتكات kek", "trill":"تريل trl", "catsan":"كاتسان", "five":"فايف",
+  "thomas":"توماس", "mixed":"مشكل تشكيله mxd", "pedigree":"بيديجري", "dove":"دوف" };
+// Everyday words a rep may type in either language → the other language / the name's abbreviation.
+const SR_SYN = [
+  ["mini","minis","mnt","ميني","مينيز"], ["ice","ايس","ايسكريم","icecream"], ["cream","كريم"], ["chocolate","choc","choco","شوكولاته","شوكولا","شوكو"],
+  ["gum","علك","علكه","لبان"], ["cat","cats","قطط","قط"], ["dog","dogs","كلاب","كلب"], ["bird","birds","طيور","طير"], ["tuna","تونا","تونه"],
+  ["hazelnut","بندق"], ["caramel","كراميل"], ["milk","حليب"], ["dark","داكن","داكنه","غامق","غامقه"], ["almond","لوز"],
+  ["peanut","فول","سوداني"], ["strawberry","فراوله"], ["vanilla","فانيلا"], ["mint","نعناع"], ["salmon","سلمون"], ["chicken","دجاج"],
+  ["beef","لحم","بقر"], ["fruit","fruits","فواكه","فاكهه"], ["sour","حامض"], ["stick","ستيك"], ["cone","كون"], ["tub","علبه"],
+  ["biscuit","بسكويت"], ["watermelon","بطيخ"], ["peach","خوخ"], ["coconut","جوز","هند"], ["box","علبه","بوكس"], ["bag","كيس"],
+  ["cake","كيك"], ["protein","بروتين"], ["jelly","جلي"], ["pouch","pou","بوتش"] ];
+const SR_SYN_MAP = (() => { const m = {}; SR_SYN.forEach(g => g.forEach(w => { m[w] = g; })); return m; })();
+
+// Character-level normaliser that remembers where every output char came from (for highlighting).
+function srNormMap(s){
+  s = String(s == null ? "" : s);
+  let out = "", map = [];
+  for(let i = 0; i < s.length; i++){
+    let c = s[i], code = s.charCodeAt(i);
+    if((code >= 0x064B && code <= 0x0652) || code === 0x0670 || code === 0x0640) continue;   // tashkeel, tatweel
+    if(code >= 0x0660 && code <= 0x0669) c = String(code - 0x0660);
+    else if(code >= 0x06F0 && code <= 0x06F9) c = String(code - 0x06F0);
+    else if("أإآٱ".includes(c)) c = "ا";
+    else if(c === "ى" || c === "ئ") c = "ي";
+    else if(c === "ة") c = "ه";
+    else if(c === "ؤ") c = "و";
+    else if(c === "×" || c === "*") c = "x";
+    else if(c === "٫") c = ".";
+    else c = c.toLowerCase();
+    if(!/[\p{L}\p{N}.&]/u.test(c)) c = " ";
+    out += c; map.push(i);
+  }
+  // a dot is only kept inside a number (212.5g); anywhere else it separates words
+  out = out.replace(/\.(?!\d)|(?<!\d)\./g, " ");
+  return { t: out, map };
+}
+function srNorm(s){ return srNormMap(s).t; }
+// "جواهر900ج" → "جواهر 900 ج" so numbers and words can be matched on their own
+function srSplit(s){ return s.replace(/(\d)(?=[^\d.\s])/g, "$1 ").replace(/([^\d.\s])(?=\d)/g, "$1 ").replace(/\s+/g, " ").trim(); }
+function srStripAl(w){ return w.length > 4 && w.startsWith("ال") ? w.slice(2) : w; }
+function srZ(c){ return String(c).replace(/^0+(?=\d)/, ""); }
+const SR_SIZE_RE = /(?<![\d.])(\d+(?:\.\d+)?)\s?(kg|كجم|كغ|كيلو|ml|مل|gm|gr|g|جرام|جم|غرام|غم|ج|غ|ك|لتر|l)(?![a-wyzء-ي])/g;
+function srSizes(text){
+  const out = []; let m; SR_SIZE_RE.lastIndex = 0;
+  while((m = SR_SIZE_RE.exec(text))){
+    let n = parseFloat(m[1]), u = SR_UNITS[m[2]] || "g";
+    if(u === "kg"){ out.push({n, u:"kg"}); n = Math.round(n*1000); u = "g"; }
+    if(u === "l"){ out.push({n, u:"l"}); n = Math.round(n*1000); u = "ml"; }
+    out.push({n, u});
+  }
+  return out;
+}
+const _srIdx = new WeakMap();
+function srIndex(sku){
+  let ix = _srIdx.get(sku); if(ix) return ix;
+  const en = srNorm(sku.nameEn), ar = srNorm(sku.nameAr);
+  const brandKey = String(sku.brand||"").toLowerCase().replace(/\s*ic$/, "").trim();
+  const m = catMeta(sku.category);
+  const extra = srNorm([sku.brand||"", SR_BRAND[brandKey]||"", m.en, m.ar, /\bic$/i.test(sku.brand||"") ? "ice cream ايس كريم ايسكريم" : ""].join(" "));
+  const text = " " + srSplit([en, ar, extra].join(" ")) + " ";
+  const words = Array.from(new Set(text.trim().split(" ").filter(Boolean).concat(text.trim().split(" ").map(srStripAl))));
+  const codes = [codeStr(sku), String(sku.artecal), String(sku.zrep||""), oldCodeOf(sku)].filter(Boolean);
+  ix = { text, compact: text.replace(/\s+/g, ""), words, codes, codesZ: codes.map(srZ), sizes: srSizes(en + " " + ar) };
+  _srIdx.set(sku, ix);
+  return ix;
+}
+// Optimal-string-alignment distance (a swap of two letters counts as one typo), with early exit.
+function srDist(a, b, max){
+  if(Math.abs(a.length - b.length) > max) return max + 1;
+  const d = []; for(let i = 0; i <= a.length; i++){ d[i] = [i]; }
+  for(let j = 0; j <= b.length; j++) d[0][j] = j;
+  for(let i = 1; i <= a.length; i++){
+    let rowMin = 1e9;
+    for(let j = 1; j <= b.length; j++){
+      const cost = a[i-1] === b[j-1] ? 0 : 1;
+      let v = Math.min(d[i-1][j] + 1, d[i][j-1] + 1, d[i-1][j-1] + cost);
+      if(i > 1 && j > 1 && a[i-1] === b[j-2] && a[i-2] === b[j-1]) v = Math.min(v, d[i-2][j-2] + 1);
+      d[i][j] = v; if(v < rowMin) rowMin = v;
+    }
+    if(rowMin > max) return max + 1;
+  }
+  return d[a.length][b.length];
+}
+let _srLast = { q: null, p: null };
+function srParse(q){
+  if(_srLast.q === q) return _srLast.p;
+  let n = srSplit(srNorm(String(q||"").replace(/m\s*&\s*m'?s?/gi, " mms ").replace(/&/g, " ")));
+  const raw = n ? n.split(" ") : [];
+  const toks = [], hl = [];
+  for(let i = 0; i < raw.length; i++){
+    const w = raw[i];
+    if(/^\d+(\.\d+)?$/.test(w)){
+      const u = SR_UNITS[raw[i+1]];
+      if(u){ toks.push({k:"size", n:parseFloat(w), u}); hl.push(w); i++; continue; }
+      toks.push({k:"num", w}); hl.push(w); continue;
+    }
+    if(SR_UNITS[w] && toks.length && toks[toks.length-1].k !== "word") continue;  // a unit on its own
+    if(w.length === 1 && raw.length > 1) continue;                                   // stray letter
+    const base = srStripAl(w);
+    const vars = Array.from(new Set([w, base].concat(SR_SYN_MAP[w] || SR_SYN_MAP[base] || [])));
+    toks.push({k:"word", w, vars}); hl.push(w); if(base !== w) hl.push(base);
+    for(const k in SR_BRAND){ const al = (k + " " + SR_BRAND[k]).split(" "); if(al.includes(w)) al.forEach(a => { if(a.length >= 3) hl.push(a); }); }
+  }
+  const p = { empty: toks.length === 0, toks, hl };
+  _srLast = { q, p };
+  return p;
+}
+function srTokScore(ix, tk, fuzzy){
+  if(tk.k === "num"){
+    const t = tk.w, tz = srZ(t); let s = 0;
+    for(let i = 0; i < ix.codes.length; i++){
+      const c = ix.codes[i], cz = ix.codesZ[i];
+      if(c === t || cz === tz) s = Math.max(s, 120);
+      // typed with its leading zeros (000605) → only codes that really start that way
+      else if(t.length >= 3 && (c.startsWith(t) || (tz === t && cz.startsWith(tz)))) s = Math.max(s, 70);
+      else if(t.length >= 4 && c.includes(t)) s = Math.max(s, 30);
+    }
+    const v = parseFloat(t);
+    if(ix.sizes.some(z => z.n === v)) s = Math.max(s, 90);
+    if(!s && ix.text.includes(" " + t + " ")) s = 35;
+    if(!s && t.length >= 2 && ix.text.includes(t)) s = 12;
+    return s;
+  }
+  if(tk.k === "size"){
+    const fam = (u) => (u === "kg" || u === "g") ? "g" : "ml";
+    return ix.sizes.some(z => z.n === tk.n && (z.u === tk.u || fam(z.u) === fam(tk.u) && z.u !== "kg" && z.u !== "l")) ? 110 : 0;
+  }
+  let best = 0;
+  for(const v of tk.vars){
+    if(v.length < 1) continue;
+    if(ix.words.includes(v)){ best = Math.max(best, v === tk.w ? 60 : 50); continue; }
+    if(ix.text.includes(" " + v)){ best = Math.max(best, v === tk.w ? 45 : 38); continue; }
+    if(v.length >= 2 && ix.text.includes(v)) best = Math.max(best, 26);
+    else if(v.length >= 3 && ix.compact.includes(v)) best = Math.max(best, 20);
+  }
+  if(best || !fuzzy || tk.w.length < 3) return best;
+  // typo tolerance — whole word, or the start of a word the rep is still typing
+  const w = tk.w, max = w.length >= 6 ? 2 : 1, pmax = w.length >= 7 ? 2 : 1;
+  let fz = 0;
+  for(const word of ix.words){
+    if(word.length < 3) continue;
+    const dw = srDist(w, word, max); if(dw <= max) return 16 - dw*2;   // fewer typos rank higher
+    if(w.length >= 4 && word.length > w.length){
+      const d1 = srDist(w, word.slice(0, w.length), pmax), d2 = srDist(w, word.slice(0, w.length + 1), pmax);
+      if(Math.min(d1, d2) <= pmax) fz = 10;
+    }
+  }
+  if(fz) return fz;
+  return 0;
+}
+// 0 = not a match; higher = better. Every word typed must match something.
+// fuzzy=true lets typos through — used only when the exact search finds nothing.
+function srScore(sku, p, fuzzy){
+  if(p.empty) return 1;
+  const ix = srIndex(sku); let total = 0;
+  for(const tk of p.toks){ const s = srTokScore(ix, tk, fuzzy); if(!s) return 0; total += s; }
+  return total;
+}
+// Mark the typed text inside the rendered names/codes (normalisation-aware, so "شوكولاتة" lights up "شوكولاته").
+function srHighlight(root, p){
+  if(!root || !p || p.empty) return;
+  const needles = p.hl.filter(w => w.length >= 2 || /^\d$/.test(w)).sort((a,b) => b.length - a.length);
+  if(!needles.length) return;
+  root.querySelectorAll(".name,.nameAr,.ln,.lnAr,.code,.oldcode,.cnAr,.ia-en,.ia-ar,.ia-code").forEach(node => {
+    const walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT);
+    const texts = []; let n; while((n = walker.nextNode())) if(n.parentNode.nodeName !== "I" && n.parentNode.nodeName !== "MARK") texts.push(n);
+    texts.forEach(tn => {
+      const src = tn.nodeValue, nm = srNormMap(src), marks = new Array(nm.t.length).fill(false);
+      needles.forEach(nd => { let i = 0; while((i = nm.t.indexOf(nd, i)) >= 0){ for(let k = i; k < i + nd.length; k++) marks[k] = true; i += nd.length; } });
+      if(!marks.some(Boolean)) return;
+      const on = new Array(src.length).fill(false);
+      marks.forEach((m, k) => { if(m) on[nm.map[k]] = true; });
+      // let a mark run across skipped chars (tashkeel) inside a marked word
+      for(let k = 1; k < src.length - 1; k++) if(!on[k] && on[k-1] && on[k+1]) on[k] = true;
+      const frag = document.createDocumentFragment(); let k = 0;
+      while(k < src.length){
+        let j = k; while(j < src.length && on[j] === on[k]) j++;
+        const part = src.slice(k, j);
+        if(on[k]){ const mk = document.createElement("mark"); mk.className = "hl"; mk.textContent = part; frag.appendChild(mk); }
+        else frag.appendChild(document.createTextNode(part));
+        k = j;
+      }
+      tn.parentNode.replaceChild(frag, tn);
+    });
+  });
+}
+// Fuzzy mode is on only when nothing at all (active or inactive) matches exactly.
+function srFz(p){
+  if(p.empty) return false;
+  if(p._fz === undefined) p._fz = !OO.skus.some(sk => srScore(sk, p, false) > 0);
+  return p._fz;
+}
+
 /* ---------------- STOCK / SUGGESTION HELPERS ---------------- */
 // On-hand expressed in cartons: the decimal figure the rep is used to seeing
 // ("603 pieces = 4.2 cartons") plus the exact full-cartons + loose-pieces split.
@@ -1866,8 +2113,16 @@ function renderItems(){
   const wn = renderStoreWhatsNew(store);
   if(wn) content.appendChild(wn);
 
-  const search = el("input", {class:"input", placeholder:t("searchItems"), value: state.query});
-  content.appendChild(el("div", {class:"searchbox"}, [svgIcon("search"), search]));
+  // Smart search: sticky at the top, clear button, live result summary underneath.
+  const search = el("input", {class:"input sr-input", type:"search", placeholder:t("srPh"), value: state.query, autocomplete:"off",
+    autocorrect:"off", autocapitalize:"off", spellcheck:"false", enterkeyhint:"search", "aria-label":t("srPh")});
+  const clearBtn = el("button", {class:"sr-clear", type:"button", "aria-label":t("srClear"), onclick:() => {
+    search.value = ""; state.query = ""; clearBtn.classList.remove("on"); drawList(); drawChips(); search.focus();
+  }}, ["×"]);
+  if(state.query) clearBtn.classList.add("on");
+  const srSum = el("div", {class:"sr-sum"});
+  content.appendChild(el("div", {class:"sr-sticky"}, [ el("div", {class:"searchbox sr-box"}, [svgIcon("search"), search, clearBtn]), srSum ]));
+  search.addEventListener("keydown", (ev) => { if(ev.key === "Enter"){ ev.preventDefault(); search.blur(); } });
 
   // Active / Inactive switch — keeps stopped items out of the way, one tap to look at them.
   const actBar = el("div", {class:"actseg"});
@@ -1974,8 +2229,8 @@ function renderItems(){
   }
 
   function categoriesPresent(){
-    const set = {};
-    OO.skus.forEach(sk => { if(passesActive(sk)) set[sk.category] = (set[sk.category]||0)+1; });
+    const set = {}, P = srParse(search.value), fz = srFz(P);
+    OO.skus.forEach(sk => { if(passesActive(sk) && (P.empty || srScore(sk, P, fz) > 0)) set[sk.category] = (set[sk.category]||0)+1; });
     return set;
   }
   function drawChips(){
@@ -1988,30 +2243,41 @@ function renderItems(){
       const chip = el("div", {class:"chip"+(state.category===cat?" active":""),
         style: state.category===cat ? ("background:"+m.color+";border-color:"+m.color) : "",
         onclick:() => {state.category=cat; drawChips(); drawList();}}, [
-        el("span", {class:"sw", style:"background:"+m.color}), catLabel(cat)
+        el("span", {class:"sw", style:"background:"+m.color}), catLabel(cat),
+        srParse(search.value).empty ? null : el("span", {class:"chip-n"}, [String(cats[cat])])
       ]);
       chips.appendChild(chip);
     });
     if(hero._paint) hero._paint();  // keep the hero total in sync with the active category
   }
 
-  function matches(sku, q){
-    if(!q) return true;
-    q = q.toLowerCase();
-    return String(sku.artecal).includes(q) || codeStr(sku).includes(q) || String(sku.zrep).includes(q) || oldCodeOf(sku).includes(q) ||
-      (sku.nameAr||"").toLowerCase().includes(q) || (sku.nameEn||"").toLowerCase().includes(q);
-  }
+  function matches(sku, q){ const P = srParse(q); return P.empty || srScore(sku, P, srFz(P)) > 0; }
   function passesGap(sk){ return state.showInactive || !state.gapOnly || isGapItem(sk, onHand[sk.artecal], state.gapThreshold); }
 
   let drawToken = 0;   // cancels a half-finished chunked draw when a newer draw starts
   function drawList(){
     const myToken = ++drawToken;
     list.innerHTML = "";
-    const q = search.value.trim();
-    const filtered = OO.skus.filter(sk => passesActive(sk) && (state.category==="all" || sk.category===state.category) && passesGap(sk) && matches(sk, q));
-    if(filtered.length === 0){ list.appendChild(el("div",{class:"emptystate"},[t(state.showInactive ? "inactNone" : (state.gapOnly ? "noGaps" : "catNoLines"))])); return; }
-    if(state.viewMode === "list"){ drawGrouped(filtered); return; }
-    filtered.sort((a,b) => nameOf(a).localeCompare(nameOf(b)));
+    const P = srParse(search.value), fz = srFz(P);
+    const hits = []; let otherCat = 0, otherAct = 0;
+    OO.skus.forEach(sk => {
+      const sc = srScore(sk, P, fz); if(!sc) return;
+      if(!passesActive(sk)){ otherAct++; return; }
+      if(!passesGap(sk)) return;
+      if(state.category !== "all" && sk.category !== state.category){ otherCat++; return; }
+      hits.push([sc, sk]);
+    });
+    drawSummary(P, fz, hits, otherCat, otherAct);
+    if(hits.length === 0){
+      if(P.empty){ list.appendChild(el("div",{class:"emptystate"},[t(state.showInactive ? "inactNone" : (state.gapOnly ? "noGaps" : "catNoLines"))])); return; }
+      list.appendChild(el("div",{class:"emptystate sr-empty"},[ el("div",{class:"sr-ei"},[svgIcon("search")]),
+        el("b",{},[t("srNone")+" «"+search.value.trim()+"»"]), el("div",{},[t("srTip")]) ]));
+      return;
+    }
+    // no search → A–Z as before; searching → best match first
+    const filtered = P.empty ? hits.map(x => x[1]).sort((a,b) => nameOf(a).localeCompare(nameOf(b)))
+      : hits.sort((a,b) => b[0]-a[0] || nameOf(a[1]).localeCompare(nameOf(b[1]))).map(x => x[1]);
+    if(state.viewMode === "list"){ const sc = new Map(hits.map(x => [x[1], x[0]])); drawGrouped(filtered, P, sc); return; }
     // Paint the first cards right away, then stream the rest across animation frames so opening a
     // store / switching a category feels instant instead of freezing on ~300 cards at once.
     const CHUNK = 26; let i = 0;
@@ -2019,19 +2285,52 @@ function renderItems(){
       if(myToken !== drawToken) return;   // a newer draw replaced this one — stop
       const frag = document.createDocumentFragment();
       const end = Math.min(i + CHUNK, filtered.length);
-      for(; i < end; i++) frag.appendChild(renderItemCard(filtered[i], onHand[filtered[i].artecal], i+1));
+      for(; i < end; i++){ const c = renderItemCard(filtered[i], onHand[filtered[i].artecal], i+1); srHighlight(c, P); frag.appendChild(c); }
       list.appendChild(frag);
       if(i < filtered.length) (window.requestAnimationFrame || window.setTimeout)(step);
     })();
   }
 
+  // Result summary under the search box: how many, where they are, and one-tap jumps.
+  function drawSummary(P, fz, hits, otherCat, otherAct){
+    srSum.innerHTML = "";
+    srSum.classList.toggle("on", !P.empty);
+    if(P.empty) return;
+    const top = el("div", {class:"sr-line"});
+    top.appendChild(el("span", {class:"sr-count"+(hits.length?"":" zero")}, [ hits.length === 1 ? t("srResult1") : (fmtInt(hits.length)+" "+t("srResults")) ]));
+    if(fz && hits.length) top.appendChild(el("span", {class:"sr-fz"}, [t("srFuzzy")]));
+    srSum.appendChild(top);
+    if(state.category === "all" && hits.length > 1){
+      const by = {}; hits.forEach(x => { by[x[1].category] = (by[x[1].category]||0) + 1; });
+      const cats = Object.keys(by);
+      if(cats.length > 1){
+        const row = el("div", {class:"sr-pills"});
+        cats.sort((a,b) => by[b]-by[a]).forEach(cat => {
+          const m = catMeta(cat);
+          row.appendChild(el("button", {class:"sr-pill", type:"button", onclick:() => { state.category = cat; drawChips(); drawList(); }}, [
+            el("span", {class:"sw", style:"background:"+m.color}), catLabel(cat), el("b", {}, [String(by[cat])]) ]));
+        });
+        srSum.appendChild(row);
+      }
+    }
+    if(otherCat) top.appendChild(el("button", {class:"sr-more", type:"button", onclick:() => { state.category = "all"; drawChips(); drawList(); }}, [
+      t("srOtherCat")+" ("+fmtInt(otherCat)+") · ", el("b", {}, [t("srShowAll")]) ]));
+    if(otherAct) top.appendChild(el("button", {class:"sr-more off", type:"button", onclick:() => {
+      state.showInactive = !state.showInactive; state.category = "all"; drawActBar(); drawGapBar(); drawChips(); drawList(); }}, [
+      fmtInt(otherAct)+" "+t(state.showInactive ? "srInActive" : "srInInactive")+" · ", el("b", {}, [t("srShow")]) ]));
+  }
+
   // Grouped list: one category block after another, and inside each block the items
   // of the same brand sit together (all the Snickers lines under each other, etc.).
-  function drawGrouped(filtered){
+  function drawGrouped(filtered, P, sc){
     groupSeq = 0;
-    const byCat = {};
-    filtered.forEach(sk => { const c = sk.category || "Uncategorized"; (byCat[c] = byCat[c] || []).push(sk); });
-    Object.keys(byCat).sort((a,b) => byCat[b].length - byCat[a].length).forEach(cat => {
+    const byCat = {}, order = [];
+    filtered.forEach(sk => { const c = sk.category || "Uncategorized"; if(!byCat[c]){ byCat[c] = []; order.push(c); } byCat[c].push(sk); });
+    // searching: the category holding the best match comes first; otherwise biggest first
+    const best = (c) => Math.max(...byCat[c].map(s => (sc && sc.get(s)) || 0));
+    const cats = (P && !P.empty) ? order.sort((a,b) => best(b) - best(a) || byCat[b].length - byCat[a].length)
+      : Object.keys(byCat).sort((a,b) => byCat[b].length - byCat[a].length);
+    cats.forEach(cat => {
       const items = byCat[cat].sort((a,b) =>
         String(a.brand||"zz").localeCompare(String(b.brand||"zz")) || nameOf(a).localeCompare(nameOf(b)));
       const m = catMeta(cat);
@@ -2045,7 +2344,7 @@ function renderItems(){
         const b = String(sk.brand||"").trim();
         if(b && b !== lastBrand){ list.appendChild(el("div", {class:"brandsep"}, [b])); lastBrand = b; }
         groupSeq++;
-        list.appendChild(renderListRow(sk, onHand[sk.artecal], groupSeq));
+        const r = renderListRow(sk, onHand[sk.artecal], groupSeq); srHighlight(r, P); list.appendChild(r);
       });
     });
   }
@@ -2226,8 +2525,9 @@ function renderItems(){
   let searchTimer = null;
   search.addEventListener("input", () => {
     state.query = search.value;
+    clearBtn.classList.toggle("on", !!search.value);
     clearTimeout(searchTimer);
-    searchTimer = setTimeout(drawList, 120);
+    searchTimer = setTimeout(() => { drawList(); drawChips(); }, 120);
   });
   drawActBar(); drawGapBar(); drawChips(); drawList();
   s.appendChild(content);
@@ -2934,12 +3234,11 @@ function renderInactiveAdmin(){
     const st = INACT.at ? fmtIsoStamp(INACT.at) : null;
     if(st) meta.appendChild(st);
     list.innerHTML = "";
-    const q = inp.value.trim().toLowerCase();
+    const q = inp.value.trim(), P = srParse(q);
     let items;
     if(q){
-      items = OO.skus.filter(sk => String(sk.artecal).includes(q) || codeStr(sk).includes(q) || String(sk.zrep).includes(q) || oldCodeOf(sk).includes(q) ||
-        (sk.nameAr||"").toLowerCase().includes(q) || (sk.nameEn||"").toLowerCase().includes(q)).slice(0,40);
-      items.sort((a,b) => (isInactive(b)?1:0) - (isInactive(a)?1:0));
+      const fz = srFz(P);
+      items = OO.skus.map(sk => [srScore(sk, P, fz), sk]).filter(x => x[0] > 0).sort((a,b) => b[0]-a[0]).slice(0,40).map(x => x[1]);
     } else {
       items = OO.skus.filter(isInactive).sort((a,b) => String(a.category).localeCompare(String(b.category)) || nameOf(a).localeCompare(nameOf(b)));
     }
@@ -2953,6 +3252,7 @@ function renderInactiveAdmin(){
       }
       list.appendChild(row(sk));
     });
+    if(q) srHighlight(list, P);
   }
   inp.addEventListener("input", () => { clearTimeout(inp._t); inp._t = setTimeout(draw, 120); });
   draw();
