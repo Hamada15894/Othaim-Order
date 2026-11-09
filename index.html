@@ -632,6 +632,49 @@ html[lang="en"] .itemcard .codes .cp i{font-size:8px;min-width:46px;}
 .cl-c.oh.low{background:#FEF2F2;} .cl-c.oh.low .v{color:var(--danger);}
 .cl-c.mars{background:rgba(180,116,10,.08);} .cl-c.mars .v{color:#7A4E06;}
 .cl-c.mars.low .v{color:var(--danger);}
+
+/* ================= Compact, professional control area ================= */
+.stocksum .hero{padding:10px 13px 10px !important;}
+.stocksum .hero .lbl{font-size:10.5px;}
+.stocksum .hero .big{font-size:21px !important;margin-top:2px !important;}
+.stocksum .hero .big .u{font-size:12px;}
+.stocksum .hero .sub{font-size:10.5px;margin-top:2px;}
+.stocksum .hero .expand{top:10px;padding:5px 8px;font-size:10.5px;}
+.sr-box .sr-input{height:42px !important;font-size:15px !important;border-radius:11px !important;}
+.sr-box .sr-input::placeholder{font-size:12.5px;}
+
+.ctrlpanel{background:#fff;border:1px solid var(--line);border-radius:13px;padding:7px;display:flex;flex-direction:column;gap:7px;box-shadow:0 1px 2px rgba(16,24,20,.04);}
+.ctrlpanel .cp-top{display:flex;gap:6px;align-items:stretch;}
+.ctrlpanel .actseg{flex:1;min-width:0;display:block;}
+.ctrlpanel .as-seg{padding:3px;gap:3px;border-radius:10px;box-shadow:none;background:#F2F4F3;border:none;height:100%;box-sizing:border-box;}
+.ctrlpanel .as-btn{padding:6px 6px;gap:5px;border-radius:8px;font-size:12px;min-height:32px;}
+.ctrlpanel .as-l{font-size:12px;white-space:nowrap;}
+.ctrlpanel .as-n{font-size:10.5px;padding:1px 6px;}
+.ctrlpanel .as-dot{width:7px;height:7px;}
+.ctrlpanel .as-off .as-dot{width:8px;height:8px;}
+.ctrlpanel .as-btn.sel{box-shadow:0 1px 3px rgba(0,0,0,.15) !important;}
+.ctrlpanel .as-btn.as-on.sel{background:#0A7F40;}
+.ctrlpanel .gapbar{flex-shrink:0;display:block;}
+.ctrlpanel .gaptoggle{height:100%;width:auto;padding:0 10px;gap:5px;border-radius:10px;border:1.5px solid #E1E6E3;}
+.ctrlpanel .gaptoggle .gt-ic{display:flex;color:#2563EB;}
+.ctrlpanel .gaptoggle .gt-ic svg{width:15px;height:15px;}
+.ctrlpanel .gaptoggle .gt-l{font-size:12px;white-space:nowrap;flex:none;}
+.ctrlpanel .gaptoggle .gt-n{font-size:10.5px;padding:1px 6px;}
+.ctrlpanel .gaptoggle.on .gt-ic{color:#2563EB;}
+.ctrlpanel .gapmore:empty,.ctrlpanel .cp-hint:empty{display:none;}
+.ctrlpanel .gapmore{display:flex;flex-direction:column;gap:6px;}
+.ctrlpanel .gapthresh{display:flex;align-items:center;gap:5px;}
+.ctrlpanel .gapthresh .gt-opt{min-width:30px;height:26px;font-size:12px;}
+.ctrlpanel .gap-hint,.ctrlpanel .as-hint{font-size:10.5px;padding:5px 8px;border-radius:8px;line-height:1.45;}
+.ctrlpanel .catgrid{flex-wrap:wrap;overflow:visible;gap:5px;padding:0;border-top:1px solid #EEF1EF;padding-top:7px;}
+.ctrlpanel .catgrid .chip{padding:5px 10px;font-size:11.5px;border-width:1px;border-radius:8px;gap:5px;background:#F7F8F8;border-color:#E6EAE8;}
+.ctrlpanel .catgrid .chip .sw{width:7px;height:7px;}
+.ctrlpanel .catgrid .chip.active{color:#fff;background:#1F2933;border-color:#1F2933;}
+.ctrlpanel .catgrid .chip .chip-n{font-size:9.5px;padding:0 5px;}
+@media (max-width:370px){ .ctrlpanel .as-l,.ctrlpanel .gaptoggle .gt-l{font-size:11px;} .ctrlpanel .as-btn{padding:5px 4px;} .ctrlpanel .gaptoggle{padding:0 7px;} }
+.clr-row{display:flex;justify-content:flex-end;margin:-4px 2px -4px;}
+.clr-row .clr-link{border:none;background:none;color:var(--danger);font-weight:700;font-size:11.5px;padding:2px 4px;cursor:pointer;font-family:inherit;text-decoration:underline;text-underline-offset:3px;}
+.clr-row .clr-link[hidden]{display:none;}
 /* ---- Clearer numbers ---- */
 body{font-variant-numeric:tabular-nums;}
 .itemcard .ic-grid .cell{padding:8px 3px 7px;}
@@ -1019,7 +1062,7 @@ const I18N = {
     srFuzzy:"لا يوجد تطابق تام — هذه أقرب النتائج", srNone:"لا توجد نتائج لـ",
     srTip:"جرّب جزءًا من الاسم (سنيك)، أو الكود الجديد أو القديم (605 أو 81380)، أو الحجم (150 أو 150ج).",
     srOtherCat:"نتائج في فئات أخرى", srShowAll:"عرض الكل", srInInactive:"في الأصناف غير النشطة", srInActive:"في الأصناف النشطة", srShow:"عرض", oldTag:"قديم", oldCodeT:"رقم الصنف في نظام العثيم القديم", outerTag:"OUTER", outerHint:"يُطلب بالأوتر", totalOuters:"إجمالي الأوتر",
-    activeItems:"الأصناف النشطة", inactiveItems:"غير النشطة", inactBadge:"غير نشط",
+    activeItems:"الأصناف النشطة", actShort:"النشطة", inactShort:"غير النشطة", inactiveItems:"غير النشطة", inactBadge:"غير نشط",
     activate:"تفعيل", deactivate:"إيقاف",
     inactTitle:"الأصناف غير النشطة",
     inactHint:"الأصناف الموقوفة تختفي من قائمة المناديب وتظهر فقط في تبويب «غير النشطة». أي تغيير هنا يصل لكل المناديب مباشرة.",
@@ -1134,7 +1177,7 @@ const I18N = {
     srFuzzy:"No exact match — closest results", srNone:"No results for",
     srTip:"Try part of the name (snick), the new or old code (605 or 81380), or a size (150 or 150g).",
     srOtherCat:"More in other categories", srShowAll:"Show all", srInInactive:"in inactive items", srInActive:"in active items", srShow:"Show", oldTag:"OLD", oldCodeT:"Item number in Othaim\u2019s old system", outerTag:"OUTER", outerHint:"Ordered by outer", totalOuters:"Total Outers",
-    activeItems:"Active items", inactiveItems:"Inactive", inactBadge:"Inactive",
+    activeItems:"Active items", actShort:"Active", inactShort:"Inactive", inactiveItems:"Inactive", inactBadge:"Inactive",
     activate:"Activate", deactivate:"Deactivate",
     inactTitle:"Inactive items",
     inactHint:"Inactive items are hidden from the reps' list and only show under the “Inactive” tab. Any change here reaches every rep instantly.",
@@ -1403,7 +1446,7 @@ const state = {
   prefShowTotal: false,
   prefShowPrice: false,
   prefShowOnHandCols: true,
-  viewMode: (function(){ try{ if(!localStorage.getItem("oo_view_v2")){ localStorage.setItem("oo_view_v2","1"); localStorage.setItem("oo_viewMode","order"); } }catch(e){} return localStorage.getItem("oo_viewMode") || "order"; })(),   // "order" | "list"
+  viewMode: "order",   // "order" | "list"
   viewport: localStorage.getItem("oo_viewport") || "",        // "" auto | "phone" | "wide"
   hidePrices: localStorage.getItem("oo_hidePrices") === "1",  // quick on-screen money blackout
   adminPin: null,
@@ -2312,8 +2355,12 @@ function renderItems(){
   search.addEventListener("keydown", (ev) => { if(ev.key === "Enter"){ ev.preventDefault(); search.blur(); } });
 
   // Active / Inactive switch — keeps stopped items out of the way, one tap to look at them.
+  const ctrl = el("div", {class:"ctrlpanel"});
+  content.appendChild(ctrl);
+  const ctrlTop = el("div", {class:"cp-top"});
+  ctrl.appendChild(ctrlTop);
   const actBar = el("div", {class:"actseg"});
-  content.appendChild(actBar);
+  ctrlTop.appendChild(actBar);
   function drawActBar(){
     actBar.innerHTML = "";
     const nOff = inactiveCount(), nOn = OO.skus.length - nOff;
@@ -2324,12 +2371,13 @@ function renderItems(){
     };
     const seg = el("div", {class:"as-seg"});
     seg.appendChild(el("button", {class:"as-btn as-on"+(!state.showInactive?" sel":""), onclick:() => pick(false)}, [
-      el("span",{class:"as-dot"}), el("span",{class:"as-l"},[t("activeItems")]), el("span",{class:"as-n"},[fmtInt(nOn)]) ]));
+      el("span",{class:"as-dot"}), el("span",{class:"as-l"},[t("actShort")]), el("span",{class:"as-n"},[fmtInt(nOn)]) ]));
     seg.appendChild(el("button", {class:"as-btn as-off"+(state.showInactive?" sel":""), onclick:() => pick(true)}, [
-      el("span",{class:"as-dot"}), el("span",{class:"as-l"},[t("inactiveItems")]), el("span",{class:"as-n"},[fmtInt(nOff)]) ]));
+      el("span",{class:"as-dot"}), el("span",{class:"as-l"},[t("inactShort")]), el("span",{class:"as-n"},[fmtInt(nOff)]) ]));
     actBar.appendChild(seg);
     const hint = state.showInactive ? t(isManager() ? "inactViewMgr" : "inactViewRep") : (isManager() ? t("inactActiveMgr") : "");
-    if(hint) actBar.appendChild(el("div", {class:"as-hint"+(state.showInactive?" off":"")}, [hint]));
+    hintBox.innerHTML = ""; hintBox.hidden = !hint;
+    if(hint) hintBox.appendChild(el("div", {class:"as-hint"+(state.showInactive?" off":"")}, [hint]));
   }
   function passesActive(sk){ return state.showInactive ? isInactive(sk) : !isInactive(sk); }
   // Badge + (manager only) one-tap switch on an item card / row.
@@ -2351,14 +2399,20 @@ function renderItems(){
 
   // Opportunity / gap filter: show only items Mars has, that this store is out of (or nearly).
   const gapBar = el("div", {class:"gapbar"});
-  content.appendChild(gapBar);
+  ctrlTop.appendChild(gapBar);
+  const gapMore = el("div", {class:"gapmore"});
+  ctrl.appendChild(gapMore);
+  const hintBox = el("div", {class:"cp-hint"});
+  ctrl.appendChild(hintBox);
   function storeGapCount(){ let n=0; OO.skus.forEach(sk=>{ if(!isInactive(sk) && isGapItem(sk, onHand[sk.artecal], state.gapThreshold)) n++; }); return n; }
   function drawGapBar(){
-    gapBar.innerHTML = "";
+    gapBar.innerHTML = ""; gapMore.innerHTML = "";
+    gapBar.hidden = !!state.showInactive;
     if(state.showInactive) return;   // the opportunity filter is for the active list only
     const count = storeGapCount();
     const btn = el("button", {class:"gaptoggle"+(state.gapOnly?" on":""), onclick:()=>{ state.gapOnly=!state.gapOnly; drawGapBar(); drawList(); }}, [
-      el("span",{class:"gt-ic"},["🎯"]), el("span",{class:"gt-l"},[t("gapFilter")]), el("span",{class:"gt-n"},[fmtInt(count)])
+      el("span",{class:"gt-ic", html:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/></svg>'}),
+      el("span",{class:"gt-l"},[t("gapFilter")]), el("span",{class:"gt-n"},[fmtInt(count)])
     ]);
     gapBar.appendChild(btn);
     if(state.gapOnly){
@@ -2366,13 +2420,13 @@ function renderItems(){
       ctrl.appendChild(el("span",{class:"gt-cap"},[t("gapThreshLabel")]));
       [0,1,2,3].forEach(n=>ctrl.appendChild(el("button",{class:"gt-opt"+(state.gapThreshold===n?" on":""),
         onclick:()=>{ state.gapThreshold=n; try{localStorage.setItem("oo_gapThreshold",String(n));}catch(e){} drawGapBar(); drawList(); }},[String(n)])));
-      gapBar.appendChild(ctrl);
-      gapBar.appendChild(el("div",{class:"gap-hint"},[t("gapHint")]));
+      gapMore.appendChild(ctrl);
+      gapMore.appendChild(el("div",{class:"gap-hint"},[t("gapHint")]));
     }
   }
 
-  const chips = el("div", {class:"chiprow"});
-  content.appendChild(chips);
+  const chips = el("div", {class:"chiprow catgrid"});
+  ctrl.appendChild(chips);
 
   const vs = el("div", {class:"viewswitch"});
   // Switch order/list WITHOUT a full re-render (only the list needs to change) — keeps it snappy.
@@ -2386,14 +2440,15 @@ function renderItems(){
   };
   vs.appendChild(el("button", {class: state.viewMode==="order"?"active":"", onclick:() => setView("order")}, [t("viewOrder")]));
   vs.appendChild(el("button", {class: state.viewMode==="list"?"active":"", onclick:() => setView("list")}, [t("viewList")]));
-  content.appendChild(vs);
+  state.viewMode = "order";   // one clean screen — the grouped list view was retired
 
-  const bulk = el("div", {class:"bulkrow"});
-  bulk.appendChild(el("button", {class:"btn btn-outline", onclick:() => {
+  // "Clear all" lives as a small link and only shows when there is something to clear
+  const clr = el("button", {class:"clr-link", type:"button", onclick:() => {
     if(cartLineCount() === 0) return;
     if(confirm(t("clearAll")+"?")){ state.cart = {}; drawList(); updateFloatbar(); }
-  }}, [t("clearAll")]));
-  content.appendChild(bulk);
+  }}, [t("clearAll")]);
+  clr.hidden = cartLineCount() === 0;
+  content.appendChild(el("div", {class:"clr-row"}, [clr]));
 
   const list = el("div", {style:"display:flex;flex-direction:column;gap:"+(state.viewMode==="list"?"6px":"10px")+";margin-top:2px;"});
   content.appendChild(list);
@@ -2685,6 +2740,7 @@ function renderItems(){
     const totals = cartTotals();
     const count = cartLineCount();
     if(floatbar) floatbar.remove();
+    const clrB = $(".clr-link", s); if(clrB) clrB.hidden = count === 0;
     if(count === 0) return;
     floatbar = el("div", {class:"floatbar"}, [
       el("div", {class:"fcount"}, [String(count)+" "+t("items")]),
