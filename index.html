@@ -622,16 +622,16 @@ html[lang="en"] .itemcard .codes .cp i{font-size:8px;min-width:46px;}
 .itemcard .ic-order .ov .ov-u{font-size:.85em;opacity:.8;}
 
 /* ---- Cart: stock strip per line ---- */
-.cartline .cl-grid{display:grid;grid-template-columns:repeat(4,1fr);background:var(--bg);border:1px solid var(--line-soft);border-radius:8px;overflow:hidden;}
-.cartline .cl-c{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:5px 2px;border-inline-start:1px solid var(--line);text-align:center;min-width:0;}
-.cartline .cl-c:first-child{border-inline-start:none;}
-.cartline .cl-c .k{font-size:9.5px;color:var(--muted);font-weight:700;line-height:1.1;white-space:nowrap;}
-.cartline .cl-c .v{font-family:var(--font-mono);font-size:14px;font-weight:800;color:var(--ink);line-height:1.1;margin-top:2px;white-space:nowrap;}
-.cartline .cl-c .v small{font-size:9px;color:var(--muted);font-weight:700;font-family:inherit;}
-.cartline .cl-c.oh{background:#EFF6FF;} .cartline .cl-c.oh .v{color:#0B5FA5;}
-.cartline .cl-c.oh.low{background:#FEF2F2;} .cartline .cl-c.oh.low .v{color:var(--danger);}
-.cartline .cl-c.mars{background:rgba(180,116,10,.08);} .cartline .cl-c.mars .v{color:#7A4E06;}
-.cartline .cl-c.mars.low .v{color:var(--danger);}
+.cl-grid{margin-top:4px;display:grid;grid-template-columns:repeat(4,1fr);background:var(--bg);border:1px solid var(--line-soft);border-radius:8px;overflow:hidden;}
+.cl-c{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:5px 2px;border-inline-start:1px solid var(--line);text-align:center;min-width:0;}
+.cl-c:first-child{border-inline-start:none;}
+.cl-c .k{font-size:9.5px;color:var(--muted);font-weight:700;line-height:1.1;white-space:nowrap;}
+.cl-c .v{font-family:var(--font-mono);font-size:14px;font-weight:800;color:var(--ink);line-height:1.1;margin-top:2px;white-space:nowrap;}
+.cl-c .v small{font-size:9px;color:var(--muted);font-weight:700;font-family:inherit;}
+.cl-c.oh{background:#EFF6FF;} .cl-c.oh .v{color:#0B5FA5;}
+.cl-c.oh.low{background:#FEF2F2;} .cl-c.oh.low .v{color:var(--danger);}
+.cl-c.mars{background:rgba(180,116,10,.08);} .cl-c.mars .v{color:#7A4E06;}
+.cl-c.mars.low .v{color:var(--danger);}
 /* ---- Clearer numbers ---- */
 body{font-variant-numeric:tabular-nums;}
 .itemcard .ic-grid .cell{padding:8px 3px 7px;}
@@ -1403,7 +1403,7 @@ const state = {
   prefShowTotal: false,
   prefShowPrice: false,
   prefShowOnHandCols: true,
-  viewMode: localStorage.getItem("oo_viewMode") || "order",   // "order" | "list"
+  viewMode: (function(){ try{ if(!localStorage.getItem("oo_view_v2")){ localStorage.setItem("oo_view_v2","1"); localStorage.setItem("oo_viewMode","order"); } }catch(e){} return localStorage.getItem("oo_viewMode") || "order"; })(),   // "order" | "list"
   viewport: localStorage.getItem("oo_viewport") || "",        // "" auto | "phone" | "wide"
   hidePrices: localStorage.getItem("oo_hidePrices") === "1",  // quick on-screen money blackout
   adminPin: null,
@@ -1817,9 +1817,10 @@ function suggestFor(sku, oh){
   // Never suggest more than the Mars warehouse can actually ship — a "fill the shelf"
   // number the depot cannot cover is exactly the unsuitable quantity we want to avoid.
   const rec = OO.marsStock[sku.artecal];
+  const hasMarsSheet = !!OO.marsStock && Object.keys(OO.marsStock).length > 0;
   let cartons = base.cartons, capReason = null;
-  if(rec && per > 0){
-    const marsQ = Number(rec.qty)||0;
+  if((rec || hasMarsSheet) && per > 0){
+    const marsQ = rec ? Number(rec.qty)||0 : 0;   // an item missing from the Mars sheet = none in Mars
     if(marsQ <= 0){ if(cartons > 0){ cartons = 0; capReason = "nomars"; } }
     else if(cartons*per > marsQ){
       const c = Math.max(0, Math.floor(marsQ/per));
@@ -1886,6 +1887,21 @@ function marsCanSupply(sku){
   if(marsQ <= 0) return false;
   const per = unitPcs(sku);
   return per > 0 ? marsQ >= per : true;
+}
+// Compact stock strip: On Hand (pcs) · in cartons · pack · Mars — used in the list view and the cart.
+function stockStrip(sku, ohQ){
+  ohQ = Number(ohQ)||0;
+  const per = Number(sku.pcPerCs)||0;
+  const cs = ohCartons(ohQ, per);
+  const marsQ = OO.marsStock[sku.artecal] ? Number(OO.marsStock[sku.artecal].qty)||0 : 0;
+  const g = el("div", {class:"cl-grid"});
+  const cell = (cls, k, v, sub) => el("div", {class:"cl-c"+(cls?" "+cls:"")}, [
+    el("span",{class:"k"},[k]), el("span",{class:"v"},[v, sub ? el("small",{},[" "+sub]) : ""]) ]);
+  g.appendChild(cell("oh"+(ohQ<=0?" low":""), t("gridOnHand"), fmtInt(ohQ), t("pieces")));
+  g.appendChild(cell("", t("inCtn"), cs ? cs.text : "—", state.lang==="ar"?"ك":"ctn"));
+  g.appendChild(cell("", t("packShort"), fmtInt(per)));
+  g.appendChild(cell("mars"+(marsCanSupply(sku)?"":" low"), t("marsShort"), fmtInt(marsQ)));
+  return g;
 }
 function isGapItem(sku, ohRec, threshold){
   if(!marsCanSupply(sku)) return false;
@@ -2539,17 +2555,7 @@ function renderItems(){
     // One dense metrics line per row, reading like the sheet the rep already uses:
     // code · on hand · on hand in cartons · stock value.
     li.appendChild(el("div", {class:"lcodes"}, [codePair(sku, "stack")]));
-    const meta = el("div", {class:"rowmeta"+(ohQty<=0?" oos":"")});
-    meta.appendChild(el("span", {}, [t("onHand")+" ", el("b",{},[fmtInt(ohQty)])]));
-    if(cs){
-      meta.appendChild(el("span", {class:"sep"}, ["·"]));
-      meta.appendChild(el("span", {}, [el("b",{},[cs.text]), " "+t("cartons")]));
-    }
-    if(!state.hidePrices){
-      meta.appendChild(el("span", {class:"sep"}, ["·"]));
-      meta.appendChild(el("span", {}, [el("b",{},[fmtMoney(ohQty*(Number(sku.pcPrice)||0))]), " "+curr()]));
-    }
-    li.appendChild(meta);
+    li.appendChild(stockStrip(sku, ohQty));
     const ictl = inactCtl(sku, row); if(ictl) li.appendChild(ictl);
     row.appendChild(li);
 
@@ -2753,21 +2759,7 @@ function renderCart(){
 
     // stock strip: store On Hand (pieces + cartons) · pack size · Mars stock — so the order can be
     // checked against the shelf and Mars without going back to the item list
-    {
-      const ohRec = storeOH[art];
-      const ohQ = ohRec ? Number(ohRec.onHand)||0 : 0;
-      const per = Number(sku.pcPerCs)||0;
-      const cs = ohCartons(ohQ, per);
-      const marsQ = OO.marsStock[art] ? Number(OO.marsStock[art].qty)||0 : 0;
-      const g = el("div", {class:"cl-grid"});
-      const cell = (cls, k, v, sub) => el("div", {class:"cl-c"+(cls?" "+cls:"")}, [
-        el("span",{class:"k"},[k]), el("span",{class:"v"},[v, sub ? el("small",{},[" "+sub]) : ""]) ]);
-      g.appendChild(cell("oh"+(ohQ<=0?" low":""), t("gridOnHand"), fmtInt(ohQ), t("pieces")));
-      g.appendChild(cell("", t("inCtn"), cs ? cs.text : "—", state.lang==="ar"?"ك":"ctn"));
-      g.appendChild(cell("", t("packShort"), fmtInt(per)));
-      g.appendChild(cell("mars"+(marsCanSupply(sku)?"":" low"), t("marsShort"), fmtInt(marsQ)));
-      line.appendChild(g);
-    }
+    { const ohRec = storeOH[art]; line.appendChild(stockStrip(sku, ohRec ? ohRec.onHand : 0)); }
 
     // bottom row: editable carton quantity + live value
     const step = el("div", {class:"cartstep"});
