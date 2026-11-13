@@ -1085,6 +1085,114 @@ html[dir="rtl"] .ia-en[dir="ltr"]{text-align:right;}
 .whatsnew .wn-head-l{flex-direction:row !important;align-items:center !important;flex-wrap:wrap;gap:4px 8px !important;}
 .pinbar .gaptoggle .gt-l{font-size:11.5px !important;}
 .stocksum .hero .big .u{margin:0 !important;}
+
+/* ================= Green pinned bar · balanced hero · smooth scrolling ================= */
+:root{ --fx-deep:#0C3326; --fx-mid:#12503B; --fx-hi:#1B6B4F; --fx-mint:#9FE3C1; --fx-lime:#C9F27E; --fx-ink:#0E2A20; }
+/* no jumpy re-measuring while scrolling (this was the up/down "shake") */
+.itemcard{content-visibility:visible !important;contain:none !important;}
+.content{overflow-anchor:auto !important;}
+
+/* hero: light card with green accents, same family as the pinned bar */
+.stocksum{background:#fff !important;color:var(--fx-ink) !important;border:1px solid #DCE8E1;box-shadow:0 1px 2px rgba(12,51,38,.06) !important;
+  position:relative;overflow:hidden;}
+.stocksum::before{content:"";position:absolute;inset-block:0;inset-inline-start:0;width:4px;background:linear-gradient(180deg,var(--fx-hi),var(--fx-deep));}
+.stocksum .hero{padding:10px 14px !important;}
+.stocksum .hero .lbl{color:#5B7A6C !important;font-size:10.5px !important;font-weight:700;}
+.stocksum .hero .lbl .dotc{background:var(--fx-hi) !important;border-radius:50% !important;width:7px !important;height:7px !important;}
+.stocksum .hero .big{color:var(--fx-deep) !important;font-size:21px !important;letter-spacing:-.3px;}
+.stocksum .hero .big .u{color:#6B8A7C !important;font-size:11.5px !important;font-weight:700;}
+.stocksum .hero .expand{background:#EDF6F1 !important;color:var(--fx-mid) !important;border:1px solid #D3E8DC !important;border-radius:8px !important;padding:6px 10px !important;}
+.stocksum .body{background:#F7FBF9 !important;border-top:1px solid #E3EEE8 !important;}
+.stocksum .body .nm,.stocksum .body .vl{color:var(--fx-ink) !important;}
+.stocksum .body .bar{background:#E3EEE8 !important;}
+.stocksum .moneytoggle{color:#5B7A6C !important;}
+
+/* pinned bar: deep forest gradient with a soft sheen */
+.pinbar{background:
+    radial-gradient(120% 140% at 100% 0%, rgba(201,242,126,.16) 0%, rgba(201,242,126,0) 45%),
+    linear-gradient(135deg, var(--fx-deep) 0%, var(--fx-mid) 58%, var(--fx-hi) 100%) !important;
+  border-radius:0 0 16px 16px;padding:8px 14px 9px !important;gap:7px !important;box-shadow:0 8px 18px -12px rgba(12,51,38,.65) !important;
+  -webkit-transform:translateZ(0);transform:translateZ(0);}
+.pinbar .pin-row{display:flex;gap:6px;align-items:stretch;}
+.pin-seg{flex:1;min-width:0;display:flex;gap:3px;padding:3px;border-radius:11px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.12);}
+.ps-btn{flex:1;min-width:0;display:flex;align-items:center;justify-content:center;gap:5px;border:none;border-radius:8px;background:transparent;
+  color:rgba(255,255,255,.78);font-family:inherit;font-weight:800;font-size:12px;padding:6px 6px;cursor:pointer;white-space:nowrap;}
+.ps-btn .ps-l{overflow:hidden;text-overflow:ellipsis;}
+.ps-btn .ps-n{font-family:var(--font-mono);font-size:10.5px;padding:1px 6px;border-radius:9px;background:rgba(255,255,255,.14);}
+.ps-btn .ps-dot{width:7px;height:7px;border-radius:50%;background:var(--fx-lime);box-shadow:0 0 0 3px rgba(201,242,126,.18);flex-shrink:0;}
+.ps-btn .ps-ic{display:flex;gap:2px;flex-shrink:0;} .ps-btn .ps-ic i{width:3px;height:10px;border-radius:1px;background:currentColor;}
+.ps-btn.sel{background:#fff;color:var(--fx-deep);box-shadow:0 1px 3px rgba(0,0,0,.18);}
+.ps-btn.sel .ps-n{background:#E7F3EC;color:var(--fx-mid);}
+.ps-btn.ps-off.sel{color:#334155;} .ps-btn.ps-off.sel .ps-n{background:#EEF1F4;color:#334155;}
+.pinbar .gapbar{display:block;flex-shrink:0;}
+.pinbar .gaptoggle{height:100% !important;min-height:36px;padding:0 10px !important;border-radius:11px !important;gap:5px;
+  background:rgba(255,255,255,.09) !important;border:1px solid rgba(255,255,255,.16) !important;color:#fff;}
+.pinbar .gaptoggle .gt-ic{color:var(--fx-mint) !important;}
+.pinbar .gaptoggle .gt-l{color:#fff !important;font-size:12px !important;}
+.pinbar .gaptoggle .gt-n{background:rgba(255,255,255,.16) !important;color:#fff !important;}
+.pinbar .gaptoggle.on{background:var(--fx-lime) !important;border-color:var(--fx-lime) !important;}
+.pinbar .gaptoggle.on .gt-ic,.pinbar .gaptoggle.on .gt-l{color:var(--fx-deep) !important;}
+.pinbar .gaptoggle.on .gt-n{background:var(--fx-deep) !important;color:#fff !important;}
+.pinbar .sr-box .sr-input{height:38px !important;border:none !important;background:#fff !important;box-shadow:0 1px 2px rgba(0,0,0,.15) !important;font-size:14.5px !important;}
+.pinbar .sr-box .sr-input:focus{box-shadow:0 0 0 3px rgba(201,242,126,.55) !important;}
+.pinbar .sr-box svg{color:var(--fx-mid) !important;}
+
+/* categories: clear, even chips */
+.pinbar .catgrid{display:flex !important;flex-wrap:wrap;gap:5px !important;}
+.pinbar .catgrid .chip{height:28px;padding:0 10px !important;font-size:12px !important;font-weight:700;border-radius:8px !important;gap:6px !important;
+  background:rgba(255,255,255,.08) !important;border:1px solid rgba(255,255,255,.16) !important;color:#EAF5EF !important;}
+.pinbar .catgrid .chip .sw{width:8px !important;height:8px !important;box-shadow:0 0 0 2px rgba(255,255,255,.18);}
+.pinbar .catgrid .chip.active{background:#fff !important;border-color:#fff !important;color:var(--fx-deep) !important;box-shadow:0 2px 6px -2px rgba(0,0,0,.35);}
+.pinbar .catgrid .chip.active .sw{box-shadow:none;}
+.pinbar .catgrid .chip .chip-n{background:rgba(255,255,255,.16) !important;color:inherit;}
+.pinbar .catgrid .chip.active .chip-n{background:#E7F3EC !important;}
+@media (max-width:380px){
+  .pinbar .catgrid{gap:4px !important;}
+  .pinbar .catgrid .chip{height:27px;padding:0 8px !important;font-size:11.5px !important;gap:5px !important;}
+  .ps-btn{font-size:11.5px;gap:4px;} .pinbar .gaptoggle .gt-l{font-size:11.5px !important;}
+}
+
+/* tighter pinned bar: two rows of categories */
+.pinbar{padding:7px 12px 8px !important;gap:6px !important;margin:0 -14px !important;}
+.pin-seg{padding:2px;}
+.ps-btn{padding:5px 6px;}
+.pinbar .gaptoggle{min-height:32px;}
+.pinbar .sr-box .sr-input{height:36px !important;}
+.pinbar .catgrid{gap:4px !important;}
+.pinbar .catgrid .chip{flex:1 1 auto;justify-content:center;height:26px;padding:0 7px !important;font-size:11.5px !important;gap:5px !important;}
+.pinbar .catgrid .chip .sw{width:7px !important;height:7px !important;}
+@media (max-width:380px){ .pinbar .catgrid .chip{padding:0 6px !important;font-size:11px !important;gap:4px !important;} .pinbar .catgrid .chip .sw{width:6px !important;height:6px !important;box-shadow:none;} }
+@media (max-width:380px){ .pinbar .gaptoggle .gt-l{display:none !important;} .pinbar .gaptoggle{padding:0 8px !important;} }
+
+/* ================= Fixed green header (top bar + total + filters), lighter list ================= */
+:root{ --fx-grad: linear-gradient(90deg, #0B3226 0%, #104536 50%, #155B45 100%); }
+.topbar{background:var(--fx-grad) !important;}
+.topbar::after{display:none !important;}
+.topbar .iconbtn,.topbar .langpill{background:rgba(255,255,255,.08) !important;border-color:rgba(255,255,255,.14) !important;}
+.topbar .t2{color:#A9D5BF !important;}
+.fxhead{flex-shrink:0;position:relative;z-index:18;background:var(--fx-grad);padding:0 12px 9px;border-radius:0 0 18px 18px;
+  box-shadow:0 6px 14px -10px rgba(11,50,38,.7);display:flex;flex-direction:column;gap:7px;}
+.fxhead::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:radial-gradient(90% 120% at 100% 100%, rgba(201,242,126,.13) 0%, rgba(201,242,126,0) 55%);}
+.fxhead > *{position:relative;}
+/* total: one slim line inside the header */
+.fxhead .stocksum.in-head{background:rgba(255,255,255,.07) !important;border:1px solid rgba(255,255,255,.12) !important;border-radius:12px !important;box-shadow:none !important;color:#fff !important;}
+.fxhead .stocksum.in-head::before{display:none;}
+.fxhead .stocksum.in-head .hero{padding:6px 10px !important;display:flex !important;align-items:center;gap:8px;}
+.fxhead .stocksum.in-head .hero .lbl{color:#A9D5BF !important;font-size:11px !important;flex:1;min-width:0;white-space:nowrap;overflow:hidden;}
+.fxhead .stocksum.in-head .hero .lbl .lbltxt{overflow:hidden;text-overflow:ellipsis;}
+.fxhead .stocksum.in-head .hero .lbl .dotc{background:var(--fx-lime,#C9F27E) !important;}
+.fxhead .stocksum.in-head .hero .big{color:#fff !important;font-size:18px !important;margin:0 !important;order:2;}
+.fxhead .stocksum.in-head .hero .big .u{color:#A9D5BF !important;font-size:11px !important;}
+.fxhead .stocksum.in-head .hero .expand{order:3;background:rgba(255,255,255,.12) !important;color:#fff !important;border:none !important;padding:5px 8px !important;font-size:10.5px !important;}
+.fxhead .stocksum.in-head .body{background:#fff !important;border-radius:0 0 11px 11px;border-top:none !important;}
+/* the bar inside the fixed header: no sticky, no own background */
+.fxhead .pinbar{position:static !important;margin:0 !important;padding:0 !important;background:none !important;box-shadow:none !important;border-radius:0 !important;transform:none !important;-webkit-transform:none !important;}
+.content{padding-top:10px !important;}
+.list-sentinel{height:1px;}
+/* lighter cards: flat, no heavy shadows */
+.itemcard{box-shadow:none !important;}
+.pinbar .gaptoggle .gt-n{min-width:20px;text-align:center;}
 </style>
 </head>
 <body>
@@ -1174,7 +1282,7 @@ const I18N = {
     noNeed:"لا يحتاج طلب", suggestHint:"مقترح حسب حد الرف",
     marsLimited:"محدود بمخزون مارس", marsNone:"غير متوفر في مارس", marsPartial:"مخزون مارس أقل من كرتون",
     viewOrder:"شاشة الطلب", viewList:"قائمة مجمّعة",
-    stockValue:"قيمة المخزون", storeStockTitle:"إجمالي مخزون المتجر (Onhand)", skuCount:"صنف", byCategory:"تفصيل بالفئة",
+    stockValue:"قيمة المخزون", storeStockTitle:"إجمالي المخزون", skuCount:"صنف", byCategory:"تفصيل بالفئة",
     hidePrices:"إخفاء الأسعار", afterOrder:"بعد الطلب", shelfMax:"حد الرف",
     warnAboveMax:"أعلى من حد الرف بكثير", warnAboveMars:"أكبر من مخزون مارس المتاح",
     priceLbl:"سعر الكرتون", onHandPcCol:"الموجود (قطعة)", onHandCsCol:"الموجود (كرتون)",
@@ -1293,7 +1401,7 @@ const I18N = {
     noNeed:"No order needed", suggestHint:"Suggested from shelf max",
     marsLimited:"Capped by Mars stock", marsNone:"Not in Mars stock", marsPartial:"Mars stock below 1 carton",
     viewOrder:"Order view", viewList:"Grouped list",
-    stockValue:"Stock value", storeStockTitle:"Total store stock (On Hand)", skuCount:"SKUs", byCategory:"By category",
+    stockValue:"Stock value", storeStockTitle:"Total stock", skuCount:"SKUs", byCategory:"By category",
     hidePrices:"Hide prices", afterOrder:"After order", shelfMax:"Shelf max",
     warnAboveMax:"Well above shelf max", warnAboveMars:"Exceeds available Mars stock",
     priceLbl:"Carton Price", onHandPcCol:"On Hand (PC)", onHandCsCol:"On Hand (CTN)",
@@ -2583,8 +2691,12 @@ function renderItems(){
   const content = el("div", {class:"content", style:"gap:10px;"});
   const onHand = OO.onHand[String(store.storeNo)] || {};
 
+  // Fixed header under the top bar — never scrolls away, the list scrolls under it.
+  const head = el("div", {class:"fxhead"});
+  s.appendChild(head);
   const hero = renderStockSummary(store, (cat) => { state.category = cat; drawChips(); drawList(); });
-  content.appendChild(hero);
+  hero.classList.add("in-head");
+  head.appendChild(hero);
 
   const wn = renderStoreWhatsNew(store);
   if(wn) content.appendChild(wn);
@@ -2601,9 +2713,9 @@ function renderItems(){
   const srBox = el("div", {class:"searchbox sr-box"}, [svgIcon("search"), search, clearBtn]);
   const gapBar = el("div", {class:"gapbar"});
   const chips = el("div", {class:"chiprow catgrid"});
-  const offBtn = el("button", {class:"offbtn", type:"button", onclick:() => pickInactive(!state.showInactive)});
-  const pin = el("div", {class:"pinbar"}, [ el("div",{class:"pin-row"},[srBox, gapBar, offBtn]), chips ]);
-  content.appendChild(pin);
+  const statusSeg = el("div", {class:"pin-seg"});
+  const pin = el("div", {class:"pinbar"}, [ el("div",{class:"pin-row"},[statusSeg, gapBar]), srBox, chips ]);
+  head.appendChild(pin);
   const gapMore = el("div", {class:"gapmore"});
   const hintBox = el("div", {class:"cp-hint"});
   content.appendChild(gapMore);
@@ -2618,6 +2730,12 @@ function renderItems(){
     drawActBar(); drawGapBar(); drawChips(); drawList();
   }
   function drawActBar(){
+    statusSeg.innerHTML = "";
+    const nOff = inactiveCount(), nOn = OO.skus.length - nOff;
+    statusSeg.appendChild(el("button", {class:"ps-btn ps-on"+(!state.showInactive?" sel":""), type:"button", onclick:() => pickInactive(false)}, [
+      el("span",{class:"ps-dot"}), el("span",{class:"ps-l"},[t("actShort")]), el("span",{class:"ps-n"},[fmtInt(nOn)]) ]));
+    statusSeg.appendChild(el("button", {class:"ps-btn ps-off"+(state.showInactive?" sel":""), type:"button", onclick:() => pickInactive(true)}, [
+      el("span",{class:"ps-ic"},[el("i"),el("i")]), el("span",{class:"ps-l"},[t("inactShort")]), el("span",{class:"ps-n"},[fmtInt(nOff)]) ]));
     const hint = state.showInactive ? t(isManager() ? "inactViewMgr" : "inactViewRep") : (isManager() ? t("inactActiveMgr") : "");
     hintBox.innerHTML = ""; hintBox.hidden = !hint;
     if(hint) hintBox.appendChild(el("div", {class:"as-hint"+(state.showInactive?" off":"")}, [hint]));
@@ -2644,15 +2762,16 @@ function renderItems(){
   function storeGapCount(){ let n=0; OO.skus.forEach(sk=>{ if(!isInactive(sk) && isGapItem(sk, onHand[sk.artecal], state.gapThreshold)) n++; }); return n; }
   function drawGapBar(){
     gapBar.innerHTML = ""; gapMore.innerHTML = "";
-    gapBar.hidden = !!state.showInactive;
-    if(state.showInactive) return;   // the opportunity filter is for the active list only
     const count = storeGapCount();
-    const btn = el("button", {class:"gaptoggle"+(state.gapOnly?" on":""), title:t("gapFilter"), onclick:()=>{ state.gapOnly=!state.gapOnly; drawGapBar(); drawList(); }}, [
+    const onOpp = state.gapOnly && !state.showInactive;
+    const btn = el("button", {class:"gaptoggle"+(onOpp?" on":""), title:t("gapFilter"), onclick:()=>{
+      if(state.showInactive){ state.showInactive = false; state.category = "all"; state.gapOnly = true; drawActBar(); drawGapBar(); drawChips(); drawList(); return; }
+      state.gapOnly=!state.gapOnly; drawGapBar(); drawList(); }}, [
       el("span",{class:"gt-ic", html:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/></svg>'}),
       el("span",{class:"gt-l"},[t("gapShort")]), el("span",{class:"gt-n"},[fmtInt(count)])
     ]);
     gapBar.appendChild(btn);
-    if(state.gapOnly){
+    if(onOpp){
       const ctrl = el("div", {class:"gapthresh"});
       ctrl.appendChild(el("span",{class:"gt-cap"},[t("gapThreshLabel")]));
       [0,1,2,3].forEach(n=>ctrl.appendChild(el("button",{class:"gt-opt"+(state.gapThreshold===n?" on":""),
@@ -2723,13 +2842,7 @@ function renderItems(){
       chips.appendChild(chip);
     });
     // inactive items: one chip at the end (tap again to go back to the active items)
-    const nOff = inactiveCount();
-    offBtn.innerHTML = ""; offBtn.hidden = !(nOff || state.showInactive);
-    offBtn.classList.toggle("on", !!state.showInactive);
-    offBtn.title = t("inactiveItems");
-    offBtn.appendChild(el("span",{class:"off-ic"},[el("i"),el("i")]));
-    offBtn.appendChild(el("span",{class:"off-l"},[t("inactShort")]));
-    offBtn.appendChild(el("span",{class:"off-n"},[fmtInt(nOff)]));
+    // (active / inactive counts live in the status switch above)
     if(hero._paint) hero._paint();  // keep the hero total in sync with the active category
   }
 
@@ -2739,6 +2852,7 @@ function renderItems(){
   let drawToken = 0;   // cancels a half-finished chunked draw when a newer draw starts
   function drawList(){
     const myToken = ++drawToken;
+    if(content.scrollTop > 0) content.scrollTop = 0;   // a new filter / search starts from the top
     // keep the old height until the new results are in, so the page doesn't jump while typing
     list.style.minHeight = list.offsetHeight + "px";
     list.innerHTML = "";
@@ -2765,15 +2879,27 @@ function renderItems(){
     if(state.viewMode === "list"){ const sc = new Map(hits.map(x => [x[1], x[0]])); drawGrouped(filtered, P, sc); return; }
     // Paint the first cards right away, then stream the rest across animation frames so opening a
     // store / switching a category feels instant instead of freezing on ~300 cards at once.
-    const CHUNK = 26; let i = 0;
-    (function step(){
+    // Light: only the first cards are built; the next batch is built as the rep scrolls near the end.
+    const CHUNK = 20; let i = 0;
+    if(list._io){ list._io.disconnect(); list._io = null; }
+    const sentinel = el("div", {class:"list-sentinel"});
+    function step(){
       if(myToken !== drawToken) return;   // a newer draw replaced this one — stop
       const frag = document.createDocumentFragment();
       const end = Math.min(i + CHUNK, filtered.length);
       for(; i < end; i++){ const c = renderItemCard(filtered[i], onHand[filtered[i].artecal], i+1); srHighlight(c, P); frag.appendChild(c); }
+      sentinel.remove();
       list.appendChild(frag);
-      if(i < filtered.length) (window.requestAnimationFrame || window.setTimeout)(step);
-    })();
+      if(i < filtered.length) list.appendChild(sentinel);
+      else if(list._io){ list._io.disconnect(); list._io = null; }
+    }
+    step();
+    if(i < filtered.length){
+      if("IntersectionObserver" in window){
+        list._io = new IntersectionObserver((en) => { if(en.some(e => e.isIntersecting)) step(); }, { root: content, rootMargin: "900px 0px" });
+        list._io.observe(sentinel);
+      } else { (function rest(){ if(myToken !== drawToken || i >= filtered.length) return; step(); setTimeout(rest, 30); })(); }
+    }
   }
 
   // Result summary under the search box: how many, where they are, and one-tap jumps.
