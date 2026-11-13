@@ -753,6 +753,49 @@ html[lang="en"] .itemcard .codes .cp i{font-size:8px;min-width:46px;}
 .af-chip .af-x{width:16px;height:16px;border-radius:50%;background:#EEF1EF;color:#4B5563;display:flex;align-items:center;justify-content:center;font-size:13px;line-height:1;}
 .ctrlpanel[hidden]{display:none;}
 .sr-sum:not(.on){display:none;}
+
+/* ================= Balanced header + pinned category bar ================= */
+.stocksum{border-radius:12px !important;}
+.stocksum .hero{padding:9px 12px !important;display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto;column-gap:10px;align-items:center;}
+.stocksum .hero .lbl{grid-column:1;grid-row:1;font-size:10.5px !important;}
+.stocksum .hero .big{grid-column:1;grid-row:2;font-size:19px !important;margin-top:1px !important;display:flex;align-items:baseline;gap:6px;}
+.stocksum .hero .big .u{font-size:11px !important;}
+.stocksum .hero .sub{display:none !important;}
+.stocksum .hero .expand{position:static !important;grid-column:2;grid-row:1 / span 2;align-self:center;}
+.whatsnew .wn-head{padding:7px 11px !important;}
+.whatsnew .wn-title{font-size:12px !important;}
+
+.pinbar{position:sticky;top:-14px;z-index:15;margin:0 -14px;padding:6px 14px 7px;background:var(--bg);display:flex;flex-direction:column;gap:6px;
+  box-shadow:0 6px 8px -8px rgba(16,24,20,.25);}
+.pinbar .pin-row{display:flex;gap:6px;align-items:stretch;}
+.pinbar .sr-box{flex:1;min-width:0;}
+.pinbar .sr-box .sr-input{height:38px !important;font-size:14.5px !important;border-radius:10px !important;}
+.pinbar .sr-box .sr-clear{width:26px;height:26px;font-size:17px;}
+.pinbar .gapbar{display:block;flex-shrink:0;}
+.pinbar .gapbar[hidden]{display:none;}
+.pinbar .gaptoggle{height:38px;width:auto;padding:0 9px;gap:5px;border-radius:10px;border:1.5px solid #D5DBD8;background:#fff;}
+.pinbar .gaptoggle .gt-ic{display:flex;color:#2563EB;}
+.pinbar .gaptoggle .gt-ic svg{width:15px;height:15px;}
+.pinbar .gaptoggle .gt-l{font-size:12px;flex:none;white-space:nowrap;}
+.pinbar .gaptoggle .gt-n{font-size:10.5px;padding:1px 6px;}
+.pinbar .gaptoggle.on{border-color:#2563EB;background:#EFF4FF;}
+.pinbar .catgrid{display:flex;flex-wrap:wrap;gap:4px;overflow:visible;padding:0;}
+.pinbar .catgrid .chip{padding:4px 9px;font-size:11px;line-height:1.3;border-width:1px;border-radius:7px;gap:4px;background:#fff;border-color:#E1E6E3;color:#374151;}
+.pinbar .catgrid .chip .sw{width:6px;height:6px;}
+.pinbar .catgrid .chip.active{color:#fff;background:#1F2933;border-color:#1F2933;}
+.pinbar .catgrid .chip .chip-n{font-size:9.5px;padding:0 5px;}
+.pinbar .catgrid .chip.chip-off{border-style:dashed;color:#64748B;}
+.pinbar .catgrid .chip.chip-off .off-ic{font-size:7px;letter-spacing:-1px;}
+.pinbar .catgrid .chip.chip-off.on{background:#475569;border-color:#475569;border-style:solid;color:#fff;}
+.gapmore{display:flex;}
+.gapmore:empty,.cp-hint:empty,.cp-hint[hidden]{display:none;}
+.gapmore .gapthresh{display:flex;align-items:center;gap:5px;flex-wrap:wrap;}
+.gapmore .gt-opt{min-width:30px;height:26px;font-size:12px;}
+.cp-hint .as-hint{font-size:10.5px;padding:5px 9px;border-radius:8px;line-height:1.45;}
+
+/* tighter item cards so more of them fit under the pinned bar */
+.itemcard{padding:9px 10px !important;gap:7px !important;}
+.itemcard .ic-grid .cell,.itemcard .ic-grid > div{padding-top:4px !important;padding-bottom:4px !important;}
 /* ---- Clearer numbers ---- */
 body{font-variant-numeric:tabular-nums;}
 .itemcard .ic-grid .cell{padding:8px 3px 7px;}
@@ -1011,6 +1054,37 @@ html[dir="rtl"] .ia-en[dir="ltr"]{text-align:right;}
 .ia-res{font-size:12px;font-weight:700;margin-top:8px;min-height:14px;}
 .ia-res.ok{color:#067F3E;} .ia-res.warn{color:var(--amber);}
 
+
+/* ===== final: compact pinned bar + compact cards (4–5 items visible while pinned) ===== */
+.pinbar{gap:5px !important;padding:6px 14px 6px !important;}
+.pinbar .pin-row{gap:5px;}
+.pinbar .gaptoggle{padding:0 8px !important;}
+.pinbar .offbtn{flex-shrink:0;display:flex;align-items:center;gap:4px;height:38px;padding:0 8px;border-radius:10px;border:1.5px dashed #C7CED3;background:#fff;
+  color:#64748B;font-family:inherit;font-weight:800;font-size:11.5px;cursor:pointer;}
+.pinbar .offbtn[hidden]{display:none;}
+.pinbar .offbtn .off-ic{display:flex;gap:2px;}
+.pinbar .offbtn .off-ic i{width:3px;height:10px;border-radius:1px;background:currentColor;}
+.pinbar .offbtn .off-n{font-family:var(--font-mono);font-size:10.5px;background:#EEF1F4;border-radius:9px;padding:1px 6px;}
+.pinbar .offbtn.on{background:#475569;border:1.5px solid #475569;color:#fff;}
+.pinbar .offbtn.on .off-n{background:rgba(255,255,255,.2);}
+@media (max-width:400px){ .pinbar .offbtn .off-l{display:none;} }
+.pinbar .catgrid{gap:4px !important;}
+.pinbar .catgrid .chip{padding:3px 8px !important;font-size:11px !important;}
+@media (max-width:380px){ .pinbar .catgrid{gap:3px !important;} .pinbar .catgrid .chip{padding:3px 6px !important;font-size:10.5px !important;gap:3px !important;} .pinbar .catgrid .chip .sw{width:5px !important;height:5px !important;} }
+
+.itemcard{gap:6px !important;}
+.itemcard .ic-warn[hidden],.itemcard .ic-warn:empty{display:none !important;}
+.itemcard .ic-grid .cell{padding:4px 3px 4px !important;}
+.itemcard .ic-grid .cell .k{font-size:9.5px !important;}
+.itemcard .ic-grid .cell .v{font-size:15.5px !important;margin-top:2px !important;}
+.itemcard .codes .cpair.stack{gap:3px !important;}
+.itemcard .codes .cp b{padding:2px 7px !important;font-size:12px !important;}
+.itemcard .step button,.itemcard .step input{height:30px !important;}
+.itemcard .ic-order .sugchip{padding-top:3px !important;padding-bottom:3px !important;}
+.stocksum .hero .big{justify-content:flex-start !important;}
+.whatsnew .wn-head-l{flex-direction:row !important;align-items:center !important;flex-wrap:wrap;gap:4px 8px !important;}
+.pinbar .gaptoggle .gt-l{font-size:11.5px !important;}
+.stocksum .hero .big .u{margin:0 !important;}
 </style>
 </head>
 <body>
@@ -1072,7 +1146,7 @@ const I18N = {
     badPin:"الرقم السري غير صحيح", enterUser:"أدخل رقم المستخدم الخاص بك",
     stockUpdated:"مخزون مارس", onhandUpdated:"On Hand", updatedAt:"آخر تحديث",
     myStores:"متاجري", searchStores:"ابحث عن متجر...",
-    filters:"تصفية", xsTabStores:"المتاجر", xsTabItem:"بحث صنف في كل المتاجر", xsPh:"اسم الصنف وحجمه (مثال: جواهر 850 جرام)",
+    filters:"تصفية", gapShort:"الفرص", xsTabStores:"المتاجر", xsTabItem:"بحث صنف في كل المتاجر", xsPh:"اسم الصنف وحجمه (مثال: جواهر 850 جرام)",
     xsHint:"اكتب أو قل اسم الصنف وحجمه، وتظهر كمية الموجود منه في كل متجر من متاجرك مرة واحدة.",
     xsItems:"صنف", xsIn:"موجود في", xsOf:"من", xsStores:"متاجر", xsTotal:"إجمالي الموجود", xsOpen:"اضغط على أي متجر لفتحه على هذا الصنف",
     xsMore:"عرض أصناف أكثر", xsNone:"لا يوجد صنف بهذا الاسم", logout:"خروج",
@@ -1140,7 +1214,7 @@ const I18N = {
     codeInFile:"كود العثيم في الملف", codeNew:"الكود الجديد", codeOld:"الكود القديم", codeEg:"مثال",
     savedOrders:"الطلبات المحفوظة (آخر 30 يوم)", histNote:"كل طلب محفوظ 30 يومًا ويُحذف تلقائيًا بعدها. تقدر تنزّل ملفه بالكود الجديد أو القديم.",
     histLeft:"يُحذف بعد {n} يوم", pdfNew:"PDF · الكود الجديد", pdfOld:"PDF · الكود القديم",
-    srPh:"ابحث بالاسم أو الكود أو الحجم", voiceBtn:"بحث صوتي", voiceListening:"تكلّم الآن… قل اسم الصنف", voiceNo:"البحث الصوتي غير مدعوم على هذا المتصفح — استخدم ميكروفون الكيبورد", voiceDenied:"اسمح للتطبيق باستخدام الميكروفون من إعدادات المتصفح", voiceNoSpeech:"لم أسمع شيئًا، حاول مرة أخرى", voiceHeard:"لم أجد صنفًا لـ", srClear:"مسح البحث", srResults:"نتيجة", srResult1:"نتيجة واحدة",
+    srPh:"ابحث عن صنف…", voiceBtn:"بحث صوتي", voiceListening:"تكلّم الآن… قل اسم الصنف", voiceNo:"البحث الصوتي غير مدعوم على هذا المتصفح — استخدم ميكروفون الكيبورد", voiceDenied:"اسمح للتطبيق باستخدام الميكروفون من إعدادات المتصفح", voiceNoSpeech:"لم أسمع شيئًا، حاول مرة أخرى", voiceHeard:"لم أجد صنفًا لـ", srClear:"مسح البحث", srResults:"نتيجة", srResult1:"نتيجة واحدة",
     srFuzzy:"لا يوجد تطابق تام — هذه أقرب النتائج", srNone:"لا توجد نتائج لـ",
     srTip:"جرّب جزءًا من الاسم (سنيك)، أو الكود الجديد أو القديم (605 أو 81380)، أو الحجم (150 أو 150ج).",
     srOtherCat:"نتائج في فئات أخرى", srShowAll:"عرض الكل", srInInactive:"في الأصناف غير النشطة", srInActive:"في الأصناف النشطة", srShow:"عرض", oldTag:"قديم", oldCodeT:"رقم الصنف في نظام العثيم القديم", outerTag:"OUTER", outerHint:"يُطلب بالأوتر", totalOuters:"إجمالي الأوتر",
@@ -1191,7 +1265,7 @@ const I18N = {
     badPin:"Incorrect PIN", enterUser:"Enter your user number",
     stockUpdated:"Mars Stock", onhandUpdated:"On Hand", updatedAt:"Last updated",
     myStores:"My Stores", searchStores:"Search stores...",
-    filters:"Filters", xsTabStores:"Stores", xsTabItem:"Find an item in all stores", xsPh:"Item name and size (e.g. jewels 850g)",
+    filters:"Filters", gapShort:"Opps", xsTabStores:"Stores", xsTabItem:"Find an item in all stores", xsPh:"Item name and size (e.g. jewels 850g)",
     xsHint:"Type or say the item and size to see its On Hand in every one of your stores at once.",
     xsItems:"items", xsIn:"in", xsOf:"of", xsStores:"stores", xsTotal:"Total on hand", xsOpen:"Tap a store to open it on this item",
     xsMore:"Show more items", xsNone:"No item matches", logout:"Logout",
@@ -1259,7 +1333,7 @@ const I18N = {
     codeInFile:"Othaim code in the file", codeNew:"New code", codeOld:"Old code", codeEg:"e.g.",
     savedOrders:"Saved orders (last 30 days)", histNote:"Each order is kept for 30 days, then deleted automatically. Download its file with the new or the old code.",
     histLeft:"deleted in {n} days", pdfNew:"PDF · New code", pdfOld:"PDF · Old code",
-    srPh:"Search name, code or size", voiceBtn:"Voice search", voiceListening:"Speak now… say the item name", voiceNo:"Voice search isn’t supported in this browser — use the keyboard mic", voiceDenied:"Allow microphone access in the browser settings", voiceNoSpeech:"Didn’t hear anything, try again", voiceHeard:"No item found for", srClear:"Clear search", srResults:"results", srResult1:"1 result",
+    srPh:"Search items…", voiceBtn:"Voice search", voiceListening:"Speak now… say the item name", voiceNo:"Voice search isn’t supported in this browser — use the keyboard mic", voiceDenied:"Allow microphone access in the browser settings", voiceNoSpeech:"Didn’t hear anything, try again", voiceHeard:"No item found for", srClear:"Clear search", srResults:"results", srResult1:"1 result",
     srFuzzy:"No exact match — closest results", srNone:"No results for",
     srTip:"Try part of the name (snick), the new or old code (605 or 81380), or a size (150 or 150g).",
     srOtherCat:"More in other categories", srShowAll:"Show all", srInInactive:"in inactive items", srInActive:"in active items", srShow:"Show", oldTag:"OLD", oldCodeT:"Item number in Othaim\u2019s old system", outerTag:"OUTER", outerHint:"Ordered by outer", totalOuters:"Total Outers",
@@ -1713,8 +1787,7 @@ function _svgRaw(inner){
    / old / ZREP code, or a size ("150", "150g", "150ج", "١٥٠ جم"). Typos and the data's own
    spelling variants (سنكرز/سنيكرز, شوكولاته/شوكولاتة, SKT = Skittles) are tolerated. */
 const SR_UNITS = { g:"g", gm:"g", gr:"g", grm:"g", gram:"g", grams:"g", "ج":"g", "جم":"g", "جرام":"g", "غ":"g", "غم":"g", "غرام":"g",
-  "قرام":"g", "قرامات":"g", "جرامات":"g", "غرامات":"g", "جراما":"g", "grams.":"g", "gms":"g",
-  kg:"kg", "كجم":"kg", "كيلوجرام":"kg", "kilo":"kg", "kilos":"kg", "كغ":"kg", "كيلو":"kg", "ك":"kg", ml:"ml", "مل":"ml", "ملي":"ml", "مللي":"ml", "ملل":"ml", "مليلتر":"ml", l:"l", "لتر":"l" };
+  kg:"kg", "كجم":"kg", "كغ":"kg", "كيلو":"kg", "ك":"kg", ml:"ml", "مل":"ml", "ملي":"ml", l:"l", "لتر":"l" };
 // Brand words in both languages + the abbreviations used in the English item names.
 const SR_BRAND = {
   "galaxy":"جالكسي جلكسي glxy", "whiskas":"ويسكاس whi", "extra":"اكسترا ext ريجليز wrigleys", "snickers":"سنيكرز سنكرز snk",
@@ -1732,64 +1805,6 @@ const SR_SYN = [
   ["biscuit","بسكويت"], ["watermelon","بطيخ"], ["peach","خوخ"], ["coconut","جوز","هند"], ["box","علبه","بوكس"], ["bag","كيس"],
   ["cake","كيك"], ["protein","بروتين"], ["jelly","جلي"], ["pouch","pou","بوتش"] ];
 const SR_SYN_MAP = (() => { const m = {}; SR_SYN.forEach(g => g.forEach(w => { m[w] = g; })); return m; })();
-
-
-/* ---- Sound-alike matching (voice search & misspellings) ----
-   Every word is reduced to a rough consonant "sound key" that is the same in both scripts:
-   سنيكرز / snickers / snikers → snkrs,  جالكسي / galaxy / glaxi → jlks,  سكتلز / skittles → sktls.
-   Vowels are dropped and letters people swap when speaking (b/p, f/v, k/c/q, s/z/x, t/d, g/j) are merged. */
-const SR_AR2LAT = { "ا":"a","ب":"b","ت":"t","ث":"s","ج":"j","ح":"h","خ":"k","د":"d","ذ":"z","ر":"r","ز":"z","س":"s","ش":"s",
-  "ص":"s","ض":"d","ط":"t","ظ":"z","ع":"","غ":"g","ف":"f","ق":"k","ك":"k","ل":"l","م":"m","ن":"n","ه":"h","و":"w","ي":"y","ء":"" };
-function srPKey(w){
-  w = String(w||"").toLowerCase();
-  if(/[؀-ۿ]/.test(w)){
-    w = w.replace(/تش/g, "s").replace(/ء/g, "");
-    let o = ""; for(const c of w) o += (SR_AR2LAT[c] !== undefined ? SR_AR2LAT[c] : (/[a-z]/.test(c) ? c : "")); w = o;
-  } else {
-    w = w.replace(/[^a-z]/g, "").replace(/ph/g, "f").replace(/ck/g, "k").replace(/ch|sh/g, "s").replace(/th/g, "t")
-         .replace(/qu/g, "k").replace(/x/g, "ks").replace(/c(?=[eiy])/g, "s").replace(/c/g, "k");
-  }
-  w = w.replace(/[qc]/g, "k").replace(/[zx]/g, "s").replace(/v/g, "f").replace(/p/g, "b").replace(/d/g, "t").replace(/g/g, "j")
-       .replace(/[aeiouwyh]/g, "");
-  return w.replace(/(.)\1+/g, "$1");
-}
-// Spoken Arabic numbers → digits ("مية وخمسين جرام" → "150 جرام", "نص كيلو" → "500 g")
-const SR_NUMW = (() => {
-  const m = {}; const add = (v, ws) => ws.split(" ").forEach(w => m[w] = v);
-  add(1,"واحد واحده"); add(2,"اثنين اتنين اثنان ثنين"); add(3,"ثلاث ثلاثه تلات تلاته"); add(4,"اربع اربعه");
-  add(5,"خمس خمسه"); add(6,"ست سته"); add(7,"سبع سبعه"); add(8,"ثمان ثماني ثمانيه تمان تمانيه ثمنيه");
-  add(9,"تسع تسعه"); add(10,"عشر عشره"); add(11,"احدعش حدعش احدعشر"); add(12,"اثنعش اطنعش اتنعش اثنعشر");
-  add(13,"ثلطعش تلتاشر"); add(14,"اربعطعش اربعتعش اربعتاشر"); add(15,"خمسطعش خمستعش خمستاشر"); add(16,"ستعش سطعش ستاشر");
-  add(17,"سبعطعش سبعتعش سبعتاشر"); add(18,"ثمنطعش ثمنتعش طمنطعش تمنتاشر"); add(19,"تسعطعش تسعتعش تسعتاشر");
-  add(20,"عشرين عشرون"); add(30,"ثلاثين تلاتين ثلاثون"); add(40,"اربعين اربعون"); add(50,"خمسين خمسون");
-  add(60,"ستين ستون"); add(70,"سبعين سبعون"); add(80,"ثمانين تمانين ثمانون"); add(90,"تسعين تسعون");
-  add(100,"ميه مايه مئه مائه ميت"); add(200,"ميتين مئتين مائتين ميتان"); add(300,"ثلاثميه تلتميه ثلثميه ثلاثمائه");
-  add(400,"اربعميه اربعمائه ربعميه"); add(500,"خمسميه خمسمائه"); add(600,"ستميه ستمائه"); add(700,"سبعميه سبعمائه");
-  add(800,"ثمانميه تمنميه ثمنميه ثمانمائه"); add(900,"تسعميه تسعمائه"); add(1000,"الف");
-  return m;
-})();
-const SR_FILLER = new Set(("اريد ابي ابغي ابغا ابغا ابى عايز عاوز بدي ودي لو سمحت سمحتي ابحث دور دورلي ابحثلي عن على في يا اعطني عطني هات "
-  + "صنف الصنف اصناف حق تبع بتاع ممكن طيب please search for find show me the want need i give of").split(" "));
-function srSpokenNums(n){
-  const w = n.split(" "), out = [];
-  for(let i = 0; i < w.length; i++){
-    let x = w[i];
-    if((x === "نص" || x === "نصف" || x === "ربع") && /^(كيلو|كيلوجرام|كجم)$/.test(w[i+1]||"")){ out.push(x === "ربع" ? "250" : "500", "g"); i++; continue; }
-    const val = (s) => SR_NUMW[s] !== undefined ? SR_NUMW[s] : (s.length > 2 && s[0] === "و" && SR_NUMW[s.slice(1)] !== undefined ? SR_NUMW[s.slice(1)] : undefined);
-    if(val(x) === undefined){ out.push(x); continue; }
-    let total = 0, j = i;
-    while(j < w.length){
-      const y = w[j]; if(y === "و"){ j++; continue; }
-      const v = val(y); if(v === undefined) break;
-      if((v === 100 || v === 1000) && total > 0 && total < 10) total *= v;   // "ثلاث ميه" → 300
-      else total += v;
-      j++;
-    }
-    if(w[j-1] === "و") j--;
-    out.push(String(total)); i = j - 1;
-  }
-  return out.join(" ");
-}
 
 // Character-level normaliser that remembers where every output char came from (for highlighting).
 function srNormMap(s){
@@ -1840,8 +1855,7 @@ function srIndex(sku){
   const text = " " + srSplit([en, ar, extra].join(" ")) + " ";
   const words = Array.from(new Set(text.trim().split(" ").filter(Boolean).concat(text.trim().split(" ").map(srStripAl))));
   const codes = [codeStr(sku), String(sku.artecal), String(sku.zrep||""), oldCodeOf(sku)].filter(Boolean);
-  const pkeys = Array.from(new Set(words.map(srPKey).filter(k => k.length >= 3)));
-  ix = { text, compact: text.replace(/\s+/g, ""), words, codes, codesZ: codes.map(srZ), sizes: srSizes(en + " " + ar), pkeys };
+  ix = { text, compact: text.replace(/\s+/g, ""), words, codes, codesZ: codes.map(srZ), sizes: srSizes(en + " " + ar) };
   _srIdx.set(sku, ix);
   return ix;
 }
@@ -1865,10 +1879,8 @@ function srDist(a, b, max){
 let _srLast = { q: null, p: null };
 function srParse(q){
   if(_srLast.q === q) return _srLast.p;
-  let n = srSplit(srNorm(String(q||"").replace(/\bm\s*(?:and|n)\s*m'?s\b/gi, " mms ").replace(/m\s*&\s*m'?s?/gi, " mms ").replace(/&/g, " ")));
-  if(n) n = srSpokenNums(n);
-  let raw = n ? n.split(" ") : [];
-  if(raw.length > 1){ const kept = raw.filter(x => !SR_FILLER.has(x)); if(kept.length) raw = kept; }
+  let n = srSplit(srNorm(String(q||"").replace(/m\s*&\s*m'?s?/gi, " mms ").replace(/&/g, " ")));
+  const raw = n ? n.split(" ") : [];
   const toks = [], hl = [];
   for(let i = 0; i < raw.length; i++){
     const w = raw[i];
@@ -1929,16 +1941,7 @@ function srTokScore(ix, tk, fuzzy){
     }
   }
   if(fz) return fz;
-  // sounds like it (voice search / spelled by ear): سكتلز ≈ Skittles, glaxy ≈ جالكسي
-  const pk = tk.pk || (tk.pk = srPKey(w));
-  if(pk.length >= 3){
-    for(const k of ix.pkeys){
-      if(k === pk) return 9;
-      if(pk.length >= 5 && k.length >= 5 && srDist(pk, k, 1) <= 1) return 7;
-      if(pk.length >= 4 && k.length > pk.length && k.startsWith(pk)) fz = 6;
-    }
-  }
-  return fz;
+  return 0;
 }
 // 0 = not a match; higher = better. Every word typed must match something.
 // fuzzy=true lets typos through — used only when the exact search finds nothing.
@@ -1948,74 +1951,6 @@ function srScore(sku, p, fuzzy){
   for(const tk of p.toks){ const s = srTokScore(ix, tk, fuzzy); if(!s) return 0; total += s; }
   return total;
 }
-
-/* ================= VOICE SEARCH =================
-   Tap the mic, say the item any way you like: Arabic, English, a brand said with an accent,
-   a size in words ("سنيكرز خمسين جرام"). The phone's speech engine returns up to 5 guesses; each
-   one is cleaned (filler words, spoken numbers) and the guess that matches the most real items wins.
-   Words that match nothing at all ("عايز", noise) are dropped instead of killing the search. */
-const SR_SPEECH = window.SpeechRecognition || window.webkitSpeechRecognition || null;
-function voiceBestQuery(alts){
-  let best = null;
-  alts.forEach((alt, ai) => {
-    const P = srParse(alt.text);
-    if(P.empty) return;
-    // keep only the spoken words that match at least one item (exactly, by typo, or by sound)
-    let kept = [];
-    P.toks.forEach(tk => {
-      const one = { empty:false, toks:[tk], hl:[] };
-      if(OO.skus.some(sk => srScore(sk, one, false) > 0) || OO.skus.some(sk => srScore(sk, one, true) > 0))
-        kept.push({ w: tk.k === "size" ? (tk.n + (tk.u === "g" ? "g" : tk.u)) : tk.w, word: tk.k === "word" });
-    });
-    const hitsOf = (list) => { const PQ = srParse(list.map(x => x.w).join(" ")); if(PQ.empty) return 0; const fz = srFz(PQ);
-      return OO.skus.reduce((a, sk) => a + (srScore(sk, PQ, fz) > 0 ? 1 : 0), 0); };
-    let hits = kept.length ? hitsOf(kept) : 0;
-    // nothing has ALL the words (e.g. a size that doesn't exist) → drop the least important word:
-    // sizes / numbers first, then the last-spoken words — the brand said first is kept longest
-    while(!hits && kept.length > 1){
-      const order = kept.map((x, i) => i).sort((a, b) => (kept[a].word - kept[b].word) || (b - a));
-      let done = false;
-      for(const i of order){ const k2 = kept.filter((_, j) => j !== i), h2 = hitsOf(k2); if(h2){ kept = k2; hits = h2; done = true; break; } }
-      if(!done) kept = kept.filter((_, j) => j !== order[0]), hits = hitsOf(kept);
-    }
-    if(!kept.length || !hits) return;
-    const q = kept.map(x => x.w).join(" "), fz = srFz(srParse(q));
-    // more matched words = more precise; then the engine's own ranking (earlier = more confident)
-    const rank = kept.length * 1000 - Math.min(hits, 300) * 0 - ai * 10 + (fz ? 0 : 5);
-    if(!best || rank > best.rank) best = { q, rank, hits };
-  });
-  return best;
-}
-function startVoiceSearch(input, btn, onDone){
-  if(!SR_SPEECH){ toast(t("voiceNo"), "warn"); return; }
-  if(btn._rec){ try{ btn._rec.stop(); }catch(e){} return; }   // second tap = stop
-  const rec = new SR_SPEECH();
-  rec.lang = state.lang === "en" ? "en-US" : "ar-SA";
-  rec.interimResults = true; rec.maxAlternatives = 5; rec.continuous = false;
-  const oldPh = input.placeholder, oldVal = input.value;
-  btn._rec = rec; btn.classList.add("rec"); input.placeholder = t("voiceListening"); input.value = "";
-  let finalAlts = null;
-  rec.onresult = (e) => {
-    const r = e.results[e.results.length - 1];
-    if(r.isFinal){ finalAlts = Array.from(r).map(a => ({ text: a.transcript, conf: a.confidence })); }
-    else input.value = r[0].transcript;
-  };
-  rec.onerror = (e) => {
-    if(e.error === "not-allowed" || e.error === "service-not-allowed") toast(t("voiceDenied"), "error");
-    else if(e.error === "no-speech") toast(t("voiceNoSpeech"), "warn");
-    else if(e.error !== "aborted") toast(t("voiceNo"), "warn");
-  };
-  rec.onend = () => {
-    btn._rec = null; btn.classList.remove("rec"); input.placeholder = oldPh;
-    if(!finalAlts || !finalAlts.length){ input.value = oldVal; return; }
-    const best = voiceBestQuery(finalAlts);
-    if(best){ input.value = best.q; }
-    else { input.value = finalAlts[0].text; toast(t("voiceHeard") + " «" + finalAlts[0].text + "»", "warn"); }
-    onDone && onDone();
-  };
-  try{ rec.start(); }catch(e){ btn._rec = null; btn.classList.remove("rec"); input.placeholder = oldPh; toast(t("voiceNo"), "warn"); }
-}
-
 // Mark the typed text inside the rendered names/codes (normalisation-aware, so "شوكولاتة" lights up "شوكولاته").
 function srHighlight(root, p){
   if(!root || !p || p.empty) return;
@@ -2379,7 +2314,6 @@ function renderStores(){
     if(state.storesMode === mode) return;
     state.storesMode = mode; tabs.querySelectorAll(".xs-tab").forEach(b => b.classList.toggle("on", b.dataset.m === mode));
     search.value = mode === "item" ? (state.xsQuery||"") : ""; search.placeholder = mode === "item" ? t("xsPh") : t("searchStores");
-    searchWrap.classList.toggle("has-mic", mode === "item" && !!SR_SPEECH); micBtn.hidden = mode !== "item";
     draw();
   }, "data-m": mode, html: icon}, []);
   const tb1 = tabBtn("stores", "", '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5l1.6-5h14.8L21 9.5M4 9.5V20h16V9.5M3 9.5h18M9.5 20v-5.5h5V20"/></svg>');
@@ -2391,11 +2325,7 @@ function renderStores(){
 
   const search = el("input", {class:"input sr-input", type:"search", autocomplete:"off", autocorrect:"off", autocapitalize:"off", spellcheck:"false",
     placeholder: state.storesMode === "item" ? t("xsPh") : t("searchStores"), value: state.storesMode === "item" ? (state.xsQuery||"") : ""});
-  const micBtn = el("button", {class:"sr-mic", type:"button", "aria-label":t("voiceBtn"), title:t("voiceBtn"),
-    html:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0013 0M12 17.5V21M8.5 21h7"/></svg>',
-    onclick:() => startVoiceSearch(search, micBtn, () => { search.dispatchEvent(new Event("input")); })});
-  micBtn.hidden = state.storesMode !== "item" || !SR_SPEECH;
-  const searchWrap = el("div", {class:"searchbox sr-box"+(state.storesMode==="item" && SR_SPEECH ? " has-mic":"")}, [svgIcon("search"), search, micBtn]);
+  const searchWrap = el("div", {class:"searchbox sr-box"}, [svgIcon("search"), search]);
   search.addEventListener("keydown", (ev) => { if(ev.key === "Enter"){ ev.preventDefault(); search.blur(); } });
   content.appendChild(searchWrap);
 
@@ -2659,7 +2589,8 @@ function renderItems(){
   const wn = renderStoreWhatsNew(store);
   if(wn) content.appendChild(wn);
 
-  // Smart search: sticky at the top, clear button, live result summary underneath.
+  // Pinned bar: search + "opportunities" + every category in two compact rows. It stays frozen at the
+  // top while the list scrolls, and is kept short so 4–5 items stay visible under it on a phone.
   const search = el("input", {class:"input sr-input", type:"search", placeholder:t("srPh"), value: state.query, autocomplete:"off",
     autocorrect:"off", autocapitalize:"off", spellcheck:"false", enterkeyhint:"search", "aria-label":t("srPh")});
   const clearBtn = el("button", {class:"sr-clear", type:"button", "aria-label":t("srClear"), onclick:() => {
@@ -2667,61 +2598,26 @@ function renderItems(){
   }}, ["×"]);
   if(state.query) clearBtn.classList.add("on");
   const srSum = el("div", {class:"sr-sum"});
-  const micBtn = el("button", {class:"sr-mic", type:"button", "aria-label":t("voiceBtn"), title:t("voiceBtn"),
-    html:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0013 0M12 17.5V21M8.5 21h7"/></svg>',
-    onclick:() => startVoiceSearch(search, micBtn, () => { search.dispatchEvent(new Event("input")); })});
-  const srBox = el("div", {class:"searchbox sr-box"+(SR_SPEECH?" has-mic":"")}, [svgIcon("search"), search, clearBtn]);
-  if(SR_SPEECH) srBox.appendChild(micBtn);
-  // Filters (active/inactive, opportunities, categories) live in a panel the rep can open or fold away.
-  // The search row stays frozen at the top while scrolling.
-  if(state.filtersOpen === undefined){ try{ state.filtersOpen = localStorage.getItem("oo_filters_open") === "1"; }catch(e){ state.filtersOpen = false; } }
-  const fBtn = el("button", {class:"flt-btn", type:"button", "aria-label":t("filters"), onclick:() => {
-    state.filtersOpen = !state.filtersOpen; try{ localStorage.setItem("oo_filters_open", state.filtersOpen ? "1" : "0"); }catch(e){}
-    drawFilterState();
-  }, html:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>'}, []);
-  fBtn.appendChild(el("span",{class:"flt-l"},[t("filters")]));
-  const fBadge = el("span",{class:"flt-n"}); fBtn.appendChild(fBadge);
-  const afRow = el("div", {class:"af-row"});
-  content.appendChild(el("div", {class:"sr-sticky"}, [ el("div",{class:"sr-line"},[srBox, fBtn]), afRow ]));
+  const srBox = el("div", {class:"searchbox sr-box"}, [svgIcon("search"), search, clearBtn]);
+  const gapBar = el("div", {class:"gapbar"});
+  const chips = el("div", {class:"chiprow catgrid"});
+  const offBtn = el("button", {class:"offbtn", type:"button", onclick:() => pickInactive(!state.showInactive)});
+  const pin = el("div", {class:"pinbar"}, [ el("div",{class:"pin-row"},[srBox, gapBar, offBtn]), chips ]);
+  content.appendChild(pin);
+  const gapMore = el("div", {class:"gapmore"});
+  const hintBox = el("div", {class:"cp-hint"});
+  content.appendChild(gapMore);
+  content.appendChild(hintBox);
   content.appendChild(srSum);
-  function activeFilterCount(){ return (state.category !== "all" ? 1 : 0) + (state.gapOnly && !state.showInactive ? 1 : 0) + (state.showInactive ? 1 : 0); }
-  function drawFilterState(){
-    const n = activeFilterCount();
-    fBadge.textContent = n ? String(n) : ""; fBadge.hidden = !n;
-    fBtn.classList.toggle("open", !!state.filtersOpen); fBtn.classList.toggle("has", n > 0);
-    ctrl.hidden = !state.filtersOpen;
-    afRow.innerHTML = "";
-    if(state.filtersOpen || !n){ afRow.hidden = true; return; }
-    afRow.hidden = false;
-    const chip = (label, color, clear) => el("button", {class:"af-chip", type:"button", onclick: clear}, [
-      color ? el("span",{class:"af-sw", style:"background:"+color}) : null, label, el("span",{class:"af-x"},["×"]) ]);
-    if(state.showInactive) afRow.appendChild(chip(t("inactShort"), "#64748B", () => { state.showInactive = false; state.category = "all"; drawActBar(); drawGapBar(); drawChips(); drawList(); }));
-    if(state.gapOnly && !state.showInactive) afRow.appendChild(chip(t("gapFilter"), "#2563EB", () => { state.gapOnly = false; drawGapBar(); drawList(); }));
-    if(state.category !== "all") afRow.appendChild(chip(catLabel(state.category), catMeta(state.category).color, () => { state.category = "all"; drawChips(); drawList(); }));
-  }
   search.addEventListener("keydown", (ev) => { if(ev.key === "Enter"){ ev.preventDefault(); search.blur(); } });
 
-  // Active / Inactive switch — keeps stopped items out of the way, one tap to look at them.
-  const ctrl = el("div", {class:"ctrlpanel"});
-  content.appendChild(ctrl);
-  const ctrlTop = el("div", {class:"cp-top"});
-  ctrl.appendChild(ctrlTop);
-  const actBar = el("div", {class:"actseg"});
-  ctrlTop.appendChild(actBar);
+  // Active / Inactive: the inactive items are one chip at the end of the category row.
+  function pickInactive(v){
+    if(state.showInactive === v) return;
+    state.showInactive = v; state.category = "all";
+    drawActBar(); drawGapBar(); drawChips(); drawList();
+  }
   function drawActBar(){
-    actBar.innerHTML = "";
-    const nOff = inactiveCount(), nOn = OO.skus.length - nOff;
-    const pick = (v) => {
-      if(state.showInactive === v) return;
-      state.showInactive = v; state.category = "all";
-      drawActBar(); drawGapBar(); drawChips(); drawList();
-    };
-    const seg = el("div", {class:"as-seg"});
-    seg.appendChild(el("button", {class:"as-btn as-on"+(!state.showInactive?" sel":""), onclick:() => pick(false)}, [
-      el("span",{class:"as-dot"}), el("span",{class:"as-l"},[t("actShort")]), el("span",{class:"as-n"},[fmtInt(nOn)]) ]));
-    seg.appendChild(el("button", {class:"as-btn as-off"+(state.showInactive?" sel":""), onclick:() => pick(true)}, [
-      el("span",{class:"as-dot"}), el("span",{class:"as-l"},[t("inactShort")]), el("span",{class:"as-n"},[fmtInt(nOff)]) ]));
-    actBar.appendChild(seg);
     const hint = state.showInactive ? t(isManager() ? "inactViewMgr" : "inactViewRep") : (isManager() ? t("inactActiveMgr") : "");
     hintBox.innerHTML = ""; hintBox.hidden = !hint;
     if(hint) hintBox.appendChild(el("div", {class:"as-hint"+(state.showInactive?" off":"")}, [hint]));
@@ -2745,21 +2641,15 @@ function renderItems(){
   }
 
   // Opportunity / gap filter: show only items Mars has, that this store is out of (or nearly).
-  const gapBar = el("div", {class:"gapbar"});
-  ctrlTop.appendChild(gapBar);
-  const gapMore = el("div", {class:"gapmore"});
-  ctrl.appendChild(gapMore);
-  const hintBox = el("div", {class:"cp-hint"});
-  ctrl.appendChild(hintBox);
   function storeGapCount(){ let n=0; OO.skus.forEach(sk=>{ if(!isInactive(sk) && isGapItem(sk, onHand[sk.artecal], state.gapThreshold)) n++; }); return n; }
   function drawGapBar(){
     gapBar.innerHTML = ""; gapMore.innerHTML = "";
     gapBar.hidden = !!state.showInactive;
     if(state.showInactive) return;   // the opportunity filter is for the active list only
     const count = storeGapCount();
-    const btn = el("button", {class:"gaptoggle"+(state.gapOnly?" on":""), onclick:()=>{ state.gapOnly=!state.gapOnly; drawGapBar(); drawList(); }}, [
+    const btn = el("button", {class:"gaptoggle"+(state.gapOnly?" on":""), title:t("gapFilter"), onclick:()=>{ state.gapOnly=!state.gapOnly; drawGapBar(); drawList(); }}, [
       el("span",{class:"gt-ic", html:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/></svg>'}),
-      el("span",{class:"gt-l"},[t("gapFilter")]), el("span",{class:"gt-n"},[fmtInt(count)])
+      el("span",{class:"gt-l"},[t("gapShort")]), el("span",{class:"gt-n"},[fmtInt(count)])
     ]);
     gapBar.appendChild(btn);
     if(state.gapOnly){
@@ -2768,13 +2658,8 @@ function renderItems(){
       [0,1,2,3].forEach(n=>ctrl.appendChild(el("button",{class:"gt-opt"+(state.gapThreshold===n?" on":""),
         onclick:()=>{ state.gapThreshold=n; try{localStorage.setItem("oo_gapThreshold",String(n));}catch(e){} drawGapBar(); drawList(); }},[String(n)])));
       gapMore.appendChild(ctrl);
-      gapMore.appendChild(el("div",{class:"gap-hint"},[t("gapHint")]));
     }
-    drawFilterState();
   }
-
-  const chips = el("div", {class:"chiprow catgrid"});
-  ctrl.appendChild(chips);
 
   const vs = el("div", {class:"viewswitch"});
   // Switch order/list WITHOUT a full re-render (only the list needs to change) — keeps it snappy.
@@ -2832,13 +2717,20 @@ function renderItems(){
       const chip = el("div", {class:"chip"+(state.category===cat?" active":""),
         style: state.category===cat ? ("background:"+m.color+";border-color:"+m.color) : "",
         onclick:() => {state.category=cat; drawChips(); drawList();}}, [
-        el("span", {class:"sw", style:"background:"+m.color}), catLabel(cat),
+        el("span", {class:"sw", style:"background:"+m.color}), catLabel(cat).replace(/^أغذية\s+/, ""),
         srParse(search.value).empty ? null : el("span", {class:"chip-n"}, [String(cats[cat])])
       ]);
       chips.appendChild(chip);
     });
+    // inactive items: one chip at the end (tap again to go back to the active items)
+    const nOff = inactiveCount();
+    offBtn.innerHTML = ""; offBtn.hidden = !(nOff || state.showInactive);
+    offBtn.classList.toggle("on", !!state.showInactive);
+    offBtn.title = t("inactiveItems");
+    offBtn.appendChild(el("span",{class:"off-ic"},[el("i"),el("i")]));
+    offBtn.appendChild(el("span",{class:"off-l"},[t("inactShort")]));
+    offBtn.appendChild(el("span",{class:"off-n"},[fmtInt(nOff)]));
     if(hero._paint) hero._paint();  // keep the hero total in sync with the active category
-    drawFilterState();
   }
 
   function matches(sku, q){ const P = srParse(q); return P.empty || srScore(sku, P, srFz(P)) > 0; }
