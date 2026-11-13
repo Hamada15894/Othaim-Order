@@ -1314,6 +1314,105 @@ html[dir="rtl"] .ia-en[dir="ltr"]{text-align:right;}
 /* performance: keep each card's layout to itself; no tap delay */
 .itemcard,.storecard,.cartline,.xs-card{contain:layout paint style;}
 button,.chip,.bn-it,.storecard,a{touch-action:manipulation;}
+
+/* ================= Stores page: soft mint cards with a wave ================= */
+.fx-stores ~ .content{background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 200' preserveAspectRatio='none'><path d='M0 60 C 90 20 170 110 260 70 S 360 30 400 55 V0 H0Z' fill='%23E6F3EC'/><path d='M0 40 C 110 90 200 10 300 45 S 380 60 400 40 V0 H0Z' fill='%23D9EEE2' fill-opacity='.55'/></svg>") top center / 100% 170px no-repeat, linear-gradient(180deg,#F1F8F4 0%,#F4F6F5 60%);}
+.storecard{position:relative;overflow:hidden;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 60' preserveAspectRatio='none'><path d='M0 34 C 70 8 150 58 230 32 S 350 8 400 28 V60 H0Z' fill='%23E3F2EA'/><path d='M0 46 C 90 26 170 64 260 44 S 360 32 400 44 V60 H0Z' fill='%23CDE8D9' fill-opacity='.75'/></svg>") bottom center / 100% 30px no-repeat, linear-gradient(135deg,#FFFFFF 0%,#F3FAF6 100%) !important;
+  border:1px solid #DDEBE3 !important;box-shadow:0 6px 16px -14px rgba(11,50,38,.55) !important;padding:13px 14px 16px !important;}
+.storecard::after{content:"";position:absolute;inset-block-start:-30px;inset-inline-end:-30px;width:90px;height:90px;border-radius:50%;
+  background:radial-gradient(circle, rgba(201,242,126,.22) 0%, rgba(201,242,126,0) 70%);pointer-events:none;}
+.storecard > *{position:relative;z-index:1;}
+.storecard .name{color:#0E2A20 !important;}
+.storecard .meta{color:#6B8A7C !important;}
+.storecard .num{box-shadow:0 6px 12px -8px rgba(11,50,38,.8);}
+.storecard:active{transform:scale(.99);}
+.storecard .meta[style]{color:#0F4636 !important;}
+.storecard{padding-bottom:20px !important;}
+
+/* store card: value + item count pills */
+.sc-stats{display:flex;align-items:center;gap:8px;margin-top:7px;flex-wrap:wrap;}
+.sc-val{display:inline-flex;align-items:baseline;gap:4px;padding:4px 10px 4px 11px;border-radius:9px;
+  background:linear-gradient(135deg,#0F4636 0%,#17654B 100%);box-shadow:0 6px 12px -8px rgba(11,50,38,.8);direction:ltr;}
+.sc-val b{font-family:var(--font-mono);font-size:15.5px;font-weight:800;color:#fff;letter-spacing:.2px;}
+.sc-val small{font-size:10.5px;font-weight:700;color:#C9F27E;}
+html[dir="rtl"] .sc-val{direction:rtl;}
+.sc-cnt{display:inline-flex;align-items:baseline;gap:4px;padding:4px 10px;border-radius:9px;background:#FFF6E5;border:1px solid #F4DFB3;}
+.sc-cnt b{font-family:var(--font-mono);font-size:13.5px;font-weight:800;color:#9A5B00;}
+.sc-cnt small{font-size:10.5px;font-weight:700;color:#B4740A;}
+
+/* ================= Total stock band (stores page + manager) ================= */
+.tband{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:13px;overflow:hidden;}
+.tb-head{width:100%;display:flex;align-items:center;gap:8px;padding:8px 11px;border:none;background:none;font-family:inherit;cursor:pointer;color:#fff;text-align:start;}
+.tb-l{flex:1;min-width:0;display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;color:#A9D5BF;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.tb-l i{width:7px;height:7px;border-radius:50%;background:#C9F27E;box-shadow:0 0 0 3px rgba(201,242,126,.2);flex-shrink:0;}
+.tb-v{display:inline-flex;align-items:baseline;gap:4px;}
+.tb-v b{font-family:var(--font-mono);font-size:20px;font-weight:800;color:#fff;letter-spacing:-.2px;}
+.tb-v small{font-size:11px;color:#C9F27E;font-weight:700;}
+.tb-n{font-size:10.5px;font-weight:800;color:#0B3226;background:#C9F27E;border-radius:8px;padding:2px 7px;white-space:nowrap;}
+.tb-chev{color:#A9D5BF;font-size:11px;}
+.tb-body{display:none;background:#fff;padding:8px 12px 10px;flex-direction:column;gap:6px;max-height:42vh;overflow:auto;}
+.tband.open .tb-body{display:flex;}
+.tb-row{display:grid;grid-template-columns:auto minmax(0,1.3fr) 1fr auto;align-items:center;gap:8px;}
+.tb-sw{width:9px;height:9px;border-radius:3px;}
+.tb-nm{font-size:12px;font-weight:700;color:#0E2A20;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.tb-nm small{color:#6B8A7C;font-weight:600;}
+.tb-bar{height:6px;border-radius:4px;background:#E6EFEA;overflow:hidden;}
+.tb-bar i{display:block;height:100%;border-radius:4px;}
+.tb-rv{font-family:var(--font-mono);font-size:12px;font-weight:800;color:#0F4636;}
+/* compact data-date strip inside the stores header */
+.fx-stores .statusstrip .cell{flex-direction:row !important;align-items:center;justify-content:space-between;gap:6px;padding:5px 9px !important;}
+.fx-stores .statusstrip .cell b{font-size:10.5px !important;white-space:nowrap;}
+.fx-stores .statusstrip .stamp{margin-top:0 !important;font-size:10px !important;padding:2px 6px !important;}
+@media (max-width:380px){ .fx-stores .statusstrip .cell{flex-direction:column !important;align-items:flex-start;gap:2px;} }
+
+/* ================= Manager panel: same green family ================= */
+.fx-admin{padding-top:2px;}
+.admin-content{background:linear-gradient(180deg,#F1F8F4 0%,#F4F6F5 50%);}
+.admin-content .section-title{color:#0F4636 !important;font-size:12.5px;}
+.admin-content .section-title::before{content:"";width:4px;height:14px;border-radius:2px;background:linear-gradient(180deg,#17654B,#C9F27E);display:inline-block;}
+.admin-content .card{border-radius:16px !important;border-color:#E2EAE5 !important;box-shadow:0 6px 16px -14px rgba(11,50,38,.5) !important;}
+.adminstat{gap:8px !important;}
+.adminstat .box{background:#fff !important;border:1px solid #E2EAE5 !important;border-radius:14px !important;box-shadow:0 6px 14px -14px rgba(11,50,38,.6);}
+.adminstat .box .lbl{color:#0F4636 !important;font-weight:800 !important;}
+.admin-content .btn-green,.admin-content .btn-dark,.admin-content .btn-primary{background:linear-gradient(135deg,#17654B,#0B3226) !important;color:#fff !important;border:none !important;box-shadow:0 10px 18px -12px rgba(11,50,38,.9);}
+.admin-content .btn-outline{border-color:#CFE0D7 !important;color:#0F4636 !important;}
+.admin-content .uploadzone{border-color:#9FCDB5 !important;background:#F3FAF6 !important;color:#0F4636 !important;border-radius:14px !important;}
+.admin-content .input:focus{border-color:#17654B !important;box-shadow:0 0 0 3px rgba(23,101,75,.14) !important;}
+.admin-content .rs-card,.admin-content .ia-card,.admin-content .inact-admin{border-radius:16px !important;}
+.admin-content .rs-pill.blue{background:#EAF3FF;} .admin-content .rs-pill.green{background:#E8F5EE;}
+
+.adminstat{grid-template-columns:repeat(2,minmax(0,1fr)) !important;}
+.adminstat .box{min-width:0;padding:10px !important;}
+.adminstat .box .stamp{font-size:10.5px;max-width:100%;}
+.admin-content .ia-head{background:radial-gradient(160px 120px at 0% 0%, rgba(201,242,126,.18), rgba(201,242,126,0) 70%), linear-gradient(135deg,#0B3226,#17654B) !important;}
+.admin-content .ia-head::after{display:none !important;}
+.tb-nm bdi{unicode-bidi:isolate;}
+
+.tb-row{grid-template-columns:auto minmax(0,1fr) auto !important;grid-template-areas:"sw nm rv" ". bar bar";row-gap:3px !important;padding:3px 0;}
+.tb-sw{grid-area:sw;} .tb-nm{grid-area:nm;} .tb-rv{grid-area:rv;} .tb-bar{grid-area:bar;}
+.tb-nm{white-space:normal !important;overflow:visible !important;line-height:1.3;}
+@media (max-width:380px){ .adminstat .box .stamp{font-size:9.5px;padding:2px 5px;} .tb-l{font-size:10.5px;} .tb-v b{font-size:18px;} }
+
+/* ================= Bottom bar: floating deep-green dock ================= */
+.bnav{margin:0 10px calc(8px + env(safe-area-inset-bottom,0px)) !important;padding:6px 4px !important;border:none !important;border-radius:22px !important;
+  background:
+    radial-gradient(140px 80px at 85% 0%, rgba(201,242,126,.16), rgba(201,242,126,0) 70%),
+    linear-gradient(100deg,#0B3226 0%,#104536 55%,#17654B 100%) !important;
+  box-shadow:0 14px 28px -12px rgba(11,50,38,.75), inset 0 1px 0 rgba(255,255,255,.08) !important;}
+.bn-it{color:rgba(225,242,233,.72) !important;gap:3px !important;}
+.bn-ic{width:48px !important;height:30px !important;border-radius:15px !important;transition:background .2s, transform .2s, color .2s !important;}
+.bn-ic svg{width:21px !important;height:21px !important;}
+.bn-l{font-size:10px !important;letter-spacing:.1px;}
+.bn-it.on{color:#fff !important;}
+.bn-it.on .bn-ic{background:linear-gradient(135deg,#D9F7A6,#C9F27E) !important;color:#0B3226 !important;transform:translateY(-1px);
+  box-shadow:0 6px 14px -6px rgba(201,242,126,.75);}
+.bn-it.on .bn-l{color:#E9FBD0 !important;font-weight:800 !important;}
+.bn-it:not(.on):active .bn-ic{background:rgba(255,255,255,.1) !important;}
+.bn-it:disabled{opacity:.3 !important;}
+.bn-badge{box-shadow:0 0 0 2px #0F4636 !important;background:#EF4444 !important;}
+/* bars that sit right above the dock: keep their own look, no double shadow line */
+.cart-actions{border-top:none !important;background:transparent !important;padding-bottom:6px !important;}
+.floatbar{margin:0 10px 6px;border-radius:16px;}
 </style>
 </head>
 <body>
@@ -1375,7 +1474,7 @@ const I18N = {
     badPin:"الرقم السري غير صحيح", enterUser:"أدخل رقم المستخدم الخاص بك",
     stockUpdated:"مخزون مارس", onhandUpdated:"On Hand", updatedAt:"آخر تحديث",
     myStores:"متاجري", searchStores:"ابحث عن متجر...",
-    filters:"تصفية", navStores:"متاجري", navStore:"المتجر", navFind:"بحث صنف", navCart:"الطلبية", navSaved:"المحفوظة", cartItems:"أصناف", cartCtn:"كرتون", cartValue:"القيمة", gapShort:"الفرص", xsTabStores:"المتاجر", xsTabItem:"بحث صنف في كل المتاجر", xsPh:"اسم الصنف وحجمه (مثال: جواهر 850 جرام)",
+    filters:"تصفية", tbMine:"إجمالي مخزون متاجري", tbAll:"إجمالي كل المتاجر", tbStores:"متاجر", navStores:"متاجري", navStore:"المتجر", navFind:"بحث صنف", navCart:"الطلبية", navSaved:"المحفوظة", cartItems:"أصناف", cartCtn:"كرتون", cartValue:"القيمة", gapShort:"الفرص", xsTabStores:"المتاجر", xsTabItem:"بحث صنف في كل المتاجر", xsPh:"اسم الصنف وحجمه (مثال: جواهر 850 جرام)",
     xsHint:"اكتب أو قل اسم الصنف وحجمه، وتظهر كمية الموجود منه في كل متجر من متاجرك مرة واحدة.",
     xsItems:"صنف", xsIn:"موجود في", xsOf:"من", xsStores:"متاجر", xsTotal:"إجمالي الموجود", xsOpen:"اضغط على أي متجر لفتحه على هذا الصنف",
     xsMore:"عرض أصناف أكثر", xsNone:"لا يوجد صنف بهذا الاسم", logout:"خروج",
@@ -1494,7 +1593,7 @@ const I18N = {
     badPin:"Incorrect PIN", enterUser:"Enter your user number",
     stockUpdated:"Mars Stock", onhandUpdated:"On Hand", updatedAt:"Last updated",
     myStores:"My Stores", searchStores:"Search stores...",
-    filters:"Filters", navStores:"Stores", navStore:"Store", navFind:"Find item", navCart:"Order", navSaved:"Saved", cartItems:"Items", cartCtn:"Cartons", cartValue:"Value", gapShort:"Opps", xsTabStores:"Stores", xsTabItem:"Find an item in all stores", xsPh:"Item name and size (e.g. jewels 850g)",
+    filters:"Filters", tbMine:"Total stock · my stores", tbAll:"Total stock · all stores", tbStores:"stores", navStores:"Stores", navStore:"Store", navFind:"Find item", navCart:"Order", navSaved:"Saved", cartItems:"Items", cartCtn:"Cartons", cartValue:"Value", gapShort:"Opps", xsTabStores:"Stores", xsTabItem:"Find an item in all stores", xsPh:"Item name and size (e.g. jewels 850g)",
     xsHint:"Type or say the item and size to see its On Hand in every one of your stores at once.",
     xsItems:"items", xsIn:"in", xsOf:"of", xsStores:"stores", xsTotal:"Total on hand", xsOpen:"Tap a store to open it on this item",
     xsMore:"Show more items", xsNone:"No item matches", logout:"Logout",
@@ -2520,6 +2619,49 @@ function renderStatusStrip(compact){
 }
 
 
+
+/* Total stock of a set of stores (a rep's stores, or the whole region for the manager),
+   with a breakdown by category or by rep, shown as a slim expandable band. */
+function storesTotals(stores){
+  let value = 0, pieces = 0; const byCat = {}, byRep = {};
+  (stores||[]).forEach(st => {
+    const ss = storeStock(st.storeNo);
+    value += ss.value; pieces += ss.pieces;
+    Object.entries(ss.byCat||{}).forEach(([c, v]) => { byCat[c] = (byCat[c]||0) + v.value; });
+    const rk = String(st.userNumber || st.salesman || "—");
+    const r = byRep[rk] || (byRep[rk] = { name: st.salesman || ("#"+rk), value:0, stores:0 });
+    r.value += ss.value; r.stores++;
+  });
+  return { value, pieces, stores:(stores||[]).length, byCat, byRep };
+}
+function totalBand(stores, labelKey, mode){
+  const tt = storesTotals(stores);
+  const band = el("div", {class:"tband"});
+  const head = el("button", {class:"tb-head", type:"button"});
+  head.appendChild(el("span", {class:"tb-l"}, [ el("i"), t(labelKey) ]));
+  const val = el("span", {class:"tb-v"}, state.hidePrices ? [ el("b",{},[fmtInt(tt.pieces)]), el("small",{},[t("pieces")]) ]
+    : [ el("b",{},[fmtSar(tt.value)]), el("small",{},[curr()]) ]);
+  head.appendChild(val);
+  head.appendChild(el("span", {class:"tb-n"}, [ fmtInt(tt.stores)+" "+t("tbStores") ]));
+  head.appendChild(el("span", {class:"tb-chev"}, ["▾"]));
+  band.appendChild(head);
+  const body = el("div", {class:"tb-body"});
+  const rows = mode === "rep"
+    ? Object.values(tt.byRep).map(r => ({ name: r.name, sub: fmtInt(r.stores)+" "+t("tbStores"), value: r.value, color:"#17654B" }))
+    : Object.entries(tt.byCat).map(([c, v]) => ({ name: catLabel(c), value: v, color: catMeta(c).color }));
+  rows.sort((a,b) => b.value - a.value);
+  const max = rows.reduce((m, r) => Math.max(m, r.value), 0) || 1;
+  rows.forEach(r => body.appendChild(el("div", {class:"tb-row"}, [
+    el("span", {class:"tb-sw", style:"background:"+r.color}),
+    el("span", {class:"tb-nm"}, [ el("bdi", {dir:"auto"}, [r.name]), r.sub ? el("small",{},[" · "+r.sub]) : null]),
+    el("span", {class:"tb-bar"}, [ el("i", {style:"width:"+Math.max(3, Math.round(r.value/max*100))+"%;background:"+r.color}) ]),
+    el("span", {class:"tb-rv"}, [ fmtSar(r.value) ])
+  ])));
+  band.appendChild(body);
+  head.onclick = () => { band.classList.toggle("open"); head.querySelector(".tb-chev").textContent = band.classList.contains("open") ? "▴" : "▾"; };
+  return band;
+}
+
 /* ---------------- BOTTOM NAVIGATION (rep pages) ---------------- */
 const NAV_IC = {
   stores:'<path d="M3.5 9.5l1.7-5h13.6l1.7 5M4.5 9.5V20h15V9.5M3.5 9.5h17M9.5 20v-5.5h5V20"/>',
@@ -2619,6 +2761,7 @@ function renderStores(){
   const head = el("div", {class:"fxhead fx-stores"});
   s.appendChild(head);
   const content = el("div", {class:"content"});
+  head.appendChild(totalBand(state.stores, state.user === "__preview__" ? "tbAll" : "tbMine", state.user === "__preview__" ? "rep" : "cat"));
   head.appendChild(renderStatusStrip(false));
 
   // Two modes on one screen: the store list, or "find an item in all my stores".
@@ -2665,9 +2808,12 @@ function renderStores(){
         el("div", {class:"info"}, [
           el("div", {class:"name"}, [st.nameAr]),
           el("div", {class:"meta"}, [ [st.region, st.city].filter(Boolean).join(" · ") ]),
-          el("div", {class:"meta", style:"font-weight:800;color:var(--ink);margin-top:2px;"}, [
-            t("stockValue")+": " + (state.hidePrices ? (fmtInt(ss.pieces)+" "+t("pieces")) : (fmtSar(ss.value)+" "+curr()))
-            + "  ·  " + fmtInt(ss.skuCount) + " " + t("skuCount")
+          // stock value + item count as two clear pills
+          el("div", {class:"sc-stats"}, [
+            el("span", {class:"sc-val", title:t("stockValue")}, state.hidePrices
+              ? [ el("b",{},[fmtInt(ss.pieces)]), el("small",{},[t("pieces")]) ]
+              : [ el("b",{},[fmtSar(ss.value)]), el("small",{},[curr()]) ]),
+            el("span", {class:"sc-cnt"}, [ el("b",{},[fmtInt(ss.skuCount)]), el("small",{},[t("skuCount")]) ])
           ])
         ]),
         (() => { const c = el("span",{class:"chev"}); c.appendChild(svgIcon("chev")); return c; })()
@@ -2960,7 +3106,8 @@ function renderItems(){
   }
 
   // Opportunity / gap filter: show only items Mars has, that this store is out of (or nearly).
-  function storeGapCount(){ let n=0; OO.skus.forEach(sk=>{ if(!isInactive(sk) && isGapItem(sk, onHand[sk.artecal], state.gapThreshold)) n++; }); return n; }
+  // opportunities in the selected category (all categories when "All" is selected)
+  function storeGapCount(){ let n=0; OO.skus.forEach(sk=>{ if(!isInactive(sk) && (state.category==="all" || sk.category===state.category) && isGapItem(sk, onHand[sk.artecal], state.gapThreshold)) n++; }); return n; }
   function drawGapBar(){
     gapBar.innerHTML = ""; gapMore.innerHTML = "";
     const count = storeGapCount();
@@ -3045,6 +3192,7 @@ function renderItems(){
     // inactive items: one chip at the end (tap again to go back to the active items)
     // (active / inactive counts live in the status switch above)
     if(hero._paint) hero._paint();  // keep the hero total in sync with the active category
+    drawGapBar();                    // the opportunities count follows the selected category
   }
 
   function matches(sku, q){ const P = srParse(q); return P.empty || srScore(sku, P, srFz(P)) > 0; }
@@ -4143,7 +4291,10 @@ function renderInactiveAdmin(){
 function renderAdmin(){
   const s = el("div", {class:"screen"});
   s.appendChild(topbar({title:t("admin"), onLogout: doLogout}));
-  const content = el("div", {class:"content"});
+  const ahead = el("div", {class:"fxhead fx-admin"});
+  ahead.appendChild(totalBand(OO.stores||[], "tbAll", "rep"));
+  s.appendChild(ahead);
+  const content = el("div", {class:"content admin-content"});
 
   content.appendChild(el("div", {class:"section-title"}, [t("dataStatus")]));
   const grid = el("div", {class:"adminstat"});
