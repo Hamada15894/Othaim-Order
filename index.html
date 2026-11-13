@@ -4,7 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <title>Othaim Order</title>
-<meta name="theme-color" content="#13161B">
+<meta name="theme-color" content="#0B3226">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta name="app-build" content="2026-11-13-1500">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -1413,6 +1416,10 @@ html[dir="rtl"] .sc-val{direction:rtl;}
 /* bars that sit right above the dock: keep their own look, no double shadow line */
 .cart-actions{border-top:none !important;background:transparent !important;padding-bottom:6px !important;}
 .floatbar{margin:0 10px 6px;border-radius:16px;}
+
+.iconbtn.refbtn.spin svg{animation:refSpin .8s linear infinite;}
+@keyframes refSpin{to{transform:rotate(360deg);}}
+html[dir="rtl"] .iconbtn.refbtn.spin svg{animation-direction:reverse;}
 </style>
 </head>
 <body>
@@ -1474,7 +1481,7 @@ const I18N = {
     badPin:"الرقم السري غير صحيح", enterUser:"أدخل رقم المستخدم الخاص بك",
     stockUpdated:"مخزون مارس", onhandUpdated:"On Hand", updatedAt:"آخر تحديث",
     myStores:"متاجري", searchStores:"ابحث عن متجر...",
-    filters:"تصفية", tbMine:"إجمالي مخزون متاجري", tbAll:"إجمالي كل المتاجر", tbStores:"متاجر", navStores:"متاجري", navStore:"المتجر", navFind:"بحث صنف", navCart:"الطلبية", navSaved:"المحفوظة", cartItems:"أصناف", cartCtn:"كرتون", cartValue:"القيمة", gapShort:"الفرص", xsTabStores:"المتاجر", xsTabItem:"بحث صنف في كل المتاجر", xsPh:"اسم الصنف وحجمه (مثال: جواهر 850 جرام)",
+    filters:"تصفية", refreshOk:"تم التحديث — كل البيانات محدّثة", tbMine:"إجمالي مخزون متاجري", tbAll:"إجمالي كل المتاجر", tbStores:"متاجر", navStores:"متاجري", navStore:"المتجر", navFind:"بحث صنف", navCart:"الطلبية", navSaved:"المحفوظة", cartItems:"أصناف", cartCtn:"كرتون", cartValue:"القيمة", gapShort:"الفرص", xsTabStores:"المتاجر", xsTabItem:"بحث صنف في كل المتاجر", xsPh:"اسم الصنف وحجمه (مثال: جواهر 850 جرام)",
     xsHint:"اكتب أو قل اسم الصنف وحجمه، وتظهر كمية الموجود منه في كل متجر من متاجرك مرة واحدة.",
     xsItems:"صنف", xsIn:"موجود في", xsOf:"من", xsStores:"متاجر", xsTotal:"إجمالي الموجود", xsOpen:"اضغط على أي متجر لفتحه على هذا الصنف",
     xsMore:"عرض أصناف أكثر", xsNone:"لا يوجد صنف بهذا الاسم", logout:"خروج",
@@ -1593,7 +1600,7 @@ const I18N = {
     badPin:"Incorrect PIN", enterUser:"Enter your user number",
     stockUpdated:"Mars Stock", onhandUpdated:"On Hand", updatedAt:"Last updated",
     myStores:"My Stores", searchStores:"Search stores...",
-    filters:"Filters", tbMine:"Total stock · my stores", tbAll:"Total stock · all stores", tbStores:"stores", navStores:"Stores", navStore:"Store", navFind:"Find item", navCart:"Order", navSaved:"Saved", cartItems:"Items", cartCtn:"Cartons", cartValue:"Value", gapShort:"Opps", xsTabStores:"Stores", xsTabItem:"Find an item in all stores", xsPh:"Item name and size (e.g. jewels 850g)",
+    filters:"Filters", refreshOk:"Up to date — all data refreshed", tbMine:"Total stock · my stores", tbAll:"Total stock · all stores", tbStores:"stores", navStores:"Stores", navStore:"Store", navFind:"Find item", navCart:"Order", navSaved:"Saved", cartItems:"Items", cartCtn:"Cartons", cartValue:"Value", gapShort:"Opps", xsTabStores:"Stores", xsTabItem:"Find an item in all stores", xsPh:"Item name and size (e.g. jewels 850g)",
     xsHint:"Type or say the item and size to see its On Hand in every one of your stores at once.",
     xsItems:"items", xsIn:"in", xsOf:"of", xsStores:"stores", xsTotal:"Total on hand", xsOpen:"Tap a store to open it on this item",
     xsMore:"Show more items", xsNone:"No item matches", logout:"Logout",
@@ -1869,24 +1876,32 @@ function initFirebase(){
 function syncFromFirebase(){
   if(!fbReady || !fbDb) return;
   try{
-    fbDb.ref(FB_DATA_PATH).on("value", (snap) => {
-      const val = snap.val();
+    fbDb.ref(FB_DATA_PATH).on("value", (snap) => { applyLiveSnap(snap.val()); }, (err) => { console.warn("Firebase read error:", err && err.message); });
+  }catch(e){ console.warn(e); }
+}
+// Apply a Firebase snapshot if it is newer than what this device has. Returns true if data changed.
+function applyLiveSnap(val){
+  let changed = false;
+  {
+    {
       // The inactive list lives beside the data and can change on its own (no data rebuild).
-      if(val && val.inactive && adoptInactive(val.inactive, true)) liveRerender();
-      if(!val || !val.blob || !val.builtAt) return;
+      if(val && val.inactive && adoptInactive(val.inactive, true)){ changed = true; liveRerender(); }
+      if(!val || !val.blob || !val.builtAt) return changed;
       const localBuilt = (OO && OO.meta && OO.meta.builtAt) || "";
-      if(String(val.builtAt) <= String(localBuilt)) return;   // not newer → ignore
+      if(String(val.builtAt) <= String(localBuilt)) return changed;   // not newer → ignore
       try{
         const data = decodeBlob(val.blob);
-        if(!(data && Array.isArray(data.skus) && data.skus.length && data.stores && data.stores.length)) return;
+        if(!(data && Array.isArray(data.skus) && data.skus.length && data.stores && data.stores.length)) return changed;
         OO = data; adoptInactive(OO.meta && OO.meta.inactive, true); OO.meta.inactive = inactPayload(); reindexSkus();
         try{ localStorage.setItem(LS_DATA_KEY, val.blob); localStorage.setItem(LS_DATA_BUILT, val.builtAt); }catch(e){}
         // Don't yank the screen out from under a rep who is mid-order; refresh other screens live.
         liveRerender();
         toast(t("liveUpdated"), "success");
+        changed = true;
       }catch(e){ console.warn("live data apply failed:", e && e.message); }
-    }, (err) => { console.warn("Firebase read error:", err && err.message); });
-  }catch(e){ console.warn(e); }
+    }
+  }
+  return changed;
 }
 // Re-draw the current screen with fresh data, keeping the cart and scroll position. If the rep is
 // typing (search / quantity), wait until they leave the field so nothing is yanked mid-entry.
@@ -2662,6 +2677,65 @@ function totalBand(stores, labelKey, mode){
   return band;
 }
 
+
+/* ---------------- VERSION CHECK (always run the newest upload) ---------------- */
+const APP_BUILD = (document.querySelector('meta[name="app-build"]') || {}).content || "";
+function hardReload(){
+  const u = location.pathname + "?v=" + Date.now() + location.hash;
+  try{ location.replace(u); }catch(e){ location.reload(); }
+}
+let _verBusy = null;
+// Resolves true when a newer upload was found (and the page is reloading), false otherwise.
+function checkForNewVersion(){
+  if(!/^https?:/.test(location.protocol) || !APP_BUILD) return Promise.resolve(false);
+  if(_verBusy) return _verBusy;
+  const url = location.pathname + "?check=" + Date.now();
+  _verBusy = fetch(url, { method:"HEAD", cache:"no-store" })
+    .then(r => {
+      const tag = (r.headers.get("etag") || r.headers.get("last-modified") || "");
+      let ok = ""; try{ ok = localStorage.getItem("oo_build_ok") || ""; }catch(e){}
+      if(tag && ok === tag + "|" + APP_BUILD) return false;          // same upload as before — nothing to do
+      return fetch(url + "b", { cache:"no-store" }).then(r2 => r2.ok ? r2.text() : "").then(txt => {
+        const m = txt.match(/<meta name="app-build" content="([^"]+)"/);
+        if(!m) return false;
+        if(m[1] === APP_BUILD){ try{ if(tag) localStorage.setItem("oo_build_ok", tag + "|" + APP_BUILD); }catch(e){} return false; }
+        let done = ""; try{ done = sessionStorage.getItem("oo_reloaded_for") || ""; }catch(e){}
+        if(done === m[1]) return false;                                  // reloaded once already for this build — no loop
+        try{ sessionStorage.setItem("oo_reloaded_for", m[1]); saveSession(); }catch(e){}
+        hardReload();
+        return true;
+      });
+    })
+    .catch(() => false)
+    .finally(() => { setTimeout(() => { _verBusy = null; }, 0); });
+  return _verBusy;
+}
+// The refresh button: quick and light. New app version → reload once; otherwise pull the latest
+// data from the live feed and redraw the current page in place (no full page reload).
+let _refreshing = false;
+async function smartRefresh(btn){
+  if(_refreshing) return; _refreshing = true;
+  if(btn) btn.classList.add("spin");
+  try{
+    if(await checkForNewVersion()) return;
+    let changed = false;
+    if(typeof fbReady !== "undefined" && fbReady && fbDb){
+      try{
+        const snap = await Promise.race([ fbDb.ref(FB_DATA_PATH).once("value"), new Promise((_, rej) => setTimeout(() => rej(new Error("timeout")), 8000)) ]);
+        changed = applyLiveSnap(snap.val());
+      }catch(e){}
+    }
+    for(const k in SCREEN_CACHE) delete SCREEN_CACHE[k];
+    for(const k in _stockCache) delete _stockCache[k];
+    if(!changed) liveRerender();
+    if(!changed) toast(t("refreshOk"), "success");
+  } finally {
+    _refreshing = false;
+    const b = document.querySelector(".topbar .refbtn"); if(b) b.classList.remove("spin");
+    if(btn) btn.classList.remove("spin");
+  }
+}
+
 /* ---------------- BOTTOM NAVIGATION (rep pages) ---------------- */
 const NAV_IC = {
   stores:'<path d="M3.5 9.5l1.7-5h13.6l1.7 5M4.5 9.5V20h15V9.5M3.5 9.5h17M9.5 20v-5.5h5V20"/>',
@@ -2728,7 +2802,7 @@ function topbar(opts){
   bar.appendChild(lp);
 
   // Refresh: reload the app so the newest data (a fresh GitHub deploy, or this device's last build) shows.
-  bar.appendChild(el("button", {class:"iconbtn", title:t("refresh"), "aria-label":t("refresh"), onclick:() => location.reload()}, [svgIcon("refresh")]));
+  bar.appendChild(el("button", {class:"iconbtn refbtn", title:t("refresh"), "aria-label":t("refresh"), onclick:(ev) => smartRefresh(ev.currentTarget)}, [svgIcon("refresh")]));
   // Mobile / computer view toggle — only worth showing on a wide screen (a phone is always "phone").
   if(window.innerWidth >= 700){
     const vp = currentViewport();
@@ -4897,11 +4971,15 @@ let ORIGINAL_HTML = null;
   // Live data sync (no-op if the Firebase SDK didn't load — the app keeps its baked/local data).
   initFirebase();
   syncFromFirebase();
-  if("serviceWorker" in navigator){
-    window.addEventListener("load", () => {
-      navigator.serviceWorker.register("sw.js").catch(() => {});
-    });
-  }
+  // No service worker: remove any old one (and its caches) that could keep showing an old version.
+  try{
+    if("serviceWorker" in navigator) navigator.serviceWorker.getRegistrations().then(rs => rs.forEach(r => r.unregister())).catch(() => {});
+    if(window.caches && caches.keys) caches.keys().then(ks => ks.forEach(k => caches.delete(k))).catch(() => {});
+  }catch(e){}
+  // Auto-update: ask GitHub for the current page (bypassing every cache). If its build differs
+  // from the one running, reload once with a fresh URL so the phone shows the new version.
+  checkForNewVersion();
+  document.addEventListener("visibilitychange", () => { if(document.visibilityState === "visible") checkForNewVersion(); });
 })();
 
 </script>
