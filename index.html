@@ -1251,6 +1251,69 @@ html[dir="rtl"] .ia-en[dir="ltr"]{text-align:right;}
 .login-foot{margin-top:auto;padding-top:14px !important;}
 .login-foot .statusstrip .cell{padding:7px 9px !important;min-width:0;}
 .login-foot .statusstrip .stamp{font-size:10.5px;padding-inline:6px;max-width:100%;}
+
+/* ================= Bottom navigation ================= */
+.bnav{flex-shrink:0;display:flex;align-items:stretch;background:#fff;border-top:1px solid #E3EAE6;padding:5px 4px calc(5px + env(safe-area-inset-bottom,0px));
+  box-shadow:0 -8px 18px -14px rgba(11,50,38,.45);z-index:30;}
+.bn-it{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:2px;border:none;background:none;padding:2px 2px;cursor:pointer;
+  font-family:inherit;color:#7C8D85;-webkit-tap-highlight-color:transparent;}
+.bn-ic{position:relative;width:46px;height:28px;border-radius:14px;display:flex;align-items:center;justify-content:center;transition:background .18s,color .18s;}
+.bn-ic svg{width:21px;height:21px;}
+.bn-l{font-size:10.5px;font-weight:700;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.bn-it.on{color:#0F4636;}
+.bn-it.on .bn-ic{background:linear-gradient(135deg,#DDF1E6,#EAF7D4);color:#0F4636;}
+.bn-it.on .bn-l{font-weight:800;}
+.bn-it:disabled{opacity:.35;cursor:default;}
+.bn-badge{position:absolute;top:-3px;inset-inline-end:2px;min-width:17px;height:17px;padding:0 4px;border-radius:9px;background:#DC2626;color:#fff;
+  font-size:10px;font-weight:800;font-family:var(--font-mono);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 2px #fff;}
+/* order bar on the item list: green, sits above the bottom bar */
+.floatbar{background:var(--fx-grad) !important;padding:9px 12px !important;box-shadow:0 -6px 16px -10px rgba(11,50,38,.6) !important;}
+.floatbar .fcount{background:#C9F27E !important;color:#0B3226 !important;}
+.floatbar .fsum{color:#A9D5BF !important;}
+.floatbar .btn{background:#fff !important;color:#0B3226 !important;border:none !important;}
+.clr-row{display:none !important;}
+
+/* ================= Order review page ================= */
+.fx-cart{padding-top:2px;}
+.ct-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:6px;}
+.ct-tile{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.13);border-radius:12px;padding:6px 10px;display:flex;flex-direction:column;gap:1px;min-width:0;}
+.ct-tile span{font-size:10.5px;color:#A9D5BF;font-weight:700;}
+.ct-tile b{font-family:var(--font-mono);font-size:17px;color:#fff;font-weight:800;white-space:nowrap;}
+.ct-tile b small{font-size:10.5px;color:#A9D5BF;font-weight:700;font-family:inherit;}
+.ct-tile.v{flex:1.7 !important;background:rgba(201,242,126,.14);border-color:rgba(201,242,126,.3);}
+.ct-tiles{display:flex !important;} .ct-tile{flex:1;}
+.cartline{border-radius:14px !important;border-color:#E2EAE5 !important;border-inline-start:3px solid #17654B !important;box-shadow:0 1px 2px rgba(11,50,38,.04) !important;}
+.cartline .cseq{background:#0F4636 !important;color:#fff !important;}
+.cartline .rm{background:#FDF0EF !important;color:#C0281F !important;border-radius:10px !important;}
+.cartstep input{border-color:#17654B !important;color:#0B3226 !important;}
+.cartline .cv b{color:#0B3226 !important;}
+.card.card-pad{border-radius:16px;border-color:#E2EAE5;}
+.section-title{color:#0F4636 !important;}
+.codeseg .cs-box{background:#F3F7F5;border-color:#E2EAE5;}
+.cs-b.sel,.cs-b.cs-old.sel{background:linear-gradient(135deg,#17654B,#0B3226) !important;box-shadow:0 8px 16px -10px rgba(11,50,38,.8) !important;}
+.switch input:checked + .track{background:#17654B !important;}
+.togglerow .tl{color:#2F4A3E !important;}
+.totalsbox{background:var(--fx-grad) !important;border-radius:16px !important;}
+.totalsbox .trow{color:#A9D5BF !important;}
+.cart-actions{flex-shrink:0;display:flex;gap:8px;padding:9px 12px;background:#fff;border-top:1px solid #E3EAE6;}
+.cart-actions .btn{margin:0 !important;height:46px;border-radius:13px;font-size:14px;}
+.cart-actions .btn-green,.cart-actions .btn-primary{flex:2;background:linear-gradient(135deg,#17654B,#0B3226) !important;color:#fff !important;border:none !important;box-shadow:0 10px 18px -12px rgba(11,50,38,.9);}
+.cart-actions .btn-outline{flex:1;border-color:#CFE0D7 !important;color:#0F4636 !important;}
+.cart-actions .btn.btn-block{width:auto;}
+/* saved orders page */
+.hist-head{display:flex;align-items:center;gap:8px;font-weight:800;color:#0F4636;font-size:14px;padding:0 2px;}
+.hist-head b{background:linear-gradient(135deg,#17654B,#0B3226);color:#fff;border-radius:10px;padding:2px 10px;font-family:var(--font-mono);}
+
+/* slim order bar on the item list */
+.floatbar{padding:6px 10px !important;gap:8px !important;}
+.floatbar .fcount{padding:3px 8px !important;font-size:11.5px !important;border-radius:7px !important;}
+.floatbar .fsum{font-size:11.5px !important;line-height:1.2;display:flex;flex-wrap:wrap;align-items:baseline;gap:0 6px;}
+.floatbar .fsum b{font-size:13px !important;}
+.floatbar .btn{height:32px !important;padding:0 14px !important;font-size:12.5px !important;border-radius:9px !important;}
+
+/* performance: keep each card's layout to itself; no tap delay */
+.itemcard,.storecard,.cartline,.xs-card{contain:layout paint style;}
+button,.chip,.bn-it,.storecard,a{touch-action:manipulation;}
 </style>
 </head>
 <body>
@@ -1312,7 +1375,7 @@ const I18N = {
     badPin:"الرقم السري غير صحيح", enterUser:"أدخل رقم المستخدم الخاص بك",
     stockUpdated:"مخزون مارس", onhandUpdated:"On Hand", updatedAt:"آخر تحديث",
     myStores:"متاجري", searchStores:"ابحث عن متجر...",
-    filters:"تصفية", gapShort:"الفرص", xsTabStores:"المتاجر", xsTabItem:"بحث صنف في كل المتاجر", xsPh:"اسم الصنف وحجمه (مثال: جواهر 850 جرام)",
+    filters:"تصفية", navStores:"متاجري", navStore:"المتجر", navFind:"بحث صنف", navCart:"الطلبية", navSaved:"المحفوظة", cartItems:"أصناف", cartCtn:"كرتون", cartValue:"القيمة", gapShort:"الفرص", xsTabStores:"المتاجر", xsTabItem:"بحث صنف في كل المتاجر", xsPh:"اسم الصنف وحجمه (مثال: جواهر 850 جرام)",
     xsHint:"اكتب أو قل اسم الصنف وحجمه، وتظهر كمية الموجود منه في كل متجر من متاجرك مرة واحدة.",
     xsItems:"صنف", xsIn:"موجود في", xsOf:"من", xsStores:"متاجر", xsTotal:"إجمالي الموجود", xsOpen:"اضغط على أي متجر لفتحه على هذا الصنف",
     xsMore:"عرض أصناف أكثر", xsNone:"لا يوجد صنف بهذا الاسم", logout:"خروج",
@@ -1431,7 +1494,7 @@ const I18N = {
     badPin:"Incorrect PIN", enterUser:"Enter your user number",
     stockUpdated:"Mars Stock", onhandUpdated:"On Hand", updatedAt:"Last updated",
     myStores:"My Stores", searchStores:"Search stores...",
-    filters:"Filters", gapShort:"Opps", xsTabStores:"Stores", xsTabItem:"Find an item in all stores", xsPh:"Item name and size (e.g. jewels 850g)",
+    filters:"Filters", navStores:"Stores", navStore:"Store", navFind:"Find item", navCart:"Order", navSaved:"Saved", cartItems:"Items", cartCtn:"Cartons", cartValue:"Value", gapShort:"Opps", xsTabStores:"Stores", xsTabItem:"Find an item in all stores", xsPh:"Item name and size (e.g. jewels 850g)",
     xsHint:"Type or say the item and size to see its On Hand in every one of your stores at once.",
     xsItems:"items", xsIn:"in", xsOf:"of", xsStores:"stores", xsTotal:"Total on hand", xsOpen:"Tap a store to open it on this item",
     xsMore:"Show more items", xsNone:"No item matches", logout:"Logout",
@@ -1815,18 +1878,19 @@ function restoreSession(){
       state.user = "__preview__"; state.salesman = s.salesman || t("previewLabel");
       if(s.adminPin && String(s.adminPin) === String(OO.meta.adminPin)) state.adminPin = s.adminPin;
       state.stores = (OO.stores||[]).slice(); state.loginMode = "manager";
-      state.screen = ["stores","items","cart"].includes(s.screen) ? s.screen : "stores";
+      state.screen = ["stores","items","cart","history"].includes(s.screen) ? s.screen : "stores";
     } else if(s.loginMode === "rep" && s.user){
       const mine = (OO.stores||[]).filter(st => String(st.userNumber) === String(s.user));
       if(mine.length === 0) return false;   // reassigned / removed → fall back to login
       state.user = s.user; state.salesman = mine[0].salesman; state.stores = mine; state.loginMode = "rep";
-      state.screen = ["stores","items","cart"].includes(s.screen) ? s.screen : "stores";
+      state.screen = ["stores","items","cart","history"].includes(s.screen) ? s.screen : "stores";
     } else if(s.loginMode === "manager" && s.adminPin && String(s.adminPin) === String(OO.meta.adminPin)){
       state.adminPin = s.adminPin; state.loginMode = "manager"; state.screen = "admin";
     } else { return false; }
-    if(state.screen === "items" || state.screen === "cart"){
+    {
       const st = (state.stores||[]).find(x => String(x.storeNo) === String(s.storeNo));
-      if(st) state.selectedStore = st; else state.screen = "stores";
+      if(st) state.selectedStore = st;
+      else if(state.screen === "items" || state.screen === "cart") state.screen = "stores";
     }
     // One-time clean-up for this version: carts saved by older versions may hold quantities that
     // were auto-filled from the suggestion, so they are dropped once. After that the open order is
@@ -2294,17 +2358,52 @@ function storeItemDiff(storeNo){
 }
 
 /* ---------------- ROUTER / RENDER ---------------- */
+let _logoUrl = null;
+function logoSrc(){
+  if(_logoUrl) return _logoUrl;
+  try{
+    const bin = atob(window.OTHAIM_LOGO_B64), u8 = new Uint8Array(bin.length);
+    for(let i = 0; i < bin.length; i++) u8[i] = bin.charCodeAt(i);
+    _logoUrl = URL.createObjectURL(new Blob([u8], {type:"image/png"}));
+  }catch(e){ _logoUrl = "data:image/png;base64," + window.OTHAIM_LOGO_B64; }
+  return _logoUrl;
+}
+/* Screen cache: the stores / items / saved pages are kept after they are built. Going back to one
+   (bottom bar, back button) re-shows the same page instantly — with its scroll position — as long
+   as nothing it shows has changed (language, data, inactive list, the open order, prices…). */
+const SCREEN_CACHE = {};
+function screenKey(sc){
+  const base = [state.lang, OO && OO.meta && OO.meta.builtAt, INACT.at, state.hidePrices ? 1 : 0, state.user, state.adminPin ? 1 : 0].join("|");
+  if(sc === "items") return base + "|" + (state.selectedStore && state.selectedStore.storeNo) + "|" + JSON.stringify(state.cart||{});
+  if(sc === "stores") return base + "|" + (state.storesMode||"stores") + "|" + (state.stores||[]).length + "|" + Object.keys(state.cart||{}).length + "|" + (state.selectedStore && state.selectedStore.storeNo);
+  return null;
+}
 function render(){
   document.documentElement.setAttribute("lang", state.lang === "ar" ? "ar" : "en");
   document.documentElement.setAttribute("dir", state.lang === "ar" ? "rtl" : "ltr");
   document.documentElement.setAttribute("data-lang", state.lang);
   const app = $("#app");
-  app.innerHTML = "";
-  if(state.screen === "login") app.appendChild(renderLogin());
+  // remember the scroll position of the page we are leaving (if it is cached)
+  const prev = app.firstChild;
+  if(prev && prev._cacheFor){ const c = prev.querySelector(".content"); prev._scroll = c ? c.scrollTop : 0; }
+  while(app.firstChild) app.removeChild(app.firstChild);
+  const sk = (state.screen === "items" || state.screen === "stores") ? screenKey(state.screen) : null;
+  const hit = sk && SCREEN_CACHE[state.screen] && SCREEN_CACHE[state.screen].key === sk ? SCREEN_CACHE[state.screen].el : null;
+  if(hit){
+    const oldNav = hit.querySelector(":scope > .bnav"); if(oldNav) oldNav.remove();
+    app.appendChild(hit);
+    const c = hit.querySelector(".content"); if(c && hit._scroll) c.scrollTop = hit._scroll;
+  }
+  else if(state.screen === "login") app.appendChild(renderLogin());
   else if(state.screen === "stores") app.appendChild(renderStores());
   else if(state.screen === "items") app.appendChild(renderItems());
   else if(state.screen === "cart") app.appendChild(renderCart());
+  else if(state.screen === "history") app.appendChild(renderHistoryScreen());
   else if(state.screen === "admin") app.appendChild(renderAdmin());
+  if(state.user && ["stores","items","cart","history"].includes(state.screen) && app.firstChild) app.firstChild.appendChild(bottomNav());
+  if(sk && !hit && app.firstChild){ app.firstChild._cacheFor = state.screen; SCREEN_CACHE[state.screen] = { key: sk, el: app.firstChild }; }
+  // the items page edits the order in place → its cache key must follow the live cart
+  if(state.screen === "items" && SCREEN_CACHE.items && SCREEN_CACHE.items.el === app.firstChild) SCREEN_CACHE.items.live = true;
   saveSession();
 }
 
@@ -2314,7 +2413,7 @@ function renderLogin(){
 
   // Brand hero — fills the top of the screen with the Othaim identity.
   const hero = el("div", {class:"login-hero"});
-  hero.appendChild(el("div", {class:"login-logo"}, [ el("img", {src:"data:image/png;base64,"+window.OTHAIM_LOGO_B64, alt:"Othaim"}) ]));
+  hero.appendChild(el("div", {class:"login-logo"}, [ el("img", {src:logoSrc(), alt:"Othaim", decoding:"async"}) ]));
   hero.appendChild(el("div", {class:"login-title"}, [t("appName")]));
   hero.appendChild(el("div", {class:"login-sub"}, [t("tagline")]));
   s.appendChild(hero);
@@ -2420,6 +2519,53 @@ function renderStatusStrip(compact){
   return wrap;
 }
 
+
+/* ---------------- BOTTOM NAVIGATION (rep pages) ---------------- */
+const NAV_IC = {
+  stores:'<path d="M3.5 9.5l1.7-5h13.6l1.7 5M4.5 9.5V20h15V9.5M3.5 9.5h17M9.5 20v-5.5h5V20"/>',
+  items:'<rect x="4" y="4" width="7" height="7" rx="1.6"/><rect x="13" y="4" width="7" height="7" rx="1.6"/><rect x="4" y="13" width="7" height="7" rx="1.6"/><rect x="13" y="13" width="7" height="7" rx="1.6"/>',
+  find:'<circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L20.5 20.5M8 10.5h5M10.5 8v5"/>',
+  cart:'<path d="M3 4h2.2l2.1 11h10.9l2-8H6.3"/><circle cx="9.5" cy="19.5" r="1.4"/><circle cx="17" cy="19.5" r="1.4"/>',
+  hist:'<path d="M7 3.5h7.5L19 8v12.5H7z"/><path d="M14.5 3.5V8H19M10 12.5h6M10 16h6"/>'
+};
+function bottomNav(){
+  const nav = el("nav", {class:"bnav"});
+  const hasStore = !!state.selectedStore, nCart = Object.keys(state.cart||{}).length;
+  const cur = state.screen === "stores" ? (state.storesMode === "item" ? "find" : "stores") : state.screen === "items" ? "items"
+    : state.screen === "cart" ? "cart" : state.screen === "history" ? "hist" : "";
+  const go = {
+    stores: () => { state.storesMode = "stores"; state.screen = "stores"; render(); },
+    items:  () => { if(!hasStore) return; state.screen = "items"; render(); },
+    find:   () => { state.storesMode = "item"; state.screen = "stores"; render(); },
+    cart:   () => { if(!hasStore) return; goToCart(); },
+    hist:   () => { state.screen = "history"; render(); }
+  };
+  const labels = { stores:t("navStores"), items: t("navStore"), find:t("navFind"), cart:t("navCart"), hist:t("navSaved") };
+  ["stores","items","find","cart","hist"].forEach(k => {
+    const dis = (k === "items" || k === "cart") && !hasStore;
+    const ic = el("span", {class:"bn-ic", html:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">'+NAV_IC[k]+'</svg>'});
+    if(k === "cart" && nCart) ic.appendChild(el("span", {class:"bn-badge"}, [String(nCart)]));
+    const b = el("button", {class:"bn-it"+(cur===k?" on":""), type:"button", onclick: () => {
+      if(cur === k && k !== "find" && k !== "stores") return;
+      nav.querySelectorAll(".bn-it").forEach(x => x.classList.toggle("on", x === b));
+      requestAnimationFrame(() => setTimeout(go[k], 0));
+    }}, [ ic, el("span",{class:"bn-l"},[labels[k]]) ]);
+    if(dis) b.disabled = true;
+    nav.appendChild(b);
+  });
+  return nav;
+}
+function renderHistoryScreen(){
+  const s = el("div", {class:"screen"});
+  s.appendChild(topbar({title: t("navSaved"), subtitle: state.salesman || "", onLogout: doLogout}));
+  const content = el("div", {class:"content"});
+  const n = purgeOldOrders().filter(o => o.lines && (!state.user || state.user === "__preview__" || !o.salesman || o.salesman === state.salesman)).length;
+  content.appendChild(el("div", {class:"hist-head"}, [ el("b",{},[String(n)]), el("span",{},[t("savedOrders")]) ]));
+  content.appendChild(el("div", {class:"card card-pad hist-card"}, [renderOrderHistory()]));
+  s.appendChild(content);
+  return s;
+}
+
 /* ---------------- TOPBAR (shared) ---------------- */
 function topbar(opts){
   const bar = el("div", {class:"topbar"});
@@ -2427,7 +2573,7 @@ function topbar(opts){
     bar.appendChild(el("button", {class:"iconbtn", onclick:opts.onBack}, [svgIcon("back")]));
   }
   const brand = el("div", {class:"brandmark"});
-  brand.appendChild(el("img", {src:"data:image/png;base64,"+window.OTHAIM_LOGO_B64}));
+  brand.appendChild(el("img", {src:logoSrc(), decoding:"async"}));
   const titles = el("div", {class:"titles"});
   titles.appendChild(el("div", {class:"t1"}, [opts.title || t("appName")]));
   if(opts.subtitle) titles.appendChild(el("div", {class:"t2"}, [opts.subtitle]));
@@ -2500,12 +2646,7 @@ function renderStores(){
   const list = el("div", {class:"storelist"});
   // Saved orders (last 30 days) — rebuild any order's file with the new or the old code.
   const nSaved = purgeOldOrders().filter(o => o.lines && (!state.user || state.user === "__preview__" || !o.salesman || o.salesman === state.salesman)).length;
-  if(nSaved){
-    const det = el("details", {class:"savedorders"});
-    det.appendChild(el("summary", {}, [ el("span",{},[t("savedOrders")]), el("b",{},[String(nSaved)]) ]));
-    det.appendChild(renderOrderHistory());
-    content.appendChild(det);
-  }
+  // saved orders now have their own page in the bottom bar
   content.appendChild(list);
 
   function draw(){
@@ -2940,7 +3081,7 @@ function renderItems(){
     // Paint the first cards right away, then stream the rest across animation frames so opening a
     // store / switching a category feels instant instead of freezing on ~300 cards at once.
     // Light: only the first cards are built; the next batch is built as the rep scrolls near the end.
-    const CHUNK = 20; let i = 0;
+    const CHUNK = 12; let i = 0;
     if(list._io){ list._io.disconnect(); list._io = null; }
     const sentinel = el("div", {class:"list-sentinel"});
     function step(){
@@ -3164,9 +3305,11 @@ function renderItems(){
 
   let floatbar;
   function updateFloatbar(){
+    if(SCREEN_CACHE.items && SCREEN_CACHE.items.el === s) SCREEN_CACHE.items.key = screenKey("items");
     const totals = cartTotals();
     const count = cartLineCount();
     if(floatbar) floatbar.remove();
+    { const bnB = $(".bnav .bn-it:nth-child(4) .bn-ic", s); if(bnB && !count){ const old = $(".bn-badge", bnB); if(old) old.remove(); } }
     const clrB = $(".clr-link", s); if(clrB) clrB.hidden = count === 0;
     if(count === 0) return;
     floatbar = el("div", {class:"floatbar"}, [
@@ -3175,7 +3318,9 @@ function renderItems(){
         state.hidePrices ? [] : ["   ", el("b",{},[fmtMoney(totals.value)+" "+curr()])])),
       el("button", {class:"btn btn-primary", onclick: () => { goToCart(); }}, [t("reviewOrder")])
     ]);
-    s.appendChild(floatbar);
+    const nav = $(".bnav", s); if(nav) s.insertBefore(floatbar, nav); else s.appendChild(floatbar);
+    const bnB = $(".bnav .bn-it:nth-child(4) .bn-ic", s);
+    if(bnB){ const old = $(".bn-badge", bnB); if(old) old.remove(); if(count) bnB.appendChild(el("span",{class:"bn-badge"},[String(count)])); }
     const badge = $(".cartbadge", s);
     const btn = $(".cartbtn", s);
     if(btn){ if(badge) badge.remove(); if(count>0) btn.appendChild(el("span",{class:"cartbadge"},[String(count)])); }
@@ -3211,9 +3356,19 @@ function renderCart(){
   const store = state.selectedStore;
   const s = el("div", {class:"screen"});
   s.appendChild(topbar({title: t("reviewOrder"), subtitle: store.nameAr, onBack: () => { state.screen="items"; render(); }}));
-  const content = el("div", {class:"content"});
-
   const lines = Object.entries(state.cart);
+  // fixed summary under the top bar: items · cartons · value (live)
+  const sumHead = el("div", {class:"fxhead fx-cart"});
+  const tN = el("b"), tC = el("b"), tV = el("b");
+  const tile = (lbl, b, cls) => el("div", {class:"ct-tile"+(cls?" "+cls:"")}, [ el("span",{},[lbl]), b ]);
+  const tiles = el("div", {class:"ct-tiles"}, [ tile(t("cartItems"), tN), tile(t("cartCtn"), tC) ]);
+  if(!state.hidePrices) tiles.appendChild(tile(t("cartValue"), tV, "v"));
+  sumHead.appendChild(tiles);
+  if(lines.length) s.appendChild(sumHead);
+  const paintHead = () => { const tt = cartTotals(); tN.textContent = fmtInt(Object.keys(state.cart).length); tC.textContent = fmtInt(tt.cartons);
+    tV.innerHTML = ""; tV.appendChild(document.createTextNode(fmtMoney(tt.value))); tV.appendChild(el("small",{},[" "+curr()])); };
+  paintHead();
+  const content = el("div", {class:"content"});
   if(lines.length === 0){
     content.appendChild(el("div", {class:"emptystate"}, [t("cartEmpty")]));
     content.appendChild(el("button", {class:"btn btn-outline btn-block", onclick: () => { state.screen="items"; render(); }}, [t("backToItems")]));
@@ -3222,6 +3377,7 @@ function renderCart(){
   }
 
   let repaintTotals = () => {};   // wired up after the totals box is built
+  const repaintAll = () => { paintHead(); repaintTotals(); };
 
   const listWrap = el("div", {style:"display:flex;flex-direction:column;gap:6px;"});
   const storeOH = (store && OO.onHand[String(store.storeNo)]) || {};
@@ -3265,7 +3421,7 @@ function renderCart(){
       v = Math.max(0, Math.floor(Number(v)||0));
       if(v <= 0){ delete state.cart[art]; render(); return; }  // removing shrinks the list → full re-render
       state.cart[art] = v; input.value = String(v);
-      paintVal(); repaintTotals();
+      paintVal(); repaintAll();
     }
     minus.onclick = () => setQty((Number(input.value)||0)-1);
     plus.onclick  = () => setQty((Number(input.value)||0)+1);
@@ -3327,7 +3483,7 @@ function renderCart(){
     repaintTotals();
   }
 
-  const btnRow = el("div", {style:"display:flex;flex-direction:column;gap:8px;margin-top:4px;"});
+  const btnRow = el("div", {class:"cart-actions"});
   // On a phone the reliable way to get a PDF into WhatsApp is the native share sheet with
   // the file attached — so when that's supported it's the primary green action. Download
   // is always offered as a clean fallback (desktop, or saving a copy).
@@ -3337,9 +3493,8 @@ function renderCart(){
   } else {
     btnRow.appendChild(el("button", {class:"btn btn-primary btn-block", onclick: () => generateThen("download")}, [svgIcon("download"), " "+t("downloadPdf")]));
   }
-  content.appendChild(btnRow);
-
   s.appendChild(content);
+  s.appendChild(btnRow);   // fixed action bar above the bottom navigation
   return s;
 }
 
