@@ -7,7 +7,7 @@
 <meta name="theme-color" content="#0B3226">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="app-build" content="2026-11-13-1500">
+<meta name="app-build" content="2026-11-19-1030">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -1420,6 +1420,11 @@ html[dir="rtl"] .sc-val{direction:rtl;}
 .iconbtn.refbtn.spin svg{animation:refSpin .8s linear infinite;}
 @keyframes refSpin{to{transform:rotate(360deg);}}
 html[dir="rtl"] .iconbtn.refbtn.spin svg{animation-direction:reverse;}
+
+.code-issues{margin-top:10px;border:1px solid #F3D9A6;background:#FFF8EA;border-radius:12px;padding:10px 12px;font-size:12px;color:#5C4210;display:flex;flex-direction:column;gap:3px;}
+.code-issues .ci-t{font-weight:800;color:#8A5A00;margin-bottom:3px;line-height:1.5;}
+.code-issues .ci-r{font-size:11.5px;line-height:1.5;} .code-issues .ci-r b{font-family:var(--font-mono);color:#0F4636;} .code-issues .ci-r s{color:#B42318;font-family:var(--font-mono);}
+.code-issues .ci-h{margin-top:6px;font-size:11px;color:#7A6232;line-height:1.5;}
 </style>
 </head>
 <body>
@@ -1481,7 +1486,7 @@ const I18N = {
     badPin:"الرقم السري غير صحيح", enterUser:"أدخل رقم المستخدم الخاص بك",
     stockUpdated:"مخزون مارس", onhandUpdated:"On Hand", updatedAt:"آخر تحديث",
     myStores:"متاجري", searchStores:"ابحث عن متجر...",
-    filters:"تصفية", refreshOk:"تم التحديث — كل البيانات محدّثة", tbMine:"إجمالي مخزون متاجري", tbAll:"إجمالي كل المتاجر", tbStores:"متاجر", navStores:"متاجري", navStore:"المتجر", navFind:"بحث صنف", navCart:"الطلبية", navSaved:"المحفوظة", cartItems:"أصناف", cartCtn:"كرتون", cartValue:"القيمة", gapShort:"الفرص", xsTabStores:"المتاجر", xsTabItem:"بحث صنف في كل المتاجر", xsPh:"اسم الصنف وحجمه (مثال: جواهر 850 جرام)",
+    filters:"تصفية", codeIssuesTitle:"تم تصحيح أكواد أصناف غير متطابقة في الملف (عمود Artecal# يختلف عن رقم الصنف في الوصف):", codeDupTitle:"أكواد مكررة — تم الإبقاء على أول صنف فقط:", codeMissTitle:"أصناف ناقصة البيانات (بدون اسم أو شد أو سعر)", codeMissPack:"بدون شد", codeMissPrice:"بدون سعر", codeIssuesHint:"الكود الصحيح مأخوذ من رقم الصنف في وصف العثيم (نفس رقم شيت On Hand). يُفضّل تصحيح عمود Artecal# في الملف الأصلي.", refreshOk:"تم التحديث — كل البيانات محدّثة", tbMine:"إجمالي مخزون متاجري", tbAll:"إجمالي كل المتاجر", tbStores:"متاجر", navStores:"متاجري", navStore:"المتجر", navFind:"بحث صنف", navCart:"الطلبية", navSaved:"المحفوظة", cartItems:"أصناف", cartCtn:"كرتون", cartValue:"القيمة", gapShort:"الفرص", xsTabStores:"المتاجر", xsTabItem:"بحث صنف في كل المتاجر", xsPh:"اسم الصنف وحجمه (مثال: جواهر 850 جرام)",
     xsHint:"اكتب أو قل اسم الصنف وحجمه، وتظهر كمية الموجود منه في كل متجر من متاجرك مرة واحدة.",
     xsItems:"صنف", xsIn:"موجود في", xsOf:"من", xsStores:"متاجر", xsTotal:"إجمالي الموجود", xsOpen:"اضغط على أي متجر لفتحه على هذا الصنف",
     xsMore:"عرض أصناف أكثر", xsNone:"لا يوجد صنف بهذا الاسم", logout:"خروج",
@@ -1600,7 +1605,7 @@ const I18N = {
     badPin:"Incorrect PIN", enterUser:"Enter your user number",
     stockUpdated:"Mars Stock", onhandUpdated:"On Hand", updatedAt:"Last updated",
     myStores:"My Stores", searchStores:"Search stores...",
-    filters:"Filters", refreshOk:"Up to date — all data refreshed", tbMine:"Total stock · my stores", tbAll:"Total stock · all stores", tbStores:"stores", navStores:"Stores", navStore:"Store", navFind:"Find item", navCart:"Order", navSaved:"Saved", cartItems:"Items", cartCtn:"Cartons", cartValue:"Value", gapShort:"Opps", xsTabStores:"Stores", xsTabItem:"Find an item in all stores", xsPh:"Item name and size (e.g. jewels 850g)",
+    filters:"Filters", codeIssuesTitle:"Item codes corrected (Artecal# column differs from the number in the item description):", codeDupTitle:"Duplicate codes — only the first item was kept:", codeMissTitle:"Items with missing data (no name, pack or price)", codeMissPack:"no pack", codeMissPrice:"no price", codeIssuesHint:"The correct code is taken from the Othaim number in the item description (same as the On Hand sheet). Please fix the Artecal# column in the source file.", refreshOk:"Up to date — all data refreshed", tbMine:"Total stock · my stores", tbAll:"Total stock · all stores", tbStores:"stores", navStores:"Stores", navStore:"Store", navFind:"Find item", navCart:"Order", navSaved:"Saved", cartItems:"Items", cartCtn:"Cartons", cartValue:"Value", gapShort:"Opps", xsTabStores:"Stores", xsTabItem:"Find an item in all stores", xsPh:"Item name and size (e.g. jewels 850g)",
     xsHint:"Type or say the item and size to see its On Hand in every one of your stores at once.",
     xsItems:"items", xsIn:"in", xsOf:"of", xsStores:"stores", xsTotal:"Total on hand", xsOpen:"Tap a store to open it on this item",
     xsMore:"Show more items", xsNone:"No item matches", logout:"Logout",
@@ -2112,7 +2117,31 @@ function svgIcon(name){
   const s = el("span"); s.innerHTML = `<svg viewBox="0 0 24 24">${icons[name]||""}</svg>`;
   return s.firstChild;
 }
+// Item codes must be unique: the order, stock and Mars stock are all keyed by the Othaim code.
+// (1) when the stored code number and the Othaim code text disagree, the Othaim code wins;
+// (2) a code that appears twice keeps only its first item. Returns what was corrected.
+function dedupeSkus(list){
+  const seen = new Set(), skus = [], dups = [];
+  (list||[]).forEach(s => {
+    const k = String(s.artecal);
+    if(seen.has(k)){ dups.push({ code: s.artecalCode || k, name: s.nameEn || s.nameAr || "" }); return; }
+    seen.add(k); skus.push(s);
+  });
+  return { skus, dups };
+}
+function normalizeSkuCodes(data){
+  if(!data || !Array.isArray(data.skus)) return 0;
+  let fixed = 0;
+  data.skus.forEach(s => {
+    const c = s.artecalCode ? parseInt(s.artecalCode, 10) : NaN;
+    if(!isNaN(c) && c > 0 && Number(s.artecal) !== c){ s.artecal = c; fixed++; }
+  });
+  const d = dedupeSkus(data.skus); data.skus = d.skus;
+  if(fixed || d.dups.length) console.warn("item codes corrected:", fixed, "duplicates removed:", d.dups.length);
+  return fixed + d.dups.length;
+}
 function reindexSkus(){
+  normalizeSkuCodes(OO);
   state.skusByArt = {};
   (OO.skus||[]).forEach(s => state.skusByArt[s.artecal] = s);
   // The per-store value/summary cache is derived from OO.onHand + OO.skus prices; any time the
@@ -4430,6 +4459,7 @@ function renderAdmin(){
           toast(t("fileNotRecognized"), "error"); return;
         }
         applyUpload(parsed, summary);   // apply the update immediately and show the result card
+        showCodeIssues(parsed, upCard);
       }catch(e){
         console.error(e);
         toast(t("fileNotRecognized"), "error");
@@ -4446,6 +4476,27 @@ function renderAdmin(){
   return s;
 }
 
+function showCodeIssues(parsed, host){
+  const old = host.querySelector(".code-issues"); if(old) old.remove();
+  const fx = parsed._codeFixes || [], dp = parsed._codeDups || [];
+  const miss = (parsed.skus || []).filter(s => !(Number(s.pcPerCs) > 0) || !(Number(s.pcPrice) > 0) || !(s.nameEn || s.nameAr));
+  if(!fx.length && !dp.length && !miss.length) return;
+  const box = el("div", {class:"code-issues"});
+  box.appendChild(el("div", {class:"ci-t"}, [t("codeIssuesTitle")]));
+  fx.slice(0, 30).forEach(f => box.appendChild(el("div", {class:"ci-r"}, [ el("b",{},[String(f.now).padStart(6,"0")]), " ← ", el("s",{},[String(f.was||"—")]), "  ", f.name ])));
+  if(fx.length > 30) box.appendChild(el("div", {class:"ci-r"}, ["+ "+(fx.length-30)]));
+  if(dp.length){
+    box.appendChild(el("div", {class:"ci-t", style:"margin-top:6px"}, [t("codeDupTitle")]));
+    dp.slice(0, 20).forEach(d => box.appendChild(el("div", {class:"ci-r"}, [ el("b",{},[d.code]), "  ", d.name ])));
+  }
+  if(miss.length){
+    box.appendChild(el("div", {class:"ci-t", style:"margin-top:6px"}, [t("codeMissTitle")+" ("+miss.length+")"]));
+    miss.slice(0, 20).forEach(s => box.appendChild(el("div", {class:"ci-r"}, [ el("b",{},[codeStr(s)]), "  ", (s.nameEn || s.nameAr || "—"),
+      !(Number(s.pcPerCs) > 0) ? " · "+t("codeMissPack") : "", !(Number(s.pcPrice) > 0) ? " · "+t("codeMissPrice") : "" ])));
+  }
+  if(fx.length || dp.length) box.appendChild(el("div", {class:"ci-h"}, [t("codeIssuesHint")]));
+  host.appendChild(box);
+}
 /* ---- parse an uploaded workbook, auto-detecting raw export vs clean template ---- */
 function sheetRows(wb, name){
   const ws = wb.Sheets[name];
@@ -4571,8 +4622,13 @@ function parseWorkbook(wb){
       const kCat   = findCol(sample, [/^category$/i, /category|فئة|تصنيف/i]);
       const kBrand = findCol(sample, [/^brand$/i, /brand|علامة|براند/i]);
       out.skus = raw.map(r => {
-        const art = leadCode(r["Artecal#"]);
+        let art = leadCode(r["Artecal#"]);
         const artCode = leadCodeStr(r["Item Arabic Description With Number"]) || (art!==null ? String(art).padStart(6,"0") : "");
+        const descArt = artCode ? parseInt(artCode, 10) : NaN;
+        if(!isNaN(descArt) && descArt > 0 && art !== descArt){
+          (out._codeFixes = out._codeFixes || []).push({ name: String(r["Item Arabic Description With Number"]||"").replace(/^\s*0*\d+\s*-\s*/,""), was: art, now: descArt });
+          art = descArt;
+        }
         const nameAr = String(r["Item Arabic Description With Number"]||"").replace(/^\s*0*\d+\s*-\s*/,"");
         const cat = (kCat && r[kCat]) || inferCategory(nameAr) || "Uncategorized";
         const pcPerCs = kPer ? num(r[kPer]) : 0;
@@ -4589,6 +4645,13 @@ function parseWorkbook(wb){
         };
       }).filter(x => x.artecal);
     }
+  }
+  if(out.skus){
+    out.skus.forEach(s => {   // template path: the ArtecalCode text wins over the ArtecalNo number too
+      const c = s.artecalCode ? parseInt(s.artecalCode, 10) : NaN;
+      if(!isNaN(c) && c > 0 && Number(s.artecal) !== c){ (out._codeFixes = out._codeFixes || []).push({ name: s.nameAr || s.nameEn || "", was: s.artecal, now: c }); s.artecal = c; }
+    });
+    const d = dedupeSkus(out.skus); out.skus = d.skus; if(d.dups.length) out._codeDups = d.dups;
   }
 
   // ---- Old Othaim codes (sheet "كود الكرتون والاوتر") ----
