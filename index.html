@@ -7,8 +7,8 @@
 <meta name="theme-color" content="#0B3226">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="app-build" content="2026-11-20-2135">
-<meta name="app-version" content="2.2">
+<meta name="app-build" content="2026-11-20-2215">
+<meta name="app-version" content="2.4">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -1516,7 +1516,7 @@ const I18N = {
     badPin:"الرقم السري غير صحيح", enterUser:"أدخل رقم المستخدم الخاص بك",
     stockUpdated:"مخزون مارس", onhandUpdated:"On Hand", updatedAt:"آخر تحديث",
     myStores:"متاجري", searchStores:"ابحث عن متجر...",
-    filters:"تصفية", verTitle:"إصدار التطبيق", verCurrent:"الإصدار الحالي", verShort:"الإصدار", verBuilt:"رقم البناء", verNow:"المستخدم الآن", verOpen:"فتح هذا الإصدار", verHint:"للرجوع لإصدار سابق: افتح مجلد versions في GitHub، خذ ملف الإصدار المطلوب (مثال v2.0.html) وارفعه باسم index.html مكان الحالي — يرجع التطبيق لكل المناديب تلقائيًا.", mmMin:"الحد الأدنى", mmMax:"الحد الأقصى", mmBelow:"تحت الحد الأدنى", codeIssuesTitle:"تم تصحيح أكواد أصناف غير متطابقة في الملف (عمود Artecal# يختلف عن رقم الصنف في الوصف):", codeDupTitle:"أكواد مكررة — تم الإبقاء على أول صنف فقط:", codeMissTitle:"أصناف ناقصة البيانات (بدون اسم أو شد أو سعر)", codeMissPack:"بدون شد", codeMissPrice:"بدون سعر", codeIssuesHint:"الكود الصحيح مأخوذ من رقم الصنف في وصف العثيم (نفس رقم شيت On Hand). يُفضّل تصحيح عمود Artecal# في الملف الأصلي.", refreshOk:"تم التحديث — كل البيانات محدّثة", tbMine:"إجمالي مخزون متاجري", tbAll:"إجمالي كل المتاجر", tbStores:"متاجر", navStores:"متاجري", navStore:"المتجر", navFind:"بحث صنف", navCart:"الطلبية", navSaved:"المحفوظة", cartItems:"أصناف", cartCtn:"كرتون", cartValue:"القيمة", gapShort:"الفرص", xsTabStores:"المتاجر", xsTabItem:"بحث صنف في كل المتاجر", xsPh:"اسم الصنف وحجمه (مثال: جواهر 850 جرام)",
+    filters:"تصفية", inOuter:"بالأوتر", outerU:"أوتر", verTitle:"إصدار التطبيق", verCurrent:"الإصدار الحالي", verShort:"الإصدار", verBuilt:"رقم البناء", verNow:"المستخدم الآن", verOpen:"فتح هذا الإصدار", verHint:"للرجوع لإصدار سابق: افتح مجلد versions في GitHub، خذ ملف الإصدار المطلوب (مثال v2.0.html) وارفعه باسم index.html مكان الحالي — يرجع التطبيق لكل المناديب تلقائيًا.", mmMin:"الحد الأدنى", mmMax:"الحد الأقصى", mmBelow:"تحت الحد الأدنى", codeIssuesTitle:"تم تصحيح أكواد أصناف غير متطابقة في الملف (عمود Artecal# يختلف عن رقم الصنف في الوصف):", codeDupTitle:"أكواد مكررة — تم الإبقاء على أول صنف فقط:", codeMissTitle:"أصناف ناقصة البيانات (بدون اسم أو شد أو سعر)", codeMissPack:"بدون شد", codeMissPrice:"بدون سعر", codeIssuesHint:"الكود الصحيح مأخوذ من رقم الصنف في وصف العثيم (نفس رقم شيت On Hand). يُفضّل تصحيح عمود Artecal# في الملف الأصلي.", refreshOk:"تم التحديث — كل البيانات محدّثة", tbMine:"إجمالي مخزون متاجري", tbAll:"إجمالي كل المتاجر", tbStores:"متاجر", navStores:"متاجري", navStore:"المتجر", navFind:"بحث صنف", navCart:"الطلبية", navSaved:"المحفوظة", cartItems:"أصناف", cartCtn:"كرتون", cartValue:"القيمة", gapShort:"الفرص", xsTabStores:"المتاجر", xsTabItem:"بحث صنف في كل المتاجر", xsPh:"اسم الصنف وحجمه (مثال: جواهر 850 جرام)",
     xsHint:"اكتب أو قل اسم الصنف وحجمه، وتظهر كمية الموجود منه في كل متجر من متاجرك مرة واحدة.",
     xsItems:"صنف", xsIn:"موجود في", xsOf:"من", xsStores:"متاجر", xsTotal:"إجمالي الموجود", xsOpen:"اضغط على أي متجر لفتحه على هذا الصنف",
     xsMore:"عرض أصناف أكثر", xsNone:"لا يوجد صنف بهذا الاسم", logout:"خروج",
@@ -1635,7 +1635,7 @@ const I18N = {
     badPin:"Incorrect PIN", enterUser:"Enter your user number",
     stockUpdated:"Mars Stock", onhandUpdated:"On Hand", updatedAt:"Last updated",
     myStores:"My Stores", searchStores:"Search stores...",
-    filters:"Filters", verTitle:"App version", verCurrent:"Current version", verShort:"Version", verBuilt:"Build", verNow:"in use now", verOpen:"Open this version", verHint:"To go back: upload versions/v<number>.html from the versions folder on GitHub as index.html — every rep gets that version automatically.", mmMin:"Min", mmMax:"Max", mmBelow:"Below min", codeIssuesTitle:"Item codes corrected (Artecal# column differs from the number in the item description):", codeDupTitle:"Duplicate codes — only the first item was kept:", codeMissTitle:"Items with missing data (no name, pack or price)", codeMissPack:"no pack", codeMissPrice:"no price", codeIssuesHint:"The correct code is taken from the Othaim number in the item description (same as the On Hand sheet). Please fix the Artecal# column in the source file.", refreshOk:"Up to date — all data refreshed", tbMine:"Total stock · my stores", tbAll:"Total stock · all stores", tbStores:"stores", navStores:"Stores", navStore:"Store", navFind:"Find item", navCart:"Order", navSaved:"Saved", cartItems:"Items", cartCtn:"Cartons", cartValue:"Value", gapShort:"Opps", xsTabStores:"Stores", xsTabItem:"Find an item in all stores", xsPh:"Item name and size (e.g. jewels 850g)",
+    filters:"Filters", inOuter:"In outers", outerU:"outer", verTitle:"App version", verCurrent:"Current version", verShort:"Version", verBuilt:"Build", verNow:"in use now", verOpen:"Open this version", verHint:"To go back: upload versions/v<number>.html from the versions folder on GitHub as index.html — every rep gets that version automatically.", mmMin:"Min", mmMax:"Max", mmBelow:"Below min", codeIssuesTitle:"Item codes corrected (Artecal# column differs from the number in the item description):", codeDupTitle:"Duplicate codes — only the first item was kept:", codeMissTitle:"Items with missing data (no name, pack or price)", codeMissPack:"no pack", codeMissPrice:"no price", codeIssuesHint:"The correct code is taken from the Othaim number in the item description (same as the On Hand sheet). Please fix the Artecal# column in the source file.", refreshOk:"Up to date — all data refreshed", tbMine:"Total stock · my stores", tbAll:"Total stock · all stores", tbStores:"stores", navStores:"Stores", navStore:"Store", navFind:"Find item", navCart:"Order", navSaved:"Saved", cartItems:"Items", cartCtn:"Cartons", cartValue:"Value", gapShort:"Opps", xsTabStores:"Stores", xsTabItem:"Find an item in all stores", xsPh:"Item name and size (e.g. jewels 850g)",
     xsHint:"Type or say the item and size to see its On Hand in every one of your stores at once.",
     xsItems:"items", xsIn:"in", xsOf:"of", xsStores:"stores", xsTotal:"Total on hand", xsOpen:"Tap a store to open it on this item",
     xsMore:"Show more items", xsNone:"No item matches", logout:"Logout",
@@ -1800,6 +1800,16 @@ let OO = null; // the live embedded dataset for this session
 /* Items that Othaim keys in OUTERS, not cartons. The quantity entered is the same number —
    this only changes the unit label (and its colour) so whoever keys the order in notices. */
 const OUTER_ARTS = new Set(["12498", "9611", "8817", "5310", "15645", "15644", "16709", "16009", "3212", "8374", "3211", "3616", "14821", "3617", "3404", "3403", "1977", "14343", "8609", "8608", "49939", "16710", "16008", "16007", "16006", "4680", "49985", "49987", "49986", "49988", "49940", "10216", "14984", "72009", "71733", "72008", "72007", "49936", "49935"]);
+function ctnPcs(sku){
+  if(!sku) return 0;
+  const cs = Number(sku.csPrice)||0, pc = Number(sku.pcPrice)||0, per = Number(sku.pcPerCs)||0;
+  // only OUTER items (gum etc.) carry outers-per-carton in "PC per CS"; every other item's pack is already pieces
+  if(isOuter(sku) && cs > 0 && pc > 0){
+    const r = cs / pc, n = Math.round(r);
+    if(n >= 1 && n <= 5000 && Math.abs(r - n) <= Math.max(0.5, n * 0.02)) return n;
+  }
+  return per;
+}
 function isOuter(sku){ return !!sku && OUTER_ARTS.has(String(sku.artecal)); }
 /* Outer size in pieces for OUTER items (from the "كود الكرتون والاوتر" sheet, e.g. piece×0006).
    An OUTER line is priced and counted per outer: price = piece price × outer size. */
@@ -2822,8 +2832,8 @@ async function smartRefresh(btn){
 
 
 /* ---------------- APP VERSION (shown to the manager; each release is archived in versions/) ---------------- */
-const APP_VERSION = "2.2";
-const APP_VERSIONS = [{"v": "2.2", "date": "2026-11-20", "ar": "كود العثيم الجديد دائمًا في صفحات التطبيق حتى لو جاء الملف بالكود القديم", "en": "Always the NEW Othaim code in the app, even if the file carries the old code"}, {"v": "2.1", "date": "2026-11-20", "ar": "إضافة الحد الأدنى والحد الأقصى بالكرتون في بطاقة الصنف + رقم الإصدار للمدير", "en": "Min / Max in cartons on each item card + version number for the manager"}, {"v": "2.0", "date": "2026-11-19", "ar": "التصميم الأخضر، الشريط السفلي، التحديث التلقائي، إصلاح تكرار أكواد الأصناف", "en": "Green design, bottom bar, auto-update, duplicate item-code fix"}];
+const APP_VERSION = "2.4";
+const APP_VERSIONS = [{"v": "2.4", "date": "2026-11-20", "ar": "الحد الأدنى والأقصى والموجود بالكرتون الحقيقي لكل الأصناف (العلك والأوتر أيضًا)", "en": "Min / Max / On Hand in real cartons for every item (gum and outers too)"}, {"v": "2.3", "date": "2026-11-20", "ar": "الحد الأدنى والأقصى بدقة (0.75 بدل 0.8)", "en": "Exact Min / Max (0.75 not 0.8)"}, {"v": "2.2", "date": "2026-11-20", "ar": "كود العثيم الجديد دائمًا في صفحات التطبيق حتى لو جاء الملف بالكود القديم", "en": "Always the NEW Othaim code in the app, even if the file carries the old code"}, {"v": "2.1", "date": "2026-11-20", "ar": "إضافة الحد الأدنى والحد الأقصى بالكرتون في بطاقة الصنف + رقم الإصدار للمدير", "en": "Min / Max in cartons on each item card + version number for the manager"}, {"v": "2.0", "date": "2026-11-19", "ar": "التصميم الأخضر، الشريط السفلي، التحديث التلقائي، إصلاح تكرار أكواد الأصناف", "en": "Green design, bottom bar, auto-update, duplicate item-code fix"}];
 function versionCard(){
   const card = el("div", {class:"card card-pad ver-card"});
   const top = el("div", {class:"ver-top"}, [
@@ -3575,15 +3585,20 @@ function renderItems(){
       return c;
     };
     grid.appendChild(cell("oh"+(ohQty<=0?" low":""), t("gridOnHand"), fmtInt(ohQty), t("pieces")));
-    grid.appendChild(cell("", t("inCtn"), cs ? cs.text : "—", state.lang==="ar"?"ك":"ctn"));
-    grid.appendChild(cell("", t("packShort"), fmtInt(pcPerCs)));
+    // everything in real cartons (pieces per carton = carton price ÷ piece price)
+    const cpc = ctnPcs(sku) || pcPerCs;
+    const csR = ohCartons(ohQty, cpc);
+    grid.appendChild(cell("", t("inCtn"), csR ? csR.text : "—", state.lang==="ar"?"ك":"ctn"));
+    grid.appendChild(cell("", t("packShort"), fmtInt(cpc)));
     grid.appendChild(cell("mars", t("marsShort"), fmtInt(marsQ)));
     card.appendChild(grid);
     // Min / Max (from the On Hand sheet, in pieces) shown in cartons — one slim line, highlighted only below Min
     {
       const mn = oh ? Number(oh.min)||0 : 0, mx = oh ? Number(oh.max)||0 : 0;
-      if((mn > 0 || mx > 0) && pcPerCs > 0 && !isInactive(sku)){
-        const ct = (x) => (Math.round(x / pcPerCs * 10) / 10).toFixed(1);
+      const unit = ctnPcs(sku) || pcPerCs;   // pieces in one real carton
+      if((mn > 0 || mx > 0) && unit > 0 && !isInactive(sku)){
+        // under 1 → two decimals (0.75, 0.58); from 1 up → one decimal, no trailing .0 (3, 6.7)
+        const ct = (x) => { const v = x / unit; return v < 1 ? String(Math.round(v * 100) / 100) : String(Math.round(v * 10) / 10); };
         const below = mn > 0 && ohQty < mn;
         const u = state.lang === "ar" ? "ك" : "ctn";
         card.appendChild(el("div", {class:"mmline"+(below?" below":"")}, [
