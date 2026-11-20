@@ -7,7 +7,8 @@
 <meta name="theme-color" content="#0B3226">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="app-build" content="2026-11-19-1030">
+<meta name="app-build" content="2026-11-20-2110">
+<meta name="app-version" content="2.1">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -1425,6 +1426,35 @@ html[dir="rtl"] .iconbtn.refbtn.spin svg{animation-direction:reverse;}
 .code-issues .ci-t{font-weight:800;color:#8A5A00;margin-bottom:3px;line-height:1.5;}
 .code-issues .ci-r{font-size:11.5px;line-height:1.5;} .code-issues .ci-r b{font-family:var(--font-mono);color:#0F4636;} .code-issues .ci-r s{color:#B42318;font-family:var(--font-mono);}
 .code-issues .ci-h{margin-top:6px;font-size:11px;color:#7A6232;line-height:1.5;}
+
+/* version card (manager) */
+.ver-badge{font-size:10.5px;color:#A9D5BF;font-weight:700;padding:0 4px;}
+.ver-badge b{color:#C9F27E;font-family:var(--font-mono);}
+.ver-card{display:flex;flex-direction:column;gap:10px;}
+.ver-top{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;padding:12px 14px;border-radius:14px;color:#fff;
+  background:radial-gradient(140px 90px at 0% 0%, rgba(201,242,126,.2), rgba(201,242,126,0) 70%), linear-gradient(135deg,#0B3226,#17654B);}
+.ver-cap{font-size:11px;color:#A9D5BF;font-weight:700;}
+.ver-num{font-family:var(--font-mono);font-size:26px;font-weight:800;letter-spacing:.3px;}
+.ver-build{font-size:10.5px;color:#A9D5BF;text-align:end;} .ver-build b{color:#fff;font-family:var(--font-mono);}
+.ver-list{display:flex;flex-direction:column;border:1px solid #E3ECE7;border-radius:12px;overflow:hidden;}
+.ver-row{display:flex;align-items:center;gap:10px;padding:9px 11px;border-top:1px solid #EEF2F0;background:#fff;}
+.ver-row:first-child{border-top:none;}
+.ver-row.cur{background:#F2F9F5;}
+.ver-tag{font-family:var(--font-mono);font-weight:800;font-size:12.5px;color:#fff;background:#0F4636;border-radius:8px;padding:3px 8px;flex-shrink:0;}
+.ver-row:not(.cur) .ver-tag{background:#64748B;}
+.ver-txt{flex:1;min-width:0;font-size:12px;font-weight:700;color:#0E2A20;line-height:1.45;}
+.ver-txt small{display:block;color:#6B8A7C;font-weight:600;font-size:10.5px;}
+.ver-open{flex-shrink:0;font-size:11px;font-weight:800;color:#0F4636;border:1px solid #CFE0D7;border-radius:8px;padding:5px 8px;text-decoration:none;}
+.ver-hint{font-size:11px;color:#6B8A7C;line-height:1.6;}
+
+/* Min / Max line on the item card */
+.itemcard .mmline{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:-1px;padding:3px 10px;border-radius:8px;background:#F6F9F7;
+  font-size:11px;font-weight:700;color:#6B8A7C;}
+.itemcard .mmline b{font-family:var(--font-mono);font-size:12.5px;margin-inline:4px;}
+.itemcard .mmline .mm-lo b{color:#B42318;} .itemcard .mmline .mm-hi b{color:#11663F;}
+.itemcard .mmline .mm-sep{flex:1;height:1px;background:linear-gradient(90deg,transparent,#D5E3DB,transparent);}
+.itemcard .mmline.below{background:#FDF3F2;}
+.itemcard .mmline .mm-flag{font-size:10px;font-weight:800;color:#B42318;white-space:nowrap;}
 </style>
 </head>
 <body>
@@ -1486,7 +1516,7 @@ const I18N = {
     badPin:"الرقم السري غير صحيح", enterUser:"أدخل رقم المستخدم الخاص بك",
     stockUpdated:"مخزون مارس", onhandUpdated:"On Hand", updatedAt:"آخر تحديث",
     myStores:"متاجري", searchStores:"ابحث عن متجر...",
-    filters:"تصفية", codeIssuesTitle:"تم تصحيح أكواد أصناف غير متطابقة في الملف (عمود Artecal# يختلف عن رقم الصنف في الوصف):", codeDupTitle:"أكواد مكررة — تم الإبقاء على أول صنف فقط:", codeMissTitle:"أصناف ناقصة البيانات (بدون اسم أو شد أو سعر)", codeMissPack:"بدون شد", codeMissPrice:"بدون سعر", codeIssuesHint:"الكود الصحيح مأخوذ من رقم الصنف في وصف العثيم (نفس رقم شيت On Hand). يُفضّل تصحيح عمود Artecal# في الملف الأصلي.", refreshOk:"تم التحديث — كل البيانات محدّثة", tbMine:"إجمالي مخزون متاجري", tbAll:"إجمالي كل المتاجر", tbStores:"متاجر", navStores:"متاجري", navStore:"المتجر", navFind:"بحث صنف", navCart:"الطلبية", navSaved:"المحفوظة", cartItems:"أصناف", cartCtn:"كرتون", cartValue:"القيمة", gapShort:"الفرص", xsTabStores:"المتاجر", xsTabItem:"بحث صنف في كل المتاجر", xsPh:"اسم الصنف وحجمه (مثال: جواهر 850 جرام)",
+    filters:"تصفية", verTitle:"إصدار التطبيق", verCurrent:"الإصدار الحالي", verShort:"الإصدار", verBuilt:"رقم البناء", verNow:"المستخدم الآن", verOpen:"فتح هذا الإصدار", verHint:"للرجوع لإصدار سابق: افتح مجلد versions في GitHub، خذ ملف الإصدار المطلوب (مثال v2.0.html) وارفعه باسم index.html مكان الحالي — يرجع التطبيق لكل المناديب تلقائيًا.", mmMin:"الحد الأدنى", mmMax:"الحد الأقصى", mmBelow:"تحت الحد الأدنى", codeIssuesTitle:"تم تصحيح أكواد أصناف غير متطابقة في الملف (عمود Artecal# يختلف عن رقم الصنف في الوصف):", codeDupTitle:"أكواد مكررة — تم الإبقاء على أول صنف فقط:", codeMissTitle:"أصناف ناقصة البيانات (بدون اسم أو شد أو سعر)", codeMissPack:"بدون شد", codeMissPrice:"بدون سعر", codeIssuesHint:"الكود الصحيح مأخوذ من رقم الصنف في وصف العثيم (نفس رقم شيت On Hand). يُفضّل تصحيح عمود Artecal# في الملف الأصلي.", refreshOk:"تم التحديث — كل البيانات محدّثة", tbMine:"إجمالي مخزون متاجري", tbAll:"إجمالي كل المتاجر", tbStores:"متاجر", navStores:"متاجري", navStore:"المتجر", navFind:"بحث صنف", navCart:"الطلبية", navSaved:"المحفوظة", cartItems:"أصناف", cartCtn:"كرتون", cartValue:"القيمة", gapShort:"الفرص", xsTabStores:"المتاجر", xsTabItem:"بحث صنف في كل المتاجر", xsPh:"اسم الصنف وحجمه (مثال: جواهر 850 جرام)",
     xsHint:"اكتب أو قل اسم الصنف وحجمه، وتظهر كمية الموجود منه في كل متجر من متاجرك مرة واحدة.",
     xsItems:"صنف", xsIn:"موجود في", xsOf:"من", xsStores:"متاجر", xsTotal:"إجمالي الموجود", xsOpen:"اضغط على أي متجر لفتحه على هذا الصنف",
     xsMore:"عرض أصناف أكثر", xsNone:"لا يوجد صنف بهذا الاسم", logout:"خروج",
@@ -1605,7 +1635,7 @@ const I18N = {
     badPin:"Incorrect PIN", enterUser:"Enter your user number",
     stockUpdated:"Mars Stock", onhandUpdated:"On Hand", updatedAt:"Last updated",
     myStores:"My Stores", searchStores:"Search stores...",
-    filters:"Filters", codeIssuesTitle:"Item codes corrected (Artecal# column differs from the number in the item description):", codeDupTitle:"Duplicate codes — only the first item was kept:", codeMissTitle:"Items with missing data (no name, pack or price)", codeMissPack:"no pack", codeMissPrice:"no price", codeIssuesHint:"The correct code is taken from the Othaim number in the item description (same as the On Hand sheet). Please fix the Artecal# column in the source file.", refreshOk:"Up to date — all data refreshed", tbMine:"Total stock · my stores", tbAll:"Total stock · all stores", tbStores:"stores", navStores:"Stores", navStore:"Store", navFind:"Find item", navCart:"Order", navSaved:"Saved", cartItems:"Items", cartCtn:"Cartons", cartValue:"Value", gapShort:"Opps", xsTabStores:"Stores", xsTabItem:"Find an item in all stores", xsPh:"Item name and size (e.g. jewels 850g)",
+    filters:"Filters", verTitle:"App version", verCurrent:"Current version", verShort:"Version", verBuilt:"Build", verNow:"in use now", verOpen:"Open this version", verHint:"To go back: upload versions/v<number>.html from the versions folder on GitHub as index.html — every rep gets that version automatically.", mmMin:"Min", mmMax:"Max", mmBelow:"Below min", codeIssuesTitle:"Item codes corrected (Artecal# column differs from the number in the item description):", codeDupTitle:"Duplicate codes — only the first item was kept:", codeMissTitle:"Items with missing data (no name, pack or price)", codeMissPack:"no pack", codeMissPrice:"no price", codeIssuesHint:"The correct code is taken from the Othaim number in the item description (same as the On Hand sheet). Please fix the Artecal# column in the source file.", refreshOk:"Up to date — all data refreshed", tbMine:"Total stock · my stores", tbAll:"Total stock · all stores", tbStores:"stores", navStores:"Stores", navStore:"Store", navFind:"Find item", navCart:"Order", navSaved:"Saved", cartItems:"Items", cartCtn:"Cartons", cartValue:"Value", gapShort:"Opps", xsTabStores:"Stores", xsTabItem:"Find an item in all stores", xsPh:"Item name and size (e.g. jewels 850g)",
     xsHint:"Type or say the item and size to see its On Hand in every one of your stores at once.",
     xsItems:"items", xsIn:"in", xsOf:"of", xsStores:"stores", xsTotal:"Total on hand", xsOpen:"Tap a store to open it on this item",
     xsMore:"Show more items", xsNone:"No item matches", logout:"Logout",
@@ -2765,6 +2795,32 @@ async function smartRefresh(btn){
   }
 }
 
+
+/* ---------------- APP VERSION (shown to the manager; each release is archived in versions/) ---------------- */
+const APP_VERSION = "2.1";
+const APP_VERSIONS = [{"v": "2.1", "date": "2026-11-20", "ar": "إضافة الحد الأدنى والحد الأقصى بالكرتون في بطاقة الصنف + رقم الإصدار للمدير", "en": "Min / Max in cartons on each item card + version number for the manager"}, {"v": "2.0", "date": "2026-11-19", "ar": "التصميم الأخضر، الشريط السفلي، التحديث التلقائي، إصلاح تكرار أكواد الأصناف", "en": "Green design, bottom bar, auto-update, duplicate item-code fix"}];
+function versionCard(){
+  const card = el("div", {class:"card card-pad ver-card"});
+  const top = el("div", {class:"ver-top"}, [
+    el("div", {}, [ el("div",{class:"ver-cap"},[t("verCurrent")]), el("div",{class:"ver-num"},["v"+APP_VERSION]) ]),
+    el("div", {class:"ver-build"}, [ t("verBuilt")+" ", el("b",{dir:"ltr"},[APP_BUILD]) ])
+  ]);
+  card.appendChild(top);
+  const list = el("div", {class:"ver-list"});
+  APP_VERSIONS.forEach(x => {
+    const cur = x.v === APP_VERSION;
+    const row = el("div", {class:"ver-row"+(cur?" cur":"")}, [
+      el("span", {class:"ver-tag"}, ["v"+x.v]),
+      el("div", {class:"ver-txt"}, [ el("div",{},[state.lang==="ar"?x.ar:x.en]), el("small",{},[x.date + (cur ? "  ·  "+t("verNow") : "")]) ]),
+      cur ? null : el("a", {class:"ver-open", href:"versions/v"+x.v+".html", target:"_blank", rel:"noopener"}, [t("verOpen")])
+    ]);
+    list.appendChild(row);
+  });
+  card.appendChild(list);
+  card.appendChild(el("div", {class:"ver-hint"}, [t("verHint")]));
+  return card;
+}
+
 /* ---------------- BOTTOM NAVIGATION (rep pages) ---------------- */
 const NAV_IC = {
   stores:'<path d="M3.5 9.5l1.7-5h13.6l1.7 5M4.5 9.5V20h15V9.5M3.5 9.5h17M9.5 20v-5.5h5V20"/>',
@@ -3498,6 +3554,20 @@ function renderItems(){
     grid.appendChild(cell("", t("packShort"), fmtInt(pcPerCs)));
     grid.appendChild(cell("mars", t("marsShort"), fmtInt(marsQ)));
     card.appendChild(grid);
+    // Min / Max (from the On Hand sheet, in pieces) shown in cartons — one slim line, highlighted only below Min
+    {
+      const mn = oh ? Number(oh.min)||0 : 0, mx = oh ? Number(oh.max)||0 : 0;
+      if((mn > 0 || mx > 0) && pcPerCs > 0 && !isInactive(sku)){
+        const ct = (x) => (Math.round(x / pcPerCs * 10) / 10).toFixed(1);
+        const below = mn > 0 && ohQty < mn;
+        const u = state.lang === "ar" ? "ك" : "ctn";
+        card.appendChild(el("div", {class:"mmline"+(below?" below":"")}, [
+          el("span", {class:"mm-lo"}, [t("mmMin"), el("b",{},[ct(mn)]), u]),
+          below ? el("span", {class:"mm-flag"}, ["● "+t("mmBelow")]) : el("span", {class:"mm-sep"}),
+          el("span", {class:"mm-hi"}, [t("mmMax"), el("b",{},[ct(mx)]), u])
+        ]));
+      }
+    }
 
     // order row: suggested quantity (information only — the field stays empty until the rep
     // types a number or uses + / −) + stepper + live value
@@ -4396,6 +4466,7 @@ function renderAdmin(){
   s.appendChild(topbar({title:t("admin"), onLogout: doLogout}));
   const ahead = el("div", {class:"fxhead fx-admin"});
   ahead.appendChild(totalBand(OO.stores||[], "tbAll", "rep"));
+  ahead.appendChild(el("div", {class:"ver-badge"}, [ t("verShort")+" ", el("b",{dir:"ltr"},["v"+APP_VERSION]), "  ·  ", el("bdi",{dir:"ltr"},[APP_BUILD]) ]));
   s.appendChild(ahead);
   const content = el("div", {class:"content admin-content"});
 
@@ -4468,6 +4539,9 @@ function renderAdmin(){
     };
     reader.readAsArrayBuffer(f);
   });
+
+  content.appendChild(el("div", {class:"section-title", style:"margin-top:6px;"}, [t("verTitle")]));
+  content.appendChild(versionCard());
 
   content.appendChild(el("div", {class:"section-title", style:"margin-top:6px;"}, [t("myOrders")]));
   content.appendChild(renderOrderHistory());
