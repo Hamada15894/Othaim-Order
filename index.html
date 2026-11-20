@@ -7,8 +7,8 @@
 <meta name="theme-color" content="#0B3226">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="app-build" content="2026-11-20-2110">
-<meta name="app-version" content="2.1">
+<meta name="app-build" content="2026-11-20-2135">
+<meta name="app-version" content="2.2">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -2159,13 +2159,38 @@ function dedupeSkus(list){
   });
   return { skus, dups };
 }
+// The app always shows and keys items by the NEW Othaim code. A number is an OLD system code when it is
+// listed as one in the old→new table (and is not itself a new code), or has 7 digits.
+const _NEW_SET = new Set(Object.keys(OLD_CODES).map(k => String(parseInt(k,10))));
+const _OLD_SET = new Set(Object.values(OLD_CODES).map(v => String(parseInt(v,10))));
+const isOldCode = (n) => { const k = String(parseInt(n,10)); return Number(k) > 999999 || (_OLD_SET.has(k) && !_NEW_SET.has(k)); };
+function oldToNewMap(skus){
+  const m = {};
+  Object.entries(OLD_CODES).forEach(([nw, od]) => { m[String(parseInt(od,10))] = Number(nw); });
+  (skus||[]).forEach(s => { if(s.oldCode && !isOldCode(s.artecal)) m[String(parseInt(s.oldCode,10))] = Number(s.artecal); });
+  return m;
+}
 function normalizeSkuCodes(data){
   if(!data || !Array.isArray(data.skus)) return 0;
   let fixed = 0;
+  const o2n = oldToNewMap(data.skus);
   data.skus.forEach(s => {
-    const c = s.artecalCode ? parseInt(s.artecalCode, 10) : NaN;
-    if(!isNaN(c) && c > 0 && Number(s.artecal) !== c){ s.artecal = c; fixed++; }
+    const a = Number(s.artecal) || 0, c = s.artecalCode ? parseInt(s.artecalCode, 10) : NaN;
+    let nw = null, od = null;
+    // the new code: the description number when it is a new (6-digit) code, else the Artecal# number,
+    // else translate an old code through the old→new table
+    if(!isNaN(c) && c > 0 && !isOldCode(c)) nw = c;
+    else if(a > 0 && !isOldCode(a)) nw = a;
+    else nw = o2n[String(!isNaN(c) && c > 0 ? c : a)] || o2n[String(a)] || null;
+    if(!isNaN(c) && isOldCode(c)) od = c; else if(isOldCode(a)) od = a;
+    if(od && !s.oldCode) s.oldCode = String(od);
+    if(nw && (a !== nw || s.artecalCode !== String(nw).padStart(6,"0"))){ s.artecal = nw; s.artecalCode = String(nw).padStart(6,"0"); fixed++; }
   });
+  // stock rows keyed by an OLD code are moved to the new code (On Hand + Mars stock)
+  const o2n2 = oldToNewMap(data.skus);
+  const remap = (m) => { if(!m) return; Object.keys(m).forEach(k => { if(isOldCode(k) && o2n2[k] !== undefined){ const nk = String(o2n2[k]); if(!m[nk]) m[nk] = m[k]; delete m[k]; fixed++; } }); };
+  Object.values(data.onHand || {}).forEach(remap);
+  remap(data.marsStock);
   const d = dedupeSkus(data.skus); data.skus = d.skus;
   if(fixed || d.dups.length) console.warn("item codes corrected:", fixed, "duplicates removed:", d.dups.length);
   return fixed + d.dups.length;
@@ -2797,8 +2822,8 @@ async function smartRefresh(btn){
 
 
 /* ---------------- APP VERSION (shown to the manager; each release is archived in versions/) ---------------- */
-const APP_VERSION = "2.1";
-const APP_VERSIONS = [{"v": "2.1", "date": "2026-11-20", "ar": "إضافة الحد الأدنى والحد الأقصى بالكرتون في بطاقة الصنف + رقم الإصدار للمدير", "en": "Min / Max in cartons on each item card + version number for the manager"}, {"v": "2.0", "date": "2026-11-19", "ar": "التصميم الأخضر، الشريط السفلي، التحديث التلقائي، إصلاح تكرار أكواد الأصناف", "en": "Green design, bottom bar, auto-update, duplicate item-code fix"}];
+const APP_VERSION = "2.2";
+const APP_VERSIONS = [{"v": "2.2", "date": "2026-11-20", "ar": "كود العثيم الجديد دائمًا في صفحات التطبيق حتى لو جاء الملف بالكود القديم", "en": "Always the NEW Othaim code in the app, even if the file carries the old code"}, {"v": "2.1", "date": "2026-11-20", "ar": "إضافة الحد الأدنى والحد الأقصى بالكرتون في بطاقة الصنف + رقم الإصدار للمدير", "en": "Min / Max in cartons on each item card + version number for the manager"}, {"v": "2.0", "date": "2026-11-19", "ar": "التصميم الأخضر، الشريط السفلي، التحديث التلقائي، إصلاح تكرار أكواد الأصناف", "en": "Green design, bottom bar, auto-update, duplicate item-code fix"}];
 function versionCard(){
   const card = el("div", {class:"card card-pad ver-card"});
   const top = el("div", {class:"ver-top"}, [
@@ -4699,7 +4724,7 @@ function parseWorkbook(wb){
         let art = leadCode(r["Artecal#"]);
         const artCode = leadCodeStr(r["Item Arabic Description With Number"]) || (art!==null ? String(art).padStart(6,"0") : "");
         const descArt = artCode ? parseInt(artCode, 10) : NaN;
-        if(!isNaN(descArt) && descArt > 0 && art !== descArt){
+        if(!isNaN(descArt) && descArt > 0 && art !== descArt && !isOldCode(descArt) && !(art !== null && isOldCode(art) === false && isOldCode(descArt))){
           (out._codeFixes = out._codeFixes || []).push({ name: String(r["Item Arabic Description With Number"]||"").replace(/^\s*0*\d+\s*-\s*/,""), was: art, now: descArt });
           art = descArt;
         }
@@ -4723,7 +4748,7 @@ function parseWorkbook(wb){
   if(out.skus){
     out.skus.forEach(s => {   // template path: the ArtecalCode text wins over the ArtecalNo number too
       const c = s.artecalCode ? parseInt(s.artecalCode, 10) : NaN;
-      if(!isNaN(c) && c > 0 && Number(s.artecal) !== c){ (out._codeFixes = out._codeFixes || []).push({ name: s.nameAr || s.nameEn || "", was: s.artecal, now: c }); s.artecal = c; }
+      if(!isNaN(c) && c > 0 && !isOldCode(c) && Number(s.artecal) !== c){ (out._codeFixes = out._codeFixes || []).push({ name: s.nameAr || s.nameEn || "", was: s.artecal, now: c }); s.artecal = c; }
     });
     const d = dedupeSkus(out.skus); out.skus = d.skus; if(d.dups.length) out._codeDups = d.dups;
   }
