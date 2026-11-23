@@ -7,8 +7,8 @@
 <meta name="theme-color" content="#0B3226">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="app-build" content="2026-11-22-2150">
-<meta name="app-version" content="2.8">
+<meta name="app-build" content="2026-11-23-1030">
+<meta name="app-version" content="2.9">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -1603,6 +1603,7 @@ html[dir="rtl"] .iconbtn.refbtn.spin svg{animation-direction:reverse;}
 .po-now .pn-l{flex:1;min-width:0;}
 .po-now .pn-n{text-align:right;font-size:12.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .po-now .pn-z b{font-size:22px;font-weight:900;color:#c9f27d;letter-spacing:.03em;font-family:ui-monospace,Menlo,monospace;}
+.po-now .pn-g2{margin-left:.22em;}
 .po-now .pn-q{text-align:center;}
 .po-now .pn-q b{font-size:22px;font-weight:900;color:#ffd84d;}
 .po-now .pn-ok{width:46px;height:46px;border-radius:12px;border:0;background:#c9f27d;color:#0b3226;font-size:24px;font-weight:900;flex:none;}
@@ -1610,6 +1611,84 @@ html[dir="rtl"] .iconbtn.refbtn.spin svg{animation-direction:reverse;}
 .po-alldone{background:#e3f6ec;color:#11663f;border-radius:12px;padding:12px;font-weight:800;text-align:center;margin:10px 0;}
 .content>.po-check{background:#fff5f4;border:1px solid #F2B8B0;border-radius:12px;padding:10px;margin:8px 0;}
 .po-rv-d{font-size:11.5px;color:#555;margin:4px 0 6px;}
+
+/* ---- v2.9 PO entry workspace ---- */
+.po-content{padding-bottom:18px;}
+.po-svg{display:inline-flex;width:18px;height:18px;flex:none;}
+.po-svg svg{width:100%;height:100%;}
+.po-hd{background:#fff;border:1px solid #DCE5E0;border-radius:14px;padding:12px 14px;margin:2px 0 10px;box-shadow:0 1px 2px rgba(16,40,30,.04);}
+.po-hd-r{display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.po-hd-id small,.po-hd-g small{display:block;font-size:10.5px;font-weight:700;color:#6D8278;letter-spacing:.2px;}
+.po-hd-id b{font-size:18px;font-weight:800;color:#0E2A20;font-variant-numeric:tabular-nums;letter-spacing:.3px;}
+.po-hd-st{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:800;padding:6px 10px;border-radius:999px;}
+.po-hd-st.ok{background:#E4F5EC;color:#11663F;}
+.po-hd-st.bad{background:#FDECEA;color:#A3241A;}
+.po-hd-st .po-svg{width:15px;height:15px;}
+.po-hd-g{display:grid;grid-template-columns:1fr 1.5fr .8fr .9fr;gap:8px;margin-top:10px;padding-top:10px;border-top:1px solid #EEF2F0;}
+.po-hd-g b{display:block;font-size:13px;font-weight:800;color:#18332A;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-variant-numeric:tabular-nums;}
+.po-hd-k{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+.po-k{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:700;padding:4px 8px 4px 7px;border-radius:7px;background:#F2F5F3;color:#46594F;}
+.po-k .po-svg{width:13px;height:13px;}
+.po-k.y{background:#EAF6EF;color:#14633F;}
+.po-k.n{background:#FDECEA;color:#A3241A;}
+.po-tools{display:flex;align-items:center;gap:8px;margin:0 0 10px;}
+.po-seg{flex:1;display:flex;background:#E9EFEC;border-radius:11px;padding:3px;}
+.po-seg-b{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;border:0;background:none;border-radius:9px;padding:8px 6px;font:inherit;font-size:12.5px;font-weight:700;color:#4E6459;cursor:pointer;}
+.po-seg-b .po-svg{width:16px;height:16px;}
+.po-seg-b.on{background:#fff;color:#0B3226;box-shadow:0 1px 3px rgba(0,0,0,.08);}
+.po-tb{width:40px;height:40px;border-radius:11px;border:1px solid #DCE5E0;background:#fff;color:#0B3226;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none;}
+.po-tb:disabled{opacity:.5;}
+.po-pg{margin:0 2px 10px;}
+.po-pg-t{display:flex;align-items:center;gap:6px;font-size:12.5px;color:#5A6F65;margin-bottom:6px;}
+.po-pg-t b{color:#0E2A20;font-size:13.5px;font-variant-numeric:tabular-nums;}
+.po-pg-r{margin-inline-start:auto;display:inline-flex;align-items:center;gap:4px;border:0;background:none;color:#5A6F65;font:inherit;font-size:12px;font-weight:700;cursor:pointer;}
+.po-pg-r .po-svg{width:14px;height:14px;}
+.po-pg .po-bar{height:6px;border-radius:3px;background:#E3EAE6;overflow:hidden;}
+.po-pg .po-bar i{display:block;height:100%;background:linear-gradient(90deg,#1F9D63,#7CCB45);border-radius:3px;transition:width .35s;}
+.po-now{display:block !important;background:#0B3226 !important;color:#fff;border-radius:16px !important;padding:12px 14px !important;margin:0 0 12px !important;position:sticky;top:0;z-index:4;box-shadow:0 8px 22px rgba(11,50,38,.28) !important;}
+.po-now.bad{background:#7D1912 !important;}
+.po-now .pn-top{display:flex;justify-content:space-between;font-size:11px;font-weight:700;color:rgba(255,255,255,.7);letter-spacing:.3px;}
+.po-now .pn-main{display:flex;align-items:center;gap:12px;margin:6px 0 6px;}
+.po-now .pn-z{flex:1;min-width:0;}
+.po-now small{display:block;font-size:10px;font-weight:800;color:rgba(255,255,255,.6);letter-spacing:1px;}
+.po-now .pn-z b{display:block;font-family:"SF Mono",ui-monospace,Menlo,Consolas,monospace;font-size:34px;line-height:1.05;font-weight:800;color:#C9F27D;letter-spacing:1px;font-variant-numeric:tabular-nums;}
+.po-now .pn-q{text-align:center;min-width:58px;padding:4px 8px;border-radius:10px;background:rgba(255,255,255,.08);}
+.po-now .pn-q b{display:block;font-size:30px;line-height:1.05;font-weight:800;color:#FFD84D;font-variant-numeric:tabular-nums;}
+.po-now .pn-ok{width:54px;height:54px;border-radius:14px;border:0;background:#C9F27D;color:#0B3226;display:flex;align-items:center;justify-content:center;flex:none;cursor:pointer;}
+.po-now .pn-ok .po-svg{width:28px;height:28px;}
+.po-now.bad .pn-ok{background:#fff;color:#7D1912;}
+.po-now .pn-d{display:flex;gap:8px;font-size:12px;color:rgba(255,255,255,.82);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-top:1px solid rgba(255,255,255,.12);padding-top:6px;}
+.po-now .pn-oc{font-variant-numeric:tabular-nums;color:rgba(255,255,255,.6);flex:none;}
+.po-alldone{display:flex !important;align-items:center;justify-content:center;gap:8px;background:#E4F5EC !important;color:#11663F !important;}
+.po-list{background:#fff;border:1px solid #DCE5E0;border-radius:14px;overflow:hidden;}
+.po-lh,.po-r{display:grid;grid-template-columns:26px 74px 54px minmax(0,1fr) 28px;align-items:center;gap:6px;padding:0 10px;}
+.po-lh{height:32px;background:#F4F7F5;border-bottom:1px solid #E3EAE6;font-size:10px;font-weight:800;color:#6D8278;letter-spacing:.6px;text-transform:uppercase;}
+.po-r{min-height:52px;border-bottom:1px solid #EEF2F0;cursor:pointer;position:relative;transition:background .15s;}
+.po-r:last-child{border-bottom:0;}
+.po-r-n{font-size:11px;font-weight:700;color:#9AABA2;font-variant-numeric:tabular-nums;}
+.po-r-z{font-family:"SF Mono",ui-monospace,Menlo,Consolas,monospace;font-size:16.5px;font-weight:800;color:#0B3226;letter-spacing:.4px;font-variant-numeric:tabular-nums;}
+.po-r-q{display:flex;align-items:baseline;gap:3px;}
+.po-r-q b{font-size:17px;font-weight:800;color:#B3261E;font-variant-numeric:tabular-nums;}
+.po-r-q small{font-size:9px;font-weight:800;color:#7F9389;letter-spacing:.3px;}
+.po-r-q small.outer{color:#B76E00;}
+.po-r-d{min-width:0;display:flex;flex-direction:column;line-height:1.25;}
+.po-r-oc{font-size:11px;font-weight:700;color:#5A6F65;font-variant-numeric:tabular-nums;}
+.po-r-t{font-size:11.5px;color:#2C4238;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.po-r-c{display:flex;justify-content:center;}
+.po-r-c i{width:20px;height:20px;border-radius:6px;border:1.6px solid #C5D2CB;display:block;}
+.po-r-c .po-svg{width:20px;height:20px;}
+.po-r.focus{background:#FFF8D9;box-shadow:inset 4px 0 0 #F2B705;}
+.po-r.focus .po-r-z{font-size:18px;}
+.po-r.done{background:#FAFCFB;}
+.po-r.done .po-r-z,.po-r.done .po-r-q b,.po-r.done .po-r-t,.po-r.done .po-r-oc{color:#A6B5AD;}
+.po-r.done .po-r-z{text-decoration:line-through;text-decoration-color:rgba(31,157,99,.45);}
+.po-r.done .po-r-c{color:#1F9D63;}
+.po-r.bad{background:#FFF6F5;}
+.po-r.bad .po-r-c{color:#C0392B;}
+.po-r.bad .po-r-z{color:#A3241A;}
+.po-list .po-check{margin:0;border-radius:0;border:0;border-bottom:1px solid #F2C9C3;background:#FFF6F5;padding:8px 12px 10px;}
+.bnav .bn-l{font-size:9.5px !important;}
+.bnav .bn-ic{width:42px !important;}
 </style>
 </head>
 <body>
@@ -1673,6 +1752,7 @@ const I18N = {
     stockUpdated:"مخزون مارس", onhandUpdated:"On Hand", updatedAt:"آخر تحديث",
     myStores:"متاجري", searchStores:"ابحث عن متجر...",
     filters:"تصفية", navPo:"أمر شراء", imgOpen:"صورة المنتج", imgClose:"إغلاق", prTitle:"قارئ أوامر الشراء", prSub:"إضافة كود مارس ZREP لكل صنف", poOpenBtn:"فتح قارئ أوامر الشراء (ZREP)",
+    poHow2b:"يظهر كود مارس ZREP بجوار كود العثيم لكل سطر، مع الكمية ووحدتها — كما هي في الملف حرفيًا.", poOkS:"مطابق بالكامل", poToReview:"للمراجعة", poKCount:"عدد الأصناف", poKTotal:"الإجمالي", poKBad:"سطر يحتاج مراجعة", poKLines:"كل الأسطر مؤكدة", poViewList:"قائمة الإدخال", poViewPage:"صفحة الطلب", poNew:"طلب جديد", poNewQ:"لم يكتمل إدخال هذا الطلب. فتح طلب جديد؟", poEnteredS:"تم إدخالها", poItemCol:"كود العثيم · الصنف",
     poUpSubPdf:"ملف PDF الأصلي فقط (من النظام أو من الواتساب) — يُقرأ النص كما هو بدون أي تخمين", poPickPdf:"اختيار ملف PDF", poOnlyPdf:"هذا ليس ملف PDF. أرسل ملف PDF الأصلي لأمر الشراء.", poScanned:"هذا الملف صورة ممسوحة وليس PDF أصليًا — لا يمكن قراءته بدقة. اطلب ملف PDF الأصلي من النظام.", poHow1Pdf:"ارفع ملف PDF الأصلي لأمر الشراء.", poHow3b:"أدخل السطر المضيء ثم اضغط ✓ — يُعلَّم السطر بعلامة صح وينتقل الضوء للسطر التالي.", poNowT:"الآن أدخل", poPageT:"أمر الشراء · اضغط السطر بعد إدخاله", poReset:"البدء من جديد", poResetQ:"مسح كل علامات الإدخال؟", poAllDone:"تم إدخال كل الأصناف", poLineN:"سطر", poWhyId:"لم يتم التحقق من الصنف",
     poUpTitle:"ارفع أمر الشراء", poUpSub:"PDF من النظام، PDF ممسوح ضوئيًا، أو صورة بالجوال — حتى لو كانت غير واضحة", poPick:"اختيار ملف PDF أو صورة", poCam:"تصوير بالكاميرا",
     poReading:"جاري قراءة أمر الشراء…", poStepPage:"قراءة الصفحة", poStepClean:"تحسين وضوح الصورة…", poStepOcrLoad:"تجهيز قارئ النصوص…", poStepOcr:"قراءة الأرقام من الصورة", poInboxGet:"استلام الملف من واتساب…", poInboxFail:"تعذّر استلام الملف من الاختصار. تأكد من الإنترنت ثم شارك الملف مرة أخرى.",
@@ -1816,6 +1896,7 @@ const I18N = {
     stockUpdated:"Mars Stock", onhandUpdated:"On Hand", updatedAt:"Last updated",
     myStores:"My Stores", searchStores:"Search stores...",
     filters:"Filters", navPo:"PO", imgOpen:"Product picture", imgClose:"Close", prTitle:"Purchase order reader", prSub:"Adds the Mars ZREP to every line", poOpenBtn:"Open the PO reader (ZREP)",
+    poHow2b:"Each line shows the Mars ZREP beside the Othaim code, with the quantity and its unit — exactly as printed.", poOkS:"Fully matched", poToReview:"to review", poKCount:"Items", poKTotal:"Total", poKBad:"line(s) to review", poKLines:"All lines confirmed", poViewList:"Entry list", poViewPage:"Order page", poNew:"New order", poNewQ:"This order is not fully entered. Open a new one?", poEnteredS:"entered", poItemCol:"Othaim code · Item",
     poUpSubPdf:"Original PDF only (from the system or WhatsApp) — its text is read exactly, no guessing", poPickPdf:"Choose PDF file", poOnlyPdf:"This is not a PDF. Send the original PDF of the purchase order.", poScanned:"This file is a scanned picture, not an original PDF — it can't be read exactly. Ask for the original PDF from the system.", poHow1Pdf:"Upload the original PDF of the purchase order.", poHow3b:"Enter the lit line, then tap ✓ — it gets ticked and the light moves to the next line.", poNowT:"Enter now", poPageT:"Purchase order · tap a line after entering it", poReset:"Start over", poResetQ:"Clear all entry ticks?", poAllDone:"All lines entered", poLineN:"Line", poWhyId:"Item not verified",
     poUpTitle:"Upload a purchase order", poUpSub:"System PDF, scanned PDF or a phone photo — even if it isn't clear", poPick:"Choose PDF or picture", poCam:"Take a photo",
     poReading:"Reading the purchase order…", poStepPage:"Reading page", poStepClean:"Making the picture clearer…", poStepOcrLoad:"Preparing the text reader…", poStepOcr:"Reading numbers from the picture", poInboxGet:"Receiving the file from WhatsApp…", poInboxFail:"Couldn't receive the file from the shortcut. Check the internet and share it again.",
@@ -2791,6 +2872,7 @@ function screenKey(sc){
   return null;
 }
 function render(){
+  if(state.screen !== "po" && typeof poWake === "function") poWake(false);
   document.documentElement.setAttribute("lang", state.lang === "ar" ? "ar" : "en");
   document.documentElement.setAttribute("dir", state.lang === "ar" ? "rtl" : "ltr");
   document.documentElement.setAttribute("data-lang", state.lang);
@@ -3037,8 +3119,8 @@ async function smartRefresh(btn){
 
 
 /* ---------------- APP VERSION (shown to the manager; each release is archived in versions/) ---------------- */
-const APP_VERSION = "2.8";
-const APP_VERSIONS = [{"v": "2.8", "date": "2026-11-22", "ar": "أمر الشراء: PDF الأصلي فقط (حذف المسح الضوئي) + ZREP داخل خانة كود العثيم + صفحة بدقة كاملة مع علامة صح للمُدخل وإضاءة للسطر التالي + صور منتجات عالية الدقة", "en": "PO: original PDF only (scanning removed) + ZREP inside the Othaim code cell + full-resolution page with ticks and next-line highlight + lighter app"}, {"v": "2.7", "date": "2026-11-22", "ar": "ظهور التطبيق في مشاركة واتساب على الآيفون (عبر اختصار) + دليل إعداد داخل التطبيق", "en": "App in WhatsApp's share menu on iPhone (via a shortcut) + in-app setup guide"}, {"v": "2.6", "date": "2026-11-22", "ar": "قارئ أوامر الشراء بتحقق كامل (الكود×السعر×الوحدة، الكمية×الإجمالي×الضريبة، عدد الأصناف والإجمالي) + عرض السطر الأصلي لأي بند غير مؤكد + الصور داخل التطبيق + استقبال من واتساب", "en": "Fully verified PO reader + original-line crop for anything unproven + built-in pictures + receive from WhatsApp"}, {"v": "2.5", "date": "2026-11-22", "ar": "صور المنتجات في بطاقة الصنف + قارئ أوامر الشراء يضيف ZREP لكل صنف", "en": "Product pictures + PO reader adding the ZREP"}, {"v": "2.4", "date": "2026-11-20", "ar": "الحد الأدنى والأقصى والموجود بالكرتون الحقيقي لكل الأصناف", "en": "Min / Max / On Hand in real cartons for every item"}, {"v": "2.3", "date": "2026-11-20", "ar": "الحد الأدنى والأقصى بدقة (0.75 بدل 0.8)", "en": "Exact Min / Max (0.75 not 0.8)"}, {"v": "2.2", "date": "2026-11-20", "ar": "كود العثيم الجديد دائمًا في صفحات التطبيق", "en": "Always the NEW Othaim code in the app"}, {"v": "2.1", "date": "2026-11-20", "ar": "الحد الأدنى والأقصى بالكرتون + رقم الإصدار للمدير", "en": "Min / Max in cartons + version number"}, {"v": "2.0", "date": "2026-11-19", "ar": "التصميم الأخضر، الشريط السفلي، التحديث التلقائي، إصلاح تكرار أكواد الأصناف", "en": "Green design, bottom bar, auto-update, duplicate code fix"}];
+const APP_VERSION = "2.9";
+const APP_VERSIONS = [{"v": "2.9", "date": "2026-11-23", "ar": "إرجاع زر بحث صنف + شاشة إدخال أمر الشراء الاحترافية (قائمة الإدخال، الشاشة تبقى مضاءة، حفظ مكان التوقف)", "en": "Find-item tab back + professional PO entry screen (entry list, screen stays on, resumes where you stopped)"}, {"v": "2.8", "date": "2026-11-22", "ar": "أمر الشراء: PDF الأصلي فقط (حذف المسح الضوئي) + ZREP داخل خانة كود العثيم + صفحة بدقة كاملة مع علامة صح للمُدخل وإضاءة للسطر التالي + صور منتجات عالية الدقة", "en": "PO: original PDF only (scanning removed) + ZREP inside the Othaim code cell + full-resolution page with ticks and next-line highlight + lighter app"}, {"v": "2.7", "date": "2026-11-22", "ar": "ظهور التطبيق في مشاركة واتساب على الآيفون (عبر اختصار) + دليل إعداد داخل التطبيق", "en": "App in WhatsApp's share menu on iPhone (via a shortcut) + in-app setup guide"}, {"v": "2.6", "date": "2026-11-22", "ar": "قارئ أوامر الشراء بتحقق كامل (الكود×السعر×الوحدة، الكمية×الإجمالي×الضريبة، عدد الأصناف والإجمالي) + عرض السطر الأصلي لأي بند غير مؤكد + الصور داخل التطبيق + استقبال من واتساب", "en": "Fully verified PO reader + original-line crop for anything unproven + built-in pictures + receive from WhatsApp"}, {"v": "2.5", "date": "2026-11-22", "ar": "صور المنتجات في بطاقة الصنف + قارئ أوامر الشراء يضيف ZREP لكل صنف", "en": "Product pictures + PO reader adding the ZREP"}, {"v": "2.4", "date": "2026-11-20", "ar": "الحد الأدنى والأقصى والموجود بالكرتون الحقيقي لكل الأصناف", "en": "Min / Max / On Hand in real cartons for every item"}, {"v": "2.3", "date": "2026-11-20", "ar": "الحد الأدنى والأقصى بدقة (0.75 بدل 0.8)", "en": "Exact Min / Max (0.75 not 0.8)"}, {"v": "2.2", "date": "2026-11-20", "ar": "كود العثيم الجديد دائمًا في صفحات التطبيق", "en": "Always the NEW Othaim code in the app"}, {"v": "2.1", "date": "2026-11-20", "ar": "الحد الأدنى والأقصى بالكرتون + رقم الإصدار للمدير", "en": "Min / Max in cartons + version number"}, {"v": "2.0", "date": "2026-11-19", "ar": "التصميم الأخضر، الشريط السفلي، التحديث التلقائي، إصلاح تكرار أكواد الأصناف", "en": "Green design, bottom bar, auto-update, duplicate code fix"}];
 function versionCard(){
   const card = el("div", {class:"card card-pad ver-card"});
   const top = el("div", {class:"ver-top"}, [
@@ -3628,6 +3710,7 @@ function poTick(i, po){
   else state.poFocus = i;
   po._autoScroll = true;
   const sh = document.querySelector(".po-screen .content"); po._keepTop = sh ? sh.scrollTop : null;
+  poSaveMarks();
   render();
 }
 
@@ -3648,93 +3731,193 @@ function poRecheck(po){
   });
   poPrepPages(po);
 }
+/* ---- PO entry workspace (v2.9) ---- */
+const PO_IC = {
+  check:'<path d="M5 12.5l4.2 4.2L19 7"/>',
+  warn:'<path d="M12 4l9 16H3z"/><path d="M12 10v4.5M12 17.4v.1"/>',
+  list:'<path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1"/><circle cx="4.5" cy="12" r="1"/><circle cx="4.5" cy="18" r="1"/>',
+  page:'<path d="M7 3.5h7.5L19 8v12.5H7z"/><path d="M14.5 3.5V8H19"/><path d="M9.5 12.5h6M9.5 16h6"/>',
+  share:'<path d="M12 15V4M8 8l4-4 4 4"/><path d="M5 12v7a1 1 0 001 1h12a1 1 0 001-1v-7"/>',
+  reset:'<path d="M4 12a8 8 0 1 0 2.4-5.7M4 4.5v4h4"/>',
+  file:'<path d="M7 3.5h7.5L19 8v12.5H7z"/><path d="M14.5 3.5V8H19"/>'
+};
+const poSvg = (k, cls) => el("span", {class:"po-svg" + (cls ? " " + cls : ""), html:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + PO_IC[k] + '</svg>'});
+// ZREP shown in two groups of three so it is typed on the handheld without slips: 434 785
+const poGroup = (z) => { z = String(z || ""); return z.length === 6 ? [z.slice(0,3), el("span",{class:"pn-g2"},[z.slice(3)])] : [z]; };
+const poUnit = (ln) => ln.sku && isOuter(ln.sku) ? "OUTER" : "CTN";
+
+/* keep the phone screen on while an order is being keyed in */
+let _poWake = null;
+async function poWake(on){
+  try{
+    if(on && !_poWake && navigator.wakeLock && document.visibilityState === "visible"){ _poWake = await navigator.wakeLock.request("screen"); _poWake.addEventListener("release", () => { _poWake = null; }); }
+    else if(!on && _poWake){ const w = _poWake; _poWake = null; await w.release(); }
+  }catch(e){ _poWake = null; }
+}
+document.addEventListener("visibilitychange", () => { if(document.visibilityState === "visible" && state.screen === "po" && state.po && state.po.pages) poWake(true); });
+
+/* the open order survives closing the app: the PDF stays on the phone, with the ticks */
+const PO_SAVE = "oo_po_session";
+function poSaveMarks(){
+  const po = state.po; if(!po || !po.pages) return;
+  try{ localStorage.setItem(PO_SAVE, JSON.stringify({ po: po.info.po || "", done: po.done || {}, focus: state.poFocus, view: state.poView || "list",
+    fixes: po.pages.map(pg => pg.lines.map(l => l.manual || l.confirmed ? { z: l.sku ? l.sku.artecal : null, q: l.qty, c: !!l.confirmed, m: !!l.manual } : null)) })); }catch(e){}
+}
+async function poSaveFile(bytes){ try{ const c = await caches.open("oo-po"); await c.put("/po-last.pdf", new Response(new Blob([bytes], {type:"application/pdf"}))); }catch(e){} }
+async function poRestore(){
+  if(state.po || poRestore._tried) return; poRestore._tried = true;
+  let saved = null; try{ saved = JSON.parse(localStorage.getItem(PO_SAVE) || "null"); }catch(e){}
+  if(!saved) return;
+  try{
+    const c = await caches.open("oo-po"); const r = await c.match("/po-last.pdf"); if(!r) return;
+    const blob = await r.blob();
+    await poProcess(new File([blob], "po.pdf", { type:"application/pdf" }), { restore: saved });
+  }catch(e){}
+}
+function poClear(){
+  try{ localStorage.removeItem(PO_SAVE); }catch(e){}
+  try{ caches.open("oo-po").then(c => c.delete("/po-last.pdf")); }catch(e){}
+  state.po = null; state.poFocus = -1; poWake(false); render();
+}
+
 function renderPoScreen(){
   if(state.po && state.po.pages) poRecheck(state.po);
+  else if(!state.po) poRestore();
   const s = el("div", {class:"screen po-screen"});
-  s.appendChild(topbar({ title: t("prTitle"), subtitle: t("prSub"), onBack: () => { state.screen = state.adminPin && !state.user ? "admin" : (state.user ? "stores" : "login"); render(); } }));
-  const content = el("div", {class:"content"});
+  s.appendChild(topbar({ title: t("prTitle"), subtitle: state.po && state.po.info && state.po.info.po ? "PO " + state.po.info.po : t("prSub"), onBack: () => { state.screen = state.adminPin && !state.user ? "admin" : (state.user ? "stores" : "login"); render(); } }));
+  const content = el("div", {class:"content po-content"});
   s.appendChild(content);
   const po = state.po;
   const fileIn = el("input", {type:"file", accept:"application/pdf,.pdf", style:"display:none"});
-  const up = el("div", {class:"po-up"+(po && po.pages ? " small" : "")}, [
-    el("div", {class:"po-up-ic", html:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3.5h7.5L19 8v12.5H7z"/><path d="M14.5 3.5V8H19"/><path d="M9.5 13h6M9.5 16.5h4"/></svg>'}),
-    el("div", {class:"po-up-t"}, [ el("b",{},[t("poUpTitle")]), el("span",{},[t("poUpSubPdf")]) ]),
-    el("div", {class:"po-up-b"}, [ el("button", {class:"btn po-btn-main", type:"button", onclick:() => fileIn.click()}, [t("poPickPdf")]) ]),
-    fileIn
-  ]);
-  content.appendChild(up);
   fileIn.addEventListener("change", () => { if(fileIn.files[0]) poProcess(fileIn.files[0]); });
+  content.appendChild(fileIn);
 
-  if(po && po.busy){
+  if(!po || (!po.pages && !po.busy)){
+    content.appendChild(el("div", {class:"po-up"}, [
+      el("div", {class:"po-up-ic"}, [poSvg("file")]),
+      el("div", {class:"po-up-t"}, [ el("b",{},[t("poUpTitle")]), el("span",{},[t("poUpSubPdf")]) ]),
+      el("div", {class:"po-up-b"}, [ el("button", {class:"btn po-btn-main", type:"button", onclick:() => fileIn.click()}, [t("poPickPdf")]) ])
+    ]));
+    if(po && po.error) content.appendChild(el("div", {class:"po-err"}, [po.error]));
+    content.appendChild(el("div", {class:"po-help"}, [
+      el("b",{},[t("poHowT")]),
+      el("ol",{},[ el("li",{},[t("poHow1Pdf")]), el("li",{},[t("poHow2b")]), el("li",{},[t("poHow3b")]) ]),
+      el("div",{class:"po-wa"},[ el("b",{},[t("poWaT")]), el("div",{},[t("poWa")]),
+        isManager() ? el("button", {class:"btn po-btn-main sc-btn", type:"button", onclick:() => poShortcutGuide()}, [t("scOpen")]) : null ])
+    ]));
+    poWake(false);
+    return s;
+  }
+  if(po.busy){
     content.appendChild(el("div", {class:"po-busy"}, [ el("div",{class:"po-spin"}), el("b",{},[po.step || t("poReading")]) ]));
-  } else if(po && po.error){
-    content.appendChild(el("div", {class:"po-err"}, [po.error]));
-  } else if(po && po.pages){
-    const V = poVerdict(po), lines = V.lines;
-    const done = po.done || (po.done = {});
-    const nDone = lines.filter((_, i) => done[i]).length;
-    const checks = [
-      [V.countOK, V.itemsPrinted != null ? t("poChkCount") + ": " + lines.length + " / " + V.itemsPrinted : t("poChkCountNA")],
-      [V.totalOK, V.totalOK === null ? t("poChkTotalNA") : t("poChkTotal") + ": " + V.sumVal.toFixed(2)],
-      [!V.bad.length, V.bad.length ? V.bad.length + " " + t("poChkBad") : t("poChkLines")]
-    ];
-    content.appendChild(el("div", {class:"po-sum " + (V.ok ? "ok" : "bad")}, [
-      el("div", {class:"po-verdict"}, [ el("span",{class:"pv-ic"},[V.ok ? "✓" : "!"]), el("b",{},[V.ok ? t("poOk") : t("poNotOk")]) ]),
-      el("div", {class:"po-sum-t"}, [ el("span",{},[t("poNo")]), el("b",{dir:"ltr"},[po.info.po || "—"]) ]),
-      el("div", {class:"po-sum-g"}, [
-        el("div",{},[ el("span",{},[t("poStore")]), el("b",{},[po.info.store || "—"]) ]),
-        el("div",{},[ el("span",{},[t("poLines")]), el("b",{},[String(lines.length)]) ]),
-        el("div",{},[ el("span",{},[t("poQty")]), el("b",{},[String(V.sumQty)]) ]),
-        el("div",{},[ el("span",{},[t("poDate")]), el("b",{dir:"ltr"},[(po.info.dates||[])[0] || "—"]) ])
+    return s;
+  }
+
+  const V = poVerdict(po), lines = V.lines;
+  const done = po.done || (po.done = {});
+  const nDone = lines.filter((_, i) => done[i]).length;
+  if(state.poFocus == null || state.poFocus < 0 || state.poFocus >= lines.length){ const f = lines.findIndex((_, i) => !done[i]); state.poFocus = f; }
+  poWake(nDone < lines.length);
+
+  // ---- order header: identity + three independent checks ----
+  const chk = (ok, label) => el("div", {class:"po-k " + (ok === true ? "y" : ok === false ? "n" : "u")}, [ poSvg(ok === false ? "warn" : "check"), el("span",{},[label]) ]);
+  content.appendChild(el("div", {class:"po-hd " + (V.ok ? "ok" : "bad")}, [
+    el("div", {class:"po-hd-r"}, [
+      el("div", {class:"po-hd-id"}, [ el("small",{},[t("poNo")]), el("b",{dir:"ltr"},[po.info.po || "—"]) ]),
+      el("div", {class:"po-hd-st " + (V.ok ? "ok" : "bad")}, [ poSvg(V.ok ? "check" : "warn"), el("span",{},[V.ok ? t("poOkS") : (V.bad.length + " " + t("poToReview"))]) ])
+    ]),
+    el("div", {class:"po-hd-g"}, [
+      el("div",{},[ el("small",{},[t("poStore")]), el("b",{},[po.info.store || "—"]) ]),
+      el("div",{},[ el("small",{},[t("poDate")]), el("b",{dir:"ltr"},[(po.info.dates||[])[0] || "—"]) ]),
+      el("div",{},[ el("small",{},[t("poLines")]), el("b",{},[String(lines.length)]) ]),
+      el("div",{},[ el("small",{},[t("poQty")]), el("b",{},[String(V.sumQty)]) ])
+    ]),
+    el("div", {class:"po-hd-k"}, [
+      chk(V.countOK, V.itemsPrinted != null ? t("poKCount") + " " + lines.length + "/" + V.itemsPrinted : t("poChkCountNA")),
+      chk(V.totalOK, V.totalOK === null ? t("poChkTotalNA") : t("poKTotal") + " " + V.sumVal.toFixed(2)),
+      chk(!V.bad.length, V.bad.length ? V.bad.length + " " + t("poKBad") : t("poKLines"))
+    ])
+  ]));
+
+  // ---- toolbar: view switch + actions ----
+  const view = state.poView || "list";
+  const seg = (k, ic, label) => el("button", {class:"po-seg-b" + (view === k ? " on" : ""), type:"button", onclick:() => { if(view === k) return; state.poView = k; po._autoScroll = true; poSaveMarks(); render(); }}, [poSvg(ic), el("span",{},[label])]);
+  content.appendChild(el("div", {class:"po-tools"}, [
+    el("div", {class:"po-seg"}, [ seg("list", "list", t("poViewList")), seg("page", "page", t("poViewPage")) ]),
+    el("button", {class:"po-tb", type:"button", title:t("poPdf"), onclick: async (ev) => {
+      const b = ev.currentTarget; b.disabled = true;
+      try{ const { blob, name } = await poBuildPdf(po); poDeliver(blob, name); } catch(e){ toast(t("poPdfErr"), "error"); console.warn(e); }
+      b.disabled = false; }}, [poSvg("share")]),
+    el("button", {class:"po-tb", type:"button", title:t("poNew"), onclick:() => { if(nDone && nDone < lines.length && !confirm(t("poNewQ"))) return; poClear(); }}, [poSvg("file")])
+  ]));
+
+  // ---- progress ----
+  const pct = lines.length ? Math.round(nDone / lines.length * 100) : 0;
+  content.appendChild(el("div", {class:"po-pg"}, [
+    el("div", {class:"po-pg-t"}, [ el("b",{},[nDone + " / " + lines.length]), el("span",{},[t("poEnteredS")]),
+      nDone ? el("button", {class:"po-pg-r", type:"button", onclick:() => { if(confirm(t("poResetQ"))){ po.done = {}; state.poFocus = 0; po._autoScroll = true; poSaveMarks(); render(); } }}, [poSvg("reset"), t("poReset")]) : null ]),
+    el("div", {class:"po-bar"}, [el("i", {style:"width:" + pct + "%"})])
+  ]));
+
+  // ---- the line to key in now (pinned) ----
+  const fi = state.poFocus, cur = fi >= 0 ? lines[fi] : null;
+  if(nDone === lines.length && lines.length){
+    content.appendChild(el("div", {class:"po-alldone"}, [poSvg("check"), el("span",{},[t("poAllDone")])]));
+  } else if(cur){
+    const ok = poLineOK(cur);
+    content.appendChild(el("div", {class:"po-now" + (ok ? "" : " bad")}, [
+      el("div", {class:"pn-top"}, [ el("span",{},[t("poNowT")]), el("span",{dir:"ltr"},[(fi + 1) + " / " + lines.length]) ]),
+      el("div", {class:"pn-main"}, [
+        el("div", {class:"pn-z"}, [ el("small",{},["ZREP"]), el("b",{dir:"ltr"},cur.sku && cur.sku.zrep ? poGroup(cur.sku.zrep) : ["—"]) ]),
+        el("div", {class:"pn-q"}, [ el("small",{},[poUnit(cur)]), el("b",{},[cur.qty != null ? String(cur.qty) : "—"]) ]),
+        el("button", {class:"pn-ok", type:"button", "aria-label":"done", onclick:() => poTick(fi, po)}, [poSvg(ok ? "check" : "warn")])
       ]),
-      el("div", {class:"po-checks"}, checks.map(([ok, txt]) => el("div", {class:"po-ck " + (ok === true ? "y" : ok === false ? "n" : "u")}, [ el("i",{},[ok === true ? "✓" : ok === false ? "✕" : "–"]), txt ])))
+      el("div", {class:"pn-d", dir:"ltr"}, [ el("span",{class:"pn-oc"},[cur.sku ? codeStr(cur.sku) : (cur.code || "")]), el("span",{},[cur.poDesc || (cur.sku && cleanName(cur.sku.nameEn)) || ""]) ])
     ]));
-    content.appendChild(el("div", {class:"po-acts"}, [
-      el("button", {class:"btn po-btn-main", type:"button", onclick: async (ev) => {
-        const b = ev.currentTarget; b.disabled = true;
-        try{ const { blob, name } = await poBuildPdf(po); poDeliver(blob, name); } catch(e){ toast(t("poPdfErr"), "error"); console.warn(e); }
-        b.disabled = false;
-      }}, [t("poPdf")]),
-      el("button", {class:"btn btn-outline", type:"button", onclick:() => { if(confirm(t("poResetQ"))){ po.done = {}; state.poFocus = 0; po._autoScroll = true; render(); } }}, [t("poReset")])
-    ]));
-    // progress + what to type now
-    const fi = state.poFocus != null && state.poFocus >= 0 ? state.poFocus : -1, cur = fi >= 0 ? lines[fi] : null;
-    content.appendChild(el("div", {class:"po-prog"}, [ el("span",{},[t("poEntered")+" "+nDone+" / "+lines.length]), el("div",{class:"po-bar"},[el("i",{style:"width:"+(lines.length ? Math.round(nDone/lines.length*100) : 0)+"%"})]) ]));
-    if(nDone === lines.length && lines.length) content.appendChild(el("div", {class:"po-alldone"}, ["✓ " + t("poAllDone")]));
-    else if(cur){
-      const ok = poLineOK(cur);
-      const now = el("div", {class:"po-now" + (ok ? "" : " bad")}, [
-        el("div", {class:"pn-l"}, [ el("small",{},[t("poNowT") + " · " + (fi + 1) + "/" + lines.length]), el("div",{class:"pn-n", dir:"ltr"},[ cur.poDesc || (cur.sku && cleanName(cur.sku.nameEn)) || "—" ]) ]),
-        el("div", {class:"pn-z"}, [ el("small",{},["ZREP"]), el("b",{dir:"ltr"},[cur.sku && cur.sku.zrep ? String(cur.sku.zrep) : "?"]) ]),
-        el("div", {class:"pn-q"}, [ el("small",{},[t("poQtyS")]), el("b",{},[cur.qty != null ? String(cur.qty) : "?"]) ]),
-        el("button", {class:"pn-ok", type:"button", onclick:() => poTick(fi, po)}, [ok ? "✓" : "!"])
+  }
+
+  if(view === "list"){
+    const list = el("div", {class:"po-list", dir:"ltr"});
+    list.appendChild(el("div", {class:"po-lh"}, [ el("span",{},["#"]), el("span",{},["ZREP"]), el("span",{},["QTY"]), el("span",{},[t("poItemCol")]), el("span",{}) ]));
+    lines.forEach((ln, i) => {
+      const ok = poLineOK(ln), isDone = !!done[i], focus = fi === i;
+      const row = el("div", {class:"po-r" + (isDone ? " done" : "") + (focus ? " focus" : "") + (ok ? "" : " bad"), "data-i": i}, [
+        el("span", {class:"po-r-n"}, [String(i + 1).padStart(2, "0")]),
+        el("b", {class:"po-r-z"}, [ln.sku && ln.sku.zrep ? String(ln.sku.zrep) : "—"]),
+        el("span", {class:"po-r-q"}, [ el("b",{},[ln.qty != null ? String(ln.qty) : "—"]), el("small",{class:poUnit(ln) === "OUTER" ? "outer" : ""},[poUnit(ln)]) ]),
+        el("span", {class:"po-r-d"}, [
+          el("span", {class:"po-r-oc"}, [ln.sku ? codeStr(ln.sku) : (ln.code || "")]),
+          el("span", {class:"po-r-t"}, [ln.poDesc || (ln.sku && cleanName(ln.sku.nameEn)) || ""])
+        ]),
+        el("span", {class:"po-r-c"}, [ isDone ? poSvg("check") : ok ? el("i") : poSvg("warn") ])
       ]);
-      content.appendChild(now);
-    }
+      row.onclick = () => poTick(i, po);
+      list.appendChild(row);
+      if(!ok && !isDone) list.appendChild(poReviewCard(ln, i, po));
+    });
+    content.appendChild(list);
+    requestAnimationFrame(() => {
+      const sh = content; if(po._keepTop != null){ sh.scrollTop = po._keepTop; po._keepTop = null; }
+      if(po._autoScroll){ const r = list.querySelector(".po-r.focus"); if(r){ const top = r.getBoundingClientRect().top - sh.getBoundingClientRect().top + sh.scrollTop; sh.scrollTo({ top: Math.max(0, top - sh.clientHeight * 0.42), behavior: "smooth" }); } }
+      po._autoScroll = false;
+    });
+  } else {
     V.bad.forEach(ln => content.appendChild(poReviewCard(ln, V.lines.indexOf(ln), po)));
-    // the page itself
-    const zoomBar = el("div", {class:"pp-zoom"}, [
+    content.appendChild(el("div", {class:"pp-zoom"}, [
       el("span",{},[t("poPageT")]),
       el("button", {class:"pv-b", type:"button", onclick:() => { po.zoom = Math.max(1, (po.zoom || 1.5) - 0.5); render(); }}, ["−"]),
       el("button", {class:"pv-b", type:"button", onclick:() => { po.zoom = Math.min(4, (po.zoom || 1.5) + 0.5); render(); }}, ["+"])
-    ]);
-    content.appendChild(zoomBar);
+    ]));
     po.pages.forEach(pg => {
       const host = el("div", {class:"pp-host", dir:"ltr"}, [ el("div",{class:"po-spin"}) ]);
       content.appendChild(host);
       requestAnimationFrame(() => poRenderPage(host, pg, po).catch(e => { console.warn(e); host.textContent = t("poFail"); }));
     });
-  } else {
-    content.appendChild(el("div", {class:"po-help"}, [
-      el("b",{},[t("poHowT")]),
-      el("ol",{},[ el("li",{},[t("poHow1Pdf")]), el("li",{},[t("poHow2")]), el("li",{},[t("poHow3b")]) ]),
-      el("div",{class:"po-wa"},[ el("b",{},[t("poWaT")]), el("div",{},[t("poWa")]),
-        isManager() ? el("button", {class:"btn po-btn-main sc-btn", type:"button", onclick:() => poShortcutGuide()}, [t("scOpen")]) : null ])
-    ]));
   }
   return s;
 }
-async function poProcess(file){
+
+async function poProcess(file, opts){
   // the file itself must be a PDF ("%PDF" at the start), whatever its name says
   let isPdf = false;
   try{ const h = new Uint8Array(await file.slice(0, 1024).arrayBuffer()); for(let k = 0; k < h.length - 3 && !isPdf; k++) isPdf = h[k] === 0x25 && h[k+1] === 0x50 && h[k+2] === 0x44 && h[k+3] === 0x46; }catch(e){}
@@ -3745,11 +3928,29 @@ async function poProcess(file){
   try{
     const r = await poReadPdf(file, step);
     const info = Object.assign({ po:"", store:"", dates:[] }, ...r.pages.map(p => p.info).reverse().map(i => { const o = {}; Object.keys(i).forEach(k => { if(i[k] && (!Array.isArray(i[k]) || i[k].length)) o[k] = i[k]; }); return o; }));
-    state.po = { pages: r.pages, bytes: r.bytes, _doc: r.doc, info, done:{}, zoom: 1.5, _autoScroll: true, _dataKey: poDataKey() };
+    state.po = { pages: r.pages, bytes: r.bytes, _doc: r.doc, info, done:{}, zoom: 1.5, _autoScroll: false, _dataKey: poDataKey() };
     poPrepPages(state.po);
-    const V = poVerdict(state.po); state.poFocus = V.bad.length ? V.lines.indexOf(V.bad[0]) : 0;
+    state.poFocus = 0;
+    const sv = opts && opts.restore;
+    if(sv && sv.po === (info.po || "")){
+      // back to where the rep stopped: same ticks, same hand fixes, same view
+      state.po.done = sv.done || {}; state.poView = sv.view || "list";
+      (sv.fixes || []).forEach((pf, pi) => (pf || []).forEach((f, k) => {
+        const ln = state.po.pages[pi] && state.po.pages[pi].lines[k]; if(!f || !ln) return;
+        if(f.m && f.z != null){ const hit = poFindSku(String(f.z).padStart(6, "0")); if(hit && hit.sku){ ln.sku = hit.sku; ln.idOK = true; } }
+        if(f.m){ ln.qty = f.q; ln.qOK = f.q != null; ln.manual = true; }
+        if(f.c) ln.confirmed = true;
+      }));
+      const V = poVerdict(state.po); const f = V.lines.findIndex((_, i) => !state.po.done[i]);
+      state.poFocus = sv.focus != null && sv.focus >= 0 && !state.po.done[sv.focus] ? sv.focus : f;
+    } else if(!sv){
+      state.poView = "list";
+      poSaveFile(r.bytes);
+    }
+    poSaveMarks();
   }catch(e){
     console.warn("PO read failed", e);
+    if(opts && opts.restore){ console.warn("PO restore failed", e); state.po = null; if(state.screen === "po") render(); return; }
     state.po = { error: e && e.message === "scanned" ? t("poScanned") : e && e.message === "nolines" ? t("poNone") : t("poFail") };
   }
   if(state.screen === "po") render();
@@ -3758,7 +3959,7 @@ async function poProcess(file){
 /* a line that is not proven: say why, and let a person settle it (never assumed) */
 function poReviewCard(ln, i, po){
   const why = !ln.sku ? t("poWhyUnknown") : !ln.sku.zrep ? t("poWhyNoZrep") : !ln.idOK ? (ln.idWhy === "price" ? t("poWhyPrice") + (ln.priceNote ? " (" + ln.priceNote.toFixed(2) + ")" : "") : t("poWhyId")) : t("poWhyQty");
-  const keep = () => { const sh = document.querySelector(".po-screen .content"); po._keepTop = sh ? sh.scrollTop : null; };
+  const keep = () => { const sh = document.querySelector(".po-screen .content"); po._keepTop = sh ? sh.scrollTop : null; setTimeout(poSaveMarks, 0); };
   const ck = el("div", {class:"po-check"}, [
     el("div", {class:"po-why"}, ["! " + t("poLineN") + " " + (i + 1) + " · " + (ln.sku ? codeStr(ln.sku) : (ln.code || "?")) + " — " + why]),
     el("div", {class:"po-rv-d", dir:"ltr"}, [ (ln.poDesc || "").slice(0, 60) + (ln.qty != null ? "  ·  Qty " + ln.qty : "") ])
@@ -3869,11 +4070,11 @@ function bottomNav(){
     po:     () => { state.screen = "po"; render(); }
   };
   const labels = { stores:t("navStores"), items: t("navStore"), find:t("navFind"), cart:t("navCart"), hist:t("navSaved"), po:t("navPo") };
-  ["stores","items","po","cart","hist"].forEach(k => {
+  ["stores","items","find","po","cart","hist"].forEach(k => {
     const dis = (k === "items" || k === "cart") && !hasStore;
     const ic = el("span", {class:"bn-ic", html:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">'+NAV_IC[k]+'</svg>'});
     if(k === "cart" && nCart) ic.appendChild(el("span", {class:"bn-badge"}, [String(nCart)]));
-    const b = el("button", {class:"bn-it"+(cur===k?" on":""), type:"button", onclick: () => {
+    const b = el("button", {class:"bn-it bn-"+k+(cur===k?" on":""), type:"button", onclick: () => {
       if(cur === k && k !== "find" && k !== "stores") return;
       nav.querySelectorAll(".bn-it").forEach(x => x.classList.toggle("on", x === b));
       requestAnimationFrame(() => setTimeout(go[k], 0));
@@ -4663,7 +4864,7 @@ function renderItems(){
     const totals = cartTotals();
     const count = cartLineCount();
     if(floatbar) floatbar.remove();
-    { const bnB = $(".bnav .bn-it:nth-child(4) .bn-ic", s); if(bnB && !count){ const old = $(".bn-badge", bnB); if(old) old.remove(); } }
+    { const bnB = $(".bnav .bn-cart .bn-ic", s); if(bnB && !count){ const old = $(".bn-badge", bnB); if(old) old.remove(); } }
     const clrB = $(".clr-link", s); if(clrB) clrB.hidden = count === 0;
     if(count === 0) return;
     floatbar = el("div", {class:"floatbar"}, [
@@ -4673,7 +4874,7 @@ function renderItems(){
       el("button", {class:"btn btn-primary", onclick: () => { goToCart(); }}, [t("reviewOrder")])
     ]);
     const nav = $(".bnav", s); if(nav) s.insertBefore(floatbar, nav); else s.appendChild(floatbar);
-    const bnB = $(".bnav .bn-it:nth-child(4) .bn-ic", s);
+    const bnB = $(".bnav .bn-cart .bn-ic", s);
     if(bnB){ const old = $(".bn-badge", bnB); if(old) old.remove(); if(count) bnB.appendChild(el("span",{class:"bn-badge"},[String(count)])); }
     const badge = $(".cartbadge", s);
     const btn = $(".cartbtn", s);
@@ -6155,7 +6356,7 @@ let ORIGINAL_HTML = null;
       navigator.serviceWorker.getRegistrations().then(rs => rs.forEach(r => { const u = (r.active || r.installing || r.waiting || {}).scriptURL || ""; if(!/\/sw\.js(\?|$)/.test(u)) r.unregister(); })).catch(() => {});
       if(/^https:/.test(location.protocol)) navigator.serviceWorker.register("sw.js").catch(() => {});
     }
-    if(window.caches && caches.keys) caches.keys().then(ks => ks.forEach(k => { if(k !== "oo-share") caches.delete(k); })).catch(() => {});
+    if(window.caches && caches.keys) caches.keys().then(ks => ks.forEach(k => { if(k !== "oo-share" && k !== "oo-po") caches.delete(k); })).catch(() => {});
   }catch(e){}
   poTakeShared();
   poTakeInbox();
