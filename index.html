@@ -7,8 +7,8 @@
 <meta name="theme-color" content="#0B3226">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="app-build" content="2026-11-23-1830">
-<meta name="app-version" content="2.12">
+<meta name="app-build" content="2026-11-23-1920">
+<meta name="app-version" content="2.13">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -1836,6 +1836,47 @@ html[dir="rtl"] .iconbtn.refbtn.spin svg{animation-direction:reverse;}
 .po-main .pm-t small{display:block;font-size:11px;color:rgba(255,255,255,.72);margin-top:2px;line-height:1.35;}
 .po-main.busy{opacity:.7;} .po-main.busy .pm-ic{animation:poSpin 1s linear infinite;}
 @keyframes poSpin{to{transform:rotate(360deg);}}
+
+/* ---- v2.13: the PO as a table ---- */
+.pq-head{position:sticky;top:-10px;z-index:6;margin:-10px -14px 0;background:#F3F6F4;padding-top:10px;}
+.pq-bar{display:flex;align-items:center;gap:8px;padding:0 14px 8px;}
+.pq-id{flex:1;min-width:0;}
+.pq-id b{display:block;font-size:15px;font-weight:800;color:#0E2A20;font-variant-numeric:tabular-nums;text-align:right;letter-spacing:.2px;}
+.pq-id small{display:block;font-size:11px;color:#62766C;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.pq-prog{flex:none;font-size:12px;color:#5A6F65;font-variant-numeric:tabular-nums;padding:5px 9px;border-radius:999px;background:#E4ECE8;direction:ltr;}
+.pq-prog b{color:#0B3226;font-size:14px;}
+.pq-prog.all{background:#1F9D63;color:#fff;} .pq-prog.all b{color:#fff;}
+.pq-ic{flex:none;width:36px;height:36px;border-radius:10px;border:1px solid #D3DDD8;background:#fff;color:#0B3226;display:flex;align-items:center;justify-content:center;cursor:pointer;}
+.pq-ic .po-svg{width:17px;height:17px;}
+.pq-ic.main{background:#0B3226;border-color:#0B3226;color:#C9F27D;}
+.pq-ic.on{background:#E4ECE8;}
+.pq-ic.busy{opacity:.6;} .pq-ic.busy .po-svg{animation:poSpin 1s linear infinite;}
+.pq-pg{height:3px;background:#DFE7E3;} .pq-pg i{display:block;height:100%;background:#1F9D63;transition:width .3s;}
+.pq-t{background:#fff;border:1px solid #9AA3A0;border-top:0;margin:-12px 0 12px;}
+.pq-tr{display:grid;grid-template-columns:20px 50px 60px minmax(0,1fr) 50px 30px;align-items:center;border-bottom:1px solid #C9CFCC;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#111;min-height:38px;cursor:pointer;}
+.pq-tr>*{padding:4px 4px;min-width:0;border-left:1px solid #C9CFCC;align-self:stretch;display:flex;align-items:center;}
+.pq-tr>*:first-child{border-left:0;justify-content:center;}
+.pq-th{background:#C0C0C0;font-weight:700;font-size:10.5px;color:#111;min-height:28px;border:1px solid #9AA3A0;border-bottom:1px solid #8C9591;margin:0 14px;cursor:default;}
+.pq-th>*{border-left-color:#9AA3A0;}
+.pq-head .pq-th{margin:0 14px;}
+.pq-tr .n{font-size:10px;color:#7B8A83;font-variant-numeric:tabular-nums;}
+.pq-tr .n .po-svg{width:15px;height:15px;color:#1F9D63;}
+.pq-tr .sku{font-variant-numeric:tabular-nums;color:#333;font-size:11.5px;}
+.pq-tr .z{justify-content:center;font-weight:800;font-size:13.5px;color:#0B3226;font-variant-numeric:tabular-nums;letter-spacing:.2px;}
+.pq-th .z{font-size:10px;color:#0B4A33;text-align:center;line-height:1.1;}
+.pq-tr .d{font-size:11px;line-height:1.25;color:#1B1B1B;word-break:break-word;}
+.pq-tr .r{justify-content:flex-end;text-align:right;font-variant-numeric:tabular-nums;}
+.pq-tr .p{flex-direction:column;align-items:flex-end;justify-content:center;font-size:11.5px;}
+.pq-tr .p small{font-size:9px;color:#8A5300;font-weight:700;}
+.pq-tr .q{font-size:14px;color:#B3261E;flex-direction:column;align-items:flex-end;justify-content:center;}
+.pq-tr .q small{font-size:8px;color:#B76E00;font-weight:800;}
+.pq-tr.pw{background:#FFF7E0;} .pq-tr.pw .p{background:#FFE7A8;}
+.pq-tr.bad .z{color:#B3261E;font-size:11px;background:#FDE3DF;}
+.pq-tr.done{background:#F4F6F5;} .pq-tr.done>*{color:#9AA8A1;} .pq-tr.done .z{color:#8FA39A;text-decoration:line-through;}
+.pq-tr.cur{background:#FFF2B3;box-shadow:inset 0 0 0 2px #E0A800;}
+.pq-tr.cur .z{font-size:15px;}
+.pq-t .po-check{margin:0;border-radius:0;border:0;border-bottom:1px solid #F2C9C3;background:#FFF6F4;padding:8px 10px;}
+.pp-out{background:#E4E9E6;padding:8px;}
 </style>
 </head>
 <body>
@@ -1899,6 +1940,7 @@ const I18N = {
     stockUpdated:"مخزون مارس", onhandUpdated:"On Hand", updatedAt:"آخر تحديث",
     myStores:"متاجري", searchStores:"ابحث عن متجر...",
     filters:"تصفية", navPo:"أمر شراء", imgOpen:"صورة المنتج", imgClose:"إغلاق", prTitle:"قارئ أوامر الشراء", prSub:"إضافة كود مارس ZREP لكل صنف", poOpenBtn:"فتح قارئ أوامر الشراء (ZREP)",
+    poPageT2:"أمر الشراء كما يُرسل — مع عمود Mars ZREP",
     poMainT:"أمر الشراء + عمود كود مارس", poMainS:"PDF الأصلي مع عمود ZREP بجوار كود العثيم — جاهز للواتساب", poMainP:"فرق سعر معلَّم",
     poDoneS:"تم", poValue:"القيمة", poCheckS:"المطابقة", poOkShort:"مطابق", poFAll:"الكل", poFLeft:"متبقي", poFBad:"مراجعة", poFPrice:"فرق سعر", poNowS:"الآن", poNothing:"لا توجد أصناف هنا", poPriceDiff:"فرق سعر", poPricePO:"الطلب", poPriceMars:"مارس", poPriceLine:"فرق السطر", poPriceUnitD:"الفرق", poPriceHalala:"فرق هللات عادي",
     poUnitPrice:"سعر الوحدة", poLineVal:"القيمة", poKTotalBad:"الإجمالي غير مطابق",
@@ -2046,6 +2088,7 @@ const I18N = {
     stockUpdated:"Mars Stock", onhandUpdated:"On Hand", updatedAt:"Last updated",
     myStores:"My Stores", searchStores:"Search stores...",
     filters:"Filters", navPo:"PO", imgOpen:"Product picture", imgClose:"Close", prTitle:"Purchase order reader", prSub:"Adds the Mars ZREP to every line", poOpenBtn:"Open the PO reader (ZREP)",
+    poPageT2:"The order as it is sent — with the Mars ZREP column",
     poMainT:"PO + Mars code column", poMainS:"The original PDF with a ZREP column beside the Othaim code — ready for WhatsApp", poMainP:"price difference(s) marked",
     poDoneS:"done", poValue:"Value", poCheckS:"Match", poOkShort:"OK", poFAll:"All", poFLeft:"Left", poFBad:"Review", poFPrice:"Price diff", poNowS:"NOW", poNothing:"Nothing here", poPriceDiff:"Price difference", poPricePO:"PO", poPriceMars:"Mars", poPriceLine:"Line diff", poPriceUnitD:"Diff", poPriceHalala:"Normal halala rounding",
     poUnitPrice:"Unit price", poLineVal:"Value", poKTotalBad:"Total does not match",
@@ -3272,8 +3315,8 @@ async function smartRefresh(btn){
 
 
 /* ---------------- APP VERSION (shown to the manager; each release is archived in versions/) ---------------- */
-const APP_VERSION = "2.12";
-const APP_VERSIONS = [{"v": "2.12", "date": "2026-11-23", "ar": "أمر الشراء يرجع PDF أصلي بعمود جديد Mars ZREP بجوار كود العثيم + تعليم فرق السعر (الهللة والهللتان عادي) + التطبيق أخف 45%", "en": "PO returns the original PDF with a new Mars ZREP column beside the Othaim code + price-difference marks (1–2 halala normal) + app 45% lighter"}, {"v": "2.11", "date": "2026-11-23", "ar": "شاشة إدخال احترافية بترتيب أمر الشراء: الاسم والجرام كاملًا، السطر الحالي مكبّر، تصفية (متبقي/مراجعة/فرق سعر)، وتنبيه فرق السعر بين الطلب وسعر مارس (الهللة والهللتان عادية)", "en": "Professional entry list in PO order: full names, enlarged current line, filters, PO vs Mars price-difference warning (1–2 halala is normal)"}, {"v": "2.10", "date": "2026-11-23", "ar": "شريط أمر الشراء المثبّت (رقم الطلب، المتجر، الأصناف، الكمية) + السعر والقيمة لكل صنف بألوان واضحة", "en": "Pinned PO bar (PO, store, items, qty) + unit price and value per line, colour-coded"}, {"v": "2.9", "date": "2026-11-23", "ar": "إرجاع زر بحث صنف + شاشة إدخال أمر الشراء الاحترافية (قائمة الإدخال، الشاشة تبقى مضاءة، حفظ مكان التوقف)", "en": "Find-item tab back + professional PO entry screen (entry list, screen stays on, resumes where you stopped)"}, {"v": "2.8", "date": "2026-11-22", "ar": "أمر الشراء: PDF الأصلي فقط (حذف المسح الضوئي) + ZREP داخل خانة كود العثيم + صفحة بدقة كاملة مع علامة صح للمُدخل وإضاءة للسطر التالي + صور منتجات عالية الدقة", "en": "PO: original PDF only (scanning removed) + ZREP inside the Othaim code cell + full-resolution page with ticks and next-line highlight + lighter app"}, {"v": "2.7", "date": "2026-11-22", "ar": "ظهور التطبيق في مشاركة واتساب على الآيفون (عبر اختصار) + دليل إعداد داخل التطبيق", "en": "App in WhatsApp's share menu on iPhone (via a shortcut) + in-app setup guide"}, {"v": "2.6", "date": "2026-11-22", "ar": "قارئ أوامر الشراء بتحقق كامل (الكود×السعر×الوحدة، الكمية×الإجمالي×الضريبة، عدد الأصناف والإجمالي) + عرض السطر الأصلي لأي بند غير مؤكد + الصور داخل التطبيق + استقبال من واتساب", "en": "Fully verified PO reader + original-line crop for anything unproven + built-in pictures + receive from WhatsApp"}, {"v": "2.5", "date": "2026-11-22", "ar": "صور المنتجات في بطاقة الصنف + قارئ أوامر الشراء يضيف ZREP لكل صنف", "en": "Product pictures + PO reader adding the ZREP"}, {"v": "2.4", "date": "2026-11-20", "ar": "الحد الأدنى والأقصى والموجود بالكرتون الحقيقي لكل الأصناف", "en": "Min / Max / On Hand in real cartons for every item"}, {"v": "2.3", "date": "2026-11-20", "ar": "الحد الأدنى والأقصى بدقة (0.75 بدل 0.8)", "en": "Exact Min / Max (0.75 not 0.8)"}, {"v": "2.2", "date": "2026-11-20", "ar": "كود العثيم الجديد دائمًا في صفحات التطبيق", "en": "Always the NEW Othaim code in the app"}, {"v": "2.1", "date": "2026-11-20", "ar": "الحد الأدنى والأقصى بالكرتون + رقم الإصدار للمدير", "en": "Min / Max in cartons + version number"}, {"v": "2.0", "date": "2026-11-19", "ar": "التصميم الأخضر، الشريط السفلي، التحديث التلقائي، إصلاح تكرار أكواد الأصناف", "en": "Green design, bottom bar, auto-update, duplicate code fix"}];
+const APP_VERSION = "2.13";
+const APP_VERSIONS = [{"v": "2.13", "date": "2026-11-23", "ar": "أمر الشراء كجدول مثل الطلب نفسه (Sku · Mars ZREP · Description · Net Cost · Qty) بدون شروحات أو مجاميع + PDF نظيف بعمود ZREP وتظليل فرق السعر فقط", "en": "PO shown as a table like the PO itself, no explanations/totals + clean PDF with ZREP column and price-difference shading only"}, {"v": "2.12", "date": "2026-11-23", "ar": "أمر الشراء يرجع PDF أصلي بعمود جديد Mars ZREP بجوار كود العثيم + تعليم فرق السعر (الهللة والهللتان عادي) + التطبيق أخف 45%", "en": "PO returns the original PDF with a new Mars ZREP column beside the Othaim code + price-difference marks (1–2 halala normal) + app 45% lighter"}, {"v": "2.11", "date": "2026-11-23", "ar": "شاشة إدخال احترافية بترتيب أمر الشراء: الاسم والجرام كاملًا، السطر الحالي مكبّر، تصفية (متبقي/مراجعة/فرق سعر)، وتنبيه فرق السعر بين الطلب وسعر مارس (الهللة والهللتان عادية)", "en": "Professional entry list in PO order: full names, enlarged current line, filters, PO vs Mars price-difference warning (1–2 halala is normal)"}, {"v": "2.10", "date": "2026-11-23", "ar": "شريط أمر الشراء المثبّت (رقم الطلب، المتجر، الأصناف، الكمية) + السعر والقيمة لكل صنف بألوان واضحة", "en": "Pinned PO bar (PO, store, items, qty) + unit price and value per line, colour-coded"}, {"v": "2.9", "date": "2026-11-23", "ar": "إرجاع زر بحث صنف + شاشة إدخال أمر الشراء الاحترافية (قائمة الإدخال، الشاشة تبقى مضاءة، حفظ مكان التوقف)", "en": "Find-item tab back + professional PO entry screen (entry list, screen stays on, resumes where you stopped)"}, {"v": "2.8", "date": "2026-11-22", "ar": "أمر الشراء: PDF الأصلي فقط (حذف المسح الضوئي) + ZREP داخل خانة كود العثيم + صفحة بدقة كاملة مع علامة صح للمُدخل وإضاءة للسطر التالي + صور منتجات عالية الدقة", "en": "PO: original PDF only (scanning removed) + ZREP inside the Othaim code cell + full-resolution page with ticks and next-line highlight + lighter app"}, {"v": "2.7", "date": "2026-11-22", "ar": "ظهور التطبيق في مشاركة واتساب على الآيفون (عبر اختصار) + دليل إعداد داخل التطبيق", "en": "App in WhatsApp's share menu on iPhone (via a shortcut) + in-app setup guide"}, {"v": "2.6", "date": "2026-11-22", "ar": "قارئ أوامر الشراء بتحقق كامل (الكود×السعر×الوحدة، الكمية×الإجمالي×الضريبة، عدد الأصناف والإجمالي) + عرض السطر الأصلي لأي بند غير مؤكد + الصور داخل التطبيق + استقبال من واتساب", "en": "Fully verified PO reader + original-line crop for anything unproven + built-in pictures + receive from WhatsApp"}, {"v": "2.5", "date": "2026-11-22", "ar": "صور المنتجات في بطاقة الصنف + قارئ أوامر الشراء يضيف ZREP لكل صنف", "en": "Product pictures + PO reader adding the ZREP"}, {"v": "2.4", "date": "2026-11-20", "ar": "الحد الأدنى والأقصى والموجود بالكرتون الحقيقي لكل الأصناف", "en": "Min / Max / On Hand in real cartons for every item"}, {"v": "2.3", "date": "2026-11-20", "ar": "الحد الأدنى والأقصى بدقة (0.75 بدل 0.8)", "en": "Exact Min / Max (0.75 not 0.8)"}, {"v": "2.2", "date": "2026-11-20", "ar": "كود العثيم الجديد دائمًا في صفحات التطبيق", "en": "Always the NEW Othaim code in the app"}, {"v": "2.1", "date": "2026-11-20", "ar": "الحد الأدنى والأقصى بالكرتون + رقم الإصدار للمدير", "en": "Min / Max in cartons + version number"}, {"v": "2.0", "date": "2026-11-19", "ar": "التصميم الأخضر، الشريط السفلي، التحديث التلقائي، إصلاح تكرار أكواد الأصناف", "en": "Green design, bottom bar, auto-update, duplicate code fix"}];
 function versionCard(){
   const card = el("div", {class:"card card-pad ver-card"});
   const top = el("div", {class:"ver-top"}, [
@@ -3650,6 +3693,18 @@ function poAnalyze(tokens, W, H, mode){
     dates: (all.match(/\b20\d{2}-\d{2}-\d{2}\b/g) || []).slice(0, 2)
   };
   const doc = { itemsPrinted, sumVal, sumQty, totalPrinted, qtyPrinted, totalsFound: belowMoney.length > 0 };
+  // the full printed description of every line (name, grams, and a wrapped second line), word for word
+  const descH = find(/^description$/i).filter(k => k.cy < headerY + hm)[0];
+  if(descH){
+    const nextH = toks.filter(k => Math.abs(k.cy - descH.cy) < hm && k.x0 > descH.x1 + 2).sort((a,b) => a.x0 - b.x0)[0];
+    const right = nextH ? nextH.x0 - 1 : W;
+    lines.forEach((ln, i) => {
+      if(!ln.box || ln.descX0 == null) return;
+      const top = ln.box.y0 - hm * 0.4, nxt = lines[i + 1] && lines[i + 1].box ? lines[i + 1].box.y0 - hm * 0.4 : Math.min(footerY, ln.box.y1 + hm * 2.4);
+      const ws = body.filter(k => k.x0 >= ln.descX0 - 1 && k.x1 <= right && k.cy > top && k.cy < nxt).sort((a,b) => (Math.abs(a.cy - b.cy) > hm * 0.5 ? a.cy - b.cy : a.x0 - b.x0));
+      if(ws.length) ln.poDescFull = ws.map(k => k.t).join(" ");
+    });
+  }
   const skuH = find(/^sku$/i).filter(k => k.cy < headerY + hm)[0];
   const hdr = { sku: skuH ? { x0: skuH.x0, x1: skuH.x1, y0: skuH.y0, y1: skuH.y1 } : null };
   return { lines, info, doc, hdr };
@@ -3809,38 +3864,9 @@ async function poBuildPdf(po){
       const fs = Math.min(8.2, Math.max(6.5, c.fs * 1.02)), base = Y(c.cy) - fs * 0.36;
       if(!ok || !z){ ctr(z || "CHECK", fB, z ? fs : 6.4, base, RED); return; }
       if(pc && pc.level === "warn"){
-        notes.push({ ln, pc });
-        const tag = String(notes.length), tw = fB.widthOfTextAtSize(z, fs);
-        np.drawText(z, { x: mid - tw / 2 - 2.6, y: base, size: fs, font: fB, color: INK });
-        np.drawCircle({ x: mid + tw / 2 + 1.8, y: base + fs * 0.62, size: 3.1, color: AMBER_D });
-        np.drawText(tag, { x: mid + tw / 2 + 1.8 - fB.widthOfTextAtSize(tag, 4.4) / 2, y: base + fs * 0.62 - 1.55, size: 4.4, font: fB, color: rgb(1, 1, 1) });
+        ctr(z, fB, fs, base, INK);
       } else ctr(z, fB, fs, base, INK);
     });
-    // 4) after the table on the last page: a short, factual check line + price notes
-    if(k === src.getPageCount() - 1 || pg === po.pages[po.pages.length - 1]){
-      const maxY = Math.max(...pg.toks.map(t => t.y1)) / pg.S;
-      let y = Y(maxY) - 16;
-      const need = 14 + notes.length * 10;
-      let p2 = np;
-      if(y - need < 18){ p2 = out.addPage([W, H]); y = H - 40; }
-      const ck = (V.countOK !== false ? "Items " + V.lines.length + (V.itemsPrinted != null ? "/" + V.itemsPrinted : "") : "Items " + V.lines.length + "/" + V.itemsPrinted + " (mismatch)")
-        + "   |   Total " + V.sumVal.toFixed(2) + (V.totalOK === true ? " = order total" : V.totalOK === false ? " (does not match order total)" : "")
-        + "   |   ZREP verified: " + (V.lines.length - V.bad.length) + "/" + V.lines.length;
-      p2.drawRectangle({ x: 24, y: y - 3, width: 3, height: 11, color: GREEN });
-      p2.drawText("Mars ZREP check", { x: 31, y, size: 8, font: fB, color: GREEN });
-      p2.drawText(ck, { x: 31 + fB.widthOfTextAtSize("Mars ZREP check", 8) + 10, y, size: 7.6, font: fR, color: rgb(0.2, 0.2, 0.2) });
-      if(notes.length){
-        y -= 13;
-        p2.drawText("Price difference vs Mars price (more than 0.02 SAR per unit):", { x: 31, y, size: 7.6, font: fB, color: AMBER_D });
-        notes.forEach((n, i) => {
-          y -= 10;
-          const ln = n.ln, d = n.pc.diff;
-          const txt = (i + 1) + ")  " + (ln.sku ? codeStr(ln.sku) : ln.code) + "  " + (ln.poDesc || "").replace(/[^\x20-\x7E]/g, "").slice(0, 44)
-            + "   PO " + poMoney(ln.net) + "   Mars " + poMoney(n.pc.mars) + "   diff " + (d > 0 ? "+" : "-") + poMoney(Math.abs(d)) + (ln.qty > 1 ? "  x" + ln.qty + " = " + (d > 0 ? "+" : "-") + poMoney(Math.abs(d * ln.qty)) : "");
-          p2.drawText(txt, { x: 36, y, size: 7.4, font: fR, color: rgb(0.15, 0.15, 0.15) });
-        });
-      }
-    }
   }
   const bytes = await out.save({ useObjectStreams: true });
   return { blob: new Blob([bytes], { type: "application/pdf" }), name: "PO-" + (po.info.po || Date.now()) + "-MARS.pdf" };
@@ -4031,142 +4057,95 @@ function renderPoScreen(){
   if(state.poFocus == null || state.poFocus < 0 || state.poFocus >= lines.length){ const f = lines.findIndex((_, i) => !done[i]); state.poFocus = f; }
   poWake(nDone < lines.length);
 
-  // ---- summary (pinned): PO · store · value · items · qty · progress ----
+  // ---- one slim bar + the order table, laid out like the PO itself ----
   const stNo = String(po.info.store || "").trim();
   const st = (OO.stores || []).find(x => String(x.storeNo) === stNo);
   const view = state.poView || "list";
-  const filt = state.poFilter || "all";
   const fi = state.poFocus;
   const pct = lines.length ? Math.round(nDone / lines.length * 100) : 0;
-  const PD = lines.map(poPriceCheck);
-  const nPrice = PD.filter(p => p && p.level === "warn").length;
-  const sumVal = lines.reduce((a, l) => a + (l.total != null ? l.total : (l.net != null && l.qty != null ? l.net * l.qty : 0)), 0);
-  const pin = el("div", {class:"po-pin2"}, [
-    el("div", {class:"pt-1"}, [
-      el("div", {class:"pt-id"}, [ el("b",{dir:"ltr"},["PO " + (po.info.po || "—")]), el("small",{},[[stNo, st ? st.nameAr : ""].filter(Boolean).join(" · ")]) ]),
-      el("div", {class:"pt-act"}, [
-        el("span", {class:"pt-done" + (nDone === lines.length && lines.length ? " all" : "")}, [nDone + " / " + lines.length + " " + t("poDoneS")]),
-    nDone ? el("button", {class:"po-ic d", type:"button", title:t("poReset"), onclick:() => { if(confirm(t("poResetQ"))){ po.done = {}; state.poFocus = 0; po._autoScroll = true; poSaveMarks(); render(); } }}, [poSvg("reset")]) : null,
-    el("button", {class:"po-ic d", type:"button", title:t("poPdf"), onclick: async (ev) => {
-      const b = ev.currentTarget; b.disabled = true;
-      try{ const { blob, name } = await poBuildPdf(po); poDeliver(blob, name); } catch(e){ toast(t("poPdfErr"), "error"); console.warn(e); }
-      b.disabled = false; }}, [poSvg("share")]),
-    el("button", {class:"po-ic d", type:"button", title:t("poNew"), onclick:() => { if(nDone && nDone < lines.length && !confirm(t("poNewQ"))) return; poClear(); }}, [poSvg("file")])
-      ])
+  const share = async (ev) => {
+    const b = ev.currentTarget; if(b.disabled) return; b.disabled = true; b.classList.add("busy");
+    try{ const { blob, name } = await poBuildPdf(po); poDeliver(blob, name); } catch(e){ toast(t("poPdfErr"), "error"); console.warn(e); }
+    b.disabled = false; b.classList.remove("busy");
+  };
+  const head = el("div", {class:"pq-head"}, [
+    el("div", {class:"pq-bar"}, [
+      el("div", {class:"pq-id"}, [ el("b",{dir:"ltr"},[po.info.po || "—"]), el("small",{},[[stNo, st ? st.nameAr : ""].filter(Boolean).join(" · ")]) ]),
+      el("span", {class:"pq-prog" + (nDone === lines.length && lines.length ? " all" : "")}, [ el("b",{},[String(nDone)]), "/" + lines.length ]),
+      el("button", {class:"pq-ic" + (view === "page" ? " on" : ""), type:"button", title:t("poViewPage"), onclick:() => { state.poView = view === "page" ? "list" : "page"; po._autoScroll = true; poSaveMarks(); render(); }}, [poSvg(view === "page" ? "list" : "page")]),
+      el("button", {class:"pq-ic main", type:"button", title:t("poPdf"), onclick: share}, [poSvg("share")]),
+      el("button", {class:"pq-ic", type:"button", title:t("poNew"), onclick:() => { if(nDone && nDone < lines.length && !confirm(t("poNewQ"))) return; poClear(); }}, [poSvg("file")])
     ]),
-    el("div", {class:"pt-k"}, [
-      el("div",{class:"k-v"},[ el("small",{},[t("poValue")]), el("b",{},[poMoney(sumVal)]) ]),
-      el("div",{class:"k-n"},[ el("small",{},[t("poLines")]), el("b",{},[String(lines.length)]) ]),
-      el("div",{class:"k-q"},[ el("small",{},[t("poQty")]), el("b",{},[String(V.sumQty)]) ]),
-      el("div",{class:"k-s " + (V.ok ? "ok" : "bad")},[ el("small",{},[t("poCheckS")]), el("b",{},[poSvg(V.ok ? "check" : "warn"), V.ok ? t("poOkShort") : String(V.bad.length + (V.totalOK === false ? 1 : 0) || "!")]) ])
-    ]),
-    el("div", {class:"pt-pg"}, [el("i", {style:"width:" + pct + "%"})])
+    el("div", {class:"pq-pg"}, [el("i", {style:"width:" + pct + "%"})])
   ]);
-  content.appendChild(pin);
-
-  // ---- filters + actions ----
-  const nLeft = lines.length - nDone;
-  const chip = (k, label, n, cls) => el("button", {class:"po-ch" + (cls ? " " + cls : "") + ((k === "page" ? view === "page" : view === "list" && filt === k) ? " on" : ""), type:"button", onclick:() => {
-    if(k === "page"){ state.poView = "page"; } else { state.poView = "list"; state.poFilter = k; }
-    po._autoScroll = k === "all" || k === "left"; poSaveMarks(); render(); }}, [label, n != null ? el("span",{},[String(n)]) : null]);
-  content.appendChild(el("div", {class:"po-chips"}, [
-    chip("all", t("poFAll"), lines.length),
-    chip("left", t("poFLeft"), nLeft),
-    V.bad.length ? chip("bad", t("poFBad"), V.bad.length, "red") : null,
-    nPrice ? chip("price", t("poFPrice"), nPrice, "amber") : null,
-    chip("page", t("poViewPage"), null),
-  ]));
-  content.appendChild(el("button", {class:"po-main", type:"button", onclick: async (ev) => {
-      const b = ev.currentTarget; if(b.disabled) return; b.disabled = true; b.classList.add("busy");
-      try{ const { blob, name } = await poBuildPdf(po); poDeliver(blob, name); } catch(e){ toast(t("poPdfErr"), "error"); console.warn(e); }
-      b.disabled = false; b.classList.remove("busy"); }}, [
-    el("span", {class:"pm-ic"}, [poSvg("share")]),
-    el("span", {class:"pm-t"}, [ el("b",{},[t("poMainT")]), el("small",{},[t("poMainS") + (nPrice ? " · " + nPrice + " " + t("poMainP") : "")]) ])
-  ]));
-  if(V.totalOK === false || V.countOK === false){
-    const msg = [];
-    if(V.countOK === false) msg.push(t("poKCount") + " " + lines.length + "/" + V.itemsPrinted);
-    if(V.totalOK === false) msg.push(t("poKTotalBad"));
-    content.appendChild(el("div", {class:"po-warn"}, [poSvg("warn"), el("span",{},[msg.join(" · ")])]));
-  }
+  content.appendChild(head);
 
   if(view === "list"){
-    const list = el("div", {class:"po-l2", dir:"ltr"});
-    let shown = 0;
+    const tbl = el("div", {class:"pq-t", dir:"ltr"});
+    head.appendChild(el("div", {class:"pq-tr pq-th", dir:"ltr"}, [ el("span",{},["#"]), el("span",{},["Sku"]), el("span",{class:"z"},["Mars ZREP"]), el("span",{},["Description"]), el("span",{class:"r"},["Net Cost"]), el("span",{class:"r"},["Qty"]) ]));
+    const junk = /\b(Quantity|Site|Warehouse|Location|Damage)\b/;
     lines.forEach((ln, i) => {
-      const ok = poLineOK(ln), isDone = !!done[i], focus = fi === i && !isDone, pc = PD[i];
-      if(filt === "left" && isDone) return;
-      if(filt === "bad" && ok) return;
-      if(filt === "price" && !(pc && pc.level === "warn")) return;
-      shown++;
-      const unit = poUnit(ln), cat = ln.sku ? catMeta(ln.sku.category || "Uncategorized") : { color:"#C0392B" };
-      const z = ln.sku && ln.sku.zrep ? String(ln.sku.zrep) : "—";
-      const val = ln.total != null ? ln.total : (ln.net != null && ln.qty != null ? ln.net * ln.qty : null);
-      const names = [ el("div",{class:"r-en"},[ln.poDesc || (ln.sku && cleanName(ln.sku.nameEn)) || ""]),
-        ln.sku && ln.sku.nameAr ? el("div",{class:"r-ar", dir:"rtl"},[String(ln.sku.nameAr).replace(/[\s.·]+$/,"")]) : null ];
-      const calc = el("div", {class:"r-calc"}, [
-        el("span",{class:"r-oc"},[ln.sku ? codeStr(ln.sku) : (ln.code || "")]),
-        el("span",{class:"r-m"},[ ln.net != null ? poMoney(ln.net) : "—", el("i",{},["×"]), ln.qty != null ? String(ln.qty) : "—", el("i",{},["="]) ]),
-        el("b",{class:"r-v"},[val != null ? poMoney(val) : "—"])
+      const ok = poLineOK(ln), isDone = !!done[i], focus = fi === i && !isDone, pc = poPriceCheck(ln);
+      const z = ln.sku && ln.sku.zrep ? String(ln.sku.zrep) : "";
+      const pd = ln.poDescFull || ln.poDesc;
+      const desc = pd && !junk.test(pd) ? pd : ((ln.sku && cleanName(ln.sku.nameEn)) || pd || "");
+      const pw = pc && pc.level === "warn";
+      const row = el("div", {class:"pq-tr" + (isDone ? " done" : "") + (focus ? " cur" : "") + (ok ? "" : " bad") + (pw ? " pw" : ""), "data-i": i}, [
+        el("span", {class:"n"}, [isDone ? poSvg("check") : String(i + 1)]),
+        el("span", {class:"sku"}, [ln.sku ? codeStr(ln.sku) : (ln.code || "")]),
+        el("b", {class:"z"}, [z || "CHECK"]),
+        el("span", {class:"d"}, [desc]),
+        el("span", {class:"r p"}, [ ln.net != null ? poMoney(ln.net) : "—", pw ? el("small",{},["M " + poMoney(pc.mars)]) : null ]),
+        el("b", {class:"r q"}, [ln.qty != null ? String(ln.qty) : "—", poUnit(ln) === "OUTER" ? el("small",{},["OUT"]) : null])
       ]);
-      const sg = (v) => (v > 0 ? "+" : "−") + poMoney(Math.abs(v));
-      const priceLine = !pc || pc.level === "ok" ? null : pc.level === "minor"
-        ? el("div", {class:"r-pd minor", dir:"rtl"}, [t("poPriceHalala") + " ", el("span",{dir:"ltr"},[sg(pc.diff)])])
-        : el("div", {class:"r-pd warn", dir:"rtl"}, [
-            el("div", {class:"pd-h"}, [poSvg("warn"), el("b",{},[t("poPriceDiff")])]),
-            el("div", {class:"pd-g"}, [
-              el("span",{},[el("small",{},[t("poPricePO")]), el("b",{dir:"ltr"},[poMoney(ln.net)])]),
-              el("span",{},[el("small",{},[t("poPriceMars")]), el("b",{dir:"ltr"},[poMoney(pc.mars)])]),
-              el("span",{class:"pd-d"},[el("small",{},[t("poPriceUnitD")]), el("b",{dir:"ltr"},[sg(pc.diff)])]),
-              ln.qty > 1 ? el("span",{class:"pd-d"},[el("small",{},[t("poPriceLine")]), el("b",{dir:"ltr"},[sg(pc.diff * ln.qty)])]) : null
-            ])
-          ]);
-      let row;
-      if(focus){
-        row = el("div", {class:"r2 cur" + (ok ? "" : " bad"), "data-i": i, style:"--cat:" + cat.color}, [
-          el("span", {class:"r-tag"}, [t("poNowS")]),
-          el("div", {class:"cur-top"}, [
-            el("span",{class:"r-n"},[String(i + 1).padStart(2, "0")]),
-            el("b",{class:"cur-z"}, z.length === 6 ? [z.slice(0,3), el("span",{class:"g2"},[z.slice(3)])] : [z]),
-            el("span",{class:"cur-q" + (unit === "OUTER" ? " o" : "")},[ el("b",{},[ln.qty != null ? String(ln.qty) : "—"]), el("small",{},[unit]) ]),
-            el("button",{class:"cur-ok", type:"button", "aria-label":"done", onclick:(e) => { e.stopPropagation(); poTick(i, po); }},[poSvg(ok ? "check" : "warn")])
-          ]),
-          el("div", {class:"cur-b"}, [ ...names, calc, priceLine ])
-        ]);
-      } else {
-        row = el("div", {class:"r2" + (isDone ? " done" : "") + (ok ? "" : " bad") + (pc && pc.level === "warn" ? " pw" : ""), "data-i": i, style:"--cat:" + cat.color}, [
-          el("span",{class:"r-n"},[String(i + 1).padStart(2, "0")]),
-          el("b",{class:"r-z"},[z]),
-          el("span",{class:"r-q" + (unit === "OUTER" ? " o" : "")},[ el("b",{},[ln.qty != null ? String(ln.qty) : "—"]), el("small",{},[unit]) ]),
-          el("div",{class:"r-d"},[ ...names, calc, priceLine ]),
-          el("span",{class:"r-c"},[ isDone ? poSvg("check") : ok ? el("i") : poSvg("warn") ])
-        ]);
-      }
       row.onclick = () => poTick(i, po);
-      list.appendChild(row);
-      if(!ok && !isDone) list.appendChild(poReviewCard(ln, i, po));
+      tbl.appendChild(row);
+      if(!ok && !isDone && focus) tbl.appendChild(poReviewCard(ln, i, po));
     });
-    if(!shown) list.appendChild(el("div", {class:"po-empty"}, [t(filt === "left" ? "poAllDone" : "poNothing")]));
-    content.appendChild(list);
+    content.appendChild(tbl);
     requestAnimationFrame(() => {
       const sh = content; if(po._keepTop != null){ sh.scrollTop = po._keepTop; po._keepTop = null; }
-      if(po._autoScroll){ const r = list.querySelector(".r2.cur"); if(r){ const pinH = pin.offsetHeight; const top = r.getBoundingClientRect().top - sh.getBoundingClientRect().top + sh.scrollTop; sh.scrollTo({ top: Math.max(0, top - pinH - 70), behavior: "smooth" }); } }
+      if(po._autoScroll){ const r = tbl.querySelector(".pq-tr.cur"); if(r){ const top = r.getBoundingClientRect().top - sh.getBoundingClientRect().top + sh.scrollTop; sh.scrollTo({ top: Math.max(0, top - head.offsetHeight - sh.clientHeight * 0.25), behavior: "smooth" }); } }
       po._autoScroll = false;
     });
   } else {
-    V.bad.forEach(ln => content.appendChild(poReviewCard(ln, V.lines.indexOf(ln), po)));
     content.appendChild(el("div", {class:"pp-zoom"}, [
-      el("span",{},[t("poPageT")]),
-      el("button", {class:"pv-b", type:"button", onclick:() => { po.zoom = Math.max(1, (po.zoom || 1.5) - 0.5); render(); }}, ["−"]),
-      el("button", {class:"pv-b", type:"button", onclick:() => { po.zoom = Math.min(4, (po.zoom || 1.5) + 0.5); render(); }}, ["+"])
+      el("span",{},[t("poPageT2")]),
+      el("button", {class:"pv-b", type:"button", onclick:() => { po.zoom = Math.max(1, (po.zoom || 2) - 0.5); render(); }}, ["−"]),
+      el("button", {class:"pv-b", type:"button", onclick:() => { po.zoom = Math.min(4, (po.zoom || 2) + 0.5); render(); }}, ["+"])
     ]));
-    po.pages.forEach(pg => {
-      const host = el("div", {class:"pp-host", dir:"ltr"}, [ el("div",{class:"po-spin"}) ]);
-      content.appendChild(host);
-      requestAnimationFrame(() => poRenderPage(host, pg, po).catch(e => { console.warn(e); host.textContent = t("poFail"); }));
-    });
+    const host = el("div", {class:"pp-host pp-out", dir:"ltr"}, [ el("div",{class:"po-spin"}) ]);
+    content.appendChild(host);
+    requestAnimationFrame(() => poRenderOut(host, po).catch(e => { console.warn(e); host.textContent = t("poFail"); }));
   }
   return s;
+}
+
+/* the order exactly as it will be sent (original PDF + Mars ZREP column), drawn sharp for this screen */
+async function poRenderOut(host, po){
+  const lib = await poPdfLib();
+  const key = poDataKey() + "|" + po.pages.map(p => p.lines.map(l => (l.sku ? l.sku.zrep : "") + (l.confirmed ? "c" : "")).join(",")).join(";");
+  if(!po._out || po._outKey !== key){
+    const { blob } = await poBuildPdf(po);
+    po._out = await lib.getDocument({ data: new Uint8Array(await blob.arrayBuffer()) }).promise; po._outKey = key; po._outCv = {};
+  }
+  host.innerHTML = "";
+  const zoom = po.zoom || 2, cssW = Math.round((host.clientWidth || 360) * zoom);
+  for(let n = 1; n <= po._out.numPages; n++){
+    const page = await po._out.getPage(n), base = page.getViewport({ scale: 1 });
+    const sc = cssW / base.width, cssH = Math.round(base.height * sc), k = n + "|" + cssW;
+    let cv = po._outCv[k];
+    if(!cv){
+      let dpr = Math.min(3, Math.max(2, window.devicePixelRatio || 1));
+      while(cssW * cssH * dpr * dpr > 14e6 && dpr > 1) dpr -= 0.25;
+      const vp = page.getViewport({ scale: sc * dpr });
+      cv = document.createElement("canvas"); cv.width = Math.round(vp.width); cv.height = Math.round(vp.height); cv.className = "pp-cv";
+      await page.render({ canvasContext: cv.getContext("2d", { alpha:false }), viewport: vp }).promise;
+      po._outCv[k] = cv;
+    }
+    cv.style.width = cssW + "px"; cv.style.height = cssH + "px";
+    host.appendChild(el("div", {class:"pp-page", style:"width:" + cssW + "px;height:" + cssH + "px;margin-bottom:8px"}, [cv]));
+  }
 }
 
 async function poProcess(file, opts){
