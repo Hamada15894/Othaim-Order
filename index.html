@@ -7,8 +7,8 @@
 <meta name="theme-color" content="#0B3226">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta name="app-build" content="2026-11-23-1920">
-<meta name="app-version" content="2.13">
+<meta name="app-build" content="2026-11-28-1445">
+<meta name="app-version" content="2.19">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -1877,6 +1877,70 @@ html[dir="rtl"] .iconbtn.refbtn.spin svg{animation-direction:reverse;}
 .pq-tr.cur .z{font-size:15px;}
 .pq-t .po-check{margin:0;border-radius:0;border:0;border-bottom:1px solid #F2C9C3;background:#FFF6F4;padding:8px 10px;}
 .pp-out{background:#E4E9E6;padding:8px;}
+.cs-box.cs-3{grid-template-columns:repeat(3,1fr) !important;display:grid !important;}
+.cs-box.cs-3 .cs-b span{font-size:10px;}
+
+/* ---- v2.15 PO box ---- */
+.pb-head{display:flex;align-items:center;gap:10px;margin:2px 0 0;}
+.pb-t{flex:1;min-width:0;} .pb-t b{display:block;font-size:17px;font-weight:800;color:#0E2A20;} .pb-t small{display:block;font-size:12px;color:#62766C;}
+.pb-xl{display:inline-flex;align-items:center;gap:6px;border:1px solid #1E6E43;background:#fff;color:#1E6E43;font:inherit;font-weight:800;font-size:13px;padding:8px 12px;border-radius:11px;cursor:pointer;}
+.pb-xl .po-svg{width:17px;height:17px;} .pb-xl.busy{opacity:.6;}
+.pb-up{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;border:1.5px dashed #1E6E43;background:#F1F8F4;color:#0B3226;font:inherit;font-weight:800;font-size:14px;padding:14px;border-radius:14px;cursor:pointer;}
+.pb-up .po-svg{width:20px;height:20px;} .pb-up.busy{opacity:.7;}
+.pb-list{display:flex;flex-direction:column;gap:8px;}
+.pb-day{font-size:11.5px;font-weight:800;color:#6D8278;letter-spacing:.4px;margin:6px 2px 0;text-align:right;}
+.pb-c{display:grid;grid-template-columns:58px minmax(0,1fr) auto;gap:12px;align-items:center;background:#fff;border:1px solid #DFE7E3;border-radius:14px;padding:10px 12px;cursor:pointer;box-shadow:0 1px 2px rgba(16,40,30,.04);}
+.pb-c:active{transform:scale(.995);}
+.pb-st{background:#0B3226;color:#fff;border-radius:11px;text-align:center;padding:6px 0;}
+.pb-st small{display:block;font-size:9.5px;opacity:.7;font-weight:700;} .pb-st b{display:block;font-size:19px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.1;}
+.pb-nm{font-size:14px;font-weight:800;color:#13302A;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.pb-po{font-family:"SF Mono",ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;font-weight:700;color:#8B0E22;text-align:right;margin-top:1px;}
+.pb-meta{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:11.5px;color:#5E7268;margin-top:3px;}
+.pb-due{font-weight:700;color:#14794A;} .pb-due.soon{color:#B76E00;} .pb-due.x{color:#9AA8A1;}
+.pb-rep{font-size:11px;color:#7A8D84;margin-top:2px;}
+.pb-v{text-align:left;direction:ltr;display:flex;flex-direction:column;align-items:flex-start;}
+.pb-v b{font-size:15.5px;font-weight:800;color:#0F5132;font-variant-numeric:tabular-nums;} .pb-v small{font-size:10px;color:#7A8D84;font-weight:700;}
+.pb-acts{display:flex;gap:6px;margin-top:6px;}
+.pb-ib{width:32px;height:32px;border-radius:9px;border:1px solid #D3DDD8;background:#fff;color:#1E6E43;display:flex;align-items:center;justify-content:center;cursor:pointer;}
+.pb-ib .po-svg{width:16px;height:16px;} .pb-ib{width:auto !important;padding:0 8px;} .pb-ib b{font-size:10.5px;font-weight:800;letter-spacing:.3px;} .pb-ib.pdf{color:#B3261E;border-color:#F0C4BE;} .pb-ib.del{color:#B3261E;} .pb-ib.busy{opacity:.5;}
+.pb-c.closed{opacity:.62;} .pb-c.closed .pb-st{background:#8A9A92;}
+.pb-empty{background:#fff;border:1px dashed #CFDAD4;border-radius:14px;padding:26px 14px;text-align:center;color:#62766C;font-weight:700;font-size:13px;}
+.pb-own{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;border:0;background:none;color:#4E6459;font:inherit;font-weight:700;font-size:13px;padding:10px;cursor:pointer;text-decoration:underline;text-underline-offset:3px;}
+.pb-own .po-svg{width:16px;height:16px;}
+
+.pb-seg{margin:0 0 2px;display:flex;flex:none;height:46px;align-items:stretch;} .pb-seg .po-seg-b{height:auto;min-height:0;padding:0 8px;flex-direction:row;} .pb-seg .pb-n{font-style:normal;background:#C8102E;color:#fff;font-size:10.5px;font-weight:800;border-radius:999px;padding:1px 7px;margin-inline-start:2px;}
+.pb-admin{background:#fff;border:1px solid #DFE7E3;border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:10px;}
+.pba-k{display:grid;grid-template-columns:1fr 1fr 1.4fr;gap:8px;}
+.pba-k>div{background:#F3F7F5;border-radius:10px;padding:8px 10px;}
+.pba-k b{display:block;font-size:17px;font-weight:800;color:#0B3226;font-variant-numeric:tabular-nums;} .pba-k small{font-size:11px;color:#62766C;font-weight:700;}
+.pb-bar{height:5px;border-radius:3px;background:#E3EAE6;overflow:hidden;} .pb-bar i{display:block;height:100%;background:#1F9D63;transition:width .3s;}
+.pba-res{display:flex;flex-wrap:wrap;gap:6px;font-size:12px;font-weight:700;}
+.pba-res span{padding:4px 9px;border-radius:8px;} .pba-res .y{background:#E4F5EC;color:#11663F;} .pba-res .d{background:#FFF3DC;color:#8A5300;} .pba-res .n{background:#FDECEA;color:#A3241A;}
+.pba-note{font-size:11.5px;color:#62766C;line-height:1.5;}
+
+.pb-mgr{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.pb-mgr.on{background:#fff;border:1px solid #DFE7E3;border-radius:12px;padding:8px;position:sticky;top:-10px;z-index:5;box-shadow:0 4px 12px rgba(0,0,0,.06);}
+.pb-mb{display:inline-flex;align-items:center;gap:6px;border:1px solid #D3DDD8;background:#fff;color:#0B3226;font:inherit;font-size:12.5px;font-weight:800;padding:8px 12px;border-radius:10px;cursor:pointer;}
+.pb-mb .po-svg{width:15px;height:15px;} .pb-mb:disabled{opacity:.45;}
+.pb-mb.red{color:#B3261E;border-color:#F0C4BE;} .pb-mb.red.solid{background:#B3261E;color:#fff;border-color:#B3261E;}
+.pb-cnt{margin-inline-start:auto;font-size:12.5px;font-weight:800;color:#5A6F65;font-variant-numeric:tabular-nums;direction:ltr;}
+.pb-cb{width:20px;height:20px;border-radius:6px;border:2px solid #A9B8B0;display:inline-block;flex:none;position:relative;background:#fff;}
+.pb-cb.on{background:#B3261E;border-color:#B3261E;} .pb-cb.on:after{content:"";position:absolute;left:5px;top:1px;width:5px;height:10px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg);}
+.pb-c.sel-mode{grid-template-columns:22px 58px minmax(0,1fr) auto;} .pb-c.sel-mode .pb-acts{display:none;}
+.pb-c.picked{border-color:#B3261E;background:#FFF6F5;}
+
+.ver-cur-note{font-size:12px;font-weight:700;color:#24423A;line-height:1.5;background:#F2F9F5;border-radius:10px;padding:8px 10px;}
+.ver-toggle{display:flex;align-items:center;gap:8px;width:100%;border:1px solid #E3ECE7;background:#fff;border-radius:11px;padding:10px 12px;font:inherit;font-size:13px;font-weight:800;color:#0E2A20;cursor:pointer;}
+.ver-toggle .ver-cnt{font-style:normal;background:#E4ECE8;color:#3E5A4E;font-size:11px;border-radius:999px;padding:1px 8px;}
+.ver-toggle .ver-chev{margin-inline-start:auto;color:#6B8A7C;}
+.ver-list.compact{max-height:300px;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+.ver-list.compact .ver-row{padding:7px 10px;cursor:pointer;}
+.ver-list.compact .ver-tag{font-size:11px;padding:2px 7px;}
+.ver-list.compact .ver-txt{font-size:11.5px;font-weight:600;}
+.ver-list.compact .ver-line{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.ver-list.compact .ver-row.ex .ver-line{white-space:normal;}
+.ver-list.compact .ver-txt small{font-size:10px;}
+.ver-list.compact .ver-open{font-size:10.5px;padding:4px 7px;}
 </style>
 </head>
 <body>
@@ -1941,6 +2005,9 @@ const I18N = {
     myStores:"متاجري", searchStores:"ابحث عن متجر...",
     filters:"تصفية", navPo:"أمر شراء", imgOpen:"صورة المنتج", imgClose:"إغلاق", prTitle:"قارئ أوامر الشراء", prSub:"إضافة كود مارس ZREP لكل صنف", poOpenBtn:"فتح قارئ أوامر الشراء (ZREP)",
     poPageT2:"أمر الشراء كما يُرسل — مع عمود Mars ZREP",
+    pbSelect:"تحديد للحذف", pbSelAll:"تحديد الكل", pbDelSel:"حذف المحدد", pbCancel:"إلغاء", pbDelAllShown:"حذف الكل ({n})", pbDelManyQ:"حذف {n} من طلبات الشراء نهائيًا من عند كل المناديب؟", pbDeletedN:"تم حذف",
+    pbReader:"قارئ أمر الشراء", pbUploadAll:"إضافة طلبات الشراء (PDF) — كل الملفات مرة واحدة", pbAddedN:"أُضيف", pbDupN:"مكرر لم يُضف", pbBadN:"غير مقروء", pbCountPo:"طلب شراء", pbCountSt:"متجر", pbCountVal:"القيمة", pbKeepNote:"الطلب المكرر لا يُضاف مرتين. كل طلب يبقى أسبوعين من يوم إضافته ثم يُحذف تلقائيًا، وإضافة الجديد لا تحذف القديم.", pbShow:"عرض طلبات الشراء",
+    pbTitle:"طلبات الشراء", pbSubRep:"طلبات الشراء الخاصة بمتاجرك", pbSubMgr:"كل طلبات الشراء — كل مندوب يرى متاجره فقط", pbUpload:"إضافة طلبات شراء (PDF)", pbUploading:"جارِ الرفع", pbUploaded:"تمت إضافتها", pbBadFile:"ليست أمر شراء PDF أصلي", pbDelQ:"حذف أمر الشراء", pbDel:"حذف", pbOpening:"جارِ فتح أمر الشراء…", pbOpenErr:"تعذّر فتح أمر الشراء — تأكد من الاتصال بالإنترنت", pbOpen:"مفتوحة", pbClosed:"منتهية", pbItems:"صنف", pbQtyS:"كمية", pbUntil:"حتى", pbExpired:"منتهي", pbNoneHere:"لا توجد طلبات هنا", pbEmptyRep:"لا توجد طلبات شراء لمتاجرك حاليًا", pbEmptyMgr:"لم تُضف طلبات شراء بعد — اضغط «إضافة طلبات شراء»", pbOwn:"فتح ملف PDF من جهازي",
     poMainT:"أمر الشراء + عمود كود مارس", poMainS:"PDF الأصلي مع عمود ZREP بجوار كود العثيم — جاهز للواتساب", poMainP:"فرق سعر معلَّم",
     poDoneS:"تم", poValue:"القيمة", poCheckS:"المطابقة", poOkShort:"مطابق", poFAll:"الكل", poFLeft:"متبقي", poFBad:"مراجعة", poFPrice:"فرق سعر", poNowS:"الآن", poNothing:"لا توجد أصناف هنا", poPriceDiff:"فرق سعر", poPricePO:"الطلب", poPriceMars:"مارس", poPriceLine:"فرق السطر", poPriceUnitD:"الفرق", poPriceHalala:"فرق هللات عادي",
     poUnitPrice:"سعر الوحدة", poLineVal:"القيمة", poKTotalBad:"الإجمالي غير مطابق",
@@ -1968,7 +2035,7 @@ const I18N = {
     poNo:"أمر شراء", poStore:"المتجر", poLines:"الأصناف", poQty:"إجمالي الكمية", poDate:"التاريخ", poModeText:"تمت القراءة من نص الملف مباشرة — دقة كاملة", poModeOcr:"تمت القراءة من صورة بعد تحسين وضوحها — راجع الأرقام الحمراء",
     poUnmatched:"صنف بدون ZREP", poNoQty:"بدون كمية واضحة", poPdf:"PDF بالزريب كود", poPdfErr:"تعذّر إنشاء الملف", poEntryMode:"ابدأ الإدخال من أول صنف",
     poEntered:"تم إدخال", poQtyS:"الكمية", poCopied:"تم نسخ", poPreview:"صفحة أمر الشراء مع الزريب كود",
-    poHowT:"طريقة الاستخدام", poHow1:"ارفع أمر الشراء (PDF أو صورة).", poHow2:"يظهر بجوار كل صنف كود مارس ZREP بخط كبير مع الكمية.", poHow3:"اضغط ✓ بعد إدخال كل صنف في الجهاز الآخر — ينتقل التمييز للصنف التالي تلقائيًا، وحمّل PDF بالزريب كود للمشاركة.", inOuter:"بالأوتر", outerU:"أوتر", verTitle:"إصدار التطبيق", verCurrent:"الإصدار الحالي", verShort:"الإصدار", verBuilt:"رقم البناء", verNow:"المستخدم الآن", verOpen:"فتح هذا الإصدار", verHint:"للرجوع لإصدار سابق: افتح مجلد versions في GitHub، خذ ملف الإصدار المطلوب (مثال v2.0.html) وارفعه باسم index.html مكان الحالي — يرجع التطبيق لكل المناديب تلقائيًا.", mmMin:"الحد الأدنى", mmMax:"الحد الأقصى", mmBelow:"تحت الحد الأدنى", codeIssuesTitle:"تم تصحيح أكواد أصناف غير متطابقة في الملف (عمود Artecal# يختلف عن رقم الصنف في الوصف):", codeDupTitle:"أكواد مكررة — تم الإبقاء على أول صنف فقط:", codeMissTitle:"أصناف ناقصة البيانات (بدون اسم أو شد أو سعر)", codeMissPack:"بدون شد", codeMissPrice:"بدون سعر", codeIssuesHint:"الكود الصحيح مأخوذ من رقم الصنف في وصف العثيم (نفس رقم شيت On Hand). يُفضّل تصحيح عمود Artecal# في الملف الأصلي.", refreshOk:"تم التحديث — كل البيانات محدّثة", tbMine:"إجمالي مخزون متاجري", tbAll:"إجمالي كل المتاجر", tbStores:"متاجر", navStores:"متاجري", navStore:"المتجر", navFind:"بحث صنف", navCart:"الطلبية", navSaved:"المحفوظة", cartItems:"أصناف", cartCtn:"كرتون", cartValue:"القيمة", gapShort:"الفرص", xsTabStores:"المتاجر", xsTabItem:"بحث صنف في كل المتاجر", xsPh:"اسم الصنف وحجمه (مثال: جواهر 850 جرام)",
+    poHowT:"طريقة الاستخدام", poHow1:"ارفع أمر الشراء (PDF أو صورة).", poHow2:"يظهر بجوار كل صنف كود مارس ZREP بخط كبير مع الكمية.", poHow3:"اضغط ✓ بعد إدخال كل صنف في الجهاز الآخر — ينتقل التمييز للصنف التالي تلقائيًا، وحمّل PDF بالزريب كود للمشاركة.", inOuter:"بالأوتر", outerU:"أوتر", verTitle:"إصدار التطبيق", verCurrent:"الإصدار الحالي", verShort:"الإصدار", verBuilt:"رقم البناء", verNow:"المستخدم الآن", verHistory:"سجل الإصدارات السابقة", verOpen:"فتح هذا الإصدار", verHint:"للرجوع لإصدار سابق: افتح مجلد versions في GitHub، خذ ملف الإصدار المطلوب (مثال v2.0.html) وارفعه باسم index.html مكان الحالي — يرجع التطبيق لكل المناديب تلقائيًا.", mmMin:"الحد الأدنى", mmMax:"الحد الأقصى", mmBelow:"تحت الحد الأدنى", codeIssuesTitle:"تم تصحيح أكواد أصناف غير متطابقة في الملف (عمود Artecal# يختلف عن رقم الصنف في الوصف):", codeDupTitle:"أكواد مكررة — تم الإبقاء على أول صنف فقط:", codeMissTitle:"أصناف ناقصة البيانات (بدون اسم أو شد أو سعر)", codeMissPack:"بدون شد", codeMissPrice:"بدون سعر", codeIssuesHint:"الكود الصحيح مأخوذ من رقم الصنف في وصف العثيم (نفس رقم شيت On Hand). يُفضّل تصحيح عمود Artecal# في الملف الأصلي.", refreshOk:"تم التحديث — كل البيانات محدّثة", tbMine:"إجمالي مخزون متاجري", tbAll:"إجمالي كل المتاجر", tbStores:"متاجر", navStores:"متاجري", navStore:"المتجر", navFind:"بحث صنف", navCart:"الطلبية", navSaved:"المحفوظة", cartItems:"أصناف", cartCtn:"كرتون", cartValue:"القيمة", gapShort:"الفرص", xsTabStores:"المتاجر", xsTabItem:"بحث صنف في كل المتاجر", xsPh:"اسم الصنف وحجمه (مثال: جواهر 850 جرام)",
     xsHint:"اكتب أو قل اسم الصنف وحجمه، وتظهر كمية الموجود منه في كل متجر من متاجرك مرة واحدة.",
     xsItems:"صنف", xsIn:"موجود في", xsOf:"من", xsStores:"متاجر", xsTotal:"إجمالي الموجود", xsOpen:"اضغط على أي متجر لفتحه على هذا الصنف",
     xsMore:"عرض أصناف أكثر", xsNone:"لا يوجد صنف بهذا الاسم", logout:"خروج",
@@ -2002,6 +2069,7 @@ const I18N = {
     priceLbl:"سعر الكرتون", onHandPcCol:"الموجود (قطعة)", onHandCsCol:"الموجود (كرتون)",
     orderCtnCol:"الطلب (كرتون)", orderPcsCol:"الطلب (قطعة)",
     showPrice:"إظهار سعر الكرتون", showOnHandCols:"إظهار المخزون الحالي في الملف",
+    fileTypeL:"نوع الملف", ftPdfS:"للطباعة والعرض", ftXlsS:"للمعادلات والنقل", ftBoth:"الاثنين", ftBothS:"PDF + Excel", downloadXlsx:"تحميل Excel", downloadBoth:"تحميل PDF و Excel",
     docOptions:"خيارات الملف", outOfStock:"نافد",
     exportTitle:"تصدير تقييم المخزون (Excel)",
     exportHint:"ملف إكسل شامل لكل المتاجر: قيمة كل صنف، الإجمالي الكلي، تجميع حسب الفئة والبراند، وكل التفاصيل صنف-صنف.",
@@ -2089,6 +2157,9 @@ const I18N = {
     myStores:"My Stores", searchStores:"Search stores...",
     filters:"Filters", navPo:"PO", imgOpen:"Product picture", imgClose:"Close", prTitle:"Purchase order reader", prSub:"Adds the Mars ZREP to every line", poOpenBtn:"Open the PO reader (ZREP)",
     poPageT2:"The order as it is sent — with the Mars ZREP column",
+    pbSelect:"Select to delete", pbSelAll:"Select all", pbDelSel:"Delete selected", pbCancel:"Cancel", pbDelAllShown:"Delete all ({n})", pbDelManyQ:"Delete {n} purchase orders for every rep, permanently?", pbDeletedN:"Deleted",
+    pbReader:"PO reader", pbUploadAll:"Add purchase orders (PDF) — all files at once", pbAddedN:"Added", pbDupN:"Duplicates skipped", pbBadN:"Unreadable", pbCountPo:"purchase orders", pbCountSt:"stores", pbCountVal:"value", pbKeepNote:"A duplicate PO is never added twice. Each PO stays two weeks from the day it was added, then is removed automatically; adding new ones never removes old ones.", pbShow:"Show purchase orders",
+    pbTitle:"Purchase orders", pbSubRep:"Purchase orders for your stores", pbSubMgr:"All purchase orders — each rep sees only his stores", pbUpload:"Add purchase orders (PDF)", pbUploading:"Uploading", pbUploaded:"added", pbBadFile:"not an original PO PDF", pbDelQ:"Delete purchase order", pbDel:"Delete", pbOpening:"Opening the purchase order…", pbOpenErr:"Could not open the purchase order — check the connection", pbOpen:"Open", pbClosed:"Expired", pbItems:"items", pbQtyS:"qty", pbUntil:"until", pbExpired:"Expired", pbNoneHere:"Nothing here", pbEmptyRep:"No purchase orders for your stores yet", pbEmptyMgr:"No purchase orders yet — tap “Add purchase orders”", pbOwn:"Open a PDF from my phone",
     poMainT:"PO + Mars code column", poMainS:"The original PDF with a ZREP column beside the Othaim code — ready for WhatsApp", poMainP:"price difference(s) marked",
     poDoneS:"done", poValue:"Value", poCheckS:"Match", poOkShort:"OK", poFAll:"All", poFLeft:"Left", poFBad:"Review", poFPrice:"Price diff", poNowS:"NOW", poNothing:"Nothing here", poPriceDiff:"Price difference", poPricePO:"PO", poPriceMars:"Mars", poPriceLine:"Line diff", poPriceUnitD:"Diff", poPriceHalala:"Normal halala rounding",
     poUnitPrice:"Unit price", poLineVal:"Value", poKTotalBad:"Total does not match",
@@ -2116,7 +2187,7 @@ const I18N = {
     poNo:"PO", poStore:"Store", poLines:"Lines", poQty:"Total qty", poDate:"Date", poModeText:"Read straight from the PDF text — exact", poModeOcr:"Read from a cleaned-up picture — check anything in red",
     poUnmatched:"lines without ZREP", poNoQty:"without a clear qty", poPdf:"PDF with ZREP", poPdfErr:"Couldn't build the file", poEntryMode:"Start entry from the first line",
     poEntered:"Entered", poQtyS:"Qty", poCopied:"Copied", poPreview:"Order page with ZREP",
-    poHowT:"How it works", poHow1:"Upload the purchase order (PDF or picture).", poHow2:"Each line shows its Mars ZREP in large type with the quantity.", poHow3:"Tap ✓ after entering each line on the other device — the highlight moves to the next line; download the PDF with ZREP to share.", inOuter:"In outers", outerU:"outer", verTitle:"App version", verCurrent:"Current version", verShort:"Version", verBuilt:"Build", verNow:"in use now", verOpen:"Open this version", verHint:"To go back: upload versions/v<number>.html from the versions folder on GitHub as index.html — every rep gets that version automatically.", mmMin:"Min", mmMax:"Max", mmBelow:"Below min", codeIssuesTitle:"Item codes corrected (Artecal# column differs from the number in the item description):", codeDupTitle:"Duplicate codes — only the first item was kept:", codeMissTitle:"Items with missing data (no name, pack or price)", codeMissPack:"no pack", codeMissPrice:"no price", codeIssuesHint:"The correct code is taken from the Othaim number in the item description (same as the On Hand sheet). Please fix the Artecal# column in the source file.", refreshOk:"Up to date — all data refreshed", tbMine:"Total stock · my stores", tbAll:"Total stock · all stores", tbStores:"stores", navStores:"Stores", navStore:"Store", navFind:"Find item", navCart:"Order", navSaved:"Saved", cartItems:"Items", cartCtn:"Cartons", cartValue:"Value", gapShort:"Opps", xsTabStores:"Stores", xsTabItem:"Find an item in all stores", xsPh:"Item name and size (e.g. jewels 850g)",
+    poHowT:"How it works", poHow1:"Upload the purchase order (PDF or picture).", poHow2:"Each line shows its Mars ZREP in large type with the quantity.", poHow3:"Tap ✓ after entering each line on the other device — the highlight moves to the next line; download the PDF with ZREP to share.", inOuter:"In outers", outerU:"outer", verTitle:"App version", verCurrent:"Current version", verShort:"Version", verBuilt:"Build", verNow:"in use now", verHistory:"Previous versions", verOpen:"Open this version", verHint:"To go back: upload versions/v<number>.html from the versions folder on GitHub as index.html — every rep gets that version automatically.", mmMin:"Min", mmMax:"Max", mmBelow:"Below min", codeIssuesTitle:"Item codes corrected (Artecal# column differs from the number in the item description):", codeDupTitle:"Duplicate codes — only the first item was kept:", codeMissTitle:"Items with missing data (no name, pack or price)", codeMissPack:"no pack", codeMissPrice:"no price", codeIssuesHint:"The correct code is taken from the Othaim number in the item description (same as the On Hand sheet). Please fix the Artecal# column in the source file.", refreshOk:"Up to date — all data refreshed", tbMine:"Total stock · my stores", tbAll:"Total stock · all stores", tbStores:"stores", navStores:"Stores", navStore:"Store", navFind:"Find item", navCart:"Order", navSaved:"Saved", cartItems:"Items", cartCtn:"Cartons", cartValue:"Value", gapShort:"Opps", xsTabStores:"Stores", xsTabItem:"Find an item in all stores", xsPh:"Item name and size (e.g. jewels 850g)",
     xsHint:"Type or say the item and size to see its On Hand in every one of your stores at once.",
     xsItems:"items", xsIn:"in", xsOf:"of", xsStores:"stores", xsTotal:"Total on hand", xsOpen:"Tap a store to open it on this item",
     xsMore:"Show more items", xsNone:"No item matches", logout:"Logout",
@@ -2150,7 +2221,7 @@ const I18N = {
     priceLbl:"Carton Price", onHandPcCol:"On Hand (PC)", onHandCsCol:"On Hand (CTN)",
     orderCtnCol:"Order (CTN)", orderPcsCol:"Order (PCS)",
     showPrice:"Show carton price", showOnHandCols:"Show on-hand columns in the file",
-    docOptions:"Document options", outOfStock:"Out of stock",
+    fileTypeL:"File type", ftPdfS:"Print & view", ftXlsS:"Formulas & import", ftBoth:"Both", ftBothS:"PDF + Excel", downloadXlsx:"Download Excel", downloadBoth:"Download PDF & Excel", docOptions:"Document options", outOfStock:"Out of stock",
     exportTitle:"Export stock valuation (Excel)",
     exportHint:"A full Excel workbook across all stores: value per item, grand total, category & brand roll-ups, and line-by-line detail.",
     exportBtn:"Download Excel (all stores)", exportDone:"Excel file created",
@@ -2479,6 +2550,7 @@ const state = {
   viewport: localStorage.getItem("oo_viewport") || "",        // "" auto | "phone" | "wide"
   hidePrices: localStorage.getItem("oo_hidePrices") === "1",  // quick on-screen money blackout
   adminPin: null,
+  fileType: (() => { try{ const v = localStorage.getItem("oo_filetype"); return v === "xlsx" || v === "both" ? v : "pdf"; }catch(e){ return "pdf"; } })(),
   codeMode: (() => { try{ return localStorage.getItem("oo_codemode") === "old" ? "old" : "new"; }catch(e){ return "new"; } })(),
   showInactive: false,   // items screen: false = active items, true = the inactive list
   lastPdf: null
@@ -3315,27 +3387,36 @@ async function smartRefresh(btn){
 
 
 /* ---------------- APP VERSION (shown to the manager; each release is archived in versions/) ---------------- */
-const APP_VERSION = "2.13";
-const APP_VERSIONS = [{"v": "2.13", "date": "2026-11-23", "ar": "أمر الشراء كجدول مثل الطلب نفسه (Sku · Mars ZREP · Description · Net Cost · Qty) بدون شروحات أو مجاميع + PDF نظيف بعمود ZREP وتظليل فرق السعر فقط", "en": "PO shown as a table like the PO itself, no explanations/totals + clean PDF with ZREP column and price-difference shading only"}, {"v": "2.12", "date": "2026-11-23", "ar": "أمر الشراء يرجع PDF أصلي بعمود جديد Mars ZREP بجوار كود العثيم + تعليم فرق السعر (الهللة والهللتان عادي) + التطبيق أخف 45%", "en": "PO returns the original PDF with a new Mars ZREP column beside the Othaim code + price-difference marks (1–2 halala normal) + app 45% lighter"}, {"v": "2.11", "date": "2026-11-23", "ar": "شاشة إدخال احترافية بترتيب أمر الشراء: الاسم والجرام كاملًا، السطر الحالي مكبّر، تصفية (متبقي/مراجعة/فرق سعر)، وتنبيه فرق السعر بين الطلب وسعر مارس (الهللة والهللتان عادية)", "en": "Professional entry list in PO order: full names, enlarged current line, filters, PO vs Mars price-difference warning (1–2 halala is normal)"}, {"v": "2.10", "date": "2026-11-23", "ar": "شريط أمر الشراء المثبّت (رقم الطلب، المتجر، الأصناف، الكمية) + السعر والقيمة لكل صنف بألوان واضحة", "en": "Pinned PO bar (PO, store, items, qty) + unit price and value per line, colour-coded"}, {"v": "2.9", "date": "2026-11-23", "ar": "إرجاع زر بحث صنف + شاشة إدخال أمر الشراء الاحترافية (قائمة الإدخال، الشاشة تبقى مضاءة، حفظ مكان التوقف)", "en": "Find-item tab back + professional PO entry screen (entry list, screen stays on, resumes where you stopped)"}, {"v": "2.8", "date": "2026-11-22", "ar": "أمر الشراء: PDF الأصلي فقط (حذف المسح الضوئي) + ZREP داخل خانة كود العثيم + صفحة بدقة كاملة مع علامة صح للمُدخل وإضاءة للسطر التالي + صور منتجات عالية الدقة", "en": "PO: original PDF only (scanning removed) + ZREP inside the Othaim code cell + full-resolution page with ticks and next-line highlight + lighter app"}, {"v": "2.7", "date": "2026-11-22", "ar": "ظهور التطبيق في مشاركة واتساب على الآيفون (عبر اختصار) + دليل إعداد داخل التطبيق", "en": "App in WhatsApp's share menu on iPhone (via a shortcut) + in-app setup guide"}, {"v": "2.6", "date": "2026-11-22", "ar": "قارئ أوامر الشراء بتحقق كامل (الكود×السعر×الوحدة، الكمية×الإجمالي×الضريبة، عدد الأصناف والإجمالي) + عرض السطر الأصلي لأي بند غير مؤكد + الصور داخل التطبيق + استقبال من واتساب", "en": "Fully verified PO reader + original-line crop for anything unproven + built-in pictures + receive from WhatsApp"}, {"v": "2.5", "date": "2026-11-22", "ar": "صور المنتجات في بطاقة الصنف + قارئ أوامر الشراء يضيف ZREP لكل صنف", "en": "Product pictures + PO reader adding the ZREP"}, {"v": "2.4", "date": "2026-11-20", "ar": "الحد الأدنى والأقصى والموجود بالكرتون الحقيقي لكل الأصناف", "en": "Min / Max / On Hand in real cartons for every item"}, {"v": "2.3", "date": "2026-11-20", "ar": "الحد الأدنى والأقصى بدقة (0.75 بدل 0.8)", "en": "Exact Min / Max (0.75 not 0.8)"}, {"v": "2.2", "date": "2026-11-20", "ar": "كود العثيم الجديد دائمًا في صفحات التطبيق", "en": "Always the NEW Othaim code in the app"}, {"v": "2.1", "date": "2026-11-20", "ar": "الحد الأدنى والأقصى بالكرتون + رقم الإصدار للمدير", "en": "Min / Max in cartons + version number"}, {"v": "2.0", "date": "2026-11-19", "ar": "التصميم الأخضر، الشريط السفلي، التحديث التلقائي، إصلاح تكرار أكواد الأصناف", "en": "Green design, bottom bar, auto-update, duplicate code fix"}];
+const APP_VERSION = "2.19";
+const APP_VERSIONS = [{"v": "2.19", "date": "2026-11-28", "ar": "سجل الإصدارات صار مطويًا داخل البطاقة", "en": "Version history folded inside the card"}, {"v": "2.18", "date": "2026-11-28", "ar": "المدير يحذف كل طلبات الشراء أو المحدد منها مرة واحدة", "en": "Manager can delete all or selected purchase orders at once"}, {"v": "2.17", "date": "2026-11-28", "ar": "تحميل PDF الأصلي لكل طلب شراء + Excel فيه مخزون المتجر بالحبة وبالكرتون/الأوتر", "en": "Download each PO original PDF + Excel with the store stock in pieces and in cartons/outers"}, {"v": "2.16", "date": "2026-11-28", "ar": "قارئ أمر الشراء رجع كما كان بجانب صفحة طلبات الشراء + رفع كل ملفات PDF مرة واحدة من لوحة المدير بدون تكرار + كل طلب يبقى أسبوعين", "en": "PO reader back as before beside the PO box + add all PDFs at once from the manager panel, no duplicates + each PO kept two weeks"}, {"v": "2.15", "date": "2026-11-28", "ar": "صندوق طلبات الشراء: المدير يضيف ملفات PDF وكل مندوب يرى طلبات متاجره (المتجر، الرقم، القيمة، التاريخ) + تحويلها Excel + Excel الطلبية بالترتيب الجديد وبدون دمج خلايا", "en": "PO box: manager adds PO PDFs, each rep sees his stores (store, number, value, date) + Excel export; order Excel in the new column order with no merged cells"}, {"v": "2.14", "date": "2026-11-28", "ar": "إرسال الطلبية كملف Excel (أو PDF + Excel): الفئة ← كود العثيم ← الكمية ← ZREP، مع سعر الأوتر الصحيح وصفحة Data للمعادلات", "en": "Send the order as Excel (or PDF + Excel): Category · Othaim code · Qty · ZREP, correct OUTER pricing and a Data sheet for formulas"}, {"v": "2.13", "date": "2026-11-23", "ar": "أمر الشراء كجدول مثل الطلب نفسه (Sku · Mars ZREP · Description · Net Cost · Qty) بدون شروحات أو مجاميع + PDF نظيف بعمود ZREP وتظليل فرق السعر فقط", "en": "PO shown as a table like the PO itself, no explanations/totals + clean PDF with ZREP column and price-difference shading only"}, {"v": "2.12", "date": "2026-11-23", "ar": "أمر الشراء يرجع PDF أصلي بعمود جديد Mars ZREP بجوار كود العثيم + تعليم فرق السعر (الهللة والهللتان عادي) + التطبيق أخف 45%", "en": "PO returns the original PDF with a new Mars ZREP column beside the Othaim code + price-difference marks (1–2 halala normal) + app 45% lighter"}, {"v": "2.11", "date": "2026-11-23", "ar": "شاشة إدخال احترافية بترتيب أمر الشراء: الاسم والجرام كاملًا، السطر الحالي مكبّر، تصفية (متبقي/مراجعة/فرق سعر)، وتنبيه فرق السعر بين الطلب وسعر مارس (الهللة والهللتان عادية)", "en": "Professional entry list in PO order: full names, enlarged current line, filters, PO vs Mars price-difference warning (1–2 halala is normal)"}, {"v": "2.10", "date": "2026-11-23", "ar": "شريط أمر الشراء المثبّت (رقم الطلب، المتجر، الأصناف، الكمية) + السعر والقيمة لكل صنف بألوان واضحة", "en": "Pinned PO bar (PO, store, items, qty) + unit price and value per line, colour-coded"}, {"v": "2.9", "date": "2026-11-23", "ar": "إرجاع زر بحث صنف + شاشة إدخال أمر الشراء الاحترافية (قائمة الإدخال، الشاشة تبقى مضاءة، حفظ مكان التوقف)", "en": "Find-item tab back + professional PO entry screen (entry list, screen stays on, resumes where you stopped)"}, {"v": "2.8", "date": "2026-11-22", "ar": "أمر الشراء: PDF الأصلي فقط (حذف المسح الضوئي) + ZREP داخل خانة كود العثيم + صفحة بدقة كاملة مع علامة صح للمُدخل وإضاءة للسطر التالي + صور منتجات عالية الدقة", "en": "PO: original PDF only (scanning removed) + ZREP inside the Othaim code cell + full-resolution page with ticks and next-line highlight + lighter app"}, {"v": "2.7", "date": "2026-11-22", "ar": "ظهور التطبيق في مشاركة واتساب على الآيفون (عبر اختصار) + دليل إعداد داخل التطبيق", "en": "App in WhatsApp's share menu on iPhone (via a shortcut) + in-app setup guide"}, {"v": "2.6", "date": "2026-11-22", "ar": "قارئ أوامر الشراء بتحقق كامل (الكود×السعر×الوحدة، الكمية×الإجمالي×الضريبة، عدد الأصناف والإجمالي) + عرض السطر الأصلي لأي بند غير مؤكد + الصور داخل التطبيق + استقبال من واتساب", "en": "Fully verified PO reader + original-line crop for anything unproven + built-in pictures + receive from WhatsApp"}, {"v": "2.5", "date": "2026-11-22", "ar": "صور المنتجات في بطاقة الصنف + قارئ أوامر الشراء يضيف ZREP لكل صنف", "en": "Product pictures + PO reader adding the ZREP"}, {"v": "2.4", "date": "2026-11-20", "ar": "الحد الأدنى والأقصى والموجود بالكرتون الحقيقي لكل الأصناف", "en": "Min / Max / On Hand in real cartons for every item"}, {"v": "2.3", "date": "2026-11-20", "ar": "الحد الأدنى والأقصى بدقة (0.75 بدل 0.8)", "en": "Exact Min / Max (0.75 not 0.8)"}, {"v": "2.2", "date": "2026-11-20", "ar": "كود العثيم الجديد دائمًا في صفحات التطبيق", "en": "Always the NEW Othaim code in the app"}, {"v": "2.1", "date": "2026-11-20", "ar": "الحد الأدنى والأقصى بالكرتون + رقم الإصدار للمدير", "en": "Min / Max in cartons + version number"}, {"v": "2.0", "date": "2026-11-19", "ar": "التصميم الأخضر، الشريط السفلي، التحديث التلقائي، إصلاح تكرار أكواد الأصناف", "en": "Green design, bottom bar, auto-update, duplicate code fix"}];
 function versionCard(){
   const card = el("div", {class:"card card-pad ver-card"});
-  const top = el("div", {class:"ver-top"}, [
+  const curV = APP_VERSIONS.find(x => x.v === APP_VERSION);
+  card.appendChild(el("div", {class:"ver-top"}, [
     el("div", {}, [ el("div",{class:"ver-cap"},[t("verCurrent")]), el("div",{class:"ver-num"},["v"+APP_VERSION]) ]),
     el("div", {class:"ver-build"}, [ t("verBuilt")+" ", el("b",{dir:"ltr"},[APP_BUILD]) ])
-  ]);
-  card.appendChild(top);
-  const list = el("div", {class:"ver-list"});
-  APP_VERSIONS.forEach(x => {
-    const cur = x.v === APP_VERSION;
-    const row = el("div", {class:"ver-row"+(cur?" cur":"")}, [
-      el("span", {class:"ver-tag"}, ["v"+x.v]),
-      el("div", {class:"ver-txt"}, [ el("div",{},[state.lang==="ar"?x.ar:x.en]), el("small",{},[x.date + (cur ? "  ·  "+t("verNow") : "")]) ]),
-      cur ? null : el("a", {class:"ver-open", href:"versions/v"+x.v+".html", target:"_blank", rel:"noopener"}, [t("verOpen")])
-    ]);
-    list.appendChild(row);
-  });
-  card.appendChild(list);
-  card.appendChild(el("div", {class:"ver-hint"}, [t("verHint")]));
+  ]));
+  if(curV) card.appendChild(el("div", {class:"ver-cur-note"}, [state.lang==="ar"?curV.ar:curV.en]));
+  // the history stays folded; it opens inside the card, compact, one line per version
+  const older = APP_VERSIONS.filter(x => x.v !== APP_VERSION);
+  const open = !!state.verOpen;
+  card.appendChild(el("button", {class:"ver-toggle"+(open?" on":""), type:"button", onclick:() => { state.verOpen = !state.verOpen; render(); }}, [
+    el("span",{},[t("verHistory")]), el("i",{class:"ver-cnt"},[String(older.length)]), el("span",{class:"ver-chev"},[open ? "▴" : "▾"]) ]));
+  if(open){
+    const list = el("div", {class:"ver-list compact"});
+    older.forEach(x => {
+      const ex = state.verExp === x.v;
+      const row = el("div", {class:"ver-row"+(ex?" ex":"")}, [
+        el("span", {class:"ver-tag"}, ["v"+x.v]),
+        el("div", {class:"ver-txt"}, [ el("div",{class:"ver-line"},[state.lang==="ar"?x.ar:x.en]), el("small",{},[x.date]) ]),
+        el("a", {class:"ver-open", href:"versions/v"+x.v+".html", target:"_blank", rel:"noopener", onclick:(e) => e.stopPropagation()}, [t("verOpen")])
+      ]);
+      row.onclick = () => { state.verExp = ex ? null : x.v; render(); };
+      list.appendChild(row);
+    });
+    card.appendChild(list);
+    card.appendChild(el("div", {class:"ver-hint"}, [t("verHint")]));
+  }
   return card;
 }
 
@@ -3688,7 +3769,7 @@ function poAnalyze(tokens, W, H, mode){
     return v ? v.t.match(valRe)[0] : "";
   };
   const info = {
-    po: after(/^P\.?\s*O\.?\s*:?$/i, /\d{9,14}/) || (all.match(/\b(2\d{11})\b/) || [])[1] || "",
+    po: after(/^P\.?\s*O\.?\s*:?$/i, /[0-9][0-9A-Z]{8,15}/) || (all.match(/\b(2[0-9A-Z]{11})\b/) || [])[1] || "",   // also 21A000189897
     store: after(/^Store\s*:?$/i, /^\d{2,4}$/) || (all.match(/Store\s*:?\s*(\d{2,4})\b/i) || [])[1] || "",
     dates: (all.match(/\b20\d{2}-\d{2}-\d{2}\b/g) || []).slice(0, 2)
   };
@@ -3968,7 +4049,9 @@ const PO_IC = {
   page:'<path d="M7 3.5h7.5L19 8v12.5H7z"/><path d="M14.5 3.5V8H19"/><path d="M9.5 12.5h6M9.5 16h6"/>',
   share:'<path d="M12 15V4M8 8l4-4 4 4"/><path d="M5 12v7a1 1 0 001 1h12a1 1 0 001-1v-7"/>',
   reset:'<path d="M4 12a8 8 0 1 0 2.4-5.7M4 4.5v4h4"/>',
-  file:'<path d="M7 3.5h7.5L19 8v12.5H7z"/><path d="M14.5 3.5V8H19"/>'
+  file:'<path d="M7 3.5h7.5L19 8v12.5H7z"/><path d="M14.5 3.5V8H19"/>',
+  xls:'<path d="M7 3.5h7.5L19 8v12.5H7z"/><path d="M14.5 3.5V8H19"/><path d="M9.5 11.5l4.5 6M14 11.5l-4.5 6"/>',
+  trash:'<path d="M5 7h14M10 7V5h4v2M7 7l1 13h8l1-13"/>'
 };
 const poSvg = (k, cls) => el("span", {class:"po-svg" + (cls ? " " + cls : ""), html:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + PO_IC[k] + '</svg>'});
 // ZREP shown in two groups of three so it is typed on the handheld without slips: 434 785
@@ -4018,11 +4101,223 @@ function poClear(){
   state.po = null; state.poFocus = -1; poWake(false); render();
 }
 
+/* ---------------- PO BOX: the manager files Othaim purchase orders, each rep sees his own ----------------
+   Firebase: oo_pos/<PO>  = small record (store, dates, value, lines)   — read by the list
+             oo_po_pdf/<PO> = the original PDF (base64)                 — fetched only when opened */
+const PO_BOX = "oo_pos", PO_BOX_PDF = "oo_po_pdf", PO_BOX_CACHE = "oo_pos_cache";
+function poBoxSku(code){ const h = poFindSku(String(code || "")); return h ? h.sku : null; }
+function poBoxKey(po){ return String(po || "").replace(/[.#$\[\]\/\s]/g, "_"); }
+function poBoxLoadCache(){ if(state.poBox) return; try{ state.poBox = JSON.parse(localStorage.getItem(PO_BOX_CACHE) || "[]") || []; }catch(e){ state.poBox = []; } }
+function poBoxSubscribe(){
+  poBoxLoadCache();
+  if(state._poBoxSub || !fbReady || !fbDb) return;
+  state._poBoxSub = true;
+  try{
+    fbDb.ref(PO_BOX).on("value", (snap) => {
+      const v = snap.val() || {};
+      state.poBox = Object.keys(v).map(k => Object.assign({ key:k }, v[k]));
+      poBoxCleanup();
+      try{ localStorage.setItem(PO_BOX_CACHE, JSON.stringify(state.poBox)); }catch(e){}
+      if((state.screen === "po" && !(state.po && (state.po.pages || state.po.busy))) || state.screen === "admin") liveRerender();
+    }, (err) => console.warn("PO box read:", err && err.message));
+  }catch(e){ console.warn(e); }
+}
+// which POs this user may see: the manager sees all, a rep only his stores
+function poBoxMine(){
+  const all = (state.poBox || []).filter(r => !poBoxExpired(r));
+  if(isManager() && !state.user) return all;
+  const mine = new Set((state.stores || []).map(s => String(s.storeNo)));
+  return all.filter(r => mine.has(String(r.store)));
+}
+function poBoxRecord(r, info){
+  const V = poVerdict({ pages:r.pages });
+  return { po:String(info.po), store:String(info.store || ""), entry:(info.dates || [])[0] || "", canc:(info.dates || [])[1] || "",
+    items:V.lines.length, qty:V.sumQty, value:Math.round(V.sumVal * 100) / 100, ok:!!V.ok,
+    lines:V.lines.map(l => ({ c:l.sku ? codeStr(l.sku) : String(l.code || ""), d:l.poDescFull || l.poDesc || "", q:l.qty, n:l.net, t:l.total })),
+    at:Date.now() };
+}
+async function poBoxUpload(files){
+  if(!fbReady || !fbDb){ toast(t("fbUnavailable"), "error"); return; }
+  files = files.filter(f => /pdf/i.test(f.type) || /\.pdf$/i.test(f.name || ""));
+  if(!files.length) return;
+  const have = new Set((state.poBox || []).map(r => r.key));
+  const res = []; state.poBoxBusy = { done:0, total:files.length }; state.poBoxLast = null; render();
+  for(const f of files){
+    try{
+      const r = await poReadPdf(f, () => {});
+      const info = Object.assign({ po:"", store:"", dates:[] }, ...r.pages.map(p => p.info).reverse().map(i => { const o = {}; Object.keys(i).forEach(k => { if(i[k] && (!Array.isArray(i[k]) || i[k].length)) o[k] = i[k]; }); return o; }));
+      if(!info.po || !info.store) throw new Error("noinfo");
+      const key = poBoxKey(info.po);
+      if(have.has(key)){ res.push({ dup:true, po:info.po, store:info.store }); }            // already filed — never twice
+      else {
+        const rec = poBoxRecord(r, info);
+        let bin = ""; const u8 = r.bytes; for(let i = 0; i < u8.length; i += 0x8000) bin += String.fromCharCode.apply(null, u8.subarray(i, i + 0x8000));
+        await fbDb.ref(PO_BOX_PDF + "/" + key).set({ name:f.name || (rec.po + ".pdf"), data:btoa(bin) });
+        await fbDb.ref(PO_BOX + "/" + key).set(rec);
+        have.add(key); res.push({ ok:true, po:rec.po, store:rec.store });
+      }
+    }catch(e){ res.push({ bad:true, name:f.name, why:e && e.message }); }
+    state.poBoxBusy.done++; poBoxPaint();
+  }
+  state.poBoxBusy = null; state.poBoxLast = res; render();
+  const n = (k) => res.filter(x => x[k]).length;
+  toast(t("pbAddedN") + " " + n("ok") + (n("dup") ? " · " + t("pbDupN") + " " + n("dup") : "") + (n("bad") ? " · " + t("pbBadN") + " " + n("bad") : ""), n("bad") ? "warn" : "success");
+}
+// keep the progress text moving without rebuilding the whole screen for every file
+function poBoxPaint(){ const b = state.poBoxBusy; document.querySelectorAll(".pb-prog").forEach(x => { x.textContent = t("pbUploading") + " " + b.done + " / " + b.total; }); document.querySelectorAll(".pb-bar i").forEach(x => { x.style.width = Math.round(b.done / b.total * 100) + "%"; }); }
+// POs stay two weeks from the day they were added; then they are removed for everyone
+const PO_BOX_KEEP = 14 * 864e5;
+function poBoxExpired(r){ return r && r.at && Date.now() - Number(r.at) > PO_BOX_KEEP; }
+function poBoxCleanup(){
+  if(!(isManager() && !state.user) || !fbReady || !fbDb) return;
+  (state.poBox || []).filter(poBoxExpired).forEach(r => { try{ fbDb.ref(PO_BOX + "/" + r.key).remove(); fbDb.ref(PO_BOX_PDF + "/" + r.key).remove(); }catch(e){} });
+}
+/* manager panel card: add any number of PO PDFs in one go */
+function poBoxAdminCard(){
+  poBoxSubscribe();
+  const all = (state.poBox || []).filter(r => !poBoxExpired(r));
+  const up = el("input", {type:"file", accept:"application/pdf,.pdf", multiple:"multiple", style:"display:none"});
+  up.addEventListener("change", () => { const fs = Array.from(up.files || []); up.value = ""; if(fs.length) poBoxUpload(fs); });
+  const busy = state.poBoxBusy, last = state.poBoxLast;
+  const stores = new Set(all.map(r => String(r.store)));
+  const card = el("div", {class:"pb-admin"}, [
+    el("div", {class:"pba-k"}, [
+      el("div",{},[ el("b",{},[String(all.length)]), el("small",{},[t("pbCountPo")]) ]),
+      el("div",{},[ el("b",{},[String(stores.size)]), el("small",{},[t("pbCountSt")]) ]),
+      el("div",{},[ el("b",{},[poMoney(all.reduce((a, r) => a + (r.value || 0), 0))]), el("small",{},[t("pbCountVal")]) ])
+    ]),
+    el("button", {class:"pb-up" + (busy ? " busy" : ""), type:"button", disabled: busy ? "disabled" : null, onclick:() => up.click()}, [
+      poSvg("file"), el("span",{class: busy ? "pb-prog" : ""},[ busy ? t("pbUploading") + " " + busy.done + " / " + busy.total : t("pbUploadAll") ]), up ]),
+    busy ? el("div", {class:"pb-bar"}, [el("i", {style:"width:" + Math.round(busy.done / busy.total * 100) + "%"})]) : null,
+    last ? el("div", {class:"pba-res"}, [
+      el("span",{class:"y"},[t("pbAddedN") + " " + last.filter(x => x.ok).length]),
+      last.some(x => x.dup) ? el("span",{class:"d"},[t("pbDupN") + " " + last.filter(x => x.dup).length]) : null,
+      last.some(x => x.bad) ? el("span",{class:"n"},[t("pbBadN") + " " + last.filter(x => x.bad).length + ": " + last.filter(x => x.bad).map(x => x.name).join("، ")]) : null
+    ]) : null,
+    el("div", {class:"pba-note"}, [t("pbKeepNote")]),
+    state.screen === "admin" ? el("button", {class:"btn btn-green btn-block", type:"button", onclick:() => { state.poTab = "box"; state.po = null; state.screen = "po"; render(); }}, [t("pbShow")]) : null
+  ]);
+  return card;
+}
+async function poBoxDelete(rec){
+  if(!confirm(t("pbDelQ") + " " + rec.po + "?")) return;
+  try{ await fbDb.ref(PO_BOX + "/" + rec.key).remove(); await fbDb.ref(PO_BOX_PDF + "/" + rec.key).remove(); }catch(e){ toast(t("genericErr"), "error"); }
+}
+async function poBoxOpen(rec){
+  state.po = { busy:true, step:t("pbOpening") }; render();
+  try{
+    if(!fbReady || !fbDb) throw new Error("offline");
+    const snap = await Promise.race([ fbDb.ref(PO_BOX_PDF + "/" + rec.key).once("value"), new Promise((_, rej) => setTimeout(() => rej(new Error("timeout")), 15000)) ]);
+    const v = snap.val(); if(!v || !v.data) throw new Error("missing");
+    const bin = atob(v.data), u8 = new Uint8Array(bin.length); for(let i = 0; i < bin.length; i++) u8[i] = bin.charCodeAt(i);
+    await poProcess(new File([u8], v.name || (rec.po + ".pdf"), { type:"application/pdf" }));
+  }catch(e){ state.po = { error:t("pbOpenErr") }; render(); }
+}
+async function poBoxDeleteMany(recs){
+  if(!recs.length || !fbReady || !fbDb) return;
+  if(!confirm(t("pbDelManyQ").replace("{n}", recs.length))) return;
+  state.poBoxDeleting = true; render();
+  try{ await Promise.all(recs.map(r => Promise.all([ fbDb.ref(PO_BOX + "/" + r.key).remove(), fbDb.ref(PO_BOX_PDF + "/" + r.key).remove() ]))); toast(t("pbDeletedN") + " " + recs.length, "success"); }
+  catch(e){ toast(t("genericErr"), "error"); }
+  state.poBoxDeleting = false; state.poSel = new Set(); state.poSelMode = false; render();
+}
+async function poBoxPdf(rec, btn){
+  if(btn){ btn.disabled = true; btn.classList.add("busy"); }
+  try{
+    if(!fbReady || !fbDb) throw new Error("offline");
+    const snap = await Promise.race([ fbDb.ref(PO_BOX_PDF + "/" + rec.key).once("value"), new Promise((_, rej) => setTimeout(() => rej(new Error("timeout")), 15000)) ]);
+    const v = snap.val(); if(!v || !v.data) throw new Error("missing");
+    const bin = atob(v.data), u8 = new Uint8Array(bin.length); for(let i = 0; i < bin.length; i++) u8[i] = bin.charCodeAt(i);
+    poDeliver(new Blob([u8], { type:"application/pdf" }), "PO-" + rec.po + ".pdf");
+  }catch(e){ toast(t("pbOpenErr"), "error"); }
+  if(btn){ btn.disabled = false; btn.classList.remove("busy"); }
+}
+async function poBoxExcel(recs, btn){
+  if(!recs.length) return;
+  if(btn){ btn.disabled = true; btn.classList.add("busy"); }
+  try{ const { blob, filename } = await buildPosXlsx(recs); poDeliver(blob, filename); }catch(e){ console.warn(e); toast(t("genericErr"), "error"); }
+  if(btn){ btn.disabled = false; btn.classList.remove("busy"); }
+}
+function poBoxDays(d){ if(!d) return null; const x = new Date(d + "T23:59:59"); return Math.ceil((x - new Date()) / 864e5); }
+
+/* the list: newest first, grouped by entry date */
+function renderPoBox(content, fileIn){
+  poBoxSubscribe();
+  const mgr = isManager() && !state.user;
+  const recs = poBoxMine().slice().sort((a, b) => String(b.entry).localeCompare(String(a.entry)) || String(a.store).localeCompare(String(b.store), undefined, { numeric:true }));
+  const f = state.poBoxFilter || "open";
+  const isOpen = (r) => { const d = poBoxDays(r.canc); return d === null || d >= 0; };
+  const shown = recs.filter(r => f === "all" ? true : f === "open" ? isOpen(r) : !isOpen(r));
+  const head = el("div", {class:"pb-head"}, [
+    el("div", {class:"pb-t"}, [ el("b",{},[t("pbTitle")]), el("small",{},[mgr ? t("pbSubMgr") : t("pbSubRep")]) ]),
+    shown.length ? el("button", {class:"pb-xl", type:"button", onclick:(e) => poBoxExcel(shown, e.currentTarget)}, [poSvg("xls"), el("span",{},["Excel"])]) : null
+  ]);
+  content.appendChild(head);
+  if(mgr) content.appendChild(poBoxAdminCard());
+  const n = (k) => recs.filter(r => k === "all" ? true : k === "open" ? isOpen(r) : !isOpen(r)).length;
+  content.appendChild(el("div", {class:"po-chips"}, [["open", t("pbOpen")], ["closed", t("pbClosed")], ["all", t("poFAll")]].map(([k, l]) =>
+    el("button", {class:"po-ch" + (f === k ? " on" : ""), type:"button", onclick:() => { state.poBoxFilter = k; render(); }}, [l, el("span",{},[String(n(k))])]))));
+  const sel = state.poSel || (state.poSel = new Set());
+  const selMode = mgr && state.poSelMode && shown.length;
+  if(mgr && shown.length){
+    if(!selMode){
+      content.appendChild(el("div", {class:"pb-mgr"}, [
+        el("button", {class:"pb-mb", type:"button", onclick:() => { state.poSelMode = true; state.poSel = new Set(); render(); }}, [poSvg("check"), el("span",{},[t("pbSelect")])]),
+        el("button", {class:"pb-mb red", type:"button", disabled: state.poBoxDeleting ? "disabled" : null, onclick:() => poBoxDeleteMany(shown)}, [poSvg("trash"), el("span",{},[t("pbDelAllShown").replace("{n}", shown.length)])])
+      ]));
+    } else {
+      const allOn = shown.every(r => sel.has(r.key));
+      const picked = shown.filter(r => sel.has(r.key));
+      content.appendChild(el("div", {class:"pb-mgr on"}, [
+        el("button", {class:"pb-mb", type:"button", onclick:() => { if(allOn) shown.forEach(r => sel.delete(r.key)); else shown.forEach(r => sel.add(r.key)); render(); }}, [el("i",{class:"pb-cb" + (allOn ? " on" : "")}), el("span",{},[t("pbSelAll")])]),
+        el("span", {class:"pb-cnt"}, [picked.length + " / " + shown.length]),
+        el("button", {class:"pb-mb red solid", type:"button", disabled: !picked.length || state.poBoxDeleting ? "disabled" : null, onclick:() => poBoxDeleteMany(picked)}, [poSvg("trash"), el("span",{},[t("pbDelSel")])]),
+        el("button", {class:"pb-mb", type:"button", onclick:() => { state.poSelMode = false; state.poSel = new Set(); render(); }}, [t("pbCancel")])
+      ]));
+    }
+  }
+  if(!shown.length){ content.appendChild(el("div", {class:"pb-empty"}, [t(recs.length ? "pbNoneHere" : (mgr ? "pbEmptyMgr" : "pbEmptyRep"))])); }
+  else {
+    const list = el("div", {class:"pb-list"});
+    let lastDate = null;
+    shown.forEach(r => {
+      if(r.entry !== lastDate){ lastDate = r.entry; list.appendChild(el("div", {class:"pb-day", dir:"ltr"}, [r.entry || "—"])); }
+      const st = (OO.stores || []).find(x => String(x.storeNo) === String(r.store));
+      const d = poBoxDays(r.canc), open = d === null || d >= 0;
+      const card = el("div", {class:"pb-c" + (open ? "" : " closed")}, [
+        el("div", {class:"pb-st"}, [ el("small",{},[t("poStore")]), el("b",{},[String(r.store)]) ]),
+        el("div", {class:"pb-m"}, [
+          el("div", {class:"pb-nm"}, [st ? st.nameAr : "—"]),
+          el("div", {class:"pb-po", dir:"ltr"}, ["PO " + r.po]),
+          el("div", {class:"pb-meta"}, [ el("span",{},[r.items + " " + t("pbItems") + " · " + r.qty + " " + t("pbQtyS")]),
+            el("span",{class:"pb-due " + (open ? (d <= 1 ? "soon" : "") : "x")},[ open ? (d === null ? "" : t("pbUntil") + " ") : t("pbExpired"), open && d !== null ? el("span",{dir:"ltr"},[r.canc]) : null ]) ]),
+          mgr && st ? el("div", {class:"pb-rep"}, [String(st.salesman || "").replace(/\s+/g, " ").trim()]) : null
+        ]),
+        el("div", {class:"pb-v"}, [ el("b",{},[poMoney(r.value || 0)]), el("small",{},["SAR"]),
+          el("div", {class:"pb-acts"}, [
+            el("button", {class:"pb-ib pdf", type:"button", title:"PDF", onclick:(e) => { e.stopPropagation(); poBoxPdf(r, e.currentTarget); }}, [el("b",{},["PDF"])]),
+            el("button", {class:"pb-ib", type:"button", title:"Excel", onclick:(e) => { e.stopPropagation(); poBoxExcel([r], e.currentTarget); }}, [el("b",{},["XLS"])]),
+            mgr ? el("button", {class:"pb-ib del", type:"button", title:t("pbDel"), onclick:(e) => { e.stopPropagation(); poBoxDelete(r); }}, [poSvg("trash")]) : null
+          ]) ])
+      ]);
+      if(selMode){
+        card.classList.add("sel-mode"); if(sel.has(r.key)) card.classList.add("picked");
+        card.insertBefore(el("i", {class:"pb-cb" + (sel.has(r.key) ? " on" : "")}), card.firstChild);
+        card.onclick = () => { if(sel.has(r.key)) sel.delete(r.key); else sel.add(r.key); render(); };
+      } else card.onclick = () => poBoxOpen(r);
+      list.appendChild(card);
+    });
+    content.appendChild(list);
+  }
+}
+
 function renderPoScreen(){
   if(state.po && state.po.pages) poRecheck(state.po);
   else if(!state.po) poRestore();
   const s = el("div", {class:"screen po-screen"});
-  s.appendChild(topbar({ title: t("prTitle"), subtitle: state.po && state.po.info && state.po.info.po ? "PO " + state.po.info.po : t("prSub"), onBack: () => { state.screen = state.adminPin && !state.user ? "admin" : (state.user ? "stores" : "login"); render(); } }));
+  const opened = !!(state.po && state.po.pages);
+  s.appendChild(topbar({ title: opened || (state.poTab || (poBoxMine().length ? "box" : "reader")) === "reader" ? t("prTitle") : t("pbTitle"), subtitle: opened && state.po.info && state.po.info.po ? "PO " + state.po.info.po : t("prSub"),
+    onBack: () => { if(state.po && (state.po.pages || state.po.error)){ state.po = null; poWake(false); render(); return; } state.screen = state.adminPin && !state.user ? "admin" : (state.user ? "stores" : "login"); render(); } }));
   const content = el("div", {class:"content po-content"});
   s.appendChild(content);
   const po = state.po;
@@ -4031,18 +4326,29 @@ function renderPoScreen(){
   content.appendChild(fileIn);
 
   if(!po || (!po.pages && !po.busy)){
-    content.appendChild(el("div", {class:"po-up"}, [
-      el("div", {class:"po-up-ic"}, [poSvg("file")]),
-      el("div", {class:"po-up-t"}, [ el("b",{},[t("poUpTitle")]), el("span",{},[t("poUpSubPdf")]) ]),
-      el("div", {class:"po-up-b"}, [ el("button", {class:"btn po-btn-main", type:"button", onclick:() => fileIn.click()}, [t("poPickPdf")]) ])
+    // two pages in one tab: the purchase orders filed by the manager, and the PDF reader as before
+    poBoxSubscribe();
+    const nBox = poBoxMine().length;
+    const tab = state.poTab || (nBox ? "box" : "reader");
+    content.appendChild(el("div", {class:"po-seg pb-seg"}, [
+      el("button", {class:"po-seg-b" + (tab === "box" ? " on" : ""), type:"button", onclick:() => { state.poTab = "box"; render(); }}, [poSvg("list"), el("span",{},[t("pbTitle")]), nBox ? el("i",{class:"pb-n"},[String(nBox)]) : null]),
+      el("button", {class:"po-seg-b" + (tab === "reader" ? " on" : ""), type:"button", onclick:() => { state.poTab = "reader"; render(); }}, [poSvg("page"), el("span",{},[t("pbReader")])])
     ]));
     if(po && po.error) content.appendChild(el("div", {class:"po-err"}, [po.error]));
-    content.appendChild(el("div", {class:"po-help"}, [
-      el("b",{},[t("poHowT")]),
-      el("ol",{},[ el("li",{},[t("poHow1Pdf")]), el("li",{},[t("poHow2b")]), el("li",{},[t("poHow3b")]) ]),
-      el("div",{class:"po-wa"},[ el("b",{},[t("poWaT")]), el("div",{},[t("poWa")]),
-        isManager() ? el("button", {class:"btn po-btn-main sc-btn", type:"button", onclick:() => poShortcutGuide()}, [t("scOpen")]) : null ])
-    ]));
+    if(tab === "box") renderPoBox(content, fileIn);
+    else {
+      content.appendChild(el("div", {class:"po-up"}, [
+        el("div", {class:"po-up-ic"}, [poSvg("file")]),
+        el("div", {class:"po-up-t"}, [ el("b",{},[t("poUpTitle")]), el("span",{},[t("poUpSubPdf")]) ]),
+        el("div", {class:"po-up-b"}, [ el("button", {class:"btn po-btn-main", type:"button", onclick:() => fileIn.click()}, [t("poPickPdf")]) ])
+      ]));
+      content.appendChild(el("div", {class:"po-help"}, [
+        el("b",{},[t("poHowT")]),
+        el("ol",{},[ el("li",{},[t("poHow1Pdf")]), el("li",{},[t("poHow2b")]), el("li",{},[t("poHow3b")]) ]),
+        el("div",{class:"po-wa"},[ el("b",{},[t("poWaT")]), el("div",{},[t("poWa")]),
+          isManager() ? el("button", {class:"btn po-btn-main sc-btn", type:"button", onclick:() => poShortcutGuide()}, [t("scOpen")]) : null ])
+      ]));
+    }
     poWake(false);
     return s;
   }
@@ -4268,7 +4574,7 @@ function poShortcutGuide(){
   document.body.appendChild(ov);
 }
 function poDeliver(blob, name){
-  const f = new File([blob], name, { type:"application/pdf" });
+  const f = new File([blob], name, { type: blob.type || "application/pdf" });
   if(navigator.canShare && navigator.canShare({ files:[f] })){
     navigator.share({ files:[f], title:name }).catch(() => poDownload(blob, name));
   } else poDownload(blob, name);
@@ -5247,6 +5553,22 @@ function renderCart(){
     draw();
     togglesCard.appendChild(seg);
   }
+  {
+    const seg = el("div", {class:"codeseg"});
+    const draw = () => {
+      seg.innerHTML = "";
+      seg.appendChild(el("div", {class:"cs-l"}, [t("fileTypeL")]));
+      const box = el("div", {class:"cs-box cs-3"});
+      [["pdf","PDF","ftPdfS"],["xlsx","Excel","ftXlsS"],["both","ftBoth","ftBothS"]].forEach(([v,k,sub]) => {
+        box.appendChild(el("button", {class:"cs-b"+(state.fileType===v?" sel":""), type:"button", onclick:() => {
+          state.fileType = v; try{ localStorage.setItem("oo_filetype", v); }catch(e){} render(); }}, [
+          el("b",{},[k === "ftBoth" ? t(k) : k]), el("span",{},[t(sub)]) ]));
+      });
+      seg.appendChild(box);
+    };
+    draw();
+    togglesCard.appendChild(seg);
+  }
   togglesCard.appendChild(toggleRow("showOnHandCols", () => state.prefShowOnHandCols, v => { state.prefShowOnHandCols=v; }));
   togglesCard.appendChild(toggleRow("showPrice", () => state.prefShowPrice, v => { state.prefShowPrice=v; }));
   togglesCard.appendChild(toggleRow("showValues", () => state.prefShowValues, v => { state.prefShowValues=v; render(); }));
@@ -5275,9 +5597,9 @@ function renderCart(){
   // is always offered as a clean fallback (desktop, or saving a copy).
   if(canShareFiles()){
     btnRow.appendChild(el("button", {class:"btn btn-green btn-block", onclick: () => generateThen("share")}, [svgIcon("share"), " "+t("generateShare")]));
-    btnRow.appendChild(el("button", {class:"btn btn-outline btn-block", onclick: () => generateThen("download")}, [svgIcon("download"), " "+t("downloadPdf")]));
+    btnRow.appendChild(el("button", {class:"btn btn-outline btn-block", onclick: () => generateThen("download")}, [svgIcon("download"), " "+t(state.fileType === "pdf" ? "downloadPdf" : state.fileType === "xlsx" ? "downloadXlsx" : "downloadBoth")]));
   } else {
-    btnRow.appendChild(el("button", {class:"btn btn-primary btn-block", onclick: () => generateThen("download")}, [svgIcon("download"), " "+t("downloadPdf")]));
+    btnRow.appendChild(el("button", {class:"btn btn-primary btn-block", onclick: () => generateThen("download")}, [svgIcon("download"), " "+t(state.fileType === "pdf" ? "downloadPdf" : state.fileType === "xlsx" ? "downloadXlsx" : "downloadBoth")]));
   }
   s.appendChild(content);
   s.appendChild(btnRow);   // fixed action bar above the bottom navigation
@@ -5336,6 +5658,203 @@ async function rebuildSavedPdf(o, codeMode){
   finally{ showLoading(false); }
 }
 
+/* ---------------- EXCEL (orders and purchase orders) ----------------
+   Clean sheets for the store's own work: no merged cells, one header row with a filter,
+   frozen panes, real numbers, codes kept with their zeros, formulas for values and totals. */
+const EXCELJS_URL = "https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.4.0/exceljs.min.js";
+const JSZIP_URL = "https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js";
+const XL = {
+  fill: (argb) => ({ type:"pattern", pattern:"solid", fgColor:{ argb } }),
+  hex: (c) => "FF" + String(c).replace("#", "").toUpperCase(),
+  tint: (c, a) => { const n = parseInt(String(c).slice(1), 16), r = n >> 16, g = (n >> 8) & 255, b = n & 255, m = (v) => Math.round(v + (255 - v) * (1 - a)); return "FF" + [m(r), m(g), m(b)].map(v => v.toString(16).padStart(2, "0")).join("").toUpperCase(); },
+  thin: { style:"thin", color:{ argb:"FFD9DEDC" } }
+};
+// column catalogue — the same look in every file
+const XL_COLS = {
+  cat:  { h:"Category", w:15, head:"FF3A4A44" },
+  en:   { h:"Description (EN)", w:38, head:"FF0B3226" },
+  ar:   { h:"الوصف (عربي)", w:34, head:"FF0B3226" },
+  zrep: { h:"Mars\nZREP", w:11, head:"FF1E6E43" },
+  code: { h:"Othaim Code\n(Artecal)", w:15, head:"FFC8102E" },
+  qty:  { h:"Order\nQty", w:9, head:"FFB3261E" },
+  unit: { h:"Unit", w:8, head:"FFB3261E" },
+  per:  { h:"PCS /\nUnit", w:8, head:"FF0B3226" },
+  up:   { h:"Unit Price\n(SAR)", w:12, head:"FF0B3226" },
+  net:  { h:"Net Cost\n(SAR)", w:12, head:"FF0B3226" },
+  val:  { h:"Value\n(SAR)", w:13, head:"FF0B3226" },
+  ohp:  { h:"On Hand\n(PCS)", w:10, head:"FF2B5C8A" },
+  ohc:  { h:"On Hand\n(CTN)", w:10, head:"FF0B3226" },
+  ohu:  { h:"On Hand\n(CTN / OUTER)", w:11, head:"FF2B5C8A" }
+};
+/* rows: [{cat, catColor, en, ar, zrep, code, qty, unit, outer, per, up|net, ohp, ohc, warn}] */
+function xlItemSheet(wb, name, { title, sub, info, keys, rows, codeHead, qtyHead, priceKey }){
+  const ws = wb.addWorksheet(name, { views:[{ state:"frozen", ySplit:4, showGridLines:false }],
+    pageSetup:{ orientation:"landscape", fitToPage:true, fitToWidth:1, fitToHeight:0, paperSize:9, margins:{ left:.3, right:.3, top:.4, bottom:.4, header:.2, footer:.2 } } });
+  const C = keys.map(k => Object.assign({ k }, XL_COLS[k], k === "code" && codeHead ? { h:codeHead } : {}, k === "qty" && qtyHead ? { h:qtyHead } : {}));
+  const N = C.length, col = (k) => C.findIndex(c => c.k === k) + 1, L = (k) => String.fromCharCode(64 + col(k));
+  ws.columns = C.map(c => ({ width:c.w }));
+  // row 1: title (one cell, no merge); row 2: details (one cell, no merge)
+  const a1 = ws.getCell("A1");
+  a1.value = { richText:[ { text:title, font:{ name:"Calibri", size:18, bold:true, color:{ argb:"FF0B3226" } } }, { text:sub ? "     " + sub : "", font:{ name:"Calibri", size:11, color:{ argb:"FF8A979F" } } } ] };
+  ws.getRow(1).height = 32; a1.alignment = { vertical:"middle" };
+  const rt = [];
+  info.forEach(([k, v], i) => { if(i) rt.push({ text:"     |     ", font:{ name:"Calibri", size:10, color:{ argb:"FFC4CCC8" } } });
+    rt.push({ text:k + "  ", font:{ name:"Calibri", size:10, color:{ argb:"FF6B7B74" } } }); rt.push({ text:String(v), font:{ name:"Calibri", size:11, bold:true, color:{ argb:"FF1A1A1A" } } }); });
+  ws.getCell("A2").value = { richText:rt }; ws.getRow(2).height = 22; ws.getRow(3).height = 6;
+  // row 4: header
+  const hr = ws.getRow(4); hr.height = 34;
+  C.forEach((cc, i) => { const c = hr.getCell(i + 1); c.value = cc.h; c.fill = XL.fill(cc.head); c.font = { name:"Calibri", bold:true, color:{ argb:"FFFFFFFF" }, size:10.5 };
+    c.alignment = { horizontal:"center", vertical:"middle", wrapText:true }; c.border = { left:{ style:"thin", color:{ argb:"FF2C5446" } }, right:{ style:"thin", color:{ argb:"FF2C5446" } }, bottom:{ style:"medium", color:{ argb:"FF0B3226" } } }; });
+  const first = 5;
+  rows.forEach((r, i) => {
+    const rr = ws.getRow(first + i), n = first + i;
+    C.forEach((cc, j) => {
+      const c = rr.getCell(j + 1);
+      if(cc.k === "val") c.value = { formula: L("qty") + n + "*" + L(priceKey) + n, result: Math.round((r.qty || 0) * (r[priceKey] || 0) * 100) / 100 };
+      else c.value = r[cc.k] === undefined ? "" : r[cc.k];
+      c.border = { top:XL.thin, left:XL.thin, bottom:XL.thin, right:XL.thin }; c.alignment = { vertical:"middle" }; c.font = { name:"Calibri", size:11 };
+      if(i % 2) c.fill = XL.fill("FFFAFBFB");
+    });
+    rr.height = 21;
+    const g = (k) => col(k) ? rr.getCell(col(k)) : null, set = (k, f) => { const c = g(k); if(c) f(c); };
+    set("cat", c => { c.fill = XL.fill(XL.tint(r.catColor || "#9AA0AC", .14)); c.font = { name:"Calibri", bold:true, size:10.5, color:{ argb:XL.hex(r.catColor || "#5A6A63") } }; });
+    set("code", c => { c.numFmt = "@"; c.font = { name:"Consolas", bold:true, size:11.5, color:{ argb:"FF8B0E22" } }; c.fill = XL.fill("FFFFF5F6"); c.alignment = { horizontal:"center", vertical:"middle" }; });
+    set("qty", c => { c.font = { name:"Calibri", bold:true, size:12.5, color:{ argb:"FFB3261E" } }; c.fill = XL.fill("FFFFF8E6"); c.alignment = { horizontal:"center", vertical:"middle" }; });
+    set("unit", c => { c.font = { name:"Calibri", bold:true, size:9.5, color:{ argb: r.outer ? "FFB76E00" : "FF5A6A63" } }; c.alignment = { horizontal:"center", vertical:"middle" }; });
+    set("zrep", c => { c.numFmt = "0"; c.font = { name:"Consolas", bold:true, size:11.5, color:{ argb: r.zrep === "" ? "FFB3261E" : "FF0F5132" } }; c.fill = XL.fill("FFF2FAF5"); c.alignment = { horizontal:"center", vertical:"middle" }; });
+    set("ar", c => { c.alignment = { horizontal:"right", vertical:"middle", readingOrder:"rtl" }; });
+    set("per", c => { c.alignment = { horizontal:"center", vertical:"middle" }; c.font = { name:"Calibri", size:10.5, bold:!!r.outer, color:{ argb: r.outer ? "FF9A5B00" : "FF5A6A63" } }; });
+    ["up", "net", "val"].forEach(k => set(k, c => { c.numFmt = "#,##0.00"; if(r.outer){ c.font = { name:"Calibri", bold:true, size:11, color:{ argb:"FF9A5B00" } }; c.fill = XL.fill("FFFFF6E6"); } }));
+    if(r.warn) set(priceKey, c => { c.fill = XL.fill("FFFFE7A8"); c.font = { name:"Calibri", bold:true, size:11, color:{ argb:"FF7A4A00" } }; c.note = { texts:[{ text:"Mars price " + r.warn.mars.toFixed(2) + "  (diff " + (r.warn.diff > 0 ? "+" : "") + r.warn.diff.toFixed(2) + ")" }] }; });
+    set("ohp", c => { c.numFmt = "#,##0"; c.font = { name:"Calibri", size:11, bold:true, color:{ argb: r.ohp > 0 ? "FF1D4F86" : "FFB3261E" } }; c.fill = XL.fill("FFF1F6FC"); });
+    set("ohc", c => { c.numFmt = "0.0"; });
+    set("ohu", c => { c.numFmt = "0.0"; c.fill = XL.fill("FFF1F6FC"); c.font = { name:"Calibri", size:11, color:{ argb: r.outer ? "FF9A5B00" : "FF1D4F86" }, bold:!!r.outer }; });
+  });
+  const last = first + rows.length - 1, tr = ws.getRow(last + 1);
+  tr.height = 24;
+  for(let j = 1; j <= N; j++){ const c = tr.getCell(j); c.fill = XL.fill("FFE7F1EC"); c.border = { top:{ style:"medium", color:{ argb:"FF0B3226" } }, bottom:XL.thin }; c.font = { name:"Calibri", bold:true, size:11, color:{ argb:"FF0B3226" } }; }
+  tr.getCell(1).value = "TOTAL · " + rows.length + " items";
+  if(rows.length){
+    const qc = tr.getCell(col("qty")); qc.value = { formula:"SUM(" + L("qty") + first + ":" + L("qty") + last + ")", result: rows.reduce((a, r) => a + (r.qty || 0), 0) };
+    qc.alignment = { horizontal:"center" }; qc.font = { name:"Calibri", bold:true, size:12.5, color:{ argb:"FFB3261E" } };
+    if(col("val")){ const vc = tr.getCell(col("val")); vc.value = { formula:"SUM(" + L("val") + first + ":" + L("val") + last + ")", result: Math.round(rows.reduce((a, r) => a + (r.qty || 0) * (r[priceKey] || 0), 0) * 100) / 100 }; vc.numFmt = "#,##0.00"; }
+  }
+  ws.autoFilter = { from:{ row:4, column:1 }, to:{ row:Math.max(4, last), column:N } };
+  ws.pageSetup.printTitlesRow = "4:4";
+  ws.headerFooter.oddFooter = "&L&8" + title + "&R&8Page &P / &N";
+  return { ws, codeRange: col("code") ? L("code") + first + ":" + L("code") + Math.max(first, last) : null };
+}
+function xlDataSheet(wb, name, keys, rows, priceKey){
+  const H = { cat:"Category", en:"Description", ar:"Description_AR", zrep:"Mars_ZREP", code:"Othaim_Code", qty:"Order_Qty", unit:"Unit", per:"PCS_per_Unit", up:"Unit_Price", net:"Net_Cost", val:"Value", ohp:"OnHand_PCS", ohc:"OnHand_CTN", ohu:"OnHand_Units", po:"PO_No", store:"Store", date:"Entry_Date" };
+  const ds = wb.addWorksheet(name, { views:[{ state:"frozen", ySplit:1 }] });
+  ds.columns = keys.map(k => ({ header:H[k] || k, key:k, width:Math.max(10, Math.min(40, (XL_COLS[k] && XL_COLS[k].w) || 13)) }));
+  ds.getRow(1).font = { name:"Calibri", bold:true }; ds.getRow(1).fill = XL.fill("FFF3F4F4");
+  rows.forEach(r => { const row = ds.addRow(keys.map(k => k === "val" ? Math.round((r.qty || 0) * (r[priceKey] || 0) * 100) / 100 : (r[k] === undefined ? "" : r[k]))); row.font = { name:"Calibri", size:11 }; });
+  keys.forEach((k, i) => { if(k === "up" || k === "net" || k === "val") ds.getColumn(i + 1).numFmt = "0.00"; if(k === "code" || k === "po") ds.getColumn(i + 1).numFmt = "@"; });
+  ds.autoFilter = { from:{ row:1, column:1 }, to:{ row:1, column:keys.length } };
+  const ci = keys.indexOf("code");
+  return ci >= 0 ? String.fromCharCode(65 + ci) + "2:" + String.fromCharCode(65 + ci) + Math.max(2, rows.length + 1) : null;
+}
+// codes are text on purpose (zeros kept): tell Excel not to flag them as "number stored as text"
+async function xlFinish(wb, quiet){
+  const buf = await wb.xlsx.writeBuffer();
+  try{
+    await loadScriptOnce(JSZIP_URL);
+    const zip = await JSZip.loadAsync(buf);
+    for(const [idx, ranges] of Object.entries(quiet)){
+      const path = "xl/worksheets/sheet" + idx + ".xml", f = zip.file(path); if(!f || !ranges.filter(Boolean).length) continue;
+      let x = await f.async("string");
+      const tag = '<ignoredErrors>' + ranges.filter(Boolean).map(r => '<ignoredError sqref="' + r + '" numberStoredAsText="1"/>').join("") + '</ignoredErrors>';
+      const at = ["<drawing", "<legacyDrawing", "<picture", "<oleObjects", "<controls", "<webPublishItems", "<tableParts", "<extLst", "</worksheet>"].map(s => x.indexOf(s)).filter(i => i >= 0).sort((a, b) => a - b)[0];
+      x = x.slice(0, at) + tag + x.slice(at); zip.file(path, x);
+    }
+    return await zip.generateAsync({ type:"blob", mimeType:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", compression:"DEFLATE" });
+  }catch(e){ return new Blob([buf], { type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" }); }
+}
+const xlClean = (s) => String(s || "").replace(/[\s.·]+$/, "");
+function xlSkuRow(sku, extra){
+  const cm = catMeta((sku && sku.category) || "Uncategorized"), outer = !!sku && isOuter(sku);
+  return Object.assign({ cat:cm.en, catColor:cm.color, ar:sku ? xlClean(sku.nameAr) : "", zrep:sku && sku.zrep ? Number(sku.zrep) : "",
+    outer, unit:outer ? "OUTER" : "CTN", per:sku ? unitPcs(sku) : "" }, extra);
+}
+
+/* the order the rep built, as Excel */
+async function buildOrderXlsx({ store, lines, orderId, codeMode, salesman, opts }){
+  await loadScriptOnce(EXCELJS_URL);
+  const showPrice = opts.showPrice && !state.hidePrices, showValue = opts.showValues && !state.hidePrices, showOH = opts.showOnHand;
+  const othCode = (sku) => { if(codeMode === "old"){ const o = oldCodeOf(sku); if(o) return o; } return codeStr(sku); };
+  const rows = lines.slice().sort((a, b) => (a.sku.category || "").localeCompare(b.sku.category || "") || codeStr(a.sku).localeCompare(codeStr(b.sku)))
+    .map(l => xlSkuRow(l.sku, { en:cleanName(l.sku.nameEn) || l.sku.nameEn || "", code:othCode(l.sku), qty:l.cartons, up:unitPrice(l.sku),
+      ohp:l.onHandPc, ohu:unitPcs(l.sku) ? Math.round(l.onHandPc / unitPcs(l.sku) * 10) / 10 : 0 }));
+  const keys = ["cat", "en", "ar", "zrep", "code", "qty", "unit", "per"];
+  if(showPrice) keys.push("up"); if(showValue){ if(!showPrice) keys.push("up"); keys.push("val"); }
+  if(showOH) keys.push("ohp", "ohu");
+  const wb = new ExcelJS.Workbook(); wb.creator = "Mars · Othaim Order"; wb.created = new Date();
+  const s1 = xlItemSheet(wb, "Order", { title:"Mars Order — Othaim Markets", sub:"Vendor " + CONFIG.VENDOR_CODE, keys, rows, priceKey:"up",
+    codeHead:"Othaim Code\n(Artecal" + (codeMode === "old" ? " · Old" : "") + ")",
+    info:[["Store", store.storeNo + " · " + (store.nameAr || "")], ["Rep", String(salesman || store.salesman || "").replace(/\s+/g, " ").trim()], ["Date", new Date().toISOString().slice(0, 10)], ["Order", orderId]] });
+  const r2 = xlDataSheet(wb, "Data", keys, rows, "up");
+  const blob = await xlFinish(wb, { 1:[s1.codeRange], 2:[r2] });
+  return { blob, filename:"Othaim-" + store.storeNo + "-" + orderId + (codeMode === "old" ? "-OLD" : "") + ".xlsx" };
+}
+
+/* purchase orders (from the PO box) as Excel: a summary + one sheet per PO */
+async function buildPosXlsx(recs){
+  await loadScriptOnce(EXCELJS_URL);
+  const wb = new ExcelJS.Workbook(); wb.creator = "Mars · Othaim Order"; wb.created = new Date();
+  const list = recs.slice().sort((a, b) => String(a.store).localeCompare(String(b.store), undefined, { numeric:true }) || String(a.entry).localeCompare(String(b.entry)));
+  // Summary
+  const sm = wb.addWorksheet("Summary", { views:[{ state:"frozen", ySplit:4, showGridLines:false }], pageSetup:{ orientation:"landscape", fitToPage:true, fitToWidth:1, fitToHeight:0, paperSize:9 } });
+  const SC = [["Store", 8, "FF3A4A44"], ["Store Name", 26, "FF0B3226"], ["PO No", 16, "FFC8102E"], ["Entry Date", 12, "FF0B3226"], ["Cancel Date", 12, "FF0B3226"], ["Items", 8, "FF0B3226"], ["Qty", 8, "FFB3261E"], ["Value (SAR)", 14, "FF1E6E43"], ["Rep", 26, "FF0B3226"]];
+  sm.columns = SC.map(c => ({ width:c[1] }));
+  sm.getCell("A1").value = { richText:[ { text:"Othaim Purchase Orders — Mars", font:{ name:"Calibri", size:18, bold:true, color:{ argb:"FF0B3226" } } }, { text:"     Vendor " + CONFIG.VENDOR_CODE, font:{ name:"Calibri", size:11, color:{ argb:"FF8A979F" } } } ] };
+  sm.getRow(1).height = 32;
+  sm.getCell("A2").value = { richText:[ { text:"POs  ", font:{ name:"Calibri", size:10, color:{ argb:"FF6B7B74" } } }, { text:String(list.length), font:{ name:"Calibri", size:11, bold:true } }, { text:"     |     Exported  ", font:{ name:"Calibri", size:10, color:{ argb:"FF6B7B74" } } }, { text:new Date().toISOString().slice(0, 16).replace("T", " "), font:{ name:"Calibri", size:11, bold:true } } ] };
+  const hr = sm.getRow(4); hr.height = 30;
+  SC.forEach((c, i) => { const x = hr.getCell(i + 1); x.value = c[0]; x.fill = XL.fill(c[2]); x.font = { name:"Calibri", bold:true, color:{ argb:"FFFFFFFF" }, size:10.5 }; x.alignment = { horizontal:"center", vertical:"middle", wrapText:true }; });
+  list.forEach((r, i) => {
+    const st = (OO.stores || []).find(x => String(x.storeNo) === String(r.store));
+    const row = sm.getRow(5 + i);
+    [Number(r.store) || r.store, st ? st.nameAr : "", String(r.po), r.entry || "", r.canc || "", r.items || 0, r.qty || 0, r.value || 0, st ? String(st.salesman || "").replace(/\s+/g, " ").trim() : ""].forEach((v, j) => {
+      const c = row.getCell(j + 1); c.value = v; c.font = { name:"Calibri", size:11 }; c.border = { top:XL.thin, left:XL.thin, bottom:XL.thin, right:XL.thin }; c.alignment = { vertical:"middle", horizontal: j === 1 ? "right" : j >= 5 && j <= 7 ? "right" : "center" };
+      if(i % 2) c.fill = XL.fill("FFFAFBFB");
+    });
+    row.getCell(3).numFmt = "@"; row.getCell(3).font = { name:"Consolas", bold:true, size:11, color:{ argb:"FF8B0E22" } };
+    row.getCell(7).font = { name:"Calibri", bold:true, size:11.5, color:{ argb:"FFB3261E" } };
+    row.getCell(8).numFmt = "#,##0.00"; row.getCell(8).font = { name:"Calibri", bold:true, size:11, color:{ argb:"FF0F5132" } };
+    row.getCell(3).value = { text:String(r.po), hyperlink:"#'" + ("PO " + r.po).slice(0, 31) + "'!A1" };
+    row.height = 21;
+  });
+  const lt = 4 + list.length, tr = sm.getRow(lt + 1);
+  for(let j = 1; j <= SC.length; j++){ const c = tr.getCell(j); c.fill = XL.fill("FFE7F1EC"); c.border = { top:{ style:"medium", color:{ argb:"FF0B3226" } } }; c.font = { name:"Calibri", bold:true, size:11, color:{ argb:"FF0B3226" } }; }
+  tr.getCell(1).value = "TOTAL";
+  if(list.length){
+    tr.getCell(6).value = { formula:"SUM(F5:F" + lt + ")", result:list.reduce((a, r) => a + (r.items || 0), 0) };
+    tr.getCell(7).value = { formula:"SUM(G5:G" + lt + ")", result:list.reduce((a, r) => a + (r.qty || 0), 0) };
+    tr.getCell(8).value = { formula:"SUM(H5:H" + lt + ")", result:list.reduce((a, r) => a + (r.value || 0), 0) }; tr.getCell(8).numFmt = "#,##0.00";
+  }
+  sm.autoFilter = { from:{ row:4, column:1 }, to:{ row:Math.max(4, lt), column:SC.length } };
+  const quiet = { 1:["C5:C" + Math.max(5, lt)] };
+  const all = [];
+  list.forEach((r, i) => {
+    const st = (OO.stores || []).find(x => String(x.storeNo) === String(r.store));
+    const ohMap = (OO.onHand && OO.onHand[String(r.store)]) || {};
+    const rows = (r.lines || []).map(l => { const sku = poBoxSku(l.c); const pc = sku ? poPriceCheck({ sku, net:l.n }) : null;
+      const oh = sku ? ohMap[String(sku.artecal)] : null, ohp = oh ? Number(oh.onHand) || 0 : 0, per = sku ? unitPcs(sku) : 0;
+      return xlSkuRow(sku, { en:l.d || (sku ? cleanName(sku.nameEn) : ""), code:l.c, qty:l.q, net:l.n, warn: pc && pc.level === "warn" ? pc : null,
+        ohp, ohu: per ? Math.round(ohp / per * 10) / 10 : 0 }); });
+    rows.forEach(x => all.push(Object.assign({ po:String(r.po), store:Number(r.store) || r.store, date:r.entry || "" }, x)));
+    const s = xlItemSheet(wb, ("PO " + r.po).slice(0, 31), { title:"PO " + r.po, sub:"Othaim · Vendor " + CONFIG.VENDOR_CODE, keys:["cat", "en", "ar", "zrep", "code", "qty", "unit", "per", "net", "val", "ohp", "ohu"], rows, priceKey:"net", qtyHead:"PO\nQty",
+      info:[["Store", r.store + (st ? " · " + st.nameAr : "")], ["Entry", r.entry || "—"], ["Cancel", r.canc || "—"], ["Items", r.items || rows.length], ["Value", (r.value || 0).toFixed(2) + " SAR"], ["Stock as of", String((OO.meta && OO.meta.lastUpdatedOnHand) || "—")]] });
+    quiet[i + 2] = [s.codeRange];
+  });
+  const dk = ["po", "store", "date", "cat", "en", "zrep", "code", "qty", "unit", "per", "net", "val", "ohp", "ohu"];
+  quiet[list.length + 2] = [xlDataSheet(wb, "Data", dk, all, "net"), "A2:A" + Math.max(2, all.length + 1)];
+  const blob = await xlFinish(wb, quiet);
+  const tag = list.length === 1 ? list[0].po : list.length + "-POs-" + new Date().toISOString().slice(0, 10);
+  return { blob, filename:"Othaim-PO-" + tag + ".xlsx" };
+}
+
 /* ---------------- PDF GENERATION ---------------- */
 function canShareFiles(){
   try{ return !!(navigator.canShare && navigator.canShare({files:[new File(["x"], "x.pdf", {type:"application/pdf"})]})); }
@@ -5364,16 +5883,24 @@ async function generateThen(action){
     const dateStr = _now.toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"}) + " · " + _now.toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"});
     const opts = { showValues: state.prefShowValues, showTotal: state.prefShowTotal,
       showPrice: state.prefShowPrice, showOnHand: state.prefShowOnHandCols };
-    const {blob, filename} = await buildPdf(Object.assign({ store, lines, orderId, dateStr, codeMode: state.codeMode }, opts));
-    state.lastPdf = {blob, filename};
+    const ft = state.fileType || "pdf", files = [];
+    if(ft !== "xlsx"){
+      const {blob, filename} = await buildPdf(Object.assign({ store, lines, orderId, dateStr, codeMode: state.codeMode }, opts));
+      state.lastPdf = {blob, filename}; files.push({ blob, filename, type:"application/pdf" });
+    }
+    if(ft !== "pdf"){
+      const {blob, filename} = await buildOrderXlsx({ store, lines, orderId, codeMode: state.codeMode, salesman: state.salesman || store.salesman, opts });
+      files.push({ blob, filename, type: blob.type });
+    }
     // both versions (new & old code) stay rebuildable from "Saved orders" for 30 days
     saveOrderToHistory(store, orderId, cartTotals(), lines, Object.assign({ dateStr }, opts));
 
     if(action === "share" && canShareFiles()){
-      const file = new File([blob], filename, {type:"application/pdf"});
+      const fl = files.map(f => new File([f.blob], f.filename, {type:f.type}));
       showLoading(false);
       try{
-        await navigator.share({ files:[file], title: t("prTitle"), text: t("prTitle")+" — "+store.nameAr+" #"+store.storeNo });
+        if(navigator.canShare && !navigator.canShare({ files: fl })) throw new Error("cannot share");
+        await navigator.share({ files: fl, title: t("prTitle"), text: t("prTitle")+" — "+store.nameAr+" #"+store.storeNo });
         return;
       }catch(e){
         if(e && e.name === "AbortError") return;  // user closed the share sheet
@@ -5381,7 +5908,7 @@ async function generateThen(action){
       }
       showLoading(true);
     }
-    downloadBlob(blob, filename);
+    files.forEach((f, i) => setTimeout(() => downloadBlob(f.blob, f.filename), i * 600));
     toast(t("orderId")+": "+orderId, "success");
   }catch(e){
     console.error(e);
@@ -6006,7 +6533,9 @@ function renderAdmin(){
   });
 
   content.appendChild(el("div", {class:"section-title", style:"margin-top:6px;"}, [t("prTitle")]));
-  content.appendChild(el("button", {class:"btn btn-green btn-block po-admin-btn", type:"button", onclick:() => { state.screen = "po"; render(); }}, [t("poOpenBtn")]));
+  content.appendChild(el("button", {class:"btn btn-outline btn-block po-admin-btn", type:"button", onclick:() => { state.poTab = "reader"; state.po = null; state.screen = "po"; render(); }}, [t("poOpenBtn")]));
+  content.appendChild(el("div", {class:"section-title", style:"margin-top:6px;"}, [t("pbTitle")]));
+  content.appendChild(poBoxAdminCard());
 
   content.appendChild(el("div", {class:"section-title", style:"margin-top:6px;"}, [t("verTitle")]));
   content.appendChild(versionCard());
